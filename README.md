@@ -62,7 +62,8 @@ The primary remote path now follows Streamline's official API:
 
 - `GET /v1/search/global?query=<icon-name>`
 - `GET /v1/icons/{hash}/download/svg`
-- `Authorization: Bearer <apiKey>`
+- `x-api-key: <apiKey>`
+- `responsive=true` on SVG downloads
 
 The plugin performs the search step at build time for each requested icon, resolves an exact name match, then downloads the SVG payload for the selected hash.
 
@@ -77,8 +78,9 @@ export default defineConfig({
       source: {
         type: "api",
         apiKey: process.env.STREAMLINE_API_KEY ?? "",
-        familySlug: "ultimate-light-free",
+        familySlug: "phosphor-light",
         icons: ["rocket", "search"],
+        productTier: "free",
       },
     }),
   ],
@@ -87,14 +89,25 @@ export default defineConfig({
 
 ### API Source Rules
 
-- `apiKey` is required and is sent as `Authorization: Bearer <apiKey>`
+- `apiKey` is required and is sent as `x-api-key: <apiKey>`
 - `icons` is required and lists the icon names you want available through the virtual loader
 - `familySlug` is recommended and becomes effectively required whenever the search API returns multiple exact matches across families
 - `baseUrl` is optional and defaults to `https://public-api.streamlinehq.com`
-- the plugin searches each icon name independently and requires an exact normalized name match
+- `productType=icons` is sent automatically by the plugin
+- the selected plugin `style` is forwarded to the search API as the `style` filter
+- `productTier` is optional and can be `all`, `free`, or `premium`
+- `responsive=true` is sent automatically on SVG downloads because the live API rejects plain SVG download requests without either `size` or `responsive=true`
+- the plugin searches each icon name independently and requires an exact normalized match, including style-suffixed names such as `Rocket Light`
 - missing results, ambiguous exact matches, auth failures, search failures, and SVG download failures abort the build with explicit errors
 
 The authoritative contract is documented in [docs/streamline-api-v1.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/streamline-api-v1.md).
+
+### Private Key Handling
+
+- keep `STREAMLINE_API_KEY` in your local shell environment, `.env.local`, or CI secret store
+- do not hardcode the key in source files
+- do not commit `.env` files containing the key
+- treat the key as private even when you are only accessing free assets through the official API
 
 ## Source Modes
 
@@ -130,8 +143,9 @@ streamlineIcons({
   source: {
     type: "api",
     apiKey: process.env.STREAMLINE_API_KEY ?? "",
-    familySlug: "ultimate-light-free",
+    familySlug: "phosphor-light",
     icons: ["rocket", "search"],
+    productTier: "free",
   },
 })
 ```

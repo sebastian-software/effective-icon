@@ -50,7 +50,8 @@ npm pack --dry-run
 - commercial sources can already be pointed at local directories, zip archives, or the official Streamline API
 - the `api` source is now the primary v1 remote-download path
 - the `api` source uses Streamline's documented global-search and hash-based SVG download endpoints
-- API auth is sent as `Authorization: Bearer <apiKey>`
+- API auth is sent as `x-api-key: <apiKey>`
+- SVG downloads are requested with `responsive=true`, which the live API currently requires unless a fixed size is provided
 - exact-name matching is deterministic and `familySlug` is used for family disambiguation
 - archive icons are loaded from zip contents in-memory, without leaving temp files behind
 
@@ -59,7 +60,7 @@ npm pack --dry-run
 - built-in free assets are placeholders, not the full Streamline free catalog
 - no official Streamline sync/import workflow has been validated yet
 - no packaging rules yet ensure larger synced assets are included in release artifacts correctly
-- API support is validated against the repo fixture contract that mirrors the documented official endpoints, but not yet against a real Streamline API key and live family slugs
+- API support is validated against the repo fixture contract and was smoke-tested on 2026-03-31 against the live Streamline API with a private local key
 - built-in free asset licensing and redistribution still need release-grade documentation
 
 ## Handover Notes

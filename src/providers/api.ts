@@ -53,7 +53,9 @@ function createSearchUrl(
 }
 
 function createSvgDownloadUrl(baseUrl: string, hash: string): string {
-  return new URL(`/v1/icons/${encodeURIComponent(hash)}/download/svg`, `${normalizeBaseUrl(baseUrl)}/`).toString()
+  const url = new URL(`/v1/icons/${encodeURIComponent(hash)}/download/svg`, `${normalizeBaseUrl(baseUrl)}/`)
+  url.searchParams.set("responsive", "true")
+  return url.toString()
 }
 
 function formatResponseStatus(response: Response): string {

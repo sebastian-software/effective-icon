@@ -6,8 +6,9 @@ The current `api` source is modeled on Streamline's official API flow:
 
 - `GET https://public-api.streamlinehq.com/v1/search/global`
 - `GET https://public-api.streamlinehq.com/v1/icons/{hash}/download/svg`
+- `GET https://public-api.streamlinehq.com/v1/icons/{hash}/download/svg?responsive=true`
 
-The plugin uses the global-search response to find an icon hash, then downloads the SVG from the hash-based endpoint.
+The plugin uses the global-search response to find an icon hash, then downloads the SVG from the hash-based endpoint with `responsive=true`. This is required by the live API unless a fixed `size` is requested instead.
 
 ## Plugin Configuration
 
@@ -17,18 +18,20 @@ streamlineIcons({
   source: {
     type: "api",
     apiKey: process.env.STREAMLINE_API_KEY ?? "",
-    familySlug: "ultimate-light-free",
+    familySlug: "phosphor-light",
     icons: ["rocket", "search"],
+    productTier: "free",
   },
 })
 ```
 
 Fields:
 
-- `apiKey`: required bearer token for the Streamline API
+- `apiKey`: required private API key for the Streamline API
 - `icons`: required list of icon names to resolve during the Vite build
 - `familySlug`: recommended family disambiguator when the search API returns exact-name matches from multiple families
 - `baseUrl`: optional override for testing or self-hosted proxies; defaults to `https://public-api.streamlinehq.com`
+- `productTier`: optional filter for `all`, `free`, or `premium`
 
 ## Search Response Assumptions
 
@@ -52,23 +55,30 @@ The plugin only needs the hash and family metadata for resolution, but it valida
 
 For each requested icon name:
 
-1. Search `GET /v1/search/global?query=<name>`
+1. Search `GET /v1/search/global?productType=icons&query=<name>&style=<style>`
 2. Normalize search result names and require an exact name match
 3. If `familySlug` is provided, require the exact match to belong to that family
 4. If multiple exact matches remain and no `familySlug` is set, fail with a disambiguation error
-5. Download the final SVG with `GET /v1/icons/{hash}/download/svg`
+5. Download the final SVG with `GET /v1/icons/{hash}/download/svg?responsive=true`
 
 This keeps the build deterministic and avoids silently choosing the wrong family.
 
 ## Authentication
 
-Authentication follows Streamline's documented bearer-token model:
+Authentication follows the verified header-based API-key model:
 
 ```http
-Authorization: Bearer <apiKey>
+x-api-key: <apiKey>
 ```
 
 The plugin sends that header to both the search and SVG-download requests.
+
+## Private Key Handling
+
+- keep `STREAMLINE_API_KEY` in your local shell environment, `.env.local`, or CI secret store
+- never hardcode the key in source files
+- never commit `.env` files containing the key
+- treat the key as private even when you are only accessing free assets through the official API
 
 ## Error Behavior
 

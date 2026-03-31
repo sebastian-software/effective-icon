@@ -57,13 +57,21 @@ describe.sequential("vite consumer integration", () => {
           search: "?productType=icons&query=rocket&style=regular&productTier=free",
           apiKey: "fixture-token",
         },
-        { path: "/v1/icons/ico_rocket/download/svg", search: "", apiKey: "fixture-token" },
+        {
+          path: "/v1/icons/ico_rocket/download/svg",
+          search: "?responsive=true",
+          apiKey: "fixture-token",
+        },
         {
           path: "/v1/search/global",
           search: "?productType=icons&query=search&style=regular&productTier=free",
           apiKey: "fixture-token",
         },
-        { path: "/v1/icons/ico_search/download/svg", search: "", apiKey: "fixture-token" },
+        {
+          path: "/v1/icons/ico_search/download/svg",
+          search: "?responsive=true",
+          apiKey: "fixture-token",
+        },
       ])
       expect(findSvgChunks(outputs).some((chunk) => chunk.code.includes("currentColor"))).toBe(true)
     } finally {

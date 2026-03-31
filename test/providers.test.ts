@@ -104,7 +104,7 @@ describe("providers", () => {
         )
       }
 
-      if (url === "https://example.test/v1/icons/ico_rocket/download/svg") {
+      if (url === "https://example.test/v1/icons/ico_rocket/download/svg?responsive=true") {
         expect(init?.headers).toEqual({
           "x-api-key": "fixture-token",
           accept: "image/svg+xml",
@@ -201,7 +201,11 @@ describe("providers", () => {
           )
         }
 
-        return new Response("nope", { status: 404, statusText: "Not Found" })
+        if (url === "https://example.test/v1/icons/ico_rocket/download/svg?responsive=true") {
+          return new Response("nope", { status: 404, statusText: "Not Found" })
+        }
+
+        return new Response("not found", { status: 404, statusText: "Not Found" })
       })
     )
 
