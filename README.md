@@ -1,13 +1,13 @@
 # vite-plugin-streamline
 
-Vite plugin for lazy-loading Streamline icons from built-in free assets or a remote `manifest.json`.
+Vite plugin for lazy-loading Streamline icons from built-in free assets, local exports, or the official Streamline API.
 
 ## Status
 
 The package now covers the first full end-to-end slice:
 
 - built-in `free` assets for local development and smoke tests
-- remote commercial loading through `source: { type: "api" }`
+- remote loading through the official Streamline API search/download flow
 - lazy icon chunks through `virtual:streamline-icons/loader`
 - fixture-backed Vite integration coverage for both `free` and `api`
 
@@ -17,7 +17,7 @@ Still intentionally provisional:
 - the sync script is still a normalization helper for local exports, not the primary v1 path
 - licensing and redistribution details for shipping a full free catalog still need to be finalized before release
 
-See [docs/current-status.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/current-status.md), [docs/api-manifest-v1.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/api-manifest-v1.md), and [docs/adr/0001-separate-vite-plugin-streamline.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/adr/0001-separate-vite-plugin-streamline.md) for the current contract.
+See [docs/current-status.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/current-status.md), [docs/streamline-api-v1.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/streamline-api-v1.md), and [docs/adr/0001-separate-vite-plugin-streamline.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/adr/0001-separate-vite-plugin-streamline.md) for the current contract.
 
 ## Install
 
@@ -56,9 +56,15 @@ console.log(rocket?.svg)
 
 `loadIcon(name)` returns `{ name, style, svg }` or `null`.
 
-## Remote Download: API Source
+## Remote Download: Official Streamline API
 
-The first complete commercial path is `source: { type: "api" }`. During the Vite build, the plugin fetches `<baseUrl>/manifest.json`, resolves SVG URLs, and emits lazy icon chunks from the fetched payloads.
+The primary remote path now follows Streamline's official API:
+
+- `GET /v1/search/global?query=<icon-name>`
+- `GET /v1/icons/{hash}/download/svg`
+- `Authorization: Bearer <apiKey>`
+
+The plugin performs the search step at build time for each requested icon, resolves an exact name match, then downloads the SVG payload for the selected hash.
 
 ```ts
 import { defineConfig } from "vite"
@@ -67,42 +73,28 @@ import { streamlineIcons } from "vite-plugin-streamline"
 export default defineConfig({
   plugins: [
     streamlineIcons({
-      style: "regular",
+      style: "light",
       source: {
         type: "api",
-        baseUrl: "https://example.com/streamline",
-        headers: {
-          Authorization: process.env.STREAMLINE_TOKEN ?? "",
-        },
+        apiKey: process.env.STREAMLINE_API_KEY ?? "",
+        familySlug: "ultimate-light-free",
+        icons: ["rocket", "search"],
       },
     }),
   ],
 })
 ```
 
-### Canonical `manifest.json`
+### API Source Rules
 
-```json
-{
-  "icons": {
-    "regular": {
-      "rocket": "./icons/regular/rocket.svg",
-      "search": "./icons/regular/search.svg"
-    }
-  }
-}
-```
+- `apiKey` is required and is sent as `Authorization: Bearer <apiKey>`
+- `icons` is required and lists the icon names you want available through the virtual loader
+- `familySlug` is recommended and becomes effectively required whenever the search API returns multiple exact matches across families
+- `baseUrl` is optional and defaults to `https://public-api.streamlinehq.com`
+- the plugin searches each icon name independently and requires an exact normalized name match
+- missing results, ambiguous exact matches, auth failures, search failures, and SVG download failures abort the build with explicit errors
 
-Rules for v1:
-
-- the manifest must live at `<baseUrl>/manifest.json`
-- the top-level shape is exactly `{ "icons": { "<style>": { "<name>": "<url>" } } }`
-- supported styles are `light`, `regular`, and `bold`
-- icon URLs may be absolute or relative; relative URLs are resolved against the manifest URL
-- request headers are forwarded to both the manifest request and each SVG request
-- missing manifests, missing requested styles, invalid entries, auth failures, and SVG fetch failures abort the build with explicit errors
-
-The authoritative contract is documented in [docs/api-manifest-v1.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/api-manifest-v1.md).
+The authoritative contract is documented in [docs/streamline-api-v1.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/streamline-api-v1.md).
 
 ## Source Modes
 
@@ -134,10 +126,12 @@ streamlineIcons({
 
 ```ts
 streamlineIcons({
+  style: "light",
   source: {
     type: "api",
-    baseUrl: "https://example.com/streamline",
-    headers: { Authorization: process.env.STREAMLINE_TOKEN ?? "" },
+    apiKey: process.env.STREAMLINE_API_KEY ?? "",
+    familySlug: "ultimate-light-free",
+    icons: ["rocket", "search"],
   },
 })
 ```
@@ -148,6 +142,7 @@ streamlineIcons({
 - icons stay lazy because the virtual loader imports each icon through a separate dynamic submodule
 - repeated `loadIcon(name)` calls rely on native ESM module caching; the plugin does not add a second cache layer
 - the package is framework-agnostic and does not depend on React, Vue, Solid, or Ardo
+- the `api` source does not infer style from Streamline's API; your chosen plugin `style` is metadata for the returned payload, while the actual API disambiguation happens through `familySlug`
 
 ## Sync Workflow
 

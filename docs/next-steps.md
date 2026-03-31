@@ -2,8 +2,8 @@
 
 ## 1. Validate Against a Real Commercial Endpoint
 
-- test the documented `api` contract against an actual Streamline customer-owned endpoint or export host
-- confirm whether relative manifest URLs and forwarded headers match real operational usage
+- test the documented search-plus-download contract against a real Streamline API key
+- confirm the real `familySlug` values for the free and paid families we want to support first
 - keep the current contract stable unless a real commercial integration proves it insufficient
 
 ## 2. Replace Placeholder Free Assets
@@ -35,6 +35,5 @@
 
 ## 6. Release Readiness
 
-- add CI for build, typecheck, and tests
 - add repository metadata, issue templates, and publishing workflow
 - add usage docs for the eventual full free catalog once licensing is settled
