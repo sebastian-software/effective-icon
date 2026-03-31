@@ -3,5 +3,7 @@ node_modules
 dist
 coverage
 .streamline-cache
+.playwright
+packages/packs/**/node_modules
 *.tsbuildinfo
 .DS_Store

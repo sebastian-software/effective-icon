@@ -31,10 +31,13 @@
     "build": "tsdown",
     "build:demo": "vite build --config demo/vite.config.ts",
     "dev:demo": "vite --config demo/vite.config.ts",
+    "download:free": "pnpm --filter @streamline-pkg/streamline-builder download-all",
+    "download:set": "pnpm --filter @streamline-pkg/streamline-builder download-set",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "sync:streamline": "tsx scripts/sync-streamline.ts"
+    "sync:streamline": "tsx scripts/sync-streamline.ts",
+    "validate:packs": "pnpm --filter @streamline-pkg/streamline-builder validate-packs"
   },
   "keywords": [
     "vite",

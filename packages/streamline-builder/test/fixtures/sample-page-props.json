@@ -1,0 +1,75 @@
+{
+  "metaTags": {
+    "metaDescription": "<p>[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0</p>"
+  },
+  "initialState": {
+    "streamlineApi": {
+      "queries": {
+        "getFamilyBySlug(core-line-free)?userHash=undefined": {
+          "data": {
+            "name": "Core Line - Free",
+            "description": "<p>Core line fixture</p>"
+          }
+        },
+        "getFamilyOrCategoryIconsGrouped({\"familySlug\":\"core-line-free\"})": {
+          "data": {
+            "pages": [
+              {
+                "iconsGrouped": {
+                  "subc_fixture_one": [
+                    {
+                      "hash": "ico_1",
+                      "slug": "add-1",
+                      "name": "Add 1",
+                      "imagePublicId": "icons/interface-essential/add-1-abc.png/add-1-def",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 14 14\"><path stroke=\"var(--sl-c-000000,#000000)\" d=\"M7 0v14\" /></svg>",
+                      "url": "/icons/download/add-1--26733",
+                      "familySlug": "core-line-free",
+                      "subcategoryHash": "subc_fixture_one",
+                      "subcategoryName": "Interface Essential",
+                      "isFree": true,
+                      "hasPremiumAccess": true,
+                      "strokeAllowed": true,
+                      "tags": ["add", "plus"]
+                    }
+                  ],
+                  "subc_fixture_two": [
+                    {
+                      "hash": "ico_2",
+                      "slug": "alarm-clock",
+                      "name": "Alarm Clock",
+                      "imagePublicId": "icons/time-and-date/alarm-clock-abc.png/alarm-clock-def",
+                      "svg": "<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 14 14\"><path stroke=\"#000000\" d=\"M1 1h12\" /></svg>",
+                      "url": "/icons/download/alarm-clock--26733",
+                      "familySlug": "core-line-free",
+                      "subcategoryHash": "subc_fixture_two",
+                      "subcategoryName": "Time And Date",
+                      "isFree": true,
+                      "hasPremiumAccess": true,
+                      "strokeAllowed": true,
+                      "tags": ["alarm", "clock"]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "getFamilyCategories(\"core-line-free\")": {
+          "data": [
+            {
+              "hash": "cat_interface_essential",
+              "slug": "interface-essential",
+              "name": "Interface Essential"
+            },
+            {
+              "hash": "cat_time_and_date",
+              "slug": "time-and-date",
+              "name": "Time And Date"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

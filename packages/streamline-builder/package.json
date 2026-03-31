@@ -1,0 +1,17 @@
+{
+  "name": "@streamline-pkg/streamline-builder",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "streamline-builder": "./src/cli.ts"
+  },
+  "scripts": {
+    "download-all": "tsx src/cli.ts download-all",
+    "download-set": "tsx src/cli.ts download-set",
+    "validate-packs": "tsx src/cli.ts validate-packs"
+  },
+  "dependencies": {
+    "playwright": "^1.54.2"
+  }
+}
