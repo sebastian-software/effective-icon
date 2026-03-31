@@ -2,7 +2,7 @@ import { downloadAllPacks, downloadSinglePack, resolveWorkspaceRoot } from "./do
 import { validatePacks } from "./validate"
 
 async function main() {
-  const [command, slug] = process.argv.slice(2)
+  const [command, slug] = process.argv.slice(2).filter((argument) => argument !== "--")
   const rootDir = resolveWorkspaceRoot(import.meta.dirname)
 
   switch (command) {
