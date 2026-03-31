@@ -6,7 +6,7 @@ import AdmZip from "adm-zip"
 import { afterEach, describe, expect, it, vi } from "vitest"
 
 import { buildLoaderModule, createVirtualIconRegistry, normalizeIconName } from "../src/manifest"
-import { coerceApiManifest, resolveApiIconSet } from "../src/providers/api"
+import { coerceSearchResponse, resolveApiIconSet } from "../src/providers/api"
 import { resolveArchiveIconSet } from "../src/providers/archive"
 import { resolveDirectoryIconSet } from "../src/providers/directory"
 import { resolveFreeIconSet } from "../src/providers/free"
@@ -67,26 +67,48 @@ describe("providers", () => {
     await rm(tempDir, { recursive: true, force: true })
   })
 
-  it("loads the api source from a manifest and SVG endpoints", async () => {
+  it("loads the api source from the official search and svg endpoints", async () => {
     const fetchMock = vi.fn(async (input: string | URL, init?: RequestInit) => {
       const url = String(input)
 
-      expect(init?.headers).toEqual({ Authorization: "Bearer fixture-token" })
-
-      if (url.endsWith("/manifest.json")) {
+      if (url === "https://example.test/v1/search/global?query=rocket") {
+        expect(init?.headers).toEqual({
+          Authorization: "Bearer fixture-token",
+          accept: "application/json",
+        })
         return new Response(
           JSON.stringify({
-            icons: {
-              regular: {
-                rocket: "./icons/rocket.svg",
+            query: "rocket",
+            results: [
+              {
+                hash: "ico_rocket",
+                name: "rocket",
+                imagePreviewUrl: "https://assets.example.test/rocket.png",
+                isFree: true,
+                familySlug: "ultimate-light-free",
+                familyName: "Ultimate Light - Free",
+                categorySlug: "interface-essential",
+                categoryName: "Interface Essential",
+                subcategorySlug: "navigation",
+                subcategoryName: "Navigation",
               },
+            ],
+            pagination: {
+              total: 1,
+              hasMore: false,
+              offset: 0,
+              nextOffset: 0,
             },
           }),
           { status: 200 }
         )
       }
 
-      if (url === "https://example.test/base/icons/rocket.svg") {
+      if (url === "https://example.test/v1/icons/ico_rocket/download/svg") {
+        expect(init?.headers).toEqual({
+          Authorization: "Bearer fixture-token",
+          accept: "image/svg+xml",
+        })
         return new Response("<svg><path d='M0 0'/></svg>", { status: 200 })
       }
 
@@ -98,8 +120,10 @@ describe("providers", () => {
     const set = await resolveApiIconSet(
       {
         type: "api",
-        baseUrl: "https://example.test/base",
-        headers: { Authorization: "Bearer fixture-token" },
+        baseUrl: "https://example.test",
+        apiKey: "fixture-token",
+        familySlug: "ultimate-light-free",
+        icons: ["rocket"],
       },
       "regular",
       { root: process.cwd() }
@@ -109,17 +133,20 @@ describe("providers", () => {
     expect(fetchMock).toHaveBeenCalledTimes(2)
   })
 
-  it("fails clearly when the manifest is missing the requested style", async () => {
+  it("fails clearly when the search query has no exact match", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: string) => {
-        if (input.endsWith("/manifest.json")) {
+        if (input === "https://example.test/v1/search/global?query=rocket") {
           return new Response(
             JSON.stringify({
-              icons: {
-                light: {
-                  rocket: "./icons/rocket.svg",
-                },
+              query: "rocket",
+              results: [],
+              pagination: {
+                total: 0,
+                hasMore: false,
+                offset: 0,
+                nextOffset: 0,
               },
             }),
             { status: 200 }
@@ -132,25 +159,41 @@ describe("providers", () => {
 
     await expect(
       resolveApiIconSet(
-        { type: "api", baseUrl: "https://example.test/base", headers: { Authorization: "x" } },
+        { type: "api", baseUrl: "https://example.test", apiKey: "x", icons: ["rocket"] },
         "regular",
         { root: process.cwd() }
       )
-    ).rejects.toThrow('does not contain style "regular"')
+    ).rejects.toThrow('did not return an exact icon match')
   })
 
-  it("fails clearly when an icon fetch fails", async () => {
+  it("fails clearly when an icon download fails", async () => {
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: string | URL) => {
         const url = String(input)
-        if (url.endsWith("/manifest.json")) {
+        if (url === "https://example.test/v1/search/global?query=rocket") {
           return new Response(
             JSON.stringify({
-              icons: {
-                regular: {
-                  rocket: "./icons/rocket.svg",
+              query: "rocket",
+              results: [
+                {
+                  hash: "ico_rocket",
+                  name: "rocket",
+                  imagePreviewUrl: "https://assets.example.test/rocket.png",
+                  isFree: true,
+                  familySlug: "ultimate-light-free",
+                  familyName: "Ultimate Light - Free",
+                  categorySlug: "interface-essential",
+                  categoryName: "Interface Essential",
+                  subcategorySlug: "navigation",
+                  subcategoryName: "Navigation",
                 },
+              ],
+              pagination: {
+                total: 1,
+                hasMore: false,
+                offset: 0,
+                nextOffset: 0,
               },
             }),
             { status: 200 }
@@ -163,32 +206,116 @@ describe("providers", () => {
 
     await expect(
       resolveApiIconSet(
-        { type: "api", baseUrl: "https://example.test/base", headers: { Authorization: "x" } },
+        {
+          type: "api",
+          baseUrl: "https://example.test",
+          apiKey: "x",
+          familySlug: "ultimate-light-free",
+          icons: ["rocket"],
+        },
         "regular",
         { root: process.cwd() }
       )
-    ).rejects.toThrow('Failed to fetch Streamline icon "rocket"')
+    ).rejects.toThrow('Failed to download Streamline icon "rocket"')
+  })
+
+  it("fails clearly when exact matches are ambiguous without a family slug", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async () => {
+        return new Response(
+          JSON.stringify({
+            query: "rocket",
+            results: [
+              {
+                hash: "ico_rocket_light",
+                name: "rocket",
+                imagePreviewUrl: "https://assets.example.test/rocket-light.png",
+                isFree: true,
+                familySlug: "ultimate-light-free",
+                familyName: "Ultimate Light - Free",
+                categorySlug: "interface-essential",
+                categoryName: "Interface Essential",
+                subcategorySlug: "navigation",
+                subcategoryName: "Navigation",
+              },
+              {
+                hash: "ico_rocket_regular",
+                name: "rocket",
+                imagePreviewUrl: "https://assets.example.test/rocket-regular.png",
+                isFree: true,
+                familySlug: "ultimate-regular-free",
+                familyName: "Ultimate Regular - Free",
+                categorySlug: "interface-essential",
+                categoryName: "Interface Essential",
+                subcategorySlug: "navigation",
+                subcategoryName: "Navigation",
+              },
+            ],
+            pagination: {
+              total: 2,
+              hasMore: false,
+              offset: 0,
+              nextOffset: 0,
+            },
+          }),
+          { status: 200 }
+        )
+      })
+    )
+
+    await expect(
+      resolveApiIconSet(
+        { type: "api", baseUrl: "https://example.test", apiKey: "x", icons: ["rocket"] },
+        "regular",
+        { root: process.cwd() }
+      )
+    ).rejects.toThrow("set source.familySlug to disambiguate")
   })
 })
 
-describe("manifest helpers", () => {
-  it("coerces the canonical manifest shape and resolves relative URLs", () => {
-    const items = coerceApiManifest({
-      icons: {
-        bold: {
-          rocket: "../icons/rocket.svg",
+describe("api helpers", () => {
+  it("coerces the official search response shape", () => {
+    const response = coerceSearchResponse(
+      {
+        query: "rocket",
+        results: [
+          {
+            hash: "ico_rocket",
+            name: "rocket",
+            imagePreviewUrl: "https://assets.example.test/rocket.png",
+            isFree: true,
+            familySlug: "ultimate-light-free",
+            familyName: "Ultimate Light - Free",
+            categorySlug: "interface-essential",
+            categoryName: "Interface Essential",
+            subcategorySlug: "navigation",
+            subcategoryName: "Navigation",
+          },
+        ],
+        pagination: {
+          total: 1,
+          hasMore: false,
+          offset: 0,
+          nextOffset: 0,
         },
       },
-    }, "https://cdn.example.test/manifests/commercial/manifest.json")
+      "rocket",
+      "https://public-api.streamlinehq.com/v1/search/global?query=rocket"
+    )
 
-    expect(items).toEqual([
-      { name: "rocket", style: "bold", url: "https://cdn.example.test/manifests/icons/rocket.svg" },
-    ])
+    expect(response.results[0]?.hash).toBe("ico_rocket")
   })
 
-  it("rejects unsupported manifest shapes", () => {
-    expect(() => coerceApiManifest({ styles: {} }, "https://cdn.example.test/manifest.json")).toThrow(
-      "Unsupported Streamline manifest shape"
+  it("rejects unsupported search response shapes", () => {
+    expect(() =>
+      coerceSearchResponse(
+        { styles: {} },
+        "rocket",
+        "https://public-api.streamlinehq.com/v1/search/global?query=rocket"
+      )
+    ).toThrow(
+      "Unsupported Streamline search response"
     )
   })
 

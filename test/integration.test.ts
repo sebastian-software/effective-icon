@@ -7,7 +7,7 @@ import { build } from "vite"
 
 const fixtureAppRoot = path.resolve(process.cwd(), "fixtures/vite-app")
 const apiFixtureRoot = path.resolve(process.cwd(), "fixtures/api")
-const fixtureToken = "Bearer fixture-token"
+const fixtureToken = "fixture-token"
 
 interface BuildChunk {
   code: string
@@ -41,7 +41,7 @@ describe.sequential("vite consumer integration", () => {
     expect(findSvgChunks(outputs).some((chunk) => chunk.code.includes("rocket"))).toBe(true)
   })
 
-  it("builds the fixture app with api icons via a local manifest server", async () => {
+  it("builds the fixture app with api icons via a local Streamline API fixture server", async () => {
     const server = await startFixtureServer()
     process.env.STREAMLINE_SOURCE_MODE = "api"
     process.env.STREAMLINE_FIXTURE_BASE_URL = server.baseUrl
@@ -52,9 +52,10 @@ describe.sequential("vite consumer integration", () => {
 
       assertLazyIconChunks(outputs)
       expect(server.requests).toEqual([
-        { path: "/manifest.json", authorization: fixtureToken },
-        { path: "/icons/regular/rocket.svg", authorization: fixtureToken },
-        { path: "/icons/regular/search.svg", authorization: fixtureToken },
+        { path: "/v1/search/global", search: "?query=rocket", authorization: "Bearer fixture-token" },
+        { path: "/v1/icons/ico_rocket/download/svg", search: "", authorization: "Bearer fixture-token" },
+        { path: "/v1/search/global", search: "?query=search", authorization: "Bearer fixture-token" },
+        { path: "/v1/icons/ico_search/download/svg", search: "", authorization: "Bearer fixture-token" },
       ])
       expect(findSvgChunks(outputs).some((chunk) => chunk.code.includes("currentColor"))).toBe(true)
     } finally {
@@ -117,33 +118,75 @@ function isBuildOutput(value: unknown): value is BuildOutput {
 async function startFixtureServer(): Promise<{
   baseUrl: string
   close: () => Promise<void>
-  requests: Array<{ path: string; authorization?: string }>
+  requests: Array<{ path: string; search: string; authorization?: string }>
 }> {
-  const requests: Array<{ path: string; authorization?: string }> = []
+  const requests: Array<{ path: string; search: string; authorization?: string }> = []
 
   const server = createServer(async (request, response) => {
     const url = new URL(request.url ?? "/", `http://${request.headers.host}`)
     const authorization = request.headers.authorization
-    requests.push({ path: url.pathname, authorization })
+    requests.push({ path: url.pathname, search: url.search, authorization })
 
-    if (authorization !== fixtureToken) {
+    if (authorization !== `Bearer ${fixtureToken}`) {
       response.writeHead(401, { "content-type": "text/plain; charset=utf-8" })
       response.end("unauthorized")
       return
     }
 
-    const filePath = path.join(apiFixtureRoot, url.pathname.replace(/^\/+/, ""))
+    if (url.pathname === "/v1/search/global") {
+      const query = url.searchParams.get("query")
+      if (query === "rocket" || query === "search") {
+        response.writeHead(200, { "content-type": "application/json; charset=utf-8" })
+        response.end(
+          JSON.stringify({
+            query,
+            results: [
+              {
+                hash: `ico_${query}`,
+                name: query,
+                imagePreviewUrl: `https://assets.example.test/${query}.png`,
+                isFree: true,
+                familySlug: "ultimate-light-free",
+                familyName: "Ultimate Light - Free",
+                categorySlug: "interface-essential",
+                categoryName: "Interface Essential",
+                subcategorySlug: "navigation",
+                subcategoryName: "Navigation",
+              },
+            ],
+            pagination: {
+              total: 1,
+              hasMore: false,
+              offset: 0,
+              nextOffset: 0,
+            },
+          })
+        )
+        return
+      }
 
-    try {
-      const body = await readFile(filePath)
-      response.writeHead(200, {
-        "content-type": filePath.endsWith(".json") ? "application/json; charset=utf-8" : "image/svg+xml",
-      })
-      response.end(body)
-    } catch {
-      response.writeHead(404, { "content-type": "text/plain; charset=utf-8" })
-      response.end("not found")
+      response.writeHead(404, { "content-type": "application/json; charset=utf-8" })
+      response.end(JSON.stringify({ message: "not found" }))
+      return
     }
+
+    const downloadMatch = url.pathname.match(/^\/v1\/icons\/(ico_[^/]+)\/download\/svg$/)
+    if (downloadMatch) {
+      const filePath = path.join(apiFixtureRoot, "icons/regular", `${downloadMatch[1].replace(/^ico_/, "")}.svg`)
+
+      try {
+        const body = await readFile(filePath)
+        response.writeHead(200, { "content-type": "image/svg+xml" })
+        response.end(body)
+      } catch {
+        response.writeHead(404, { "content-type": "text/plain; charset=utf-8" })
+        response.end("not found")
+      }
+      return
+    }
+
+    response.writeHead(404, { "content-type": "text/plain; charset=utf-8" })
+    response.end("not found")
   })
 
   await new Promise<void>((resolve, reject) => {

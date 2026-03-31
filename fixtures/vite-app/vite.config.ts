@@ -12,9 +12,9 @@ function resolveSource() {
     return {
       type: "api" as const,
       baseUrl,
-      headers: {
-        Authorization: process.env.STREAMLINE_FIXTURE_TOKEN ?? "",
-      },
+      apiKey: process.env.STREAMLINE_FIXTURE_TOKEN ?? "",
+      familySlug: "ultimate-light-free",
+      icons: ["rocket", "search"],
     }
   }
 

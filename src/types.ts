@@ -32,16 +32,12 @@ export interface ArchiveSourceOptions {
   path: string
 }
 
-export interface ApiManifestItem {
-  name: string
-  style: StreamlineIconStyle
-  url: string
-}
-
 export interface ApiSourceOptions {
   type: "api"
-  baseUrl: string
-  headers?: Record<string, string>
+  apiKey: string
+  icons: string[]
+  familySlug?: string
+  baseUrl?: string
 }
 
 export type StreamlineIconSourceOptions =
