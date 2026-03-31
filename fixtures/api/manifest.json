@@ -1,0 +1,8 @@
+{
+  "icons": {
+    "regular": {
+      "rocket": "./icons/regular/rocket.svg",
+      "search": "./icons/regular/search.svg"
+    }
+  }
+}
