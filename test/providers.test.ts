@@ -71,9 +71,9 @@ describe("providers", () => {
     const fetchMock = vi.fn(async (input: string | URL, init?: RequestInit) => {
       const url = String(input)
 
-      if (url === "https://example.test/v1/search/global?query=rocket") {
+      if (url === "https://example.test/v1/search/global?productType=icons&query=rocket&style=regular&productTier=free") {
         expect(init?.headers).toEqual({
-          Authorization: "Bearer fixture-token",
+          "x-api-key": "fixture-token",
           accept: "application/json",
         })
         return new Response(
@@ -82,11 +82,11 @@ describe("providers", () => {
             results: [
               {
                 hash: "ico_rocket",
-                name: "rocket",
+                name: "Rocket Regular",
                 imagePreviewUrl: "https://assets.example.test/rocket.png",
                 isFree: true,
-                familySlug: "ultimate-light-free",
-                familyName: "Ultimate Light - Free",
+                familySlug: "fixture-regular",
+                familyName: "Fixture Regular",
                 categorySlug: "interface-essential",
                 categoryName: "Interface Essential",
                 subcategorySlug: "navigation",
@@ -106,7 +106,7 @@ describe("providers", () => {
 
       if (url === "https://example.test/v1/icons/ico_rocket/download/svg") {
         expect(init?.headers).toEqual({
-          Authorization: "Bearer fixture-token",
+          "x-api-key": "fixture-token",
           accept: "image/svg+xml",
         })
         return new Response("<svg><path d='M0 0'/></svg>", { status: 200 })
@@ -122,8 +122,9 @@ describe("providers", () => {
         type: "api",
         baseUrl: "https://example.test",
         apiKey: "fixture-token",
-        familySlug: "ultimate-light-free",
+        familySlug: "fixture-regular",
         icons: ["rocket"],
+        productTier: "free",
       },
       "regular",
       { root: process.cwd() }
@@ -137,7 +138,7 @@ describe("providers", () => {
     vi.stubGlobal(
       "fetch",
       vi.fn(async (input: string) => {
-        if (input === "https://example.test/v1/search/global?query=rocket") {
+        if (input === "https://example.test/v1/search/global?productType=icons&query=rocket&style=regular") {
           return new Response(
             JSON.stringify({
               query: "rocket",
@@ -171,18 +172,18 @@ describe("providers", () => {
       "fetch",
       vi.fn(async (input: string | URL) => {
         const url = String(input)
-        if (url === "https://example.test/v1/search/global?query=rocket") {
+        if (url === "https://example.test/v1/search/global?productType=icons&query=rocket&style=regular") {
           return new Response(
             JSON.stringify({
               query: "rocket",
               results: [
                 {
                   hash: "ico_rocket",
-                  name: "rocket",
+                  name: "Rocket Regular",
                   imagePreviewUrl: "https://assets.example.test/rocket.png",
                   isFree: true,
-                  familySlug: "ultimate-light-free",
-                  familyName: "Ultimate Light - Free",
+                  familySlug: "fixture-regular",
+                  familyName: "Fixture Regular",
                   categorySlug: "interface-essential",
                   categoryName: "Interface Essential",
                   subcategorySlug: "navigation",
@@ -210,7 +211,7 @@ describe("providers", () => {
           type: "api",
           baseUrl: "https://example.test",
           apiKey: "x",
-          familySlug: "ultimate-light-free",
+          familySlug: "fixture-regular",
           icons: ["rocket"],
         },
         "regular",
@@ -222,45 +223,51 @@ describe("providers", () => {
   it("fails clearly when exact matches are ambiguous without a family slug", async () => {
     vi.stubGlobal(
       "fetch",
-      vi.fn(async () => {
-        return new Response(
-          JSON.stringify({
-            query: "rocket",
-            results: [
-              {
-                hash: "ico_rocket_light",
-                name: "rocket",
-                imagePreviewUrl: "https://assets.example.test/rocket-light.png",
-                isFree: true,
-                familySlug: "ultimate-light-free",
-                familyName: "Ultimate Light - Free",
-                categorySlug: "interface-essential",
-                categoryName: "Interface Essential",
-                subcategorySlug: "navigation",
-                subcategoryName: "Navigation",
+      vi.fn(async (input: string | URL) => {
+        const url = String(input)
+
+        if (url === "https://example.test/v1/search/global?productType=icons&query=rocket&style=regular") {
+          return new Response(
+            JSON.stringify({
+              query: "rocket",
+              results: [
+                {
+                  hash: "ico_rocket_light",
+                  name: "Rocket Regular",
+                  imagePreviewUrl: "https://assets.example.test/rocket-light.png",
+                  isFree: true,
+                  familySlug: "fixture-light",
+                  familyName: "Fixture Light",
+                  categorySlug: "interface-essential",
+                  categoryName: "Interface Essential",
+                  subcategorySlug: "navigation",
+                  subcategoryName: "Navigation",
+                },
+                {
+                  hash: "ico_rocket_regular",
+                  name: "Rocket Regular",
+                  imagePreviewUrl: "https://assets.example.test/rocket-regular.png",
+                  isFree: true,
+                  familySlug: "fixture-regular",
+                  familyName: "Fixture Regular",
+                  categorySlug: "interface-essential",
+                  categoryName: "Interface Essential",
+                  subcategorySlug: "navigation",
+                  subcategoryName: "Navigation",
+                },
+              ],
+              pagination: {
+                total: 2,
+                hasMore: false,
+                offset: 0,
+                nextOffset: 0,
               },
-              {
-                hash: "ico_rocket_regular",
-                name: "rocket",
-                imagePreviewUrl: "https://assets.example.test/rocket-regular.png",
-                isFree: true,
-                familySlug: "ultimate-regular-free",
-                familyName: "Ultimate Regular - Free",
-                categorySlug: "interface-essential",
-                categoryName: "Interface Essential",
-                subcategorySlug: "navigation",
-                subcategoryName: "Navigation",
-              },
-            ],
-            pagination: {
-              total: 2,
-              hasMore: false,
-              offset: 0,
-              nextOffset: 0,
-            },
-          }),
-          { status: 200 }
-        )
+            }),
+            { status: 200 }
+          )
+        }
+
+        return new Response("unexpected call", { status: 500 })
       })
     )
 

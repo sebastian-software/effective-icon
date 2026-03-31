@@ -13,8 +13,9 @@ function resolveSource() {
       type: "api" as const,
       baseUrl,
       apiKey: process.env.STREAMLINE_FIXTURE_TOKEN ?? "",
-      familySlug: "ultimate-light-free",
+      familySlug: "fixture-regular",
       icons: ["rocket", "search"],
+      productTier: "free" as const,
     }
   }
 

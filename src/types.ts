@@ -38,6 +38,7 @@ export interface ApiSourceOptions {
   icons: string[]
   familySlug?: string
   baseUrl?: string
+  productTier?: "all" | "free" | "premium"
 }
 
 export type StreamlineIconSourceOptions =

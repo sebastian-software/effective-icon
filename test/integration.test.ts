@@ -52,10 +52,18 @@ describe.sequential("vite consumer integration", () => {
 
       assertLazyIconChunks(outputs)
       expect(server.requests).toEqual([
-        { path: "/v1/search/global", search: "?query=rocket", authorization: "Bearer fixture-token" },
-        { path: "/v1/icons/ico_rocket/download/svg", search: "", authorization: "Bearer fixture-token" },
-        { path: "/v1/search/global", search: "?query=search", authorization: "Bearer fixture-token" },
-        { path: "/v1/icons/ico_search/download/svg", search: "", authorization: "Bearer fixture-token" },
+        {
+          path: "/v1/search/global",
+          search: "?productType=icons&query=rocket&style=regular&productTier=free",
+          apiKey: "fixture-token",
+        },
+        { path: "/v1/icons/ico_rocket/download/svg", search: "", apiKey: "fixture-token" },
+        {
+          path: "/v1/search/global",
+          search: "?productType=icons&query=search&style=regular&productTier=free",
+          apiKey: "fixture-token",
+        },
+        { path: "/v1/icons/ico_search/download/svg", search: "", apiKey: "fixture-token" },
       ])
       expect(findSvgChunks(outputs).some((chunk) => chunk.code.includes("currentColor"))).toBe(true)
     } finally {
@@ -118,16 +126,16 @@ function isBuildOutput(value: unknown): value is BuildOutput {
 async function startFixtureServer(): Promise<{
   baseUrl: string
   close: () => Promise<void>
-  requests: Array<{ path: string; search: string; authorization?: string }>
+  requests: Array<{ path: string; search: string; apiKey?: string }>
 }> {
-  const requests: Array<{ path: string; search: string; authorization?: string }> = []
+  const requests: Array<{ path: string; search: string; apiKey?: string }> = []
 
   const server = createServer(async (request, response) => {
     const url = new URL(request.url ?? "/", `http://${request.headers.host}`)
-    const authorization = request.headers.authorization
-    requests.push({ path: url.pathname, search: url.search, authorization })
+    const apiKey = request.headers["x-api-key"]
+    requests.push({ path: url.pathname, search: url.search, apiKey: typeof apiKey === "string" ? apiKey : undefined })
 
-    if (authorization !== `Bearer ${fixtureToken}`) {
+    if (apiKey !== fixtureToken) {
       response.writeHead(401, { "content-type": "text/plain; charset=utf-8" })
       response.end("unauthorized")
       return
@@ -135,7 +143,11 @@ async function startFixtureServer(): Promise<{
 
     if (url.pathname === "/v1/search/global") {
       const query = url.searchParams.get("query")
-      if (query === "rocket" || query === "search") {
+      const productType = url.searchParams.get("productType")
+      const style = url.searchParams.get("style")
+      const productTier = url.searchParams.get("productTier")
+
+      if ((query === "rocket" || query === "search") && productType === "icons" && style === "regular" && productTier === "free") {
         response.writeHead(200, { "content-type": "application/json; charset=utf-8" })
         response.end(
           JSON.stringify({
@@ -143,11 +155,11 @@ async function startFixtureServer(): Promise<{
             results: [
               {
                 hash: `ico_${query}`,
-                name: query,
+                name: `${query[0]?.toUpperCase() ?? ""}${query.slice(1)} Regular`,
                 imagePreviewUrl: `https://assets.example.test/${query}.png`,
                 isFree: true,
-                familySlug: "ultimate-light-free",
-                familyName: "Ultimate Light - Free",
+                familySlug: "fixture-regular",
+                familyName: "Fixture Regular",
                 categorySlug: "interface-essential",
                 categoryName: "Interface Essential",
                 subcategorySlug: "navigation",

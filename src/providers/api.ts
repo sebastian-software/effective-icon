@@ -34,9 +34,21 @@ function createApiBaseUrl(baseUrl?: string): string {
   return normalizeBaseUrl(baseUrl ?? DEFAULT_STREAMLINE_API_BASE_URL)
 }
 
-function createSearchUrl(baseUrl: string, query: string): string {
+function createSearchUrl(
+  baseUrl: string,
+  query: string,
+  style: StreamlineIconStyle,
+  productTier?: ApiSourceOptions["productTier"]
+): string {
   const url = new URL("/v1/search/global", `${normalizeBaseUrl(baseUrl)}/`)
+  url.searchParams.set("productType", "icons")
   url.searchParams.set("query", query)
+  url.searchParams.set("style", style)
+
+  if (productTier && productTier !== "all") {
+    url.searchParams.set("productTier", productTier)
+  }
+
   return url.toString()
 }
 
@@ -50,7 +62,7 @@ function formatResponseStatus(response: Response): string {
 
 function createAuthHeaders(apiKey: string, accept?: string): HeadersInit {
   const headers: Record<string, string> = {
-    Authorization: `Bearer ${apiKey}`,
+    "x-api-key": apiKey,
   }
 
   if (accept) {
@@ -68,13 +80,22 @@ export async function resolveApiIconSet(
   if (options.icons.length === 0) {
     throw new Error("Streamline API source requires at least one icon name")
   }
+  if (!options.apiKey) {
+    throw new Error("Streamline API source requires apiKey")
+  }
 
   const baseUrl = createApiBaseUrl(options.baseUrl)
   const icons = new Map<string, StreamlineIconAsset>()
 
   for (const requestedName of options.icons) {
-    const searchResponse = await fetchSearchResponse(baseUrl, requestedName, options.apiKey)
-    const match = selectSearchResult(searchResponse, requestedName, options.familySlug)
+    const searchResponse = await fetchSearchResponse(
+      baseUrl,
+      requestedName,
+      style,
+      options.apiKey,
+      options.productTier
+    )
+    const match = selectSearchResult(searchResponse, requestedName, style, options.familySlug)
     const response = await fetch(createSvgDownloadUrl(baseUrl, match.hash), {
       headers: createAuthHeaders(options.apiKey, "image/svg+xml"),
     })
@@ -100,9 +121,11 @@ export async function resolveApiIconSet(
 async function fetchSearchResponse(
   baseUrl: string,
   query: string,
-  apiKey: string
+  style: StreamlineIconStyle,
+  apiKey: string,
+  productTier?: ApiSourceOptions["productTier"]
 ): Promise<StreamlineSearchResponse> {
-  const url = createSearchUrl(baseUrl, query)
+  const url = createSearchUrl(baseUrl, query, style, productTier)
   const response = await fetch(url, {
     headers: createAuthHeaders(apiKey, "application/json"),
   })
@@ -189,23 +212,27 @@ function assertSearchResult(
 function selectSearchResult(
   response: StreamlineSearchResponse,
   requestedName: string,
+  style: StreamlineIconStyle,
   familySlug?: string
 ): StreamlineSearchResult {
-  const normalizedName = normalizeSearchName(requestedName)
-  const exactMatches = response.results.filter((result) => normalizeSearchName(result.name) === normalizedName)
+  const exactCandidates = new Set([
+    normalizeSearchName(requestedName),
+    normalizeSearchName(`${requestedName} ${style}`),
+  ])
+  const exactMatches = response.results.filter((result) => exactCandidates.has(normalizeSearchName(result.name)))
 
   if (familySlug) {
     const familyMatches = exactMatches.filter((result) => result.familySlug === familySlug)
     if (familyMatches.length === 0) {
       throw new Error(
-        `Streamline search for "${requestedName}" did not return an exact match in family "${familySlug}"`
+        `Streamline search for "${requestedName}" did not return an exact match for style "${style}" in family "${familySlug}"`
       )
     }
     return familyMatches[0]
   }
 
   if (exactMatches.length === 0) {
-    throw new Error(`Streamline search for "${requestedName}" did not return an exact icon match`)
+    throw new Error(`Streamline search for "${requestedName}" did not return an exact icon match for style "${style}"`)
   }
 
   if (exactMatches.length > 1) {
