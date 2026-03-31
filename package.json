@@ -2,6 +2,7 @@
   "name": "vite-plugin-streamline",
   "version": "0.1.0",
   "description": "Vite plugin for lazy-loading Streamline icon sets with free and commercial sources",
+  "packageManager": "pnpm@9.15.9",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
