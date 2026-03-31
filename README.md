@@ -25,6 +25,15 @@ See [docs/current-status.md](/Users/sebastian/Workspace/vite-plugin-streamline/d
 pnpm add -D vite-plugin-streamline
 ```
 
+## Demo
+
+```bash
+pnpm dev:demo
+pnpm build:demo
+```
+
+The repository ships a small GitHub Pages gallery under `./demo` that lists every bundled icon currently available through the built-in `free` source.
+
 ## Quickstart: Free Assets
 
 ```ts
@@ -180,6 +189,7 @@ src/
 fixtures/
   api/
   vite-app/
+demo/
 scripts/
   sync-streamline.ts
 test/
