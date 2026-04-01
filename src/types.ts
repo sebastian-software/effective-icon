@@ -1,6 +1,6 @@
 export type StreamlineIconsTarget = "jsx" | "web-component"
 
-export type StreamlineIconsRenderMode = "component" | "mask"
+export type StreamlineIconsRenderMode = "image" | "component" | "mask" | "inline-svg"
 
 export interface StreamlineIconsOptions {
   package: string

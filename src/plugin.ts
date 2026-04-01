@@ -18,7 +18,7 @@ export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
   const normalizedOptions = {
     package: options.package,
     target: options.target ?? "jsx",
-    renderMode: options.renderMode ?? "component",
+    renderMode: normalizeRenderMode(options.renderMode),
   } as const
 
   if (normalizedOptions.target === "web-component" && options.renderMode) {
@@ -57,6 +57,14 @@ export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
       }
     },
   }
+}
+
+function normalizeRenderMode(renderMode: StreamlineIconsOptions["renderMode"] | undefined): "image" | "mask" | "inline-svg" {
+  if (renderMode === "component" || renderMode == null) {
+    return "image"
+  }
+
+  return renderMode
 }
 
 async function ensurePackage(state: PluginState, packageName: string): Promise<ResolvedIconPackage> {

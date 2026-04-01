@@ -19,7 +19,7 @@ streamlineIcons({
     type: "api",
     apiKey: process.env.STREAMLINE_API_KEY ?? "",
     familySlug: "phosphor-light",
-    icons: ["rocket", "search"],
+    icons: ["airplane", "add-1"],
     productTier: "free",
   },
 })

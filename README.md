@@ -14,6 +14,7 @@ The current V1 direction is a compile-time reset:
 - build-time rewrites for:
   - JSX image output
   - JSX mask output
+  - JSX inline SVG output
   - generic web-component output
 
 The repo also contains the Streamline pack builder workspace that produces pack packages with:
@@ -45,11 +46,11 @@ import { Icon, icon } from "vite-plugin-streamline/compile"
 Then use either surface:
 
 ```tsx
-<Icon name="rocket" className="size-4" />
+<Icon name="airplane" className="size-4" />
 ```
 
 ```tsx
-{icon`search`}
+{icon`add-1`}
 ```
 
 ## Vite Config
@@ -65,7 +66,7 @@ export default defineConfig({
     streamlineIcons({
       package: "@streamline-pkg/core-line-free",
       target: "jsx",
-      renderMode: "component",
+      renderMode: "image",
     }),
   ],
 })
@@ -85,6 +86,18 @@ streamlineIcons({
 
 This rewrites icons to static JSX output with mask-image styling.
 
+### JSX Inline SVG Output
+
+```ts
+streamlineIcons({
+  package: "@streamline-pkg/core-line-free",
+  target: "jsx",
+  renderMode: "inline-svg",
+})
+```
+
+This rewrites icons to inline `<svg>` markup in the emitted JSX.
+
 ### Web Component Output
 
 ```ts
@@ -94,7 +107,7 @@ streamlineIcons({
 })
 ```
 
-This rewrites icons to a generic `<streamline-icon>` custom element with static build-time registration of the referenced SVGs.
+This rewrites icons to a generic `<streamline-icon>` custom element, keeps the icons as external SVG asset URLs, and renders them as tintable mask-based glyphs in shadow DOM.
 
 ## Rules
 
@@ -124,7 +137,22 @@ pnpm build:demo
 pnpm dev:demo
 ```
 
-The demo now exercises the compile-time pack-based API against the sample workspace pack in `packages/packs/core-line-free`.
+The demo is structured as four real pnpm workspace apps that share most of their content/UI:
+
+- `pnpm dev:demo` starts all four dev servers together
+- `pnpm dev:demo:image` for `jsx/image`
+- `pnpm dev:demo:mask` for `jsx/mask`
+- `pnpm dev:demo:inline-svg` for `jsx/inline-svg`
+- `pnpm dev:demo:web-component` for `web-component`
+
+Default local ports:
+
+- `http://127.0.0.1:4174/` for `jsx/image`
+- `http://127.0.0.1:4175/` for `jsx/mask`
+- `http://127.0.0.1:4176/` for `jsx/inline-svg`
+- `http://127.0.0.1:4177/` for `web-component`
+
+`pnpm build:demo` builds the four apps plus a small landing index into `demo/dist` against the sample workspace pack in `packages/packs/core-line-free`.
 
 ## Builder Workspace
 

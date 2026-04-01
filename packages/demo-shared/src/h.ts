@@ -2,9 +2,20 @@ const VOID_ELEMENTS = new Set(["area", "base", "br", "col", "embed", "hr", "img"
 
 export const Fragment = Symbol.for("streamline.demo.fragment")
 
-export function h(type: string | symbol, props: Record<string, unknown> | null, ...children: unknown[]): string {
+export function h(
+  type: string | symbol | ((props: Record<string, unknown>) => string),
+  props: Record<string, unknown> | null,
+  ...children: unknown[]
+): string {
   if (type === Fragment) {
     return flatten(children).join("")
+  }
+
+  if (typeof type === "function") {
+    return type({
+      ...(props ?? {}),
+      children,
+    })
   }
 
   if (typeof type !== "string") {
@@ -40,7 +51,7 @@ function flatten(values: unknown[]): string[] {
 
 function renderAttributes(props: Record<string, unknown>): string {
   return Object.entries(props)
-    .filter(([, value]) => value != null && value !== false)
+    .filter(([name, value]) => value != null && value !== false && !isInternalJsxProp(name))
     .map(([name, value]) => {
       const attributeName = name === "className" ? "class" : name
       if (attributeName === "style" && typeof value === "object") {
@@ -59,9 +70,18 @@ function renderAttributes(props: Record<string, unknown>): string {
     .join("")
 }
 
+function isInternalJsxProp(name: string): boolean {
+  return name === "children" || name === "key" || name.startsWith("__")
+}
+
 function toKebabCase(input: string): string {
+  if (input.startsWith("--")) {
+    return input
+  }
+
   return input
     .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/^Webkit-/, "-webkit-")
     .replace(/^-ms-/, "-ms-")
     .toLowerCase()
 }

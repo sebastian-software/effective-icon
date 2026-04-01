@@ -13,15 +13,15 @@ async function loadResolvedPackage() {
 }
 
 describe("compile-time transform", () => {
-  it("rewrites JSX icons for component mode", async () => {
+  it("rewrites JSX icons for image mode", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
       import { Icon, icon } from "${COMPILE_MODULE_ID}"
 
       const view = (
         <section>
-          <Icon name="rocket" className="icon" />
-          {icon\`search\`}
+          <Icon name="airplane" className="icon" />
+          {icon\`add-1\`}
         </section>
       )
     `
@@ -30,7 +30,7 @@ describe("compile-time transform", () => {
       options: {
         package: packageName,
         target: "jsx",
-        renderMode: "component",
+        renderMode: "image",
       },
       resolvedPackage,
     })
@@ -40,12 +40,34 @@ describe("compile-time transform", () => {
     expect(transformed).not.toContain(COMPILE_MODULE_ID)
   })
 
+  it("rewrites JSX icons for inline-svg mode", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const view = <Icon name="airplane" className="icon" aria-label="Airplane" />
+    `
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        target: "jsx",
+        renderMode: "inline-svg",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed).toContain("<svg")
+    expect(transformed).toContain('className="icon"')
+    expect(transformed).not.toContain("?url")
+  })
+
   it("rewrites JSX icons for mask mode", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
       import { Icon } from "${COMPILE_MODULE_ID}"
 
-      const view = <Icon name="rocket" className="icon" style={{ color: "tomato" }} />
+      const view = <Icon name="airplane" className="icon" style={{ color: "tomato" }} />
     `
 
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
@@ -66,20 +88,21 @@ describe("compile-time transform", () => {
     const source = `
       import { icon } from "${COMPILE_MODULE_ID}"
 
-      const view = <section>{icon\`rocket\`}</section>
+      const view = <section>{icon\`airplane\`}</section>
     `
 
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
         target: "web-component",
-        renderMode: "component",
+        renderMode: "image",
       },
       resolvedPackage,
     })
 
-    expect(transformed).toContain("?raw")
-    expect(transformed).toContain("registerStreamlineIconDefinition")
+    expect(transformed).toContain("?url")
+    expect(transformed).toContain("data-streamline-url")
+    expect(transformed).toContain("ensureStreamlineIconElement")
     expect(transformed).toContain("streamline-icon")
   })
 
@@ -87,11 +110,11 @@ describe("compile-time transform", () => {
     const resolvedPackage = await loadResolvedPackage()
 
     expect(() =>
-      transformCompileTimeIcons(`const view = <Icon name="rocket" />`, "/virtual/input.tsx", {
+      transformCompileTimeIcons(`const view = <Icon name="airplane" />`, "/virtual/input.tsx", {
         options: {
           package: packageName,
           target: "jsx",
-          renderMode: "component",
+          renderMode: "image",
         },
         resolvedPackage,
       })
@@ -107,10 +130,10 @@ describe("compile-time transform", () => {
         "/virtual/input.tsx",
         {
           options: {
-            package: packageName,
-            target: "jsx",
-            renderMode: "component",
-          },
+          package: packageName,
+          target: "jsx",
+          renderMode: "image",
+        },
           resolvedPackage,
         }
       )
@@ -122,14 +145,14 @@ describe("compile-time transform", () => {
 
     expect(() =>
       transformCompileTimeIcons(
-        `import { Icon } from "${COMPILE_MODULE_ID}"; const name = "rocket"; const view = <Icon name={name} />`,
+        `import { Icon } from "${COMPILE_MODULE_ID}"; const name = "airplane"; const view = <Icon name={name} />`,
         "/virtual/input.tsx",
         {
           options: {
-            package: packageName,
-            target: "jsx",
-            renderMode: "component",
-          },
+          package: packageName,
+          target: "jsx",
+          renderMode: "image",
+        },
           resolvedPackage,
         }
       )
@@ -141,14 +164,14 @@ describe("compile-time transform", () => {
 
     expect(() =>
       transformCompileTimeIcons(
-        `import { icon } from "${COMPILE_MODULE_ID}"; const value = "rocket"; const view = <section>{icon\`${"${value}"}\`}</section>`,
+        `import { icon } from "${COMPILE_MODULE_ID}"; const value = "airplane"; const view = <section>{icon\`${"${value}"}\`}</section>`,
         "/virtual/input.tsx",
         {
           options: {
-            package: packageName,
-            target: "jsx",
-            renderMode: "component",
-          },
+          package: packageName,
+          target: "jsx",
+          renderMode: "image",
+        },
           resolvedPackage,
         }
       )
@@ -160,14 +183,14 @@ describe("compile-time transform", () => {
 
     expect(() =>
       transformCompileTimeIcons(
-        `import { Icon } from "${COMPILE_MODULE_ID}"; const props = {}; const view = <Icon name="rocket" {...props} />`,
+        `import { Icon } from "${COMPILE_MODULE_ID}"; const props = {}; const view = <Icon name="airplane" {...props} />`,
         "/virtual/input.tsx",
         {
           options: {
-            package: packageName,
-            target: "jsx",
-            renderMode: "component",
-          },
+          package: packageName,
+          target: "jsx",
+          renderMode: "image",
+        },
           resolvedPackage,
         }
       )
@@ -175,14 +198,14 @@ describe("compile-time transform", () => {
 
     expect(() =>
       transformCompileTimeIcons(
-        `import { Icon } from "${COMPILE_MODULE_ID}"; const view = <Icon name="rocket">child</Icon>`,
+        `import { Icon } from "${COMPILE_MODULE_ID}"; const view = <Icon name="airplane">child</Icon>`,
         "/virtual/input.tsx",
         {
           options: {
-            package: packageName,
-            target: "jsx",
-            renderMode: "component",
-          },
+          package: packageName,
+          target: "jsx",
+          renderMode: "image",
+        },
           resolvedPackage,
         }
       )

@@ -1,4 +1,5 @@
 import path from "node:path"
+import { readFileSync } from "node:fs"
 
 import ts from "typescript"
 
@@ -9,7 +10,7 @@ export const COMPILE_MODULE_ID = "vite-plugin-streamline/compile"
 export const RUNTIME_MODULE_ID = "vite-plugin-streamline/runtime"
 
 interface TransformContext {
-  options: Required<Pick<StreamlineIconsOptions, "target" | "renderMode">> & { package: string }
+  options: { package: string; target: "jsx" | "web-component"; renderMode: "image" | "mask" | "inline-svg" }
   resolvedPackage: ResolvedIconPackage
 }
 
@@ -21,7 +22,7 @@ interface CompileBindings {
 interface IconImportRecord {
   icon: ResolvedPackIcon
   importName: string
-  definitionId: string
+  inlineSvg?: ts.JsxElement | ts.JsxSelfClosingElement
 }
 
 class TransformState {
@@ -53,7 +54,10 @@ class TransformState {
     const record: IconImportRecord = {
       icon,
       importName: `__streamlineIconAsset${this.importCounter++}`,
-      definitionId: `${this.context.options.package}:${iconName}`,
+      inlineSvg:
+        this.context.options.target === "jsx" && this.context.options.renderMode === "inline-svg"
+          ? parseInlineSvg(icon.absolutePath, this.sourceFile.fileName)
+          : undefined,
     }
 
     if (this.context.options.target === "jsx" && this.context.options.renderMode === "mask") {
@@ -80,13 +84,13 @@ class TransformState {
     return [...leadingImports, ...retainedStatements, ...registrationStatements]
   }
 
-  buildElement(iconName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement {
+  buildElement(iconName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement | ts.JsxElement {
     const record = this.ensureIcon(iconName)
 
     if (this.context.options.target === "web-component") {
       return createJsxElement(
         "streamline-icon",
-        [...attributes, createStringAttribute("data-streamline-id", record.definitionId), ...createA11yFallback(attributes)]
+        [...attributes, createExpressionAttribute("data-streamline-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
       )
     }
 
@@ -105,6 +109,10 @@ class TransformState {
         ),
         ...createA11yFallback(forwarded),
       ])
+    }
+
+    if (this.context.options.renderMode === "inline-svg") {
+      return createInlineSvgElement(record, [...attributes, ...createA11yFallback(attributes)])
     }
 
     return createJsxElement("img", [
@@ -134,15 +142,16 @@ class TransformState {
 
     if (this.needsWebComponentRuntime) {
       statements.push(
-        createNamedImport(RUNTIME_MODULE_ID, [
-          ["ensureStreamlineIconElement", "__streamlineEnsureIconElement"],
-          ["registerStreamlineIconDefinition", "__streamlineRegisterIconDefinition"],
-        ])
+        createNamedImport(RUNTIME_MODULE_ID, [["ensureStreamlineIconElement", "__streamlineEnsureIconElement"]])
       )
     }
 
     for (const record of this.iconImports.values()) {
-      const query = this.context.options.target === "web-component" ? "?raw" : "?url"
+      if (this.context.options.target === "jsx" && this.context.options.renderMode === "inline-svg") {
+        continue
+      }
+
+      const query = "?url"
       const specifier = normalizeImportPath(record.icon.absolutePath) + query
       statements.push(createDefaultImport(specifier, record.importName))
     }
@@ -155,25 +164,11 @@ class TransformState {
       return []
     }
 
-    const statements: ts.Statement[] = [
+    return [
       ts.factory.createExpressionStatement(
         ts.factory.createCallExpression(ts.factory.createIdentifier("__streamlineEnsureIconElement"), undefined, [])
       ),
     ]
-
-    for (const record of this.iconImports.values()) {
-      statements.push(
-        ts.factory.createExpressionStatement(
-          ts.factory.createCallExpression(
-            ts.factory.createIdentifier("__streamlineRegisterIconDefinition"),
-            undefined,
-            [ts.factory.createStringLiteral(record.definitionId), ts.factory.createIdentifier(record.importName)]
-          )
-        )
-      )
-    }
-
-    return statements
   }
 }
 
@@ -236,7 +231,10 @@ export function transformCompileTimeIcons(code: string, id: string, context: Tra
   return printer.printFile(transformed)
 }
 
-function transformJsxIcon(node: ts.JsxSelfClosingElement | ts.JsxElement, state: TransformState): ts.JsxSelfClosingElement {
+function transformJsxIcon(
+  node: ts.JsxSelfClosingElement | ts.JsxElement,
+  state: TransformState
+): ts.JsxSelfClosingElement | ts.JsxElement {
   if (ts.isJsxElement(node)) {
     throw state.errorAt(node, "Compile-time <Icon> does not support children")
   }
@@ -270,7 +268,7 @@ function transformJsxIcon(node: ts.JsxSelfClosingElement | ts.JsxElement, state:
   return state.buildElement(nameAttribute.initializer.text, forwarded)
 }
 
-function transformTaggedIcon(node: ts.TaggedTemplateExpression, state: TransformState): ts.JsxSelfClosingElement {
+function transformTaggedIcon(node: ts.TaggedTemplateExpression, state: TransformState): ts.JsxSelfClosingElement | ts.JsxElement {
   const fileExtension = path.extname(node.getSourceFile().fileName.replace(/\?.*$/, ""))
   if (![".tsx", ".jsx", ".mdx"].includes(fileExtension)) {
     throw state.errorAt(node, "Compile-time icon templates are only supported in JSX, TSX, or MDX files")
@@ -361,6 +359,66 @@ function getJsxAttributeExpression(
   return undefined
 }
 
+function createInlineSvgElement(
+  record: IconImportRecord,
+  attributes: readonly ts.JsxAttributeLike[]
+): ts.JsxElement | ts.JsxSelfClosingElement {
+  if (!record.inlineSvg) {
+    throw new Error(`Missing inline SVG AST for "${record.icon.name}"`)
+  }
+
+  const clonedSvg = cloneStaticJsxNode(record.inlineSvg)
+
+  if (ts.isJsxElement(clonedSvg)) {
+    return ts.factory.updateJsxElement(
+      clonedSvg,
+      ts.factory.updateJsxOpeningElement(
+        clonedSvg.openingElement,
+        clonedSvg.openingElement.tagName,
+        clonedSvg.openingElement.typeArguments,
+        ts.factory.createJsxAttributes(mergeJsxAttributes(clonedSvg.openingElement.attributes.properties, attributes))
+      ),
+      clonedSvg.children,
+      clonedSvg.closingElement
+    )
+  }
+
+  return ts.factory.updateJsxSelfClosingElement(
+    clonedSvg,
+    clonedSvg.tagName,
+    clonedSvg.typeArguments,
+    ts.factory.createJsxAttributes(mergeJsxAttributes(clonedSvg.attributes.properties, attributes))
+  )
+}
+
+function mergeJsxAttributes(
+  existing: readonly ts.JsxAttributeLike[],
+  forwarded: readonly ts.JsxAttributeLike[]
+): ts.JsxAttributeLike[] {
+  const merged: ts.JsxAttributeLike[] = []
+  const indexByName = new Map<string, number>()
+
+  for (const attribute of [...existing, ...forwarded]) {
+    const name = getJsxAttributeName(attribute)
+
+    if (!name) {
+      merged.push(attribute)
+      continue
+    }
+
+    const existingIndex = indexByName.get(name)
+    if (existingIndex == null) {
+      indexByName.set(name, merged.length)
+      merged.push(attribute)
+      continue
+    }
+
+    merged[existingIndex] = attribute
+  }
+
+  return merged
+}
+
 function createJsxElement(tagName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement {
   return ts.factory.createJsxSelfClosingElement(
     ts.factory.createIdentifier(tagName),
@@ -434,6 +492,154 @@ function getJsxAttributeIdentifier(name: ts.JsxAttributeName): string {
   return ts.isIdentifier(name) ? name.text : name.getText()
 }
 
+function parseInlineSvg(iconPath: string, fromFile: string): ts.JsxElement | ts.JsxSelfClosingElement {
+  const rawSvg = readFileSync(iconPath, "utf8").trim()
+  const source = ts.createSourceFile(
+    `${iconPath}.tsx`,
+    `const __streamlineInlineIcon = (${rawSvg});`,
+    ts.ScriptTarget.Latest,
+    true,
+    ts.ScriptKind.TSX
+  )
+  const statement = source.statements[0]
+
+  if (!statement || !ts.isVariableStatement(statement)) {
+    throw new Error(`Could not parse inline SVG for "${iconPath}" referenced from "${fromFile}"`)
+  }
+
+  const initializer = statement.declarationList.declarations[0]?.initializer
+  const expression = initializer && ts.isParenthesizedExpression(initializer) ? initializer.expression : initializer
+
+  if (!expression || (!ts.isJsxElement(expression) && !ts.isJsxSelfClosingElement(expression))) {
+    throw new Error(`Expected root <svg> element in "${iconPath}" referenced from "${fromFile}"`)
+  }
+
+  const tagName = ts.isJsxElement(expression) ? expression.openingElement.tagName : expression.tagName
+  if (!ts.isIdentifier(tagName) || tagName.text !== "svg") {
+    throw new Error(`Expected root <svg> element in "${iconPath}" referenced from "${fromFile}"`)
+  }
+
+  return cloneStaticJsxNode(expression)
+}
+
+function cloneStaticJsxNode(node: ts.JsxElement | ts.JsxSelfClosingElement): ts.JsxElement | ts.JsxSelfClosingElement {
+  if (ts.isJsxElement(node)) {
+    return ts.factory.createJsxElement(
+      ts.factory.createJsxOpeningElement(
+        cloneJsxTagName(node.openingElement.tagName),
+        undefined,
+        ts.factory.createJsxAttributes(node.openingElement.attributes.properties.map(cloneJsxAttributeLike))
+      ),
+      node.children.map(cloneJsxChild),
+      ts.factory.createJsxClosingElement(cloneJsxTagName(node.closingElement.tagName))
+    )
+  }
+
+  return ts.factory.createJsxSelfClosingElement(
+    cloneJsxTagName(node.tagName),
+    undefined,
+    ts.factory.createJsxAttributes(node.attributes.properties.map(cloneJsxAttributeLike))
+  )
+}
+
+function cloneJsxChild(child: ts.JsxChild): ts.JsxChild {
+  if (ts.isJsxText(child)) {
+    return ts.factory.createJsxText(child.getText())
+  }
+
+  if (ts.isJsxElement(child)) {
+    return cloneStaticJsxNode(child)
+  }
+
+  if (ts.isJsxSelfClosingElement(child)) {
+    return cloneStaticJsxNode(child)
+  }
+
+  if (ts.isJsxExpression(child)) {
+    return ts.factory.createJsxExpression(undefined, child.expression)
+  }
+
+  if (ts.isJsxFragment(child)) {
+    return ts.factory.createJsxFragment(
+      ts.factory.createJsxOpeningFragment(),
+      child.children.map(cloneJsxChild),
+      ts.factory.createJsxJsxClosingFragment()
+    )
+  }
+
+  return child
+}
+
+function cloneJsxAttributeLike(attribute: ts.JsxAttributeLike): ts.JsxAttributeLike {
+  if (ts.isJsxSpreadAttribute(attribute)) {
+    return ts.factory.createJsxSpreadAttribute(attribute.expression)
+  }
+
+  return ts.factory.createJsxAttribute(
+    cloneJsxAttributeName(attribute.name),
+    cloneJsxAttributeInitializer(attribute.initializer)
+  )
+}
+
+function cloneJsxAttributeInitializer(
+  initializer: ts.JsxAttribute["initializer"]
+): ts.StringLiteral | ts.JsxExpression | ts.JsxElement | ts.JsxSelfClosingElement | ts.JsxFragment | undefined {
+  if (!initializer) {
+    return undefined
+  }
+
+  if (ts.isStringLiteral(initializer)) {
+    return ts.factory.createStringLiteral(initializer.text)
+  }
+
+  if (ts.isJsxExpression(initializer)) {
+    return ts.factory.createJsxExpression(undefined, initializer.expression)
+  }
+
+  if (ts.isJsxElement(initializer) || ts.isJsxSelfClosingElement(initializer)) {
+    return cloneStaticJsxNode(initializer)
+  }
+
+  return ts.factory.createJsxFragment(
+    ts.factory.createJsxOpeningFragment(),
+    initializer.children.map(cloneJsxChild),
+    ts.factory.createJsxJsxClosingFragment()
+  )
+}
+
+function cloneJsxAttributeName(name: ts.JsxAttributeName): ts.JsxAttributeName {
+  if (ts.isIdentifier(name)) {
+    return ts.factory.createIdentifier(name.text)
+  }
+
+  return ts.factory.createJsxNamespacedName(
+    ts.factory.createIdentifier(name.namespace.text),
+    ts.factory.createIdentifier(name.name.text)
+  )
+}
+
+function cloneJsxTagName(name: ts.JsxTagNameExpression): ts.JsxTagNameExpression {
+  if (ts.isIdentifier(name)) {
+    return ts.factory.createIdentifier(name.text)
+  }
+
+  if (ts.isJsxNamespacedName(name)) {
+    return ts.factory.createJsxNamespacedName(
+      ts.factory.createIdentifier(name.namespace.text),
+      ts.factory.createIdentifier(name.name.text)
+    )
+  }
+
+  if (ts.isPropertyAccessExpression(name)) {
+    return ts.factory.createPropertyAccessExpression(
+      cloneJsxTagName(name.expression) as ts.Identifier | ts.ThisExpression | ts.JsxTagNamePropertyAccess,
+      ts.factory.createIdentifier(name.name.text)
+    ) as unknown as ts.JsxTagNamePropertyAccess
+  }
+
+  return ts.factory.createThis()
+}
+
 function isCompileImport(statement: ts.Statement): boolean {
   return (
     ts.isImportDeclaration(statement) &&
@@ -447,7 +653,7 @@ function isReservedAttribute(name: string, state: TransformState): boolean {
     return true
   }
 
-  if (name === "data-streamline-id") {
+  if (name === "data-streamline-id" || name === "data-streamline-url") {
     return true
   }
 

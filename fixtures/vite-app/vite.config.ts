@@ -32,7 +32,12 @@ export default defineConfig({
         : {
             package: "@streamline-pkg/core-line-free",
             target: "jsx",
-            renderMode: process.env.STREAMLINE_RENDER_MODE === "mask" ? "mask" : "component",
+            renderMode:
+              process.env.STREAMLINE_RENDER_MODE === "mask"
+                ? "mask"
+                : process.env.STREAMLINE_RENDER_MODE === "inline-svg"
+                  ? "inline-svg"
+                  : "image",
           }
     ),
   ],

@@ -1,7 +1,5 @@
 const STREAMLINE_ICON_ELEMENT_NAME = "streamline-icon"
 
-const iconDefinitions = new Map<string, string>()
-
 export type StreamlineStyleValue = Record<string, unknown> | undefined
 
 export function buildStreamlineMaskStyle(iconUrl: string, style?: StreamlineStyleValue): Record<string, unknown> {
@@ -31,10 +29,8 @@ export function buildStreamlineMaskStyle(iconUrl: string, style?: StreamlineStyl
   }
 }
 
-export function registerStreamlineIconDefinition(id: string, svg: string): void {
-  if (!iconDefinitions.has(id)) {
-    iconDefinitions.set(id, svg)
-  }
+export function registerStreamlineIconDefinition(_id: string, _svg: string): void {
+  // Kept as a no-op for compatibility with earlier runtime wiring.
 }
 
 export function ensureStreamlineIconElement(): void {
@@ -44,7 +40,7 @@ export function ensureStreamlineIconElement(): void {
 
   class StreamlineIconElement extends HTMLElement {
     static get observedAttributes(): string[] {
-      return ["data-streamline-id", "aria-label", "aria-hidden"]
+      return ["data-streamline-url"]
     }
 
     connectedCallback(): void {
@@ -56,38 +52,53 @@ export function ensureStreamlineIconElement(): void {
     }
 
     private render(): void {
-      const id = this.getAttribute("data-streamline-id")
-      const svg = id ? iconDefinitions.get(id) : null
+      const iconUrl = this.getAttribute("data-streamline-url")
 
-      if (!svg) {
+      if (!iconUrl) {
         return
       }
 
       const shadow = this.shadowRoot ?? this.attachShadow({ mode: "open" })
-      shadow.innerHTML = svg
+      if (!shadow.innerHTML) {
+        shadow.innerHTML = `<style>
+  :host {
+    display: inline-block;
+    inline-size: 1em;
+    block-size: 1em;
+    vertical-align: middle;
+  }
 
-      const root = shadow.firstElementChild
-      if (!(root instanceof SVGElement)) {
+  .glyph {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+  }
+</style><span class="glyph" part="svg"></span>`
+      }
+
+      const root = shadow.querySelector<HTMLSpanElement>(".glyph")
+      if (!root) {
         return
       }
 
-      root.setAttribute("part", "svg")
-      root.setAttribute("focusable", "false")
-      root.setAttribute("width", "1em")
-      root.setAttribute("height", "1em")
+      const styles = buildStreamlineMaskStyle(iconUrl, {
+        width: "100%",
+        height: "100%",
+      })
+
+      for (const [key, value] of Object.entries(styles)) {
+        root.style.setProperty(toCssPropertyName(key), String(value))
+      }
 
       const label = this.getAttribute("aria-label")
       const hidden = this.getAttribute("aria-hidden")
 
       if (label) {
-        root.setAttribute("role", "img")
-        root.setAttribute("aria-label", label)
-        root.setAttribute("aria-hidden", "false")
+        this.setAttribute("role", "img")
         return
       }
 
-      root.setAttribute("aria-hidden", hidden ?? "true")
-      root.setAttribute("role", hidden === "false" ? "img" : "presentation")
+      this.setAttribute("role", hidden === "false" ? "img" : "presentation")
     }
   }
 
@@ -95,3 +106,11 @@ export function ensureStreamlineIconElement(): void {
 }
 
 export { STREAMLINE_ICON_ELEMENT_NAME }
+
+function toCssPropertyName(input: string): string {
+  return input
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/^Webkit-/, "-webkit-")
+    .replace(/^-ms-/, "-ms-")
+    .toLowerCase()
+}

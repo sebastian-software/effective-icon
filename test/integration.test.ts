@@ -28,15 +28,27 @@ describe.sequential("vite consumer integration", () => {
     delete process.env.STREAMLINE_RENDER_MODE
   })
 
-  it("builds the fixture app for component mode and includes only referenced icons", async () => {
+  it("builds the fixture app for image mode and includes only referenced icons", async () => {
     process.env.STREAMLINE_TARGET = "jsx"
-    process.env.STREAMLINE_RENDER_MODE = "component"
+    process.env.STREAMLINE_RENDER_MODE = "image"
 
     const outputs = await buildFixtureApp()
     const code = collectChunkCode(outputs)
 
-    expect(code).toContain("icon--rocket")
+    expect(code).toContain("icon--airplane")
     expect(code).toContain('"img"')
+    expect(code).not.toContain("anchor")
+  })
+
+  it("builds the fixture app for inline-svg mode", async () => {
+    process.env.STREAMLINE_TARGET = "jsx"
+    process.env.STREAMLINE_RENDER_MODE = "inline-svg"
+
+    const outputs = await buildFixtureApp()
+    const code = collectChunkCode(outputs)
+
+    expect(code).toContain('"svg"')
+    expect(code).not.toContain("?url")
     expect(code).not.toContain("anchor")
   })
 
@@ -59,7 +71,8 @@ describe.sequential("vite consumer integration", () => {
     const code = collectChunkCode(outputs)
 
     expect(code).toContain("streamline-icon")
-    expect(code).toContain("registerStreamlineIconDefinition")
+    expect(code).toContain("data-streamline-url")
+    expect(code).toContain("ensureStreamlineIconElement")
     expect(code).not.toContain("anchor")
   })
 })
