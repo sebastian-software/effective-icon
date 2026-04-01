@@ -17,18 +17,26 @@ export async function materializeDiscoveredSet(
 ): Promise<ExtractedSetData> {
   const icons: ExtractedIcon[] = []
   const seenNames = new Set<string>()
+  const baseNameCounts = countBaseNames(discoveredSet.icons)
   const detailCache = new Map<string, Promise<DiscoveredIcon | null>>()
   const svgCache = new Map<string, Promise<string | null>>()
   let fallbackSetPromise: Promise<ExtractedSetData> | null = null
 
   for (const icon of discoveredSet.icons) {
-    const normalizedName = normalizePackIconName(icon.name)
-    if (seenNames.has(normalizedName)) {
-      throw new Error(`Duplicate normalized icon name "${normalizedName}" in "${entry.slug}"`)
-    }
-    seenNames.add(normalizedName)
+    const normalizedBaseName = normalizePackIconName(icon.name)
 
-    const detail = await getIconDetails(icon.hash, options.apiClient, detailCache)
+    const initialFallbackIcon = shouldUseInitialFallback(icon)
+      ? await getFallbackIconIfNeeded(normalizedBaseName, icon, options, () => {
+          if (!fallbackSetPromise && options.loadFallbackSet) {
+            fallbackSetPromise = options.loadFallbackSet()
+          }
+          return fallbackSetPromise
+        })
+      : undefined
+
+    const detail = needsDetails(icon, initialFallbackIcon)
+      ? await getIconDetails(icon.hash, options.apiClient, detailCache)
+      : null
     const merged = mergeDiscoveredIcon(icon, detail)
 
     const svg =
@@ -39,20 +47,22 @@ export async function materializeDiscoveredSet(
         options.fetchImpl ?? fetch
       ))
 
-    const fallbackIcon = await getFallbackIconIfNeeded(
-      normalizedName,
-      {
-        ...merged,
-        svg: svg ?? undefined,
-      },
-      options,
-      () => {
-        if (!fallbackSetPromise && options.loadFallbackSet) {
-          fallbackSetPromise = options.loadFallbackSet()
+    const fallbackIcon =
+      initialFallbackIcon ??
+      (await getFallbackIconIfNeeded(
+        normalizedBaseName,
+        {
+          ...merged,
+          svg: svg ?? undefined,
+        },
+        options,
+        () => {
+          if (!fallbackSetPromise && options.loadFallbackSet) {
+            fallbackSetPromise = options.loadFallbackSet()
+          }
+          return fallbackSetPromise
         }
-        return fallbackSetPromise
-      }
-    )
+      ))
 
     const resolvedSvg = svg ?? fallbackIcon?.svg
 
@@ -76,10 +86,18 @@ export async function materializeDiscoveredSet(
     }
 
     const tags = dedupeAndSort(merged.tags ?? fallbackIcon?.tags)
+    const resolvedName = resolveIconName({
+      baseName: normalizedBaseName,
+      categorySlug,
+      subcategorySlug,
+      hash: icon.hash,
+      duplicate: (baseNameCounts.get(normalizedBaseName) ?? 0) > 1,
+      seenNames,
+    })
 
     icons.push({
-      name: normalizedName,
-      file: createPackIconFileName(merged.name),
+      name: resolvedName,
+      file: createPackIconFileName(resolvedName),
       originalName: merged.name,
       sourcePageUrl: merged.sourcePageUrl ?? fallbackIcon?.sourcePageUrl ?? entry.setPageUrl,
       category,
@@ -212,4 +230,69 @@ function dedupeAndSort(values: string[] | undefined): string[] | undefined {
   }
 
   return [...new Set(values)].sort()
+}
+
+function needsDetails(icon: DiscoveredIcon, fallbackIcon: ExtractedIcon | undefined): boolean {
+  return !Boolean(
+    (icon.svg || fallbackIcon?.svg) &&
+      (icon.category || fallbackIcon?.category) &&
+      (icon.categorySlug || fallbackIcon?.categorySlug) &&
+      (icon.subcategory || fallbackIcon?.subcategory) &&
+      (icon.subcategorySlug || fallbackIcon?.subcategorySlug)
+  )
+}
+
+function shouldUseInitialFallback(icon: DiscoveredIcon): boolean {
+  return !Boolean(
+    icon.svg ||
+      (icon.svgUrlCandidates && icon.svgUrlCandidates.length > 0)
+  )
+}
+
+function countBaseNames(icons: DiscoveredIcon[]): Map<string, number> {
+  const counts = new Map<string, number>()
+
+  for (const icon of icons) {
+    const baseName = normalizePackIconName(icon.name)
+    counts.set(baseName, (counts.get(baseName) ?? 0) + 1)
+  }
+
+  return counts
+}
+
+function resolveIconName(input: {
+  baseName: string
+  categorySlug: string
+  subcategorySlug: string
+  hash: string
+  duplicate: boolean
+  seenNames: Set<string>
+}): string {
+  const candidates = input.duplicate
+    ? [
+        `${input.baseName}-${input.categorySlug}`,
+        `${input.baseName}-${input.subcategorySlug}`,
+        `${input.baseName}-${stripHashPrefix(input.hash).slice(0, 8)}`,
+      ]
+    : [input.baseName]
+
+  for (const candidate of candidates) {
+    const normalized = normalizePackIconName(candidate)
+    if (!input.seenNames.has(normalized)) {
+      input.seenNames.add(normalized)
+      return normalized
+    }
+  }
+
+  const finalCandidate = normalizePackIconName(`${input.baseName}-${stripHashPrefix(input.hash)}`)
+  if (input.seenNames.has(finalCandidate)) {
+    throw new Error(`Unable to resolve duplicate icon name "${input.baseName}" in a deterministic way`)
+  }
+
+  input.seenNames.add(finalCandidate)
+  return finalCandidate
+}
+
+function stripHashPrefix(hash: string): string {
+  return hash.replace(/^[a-z]+_/i, "")
 }

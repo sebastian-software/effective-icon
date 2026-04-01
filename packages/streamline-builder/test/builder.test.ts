@@ -10,6 +10,7 @@ import { extractSetDataFromPageProps } from "../src/extract"
 import { materializeDiscoveredSet } from "../src/materialize"
 import { normalizePackIconName, normalizeSvgToCurrentColor } from "../src/normalize"
 import { writePack } from "../src/pack"
+import { fetchGroupedWebsiteSet } from "../src/website-api"
 import type { BuilderApiClient, DiscoveredSetData, ExtractedSetData, RegistryEntry } from "../src/types"
 
 const fixturePath = path.resolve(import.meta.dirname, "fixtures", "sample-page-props.json")
@@ -119,14 +120,21 @@ describe("streamline builder", () => {
           requests.push(url.pathname + url.search)
 
           if (url.pathname === "/v1/family-groups") {
-            return jsonResponse([{ slug: "core", name: "Core" }])
+            return jsonResponse([{ hash: "fgr_core", slug: "core-sets", name: "Core" }])
           }
 
-          if (url.pathname === "/v1/family-groups/core/families") {
-            return jsonResponse([{ slug: "core-line-free", name: "Core Line Free", description: "Core free family" }])
+          if (url.pathname === "/v1/family-groups/fgr_core/families") {
+            return jsonResponse([
+              {
+                hash: "fam_core_line_free",
+                slug: "core-line-free",
+                name: "Core Line Free",
+                description: "Core free family",
+              },
+            ])
           }
 
-          if (url.pathname === "/v1/families/core-line-free/icons" && url.searchParams.get("offset") === "0") {
+          if (url.pathname === "/v1/families/fam_core_line_free/icons" && url.searchParams.get("offset") === "0") {
             return jsonResponse({
               results: [
                 {
@@ -148,7 +156,7 @@ describe("streamline builder", () => {
             })
           }
 
-          if (url.pathname === "/v1/families/core-line-free/icons" && url.searchParams.get("offset") === "1") {
+          if (url.pathname === "/v1/families/fam_core_line_free/icons" && url.searchParams.get("offset") === "1") {
             return jsonResponse({
               results: [
                 {
@@ -180,7 +188,7 @@ describe("streamline builder", () => {
     expect(discovered.icons[0]?.hash).toBe("ico_rocket")
     expect(discovered.icons[0]?.svgUrlCandidates).toContain("https://assets.example.test/rocket.svg")
     expect(requests.some((request) => request.startsWith("/v1/family-groups"))).toBe(true)
-    expect(requests.some((request) => request.startsWith("/v1/families/core-line-free/icons"))).toBe(true)
+    expect(requests.some((request) => request.startsWith("/v1/families/fam_core_line_free/icons"))).toBe(true)
   })
 
   it("materializes icons via public svg urls without using the api download endpoint", async () => {
@@ -307,6 +315,104 @@ describe("streamline builder", () => {
     expect(materialized.icons[0]?.svg).toContain('stroke="currentColor"')
   })
 
+  it("hydrates fallback icons from the website grouped endpoint", async () => {
+    const discovered: DiscoveredSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyGroupSlug: "core-sets",
+      familyName: "Core Line Free",
+      familyDescription: "desc",
+      icons: [
+        {
+          hash: "ico_rocket",
+          name: "Rocket",
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Navigation",
+          subcategorySlug: "navigation",
+        },
+        {
+          hash: "ico_search",
+          name: "Search",
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Search",
+          subcategorySlug: "search",
+        },
+      ],
+    }
+
+    const set = await fetchGroupedWebsiteSet(registryEntry, discovered, createMockFetch(async (url) => {
+      if (url.pathname === "/v5/icons/grouped/core-line-free" && url.searchParams.get("skip") === "0") {
+        return jsonResponse({
+          iconsGrouped: {
+            subc_a: [
+              {
+                hash: "ico_rocket",
+                slug: "rocket",
+                name: "Rocket",
+                imagePublicId: "icons/interface-essential/rocket-a.png/rocket-b",
+                svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+                url: "/icons/download/rocket--123",
+                familySlug: "core-line-free",
+                subcategoryHash: "subc_a",
+                subcategoryName: "Navigation",
+                isFree: true,
+                hasPremiumAccess: true,
+                strokeAllowed: true,
+                tags: ["launch", "rocket"],
+              },
+            ],
+          },
+          pagination: {
+            hasMore: true,
+            nextSkip: 1,
+          },
+        })
+      }
+
+      if (url.pathname === "/v5/icons/grouped/core-line-free" && url.searchParams.get("skip") === "1") {
+        return jsonResponse({
+          iconsGrouped: {
+            subc_b: [
+              {
+                hash: "ico_search",
+                slug: "search",
+                name: "Search",
+                imagePublicId: "icons/interface-essential/search-a.png/search-b",
+                svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+                url: "/icons/download/search--123",
+                familySlug: "core-line-free",
+                subcategoryHash: "subc_b",
+                subcategoryName: "Search",
+                isFree: true,
+                hasPremiumAccess: true,
+                strokeAllowed: true,
+              },
+            ],
+          },
+          pagination: {
+            hasMore: false,
+            nextSkip: 1,
+          },
+        })
+      }
+
+      return notFound()
+    }))
+
+    expect(set.iconCount).toBe(2)
+    expect(set.icons[0]?.svg).toContain('stroke="currentColor"')
+    expect(set.icons[0]?.category).toBe("Interface Essential")
+    expect(set.icons[0]?.tags).toEqual(["launch", "rocket"])
+  })
+
   it("writes a materialized pack with optional tags omitted from the manifest", async () => {
     const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-pack-"))
     tempDirs.push(tempDir)
@@ -346,6 +452,55 @@ describe("streamline builder", () => {
     ) as { icons?: Array<Record<string, unknown>> }
 
     expect(manifest.icons?.[0]?.tags).toBeUndefined()
+  })
+
+  it("disambiguates duplicate normalized icon names with category suffixes", async () => {
+    const apiClient: BuilderApiClient = {
+      discoverSet: async () => {
+        throw new Error("not used")
+      },
+      getIconDetails: async () => null,
+    }
+
+    const discovered: DiscoveredSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyGroupSlug: "core-sets",
+      familyName: "Core Line Free",
+      familyDescription: null,
+      icons: [
+        {
+          hash: "ico_first",
+          name: "Tag",
+          category: "Money Shopping",
+          categorySlug: "money-shopping",
+          subcategory: "Money Shopping",
+          subcategorySlug: "money-shopping",
+          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+        },
+        {
+          hash: "ico_second",
+          name: "Tag",
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Interface Essential",
+          subcategorySlug: "interface-essential",
+          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+        },
+      ],
+    }
+
+    const materialized = await materializeDiscoveredSet(registryEntry, discovered, {
+      apiClient,
+    })
+
+    expect(materialized.icons.map((icon) => icon.name).sort()).toEqual(["tag-interface-essential", "tag-money-shopping"])
   })
 })
 

@@ -8,6 +8,7 @@ import { extractSetDataFromPageProps } from "./extract"
 import { findRegistryEntry, getEnabledRegistry } from "./registry"
 import { materializeDiscoveredSet } from "./materialize"
 import { writePack } from "./pack"
+import { fetchGroupedWebsiteSet } from "./website-api"
 
 export async function downloadAllPacks(rootDir: string): Promise<void> {
   const config = await loadBuilderConfig(rootDir)
@@ -47,14 +48,24 @@ async function downloadSet(
   const discoveredSet = await apiClient.discoverSet(entry)
   const set = await materializeDiscoveredSet(entry, discoveredSet, {
     apiClient,
-    loadFallbackSet: () => loadFallbackSet(entry, browserManager),
+    loadFallbackSet: () => loadFallbackSet(entry, discoveredSet, browserManager),
   })
 
   await writePack(rootDir, set)
   return set
 }
 
-async function loadFallbackSet(entry: ReturnType<typeof findRegistryEntry>, browserManager: ReturnType<typeof createBrowserManager>) {
+async function loadFallbackSet(
+  entry: ReturnType<typeof findRegistryEntry>,
+  discoveredSet: Awaited<ReturnType<ReturnType<typeof createBuilderApiClient>["discoverSet"]>>,
+  browserManager: ReturnType<typeof createBrowserManager>
+) {
+  try {
+    return await fetchGroupedWebsiteSet(entry, discoveredSet)
+  } catch {
+    // Fall back to the browser path only when the public grouped endpoint is unavailable.
+  }
+
   const browser = await browserManager.get()
   const page = await browser.newPage()
 

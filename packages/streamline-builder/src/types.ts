@@ -115,11 +115,13 @@ export interface BuilderApiClient {
 }
 
 export interface ApiFamilyGroup {
+  hash?: string
   slug: string
   name: string
 }
 
 export interface ApiFamilyGroupMember {
+  hash?: string
   slug: string
   name: string
   description?: string

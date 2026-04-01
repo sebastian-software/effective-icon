@@ -10,6 +10,7 @@ import type {
 } from "./types"
 
 type FetchLike = typeof fetch
+const FAMILY_ICON_PAGE_SIZE = 50
 
 interface JsonResult<T> {
   data: T
@@ -41,9 +42,10 @@ export async function discoverSetViaApi(
 ): Promise<DiscoveredSetData> {
   const groupSlug = deriveGroupSlug(entry.slug)
   const groups = await tryListFamilyGroups(config, fetchImpl)
-  const families = await tryListFamilies(groupSlug, config, fetchImpl)
+  const group = groups.find((candidate) => candidate.slug === groupSlug)
+  const families = await tryListFamilies(group?.hash ?? groupSlug, config, fetchImpl)
   const family = families.find((candidate) => candidate.slug === entry.slug)
-  const icons = await listIconsFromFamily(entry.slug, config, fetchImpl)
+  const icons = await listIconsFromFamily(family?.hash ?? entry.slug, config, fetchImpl)
 
   return {
     slug: entry.slug,
@@ -54,7 +56,7 @@ export async function discoverSetViaApi(
     license: entry.license,
     attributionUrl: entry.attributionUrl,
     sourceUrl: entry.setPageUrl,
-    familyGroupSlug: groups.find((candidate) => candidate.slug === groupSlug)?.slug ?? groupSlug,
+    familyGroupSlug: group?.slug ?? groupSlug,
     familyName: family?.name ?? entry.slug,
     familyDescription: family?.description ?? null,
     icons,
@@ -74,14 +76,14 @@ async function tryListFamilyGroups(config: BuilderConfig, fetchImpl: FetchLike):
 }
 
 async function tryListFamilies(
-  groupSlug: string,
+  groupRef: string,
   config: BuilderConfig,
   fetchImpl: FetchLike
 ): Promise<ApiFamilyGroupMember[]> {
   return tryEndpoint(
     [
-      { path: `/v1/family-groups/${encodeURIComponent(groupSlug)}/families` },
-      { path: "/v1/families", query: { groupSlug } },
+      { path: `/v1/family-groups/${encodeURIComponent(groupRef)}/families` },
+      { path: "/v1/families", query: { groupSlug: groupRef } },
     ],
     config,
     fetchImpl,
@@ -90,15 +92,15 @@ async function tryListFamilies(
 }
 
 async function listIconsFromFamily(
-  familySlug: string,
+  familyRef: string,
   config: BuilderConfig,
   fetchImpl: FetchLike
 ): Promise<DiscoveredIcon[]> {
   const endpoint = await resolveWorkingEndpoint(
     [
-      { path: `/v1/families/${encodeURIComponent(familySlug)}/icons`, query: { limit: 200, offset: 0, page: 1 } },
-      { path: `/v1/search/family/${encodeURIComponent(familySlug)}`, query: { limit: 200, offset: 0, page: 1 } },
-      { path: "/v1/search/family", query: { familySlug, limit: 200, offset: 0, page: 1 } },
+      { path: `/v1/families/${encodeURIComponent(familyRef)}/icons`, query: { limit: FAMILY_ICON_PAGE_SIZE, offset: 0, page: 1 } },
+      { path: `/v1/search/family/${encodeURIComponent(familyRef)}`, query: { limit: FAMILY_ICON_PAGE_SIZE, offset: 0, page: 1 } },
+      { path: "/v1/search/family", query: { familySlug: familyRef, limit: FAMILY_ICON_PAGE_SIZE, offset: 0, page: 1 } },
     ],
     config,
     fetchImpl,
@@ -113,7 +115,7 @@ async function listIconsFromFamily(
   while (true) {
     const query: Record<string, string | number> = {
       ...(endpoint.query ?? {}),
-      limit: 200,
+      limit: FAMILY_ICON_PAGE_SIZE,
       offset,
       page,
     }
@@ -137,7 +139,7 @@ async function listIconsFromFamily(
   }
 
   if (icons.length === 0) {
-    throw new Error(`Official API discovery returned no icons for family "${familySlug}"`)
+    throw new Error(`Official API discovery returned no icons for family "${familyRef}"`)
   }
 
   return icons
@@ -243,7 +245,8 @@ function normalizeFamilyGroups(input: unknown): ApiFamilyGroup[] {
     .flatMap((item) => {
       const slug = readString(item, ["slug", "groupSlug"])
       const name = readString(item, ["name", "title"]) ?? slug
-      return slug && name ? [{ slug, name }] : []
+      const hash = readString(item, ["hash", "id"])
+      return slug && name ? [{ slug, name, ...(hash ? { hash } : {}) }] : []
     })
 }
 
@@ -256,7 +259,8 @@ function normalizeFamilies(input: unknown): ApiFamilyGroupMember[] {
       const slug = readString(item, ["slug", "familySlug"])
       const name = readString(item, ["name", "title"]) ?? slug
       const description = readString(item, ["description", "metaDescription"])
-      return slug && name ? [{ slug, name, ...(description ? { description } : {}) }] : []
+      const hash = readString(item, ["hash", "id"])
+      return slug && name ? [{ slug, name, ...(hash ? { hash } : {}), ...(description ? { description } : {}) }] : []
     })
 }
 
@@ -458,6 +462,22 @@ function normalizeSourceUrl(input: string | undefined): string | undefined {
 }
 
 function deriveGroupSlug(familySlug: string): string {
+  if (familySlug.startsWith("core-")) {
+    return "core-sets"
+  }
+
+  if (familySlug.startsWith("sharp-")) {
+    return "sharp-sets"
+  }
+
+  if (familySlug.startsWith("ultimate-")) {
+    return "ultimate-sets"
+  }
+
+  if (familySlug.startsWith("flex-")) {
+    return "flex"
+  }
+
   return familySlug.split("-")[0] ?? familySlug
 }
 
