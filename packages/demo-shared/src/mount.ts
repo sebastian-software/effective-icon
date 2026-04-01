@@ -19,12 +19,12 @@ export function mountDemoPage(root: HTMLElement, variant: DemoVariantKey): void 
     for (const choice of choices) {
       const isActive = choice.dataset.demoColor === nextColor
       choice.setAttribute("aria-pressed", String(isActive))
-      choice.classList.toggle("tint-control__swatch--active", isActive)
+      choice.classList.toggle("tint-row__swatch--active", isActive)
     }
   }
 
   const initialChoice =
-    choices.find((choice) => choice.classList.contains("tint-control__swatch--active")) ??
+    choices.find((choice) => choice.classList.contains("tint-row__swatch--active")) ??
     choices.find((choice) => choice.dataset.demoColor === page.style.getPropertyValue("--demo-icon-color")) ??
     choices[0]
 
