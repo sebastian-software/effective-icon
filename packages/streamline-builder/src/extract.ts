@@ -58,7 +58,7 @@ export function extractSetDataFromPageProps(pageProps: unknown, entry: RegistryE
       categorySlug,
       subcategory: icon.subcategoryName,
       subcategorySlug: normalizeSubcategorySlug(icon.subcategoryName),
-      tags: [...(icon.tags ?? [])].sort(),
+      tags: icon.tags && icon.tags.length > 0 ? [...icon.tags].sort() : undefined,
       svg: normalizeSvgToCurrentColor(icon.svg),
     })
   }

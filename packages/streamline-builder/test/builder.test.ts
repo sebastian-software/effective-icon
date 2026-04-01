@@ -4,13 +4,27 @@ import path from "node:path"
 
 import { afterEach, describe, expect, it } from "vitest"
 
+import { createBuilderApiClient } from "../src/api"
+import { loadBuilderConfig } from "../src/config"
 import { extractSetDataFromPageProps } from "../src/extract"
+import { materializeDiscoveredSet } from "../src/materialize"
 import { normalizePackIconName, normalizeSvgToCurrentColor } from "../src/normalize"
 import { writePack } from "../src/pack"
+import type { BuilderApiClient, DiscoveredSetData, ExtractedSetData, RegistryEntry } from "../src/types"
 
 const fixturePath = path.resolve(import.meta.dirname, "fixtures", "sample-page-props.json")
 const rootFixture = path.resolve(import.meta.dirname, "..", "..", "..")
 const tempDirs: string[] = []
+const registryEntry: RegistryEntry = {
+  slug: "core-line-free",
+  packageName: "@streamline-pkg/core-line-free",
+  setPageUrl: "https://www.streamlinehq.com/icons/core-line-free",
+  family: "Core",
+  style: "line",
+  license: "CC BY 4.0",
+  attributionUrl: "https://www.streamlinehq.com/",
+  enabled: true,
+}
 
 afterEach(async () => {
   await Promise.all(
@@ -35,16 +49,7 @@ describe("streamline builder", () => {
 
   it("extracts set data from page props", async () => {
     const pageProps = JSON.parse(await readFile(fixturePath, "utf8"))
-    const set = extractSetDataFromPageProps(pageProps, {
-      slug: "core-line-free",
-      packageName: "@streamline-pkg/core-line-free",
-      setPageUrl: "https://www.streamlinehq.com/icons/core-line-free",
-      family: "Core",
-      style: "line",
-      license: "CC BY 4.0",
-      attributionUrl: "https://www.streamlinehq.com/",
-      enabled: true,
-    })
+    const set = extractSetDataFromPageProps(pageProps, registryEntry)
 
     expect(set.iconCount).toBe(2)
     expect(set.icons[0]?.name).toBe("add-1")
@@ -54,16 +59,7 @@ describe("streamline builder", () => {
 
   it("writes a pack directory with manifest and icons", async () => {
     const pageProps = JSON.parse(await readFile(fixturePath, "utf8"))
-    const set = extractSetDataFromPageProps(pageProps, {
-      slug: "core-line-free",
-      packageName: "@streamline-pkg/core-line-free",
-      setPageUrl: "https://www.streamlinehq.com/icons/core-line-free",
-      family: "Core",
-      style: "line",
-      license: "CC BY 4.0",
-      attributionUrl: "https://www.streamlinehq.com/",
-      enabled: true,
-    })
+    const set = extractSetDataFromPageProps(pageProps, registryEntry)
     const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-"))
     tempDirs.push(tempDir)
     await writeFile(path.join(tempDir, "LICENSE"), await readFile(path.join(rootFixture, "LICENSE"), "utf8"), "utf8")
@@ -73,12 +69,322 @@ describe("streamline builder", () => {
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
     ) as { iconCount: number; icons: Array<{ file: string }> }
+    const packageJson = JSON.parse(
+      await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "package.json"), "utf8")
+    ) as { exports?: Record<string, string> }
 
     expect(manifest.iconCount).toBe(2)
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
+    expect(packageJson.exports?.["./manifest.json"]).toBe("./manifest.json")
+    expect(packageJson.exports?.["./icons/*"]).toBe("./icons/*")
     expect(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "icons", "add-1.svg"), "utf8")
     ).toContain("currentColor")
     expect(await readFile(path.join(rootFixture, "LICENSE"), "utf8")).toContain("MIT License")
   })
+
+  it("loads builder config from .env.local", async () => {
+    const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-config-"))
+    tempDirs.push(tempDir)
+    await writeFile(
+      path.join(tempDir, ".env.local"),
+      "STREAMLINE_API_KEY=test-key\nSTREAMLINE_API_BASE_URL=http://127.0.0.1:4010/\n",
+      "utf8"
+    )
+
+    const previousKey = process.env.STREAMLINE_API_KEY
+    const previousBaseUrl = process.env.STREAMLINE_API_BASE_URL
+    delete process.env.STREAMLINE_API_KEY
+    delete process.env.STREAMLINE_API_BASE_URL
+
+    try {
+      const config = await loadBuilderConfig(tempDir)
+      expect(config.apiKey).toBe("test-key")
+      expect(config.apiBaseUrl).toBe("http://127.0.0.1:4010")
+    } finally {
+      restoreEnv("STREAMLINE_API_KEY", previousKey)
+      restoreEnv("STREAMLINE_API_BASE_URL", previousBaseUrl)
+    }
+  })
+
+  it("discovers a set through official api-style endpoints with pagination", async () => {
+    const requests: string[] = []
+    const client = createBuilderApiClient(
+      {
+        apiBaseUrl: "https://api.example.test",
+        apiKey: "fixture-key",
+      },
+      {
+        fetchImpl: createMockFetch(async (url) => {
+          requests.push(url.pathname + url.search)
+
+          if (url.pathname === "/v1/family-groups") {
+            return jsonResponse([{ slug: "core", name: "Core" }])
+          }
+
+          if (url.pathname === "/v1/family-groups/core/families") {
+            return jsonResponse([{ slug: "core-line-free", name: "Core Line Free", description: "Core free family" }])
+          }
+
+          if (url.pathname === "/v1/families/core-line-free/icons" && url.searchParams.get("offset") === "0") {
+            return jsonResponse({
+              results: [
+                {
+                  hash: "ico_rocket",
+                  name: "Rocket",
+                  categoryName: "Interface Essential",
+                  categorySlug: "interface-essential",
+                  subcategoryName: "Navigation",
+                  subcategorySlug: "navigation",
+                  tags: ["launch", "rocket"],
+                  svgUrl: "https://assets.example.test/rocket.svg",
+                  url: "/icons/core-line-free/rocket",
+                },
+              ],
+              pagination: {
+                hasMore: true,
+                nextOffset: 1,
+              },
+            })
+          }
+
+          if (url.pathname === "/v1/families/core-line-free/icons" && url.searchParams.get("offset") === "1") {
+            return jsonResponse({
+              results: [
+                {
+                  hash: "ico_search",
+                  name: "Search",
+                  categoryName: "Interface Essential",
+                  categorySlug: "interface-essential",
+                  subcategoryName: "Search",
+                  subcategorySlug: "search",
+                  svgUrl: "https://assets.example.test/search.svg",
+                },
+              ],
+              pagination: {
+                hasMore: false,
+                nextOffset: 1,
+              },
+            })
+          }
+
+          return notFound()
+        }),
+      }
+    )
+
+    const discovered = await client.discoverSet(registryEntry)
+
+    expect(discovered.familyName).toBe("Core Line Free")
+    expect(discovered.icons).toHaveLength(2)
+    expect(discovered.icons[0]?.hash).toBe("ico_rocket")
+    expect(discovered.icons[0]?.svgUrlCandidates).toContain("https://assets.example.test/rocket.svg")
+    expect(requests.some((request) => request.startsWith("/v1/family-groups"))).toBe(true)
+    expect(requests.some((request) => request.startsWith("/v1/families/core-line-free/icons"))).toBe(true)
+  })
+
+  it("materializes icons via public svg urls without using the api download endpoint", async () => {
+    const requests: string[] = []
+    const apiClient: BuilderApiClient = {
+      discoverSet: async () => {
+        throw new Error("not used")
+      },
+      getIconDetails: async () => null,
+    }
+
+    const discovered: DiscoveredSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyGroupSlug: "core",
+      familyName: "Core Line Free",
+      familyDescription: "desc",
+      icons: [
+        {
+          hash: "ico_rocket",
+          name: "Rocket",
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Navigation",
+          subcategorySlug: "navigation",
+          svgUrlCandidates: ["https://assets.example.test/rocket.svg"],
+          tags: ["rocket"],
+        },
+      ],
+    }
+
+    const materialized = await materializeDiscoveredSet(registryEntry, discovered, {
+      apiClient,
+      fetchImpl: createMockFetch(async (url) => {
+        requests.push(url.pathname)
+
+        if (url.pathname === "/rocket.svg") {
+          return textResponse('<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>')
+        }
+
+        if (url.pathname.includes("/download/svg")) {
+          throw new Error("download endpoint should not be used")
+        }
+
+        return notFound()
+      }),
+      loadFallbackSet: async () => {
+        throw new Error("fallback should not be used when public svg urls work")
+      },
+    })
+
+    expect(materialized.icons[0]?.svg).toContain('stroke="currentColor"')
+    expect(requests).not.toContain("/v1/icons/ico_rocket/download/svg")
+  })
+
+  it("materializes icons with website fallback metadata and keeps tags optional", async () => {
+    const apiClient: BuilderApiClient = {
+      discoverSet: async () => {
+        throw new Error("not used")
+      },
+      getIconDetails: async () => null,
+    }
+
+    const discovered: DiscoveredSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyGroupSlug: "core",
+      familyName: "Core Line Free",
+      familyDescription: null,
+      icons: [
+        {
+          hash: "ico_search",
+          name: "Search",
+        },
+      ],
+    }
+
+    const fallbackSet: ExtractedSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyName: "Core Line Free",
+      familyDescription: null,
+      iconCount: 1,
+      icons: [
+        {
+          name: "search",
+          file: "search.svg",
+          originalName: "Search",
+          sourcePageUrl: registryEntry.setPageUrl,
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Search",
+          subcategorySlug: "search",
+          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+        },
+      ],
+    }
+
+    const materialized = await materializeDiscoveredSet(registryEntry, discovered, {
+      apiClient,
+      loadFallbackSet: async () => fallbackSet,
+    })
+
+    expect(materialized.icons[0]?.category).toBe("Interface Essential")
+    expect(materialized.icons[0]?.tags).toBeUndefined()
+    expect(materialized.icons[0]?.svg).toContain('stroke="currentColor"')
+  })
+
+  it("writes a materialized pack with optional tags omitted from the manifest", async () => {
+    const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-pack-"))
+    tempDirs.push(tempDir)
+    await writeFile(path.join(tempDir, "LICENSE"), await readFile(path.join(rootFixture, "LICENSE"), "utf8"), "utf8")
+
+    const set: ExtractedSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyName: "Core Line Free",
+      familyDescription: null,
+      iconCount: 1,
+      icons: [
+        {
+          name: "rocket",
+          file: "rocket.svg",
+          originalName: "Rocket",
+          sourcePageUrl: registryEntry.setPageUrl,
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Navigation",
+          subcategorySlug: "navigation",
+          svg: '<svg viewBox="0 0 24 24"><path stroke="currentColor" /></svg>',
+        },
+      ],
+    }
+
+    await writePack(tempDir, set)
+
+    const manifest = JSON.parse(
+      await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
+    ) as { icons?: Array<Record<string, unknown>> }
+
+    expect(manifest.icons?.[0]?.tags).toBeUndefined()
+  })
 })
+
+function restoreEnv(key: string, value: string | undefined): void {
+  if (value == null) {
+    delete process.env[key]
+    return
+  }
+
+  process.env[key] = value
+}
+
+function createMockFetch(
+  handler: (url: URL, init?: RequestInit) => Promise<Response> | Response
+): typeof fetch {
+  return async (input: RequestInfo | URL, init?: RequestInit) => {
+    const url = typeof input === "string" ? new URL(input) : input instanceof URL ? input : new URL(input.url)
+    return handler(url, init)
+  }
+}
+
+function jsonResponse(payload: unknown, status = 200): Response {
+  return new Response(JSON.stringify(payload), {
+    status,
+    headers: {
+      "content-type": "application/json; charset=utf-8",
+    },
+  })
+}
+
+function textResponse(payload: string, status = 200): Response {
+  return new Response(payload, {
+    status,
+    headers: {
+      "content-type": "image/svg+xml; charset=utf-8",
+    },
+  })
+}
+
+function notFound(): Response {
+  return jsonResponse({ message: "not found" }, 404)
+}

@@ -28,7 +28,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
       categorySlug: icon.categorySlug,
       subcategory: icon.subcategory,
       subcategorySlug: icon.subcategorySlug,
-      tags: icon.tags,
+      ...(icon.tags && icon.tags.length > 0 ? { tags: icon.tags } : {}),
     })),
   }
 

@@ -2,36 +2,60 @@ import path from "node:path"
 
 import { chromium, type Browser } from "playwright"
 
+import { createBuilderApiClient } from "./api"
+import { loadBuilderConfig } from "./config"
 import { extractSetDataFromPageProps } from "./extract"
 import { findRegistryEntry, getEnabledRegistry } from "./registry"
+import { materializeDiscoveredSet } from "./materialize"
 import { writePack } from "./pack"
 
 export async function downloadAllPacks(rootDir: string): Promise<void> {
-  const browser = await chromium.launch()
+  const config = await loadBuilderConfig(rootDir)
+  const apiClient = createBuilderApiClient(config)
+  const browserManager = createBrowserManager()
 
   try {
     for (const entry of getEnabledRegistry()) {
-      const set = await downloadSet(entry.slug, rootDir, browser)
+      const set = await downloadSet(entry.slug, rootDir, apiClient, browserManager)
       console.log(`[download] ${entry.slug}: wrote ${set.iconCount} icons`)
     }
   } finally {
-    await browser.close()
+    await browserManager.close()
   }
 }
 
 export async function downloadSinglePack(rootDir: string, slug: string): Promise<void> {
-  const browser = await chromium.launch()
+  const config = await loadBuilderConfig(rootDir)
+  const apiClient = createBuilderApiClient(config)
+  const browserManager = createBrowserManager()
 
   try {
-    const set = await downloadSet(slug, rootDir, browser)
+    const set = await downloadSet(slug, rootDir, apiClient, browserManager)
     console.log(`[download] ${slug}: wrote ${set.iconCount} icons`)
   } finally {
-    await browser.close()
+    await browserManager.close()
   }
 }
 
-async function downloadSet(slug: string, rootDir: string, browser: Browser) {
+async function downloadSet(
+  slug: string,
+  rootDir: string,
+  apiClient: ReturnType<typeof createBuilderApiClient>,
+  browserManager: ReturnType<typeof createBrowserManager>
+) {
   const entry = findRegistryEntry(slug)
+  const discoveredSet = await apiClient.discoverSet(entry)
+  const set = await materializeDiscoveredSet(entry, discoveredSet, {
+    apiClient,
+    loadFallbackSet: () => loadFallbackSet(entry, browserManager),
+  })
+
+  await writePack(rootDir, set)
+  return set
+}
+
+async function loadFallbackSet(entry: ReturnType<typeof findRegistryEntry>, browserManager: ReturnType<typeof createBrowserManager>) {
+  const browser = await browserManager.get()
   const page = await browser.newPage()
 
   try {
@@ -39,7 +63,6 @@ async function downloadSet(slug: string, rootDir: string, browser: Browser) {
     await page.waitForFunction(() => Boolean((window as { __NEXT_DATA__?: unknown }).__NEXT_DATA__), undefined, {
       timeout: 30_000,
     })
-
     const pageProps = await page.evaluate(() => {
       const data = (window as { __NEXT_DATA__?: { props?: { pageProps?: unknown } } }).__NEXT_DATA__
       return data?.props?.pageProps ?? null
@@ -51,16 +74,33 @@ async function downloadSet(slug: string, rootDir: string, browser: Browser) {
         throw new Error(`Unable to extract __NEXT_DATA__ from "${entry.setPageUrl}"`)
       }
       const parsed = JSON.parse(fallback) as { props?: { pageProps?: unknown } }
-      const set = extractSetDataFromPageProps(parsed.props?.pageProps ?? null, entry)
-      await writePack(rootDir, set)
-      return set
+      return extractSetDataFromPageProps(parsed.props?.pageProps ?? null, entry)
     }
 
-    const set = extractSetDataFromPageProps(pageProps, entry)
-    await writePack(rootDir, set)
-    return set
+    return extractSetDataFromPageProps(pageProps, entry)
   } finally {
     await page.close()
+  }
+}
+
+function createBrowserManager() {
+  let browserPromise: Promise<Browser> | null = null
+
+  return {
+    async get(): Promise<Browser> {
+      if (!browserPromise) {
+        browserPromise = chromium.launch()
+      }
+      return browserPromise
+    },
+    async close(): Promise<void> {
+      if (!browserPromise) {
+        return
+      }
+
+      const browser = await browserPromise
+      await browser.close()
+    },
   }
 }
 

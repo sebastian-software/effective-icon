@@ -24,7 +24,10 @@ export async function validatePacks(rootDir: string): Promise<void> {
       name?: string
       slug?: string
       license?: string
-      icons?: Array<{ file?: string }>
+      icons?: Array<{ file?: string; tags?: string[] }>
+    }
+    const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8")) as {
+      exports?: Record<string, string>
     }
 
     if (manifest.name !== entry.packageName) {
@@ -39,10 +42,19 @@ export async function validatePacks(rootDir: string): Promise<void> {
     if (!Array.isArray(manifest.icons) || manifest.icons.length === 0) {
       throw new Error(`Pack "${entry.slug}" has no icons in manifest`)
     }
+    if (packageJson.exports?.["./manifest.json"] !== "./manifest.json") {
+      throw new Error(`Pack "${entry.slug}" does not export "./manifest.json" correctly`)
+    }
+    if (packageJson.exports?.["./icons/*"] !== "./icons/*") {
+      throw new Error(`Pack "${entry.slug}" does not export "./icons/*" correctly`)
+    }
 
     for (const icon of manifest.icons) {
       if (!icon.file) {
         throw new Error(`Pack "${entry.slug}" has an icon entry without a file`)
+      }
+      if (icon.tags != null && !Array.isArray(icon.tags)) {
+        throw new Error(`Pack "${entry.slug}" has a non-array tags field`)
       }
       await assertExists(path.join(packDir, icon.file))
     }
