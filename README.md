@@ -11,132 +11,157 @@ Named icons without the runtime tax.
 or:
 
 ```tsx
-{icon`add-1`}
+{icon`anchor`}
 ```
 
-That API is the whole point. A single icon surface. One `name` prop. No per-icon imports sprinkled through your app. No giant switch statement. No hand-written registry.
+That API is the whole point.
 
-The interesting part is what happens next: `iconkit` does not keep that convenience as a runtime abstraction. It resolves the icon package at build time, validates the icon name against the package manifest, and rewrites the marker to the concrete output you selected.
+One icon surface. One `name` prop. No per-icon imports scattered through the app. No giant switch statement. No hand-written registry. No component graveyard where every icon becomes another symbol to remember.
 
-That means you get the ergonomics of a name-based icon component without paying the usual price for it.
+Most teams assume that if they want named icons, they have to pay for that convenience at runtime.
 
-- Only the icons you actually use are emitted.
-- They only end up in the chunks that reference them.
-- They can stay external `.svg` assets instead of getting stuffed into your JavaScript bundle.
-- `mask` and `web-component` output stay tintable via `currentColor`.
+That tradeoff is so common it barely gets questioned:
 
-That is the pitch in one sentence: the DX of `<Icon name="...">`, with output characteristics much closer to a static asset pipeline.
+- clean API means runtime registry
+- name-based lookup means more JavaScript
+- tintable output means inline SVG payload
+- external asset files mean giving up ergonomics
 
-MIT licensed.  
-Copyright (c) 2026 Sebastian Software GmbH, Mainz, Germany.  
-OSS home: [oss.sebastian-software.com](https://oss.sebastian-software.com)
+`iconkit` exists because that tradeoff is not actually necessary.
 
-## Why This Exists
+It resolves the selected icon pack at build time, validates every icon name against the manifest, and rewrites your marker usage to concrete output.
 
-Most icon setups make you choose between ergonomics and output quality.
+So you get the part people like:
 
-### 1. Per-icon component libraries
+- `<Icon name="...">`
+- ``icon`anchor` ``
+- a single icon abstraction for the whole app
 
-This is the `lucide-react` style:
+without the usual cost:
+
+- no runtime icon registry
+- no per-icon component imports at call sites
+- no shipping an icon library just to resolve names
+- no need to push every icon into JS if an external `.svg` file is the better output
+
+## You Really Can Have Both
+
+This is the thing `iconkit` is built around:
+
+- author by name
+- validate by name
+- emit only the icons you actually use
+- keep them local to the chunks that reference them
+- leave them as external assets when you want
+- still support tintable output modes
+
+That combination is the product.
+
+It is the convenience of a runtime icon system with the output discipline of a static asset pipeline.
+
+## The Problem With Most Icon Setups
+
+Most current approaches force you into one of three compromises.
+
+### Per-icon component libraries
+
+This is the `lucide-react` model:
 
 ```tsx
 import { Plane, Anchor } from "some-icon-library"
 ```
 
-That works, but it scales badly in real codebases.
+It works. It is also noisy.
 
-- Every icon becomes another import.
-- Every call site now depends on a component name instead of the icon name your design system actually cares about.
-- Swapping icon packs or standardizing naming gets harder because your app code is coupled to library-specific component exports.
+- Every icon is another import.
+- Every call site knows about library-specific component exports.
+- Refactoring icon packs becomes a codebase-wide rename problem.
+- Design-system naming and implementation naming drift apart fast.
 
-It is explicit. It is also noisy.
+You get explicitness. You lose the nice API.
 
-### 2. Runtime registries or lookup-based icon systems
+### Runtime registries and dynamic lookup systems
 
-These get closer to the ideal API:
+This gets closer to the API people actually want:
 
 ```tsx
 <Icon name="airplane" />
 ```
 
-Much nicer. But many of these systems pay for that convenience at runtime.
+But many systems pay for that at runtime.
 
-- They keep a registry in JavaScript.
-- They look icons up by name in the browser.
-- They often move icon-related logic into your client bundle.
-- Static validation is weaker unless you build extra tooling around it.
+- The name lookup lives in JavaScript.
+- The registry lives in JavaScript.
+- The indirection lives in JavaScript.
+- Static guarantees are weaker than they should be.
 
-So the API feels right, but the delivery path is heavier than it needs to be.
+The API is better. The delivery path is heavier.
 
-### 3. Raw SVG or asset imports
+### Manual SVG imports
 
-This is lean and predictable:
+This is lean:
 
 ```tsx
 import airplaneUrl from "./icons/airplane.svg"
 ```
 
-But now you are back to repetitive asset management.
+But it is also tedious.
 
 - Every icon import is manual.
-- Every codebase invents its own conventions.
-- Standardizing icon usage across a team becomes harder than it should be.
+- Every file repeats the same asset ceremony.
+- Teams end up inventing their own local conventions.
+- The code stays technically efficient while getting worse to work in.
 
-You get good output, but poor authoring ergonomics.
+The output is fine. The authoring experience is not.
 
-### 4. iconkit
+## What iconkit Does Instead
 
-`iconkit` is trying to keep the part people actually like and remove the cost they usually accept as inevitable.
+`iconkit` is not trying to become another icon library.
 
-- Author icons by name.
-- Validate those names at build time.
-- Rewrite them to concrete assets at build time.
-- Emit only the icons that are actually referenced.
-- Keep assets external when that is the better output.
-- Still support tintable rendering modes.
+It is a compile-time icon pipeline.
 
-You can have the clean `<Icon name="...">` API and still ship something that behaves like a disciplined asset pipeline.
+It reads the selected pack manifest during the build, validates the icon names you wrote in source, and rewrites them to the output form you actually want:
 
-## What Makes It Different
+- `image` for external SVG URL output
+- `mask` for tintable monochrome output with external assets
+- `inline-svg` for direct DOM SVG output
+- `web-component` for framework-agnostic tintable output with external assets
 
-The key distinction is simple:
+So the same authoring code can compile down to different delivery strategies without changing every call site in your app.
 
-`iconkit` is not an icon library. It is a compile-time icon pipeline.
+That is the real unlock.
 
-It does not want to own your icon set in runtime code. It wants to:
+## Why This Feels Better In Practice
 
-1. read a pack manifest during the build
-2. validate icon references against that manifest
-3. rewrite those references to the output form you chose
+You keep the API people naturally reach for:
 
-That changes the tradeoff completely.
+```tsx
+<Icon name="airplane" />
+```
 
-### What you keep
+And you still get:
 
-- A pleasant authoring API
-- A single icon abstraction for your app
-- Pack-level validation
-- Output flexibility
+- TypeScript validation of `name` from the selected pack
+- build-time failure for missing icons
+- only-used-icons emission
+- chunk-local output instead of global icon baggage
+- external `.svg` assets when you want browser caching and minimal JS
+- tintable modes when you want icons to inherit `currentColor`
 
-### What you avoid
+That last point matters more than it sounds.
 
-- Runtime icon registries
-- Bundling a component export for every icon
-- Repetitive import boilerplate at call sites
-- Shipping icons in JS when a plain asset file would do
+Usually you pick two:
 
-## The Real Promise
+- nice API
+- external assets
+- tintability
+- strict validation
 
-If someone asks what `iconkit` actually buys them, the answer is this:
+`iconkit` is trying very hard to let you keep all four.
 
-- named icon authoring
-- compile-time validation
-- chunk-local emission of only the icons you use
-- optional external SVG assets
-- tintable output modes when you need them
-- one pack selected per project, which keeps the output deterministic
+## The One-Sentence Pitch
 
-That combination is the reason this exists.
+`iconkit` gives you the DX of `<Icon name="...">` with the bundle behavior of a static asset pipeline.
 
 ## Install
 
@@ -165,8 +190,10 @@ Then use either surface:
 ```
 
 ```tsx
-{icon`add-1`}
+{icon`anchor`}
 ```
+
+For the template-tag form, descriptive names like `anchor`, `airplane`, or `calendar-add` read much better than abstract internal-looking IDs.
 
 The important detail is that these are markers for the plugin, not a runtime component system.
 
@@ -186,6 +213,28 @@ export default defineConfig({
   ],
 })
 ```
+
+By default, the plugin also generates a type-registration file for TypeScript:
+
+- `src/iconkit.generated.d.ts` when your project has a `src/` directory
+- otherwise `iconkit.generated.d.ts` in the project root
+
+That file augments `iconkit/compile` with the icon-name union from the selected package, so `name="..."` becomes TypeScript-validated in editors and `tsc`.
+
+If you want a custom path or want to disable generation, use `typesOutputFile`:
+
+```ts
+iconkitVitePlugin({
+  package: "@icon-pkg/streamline-core-line-free",
+  target: "jsx",
+  renderMode: "image",
+  typesOutputFile: "./types/iconkit.generated.d.ts",
+})
+```
+
+Set `typesOutputFile: false` if you want to turn this off.
+
+Like other generated routing or type-registration files, it is reasonable to check the generated file into git if you want CI and editors to see the exact same icon-name union without relying on a prior Vite run.
 
 ## Output Modes
 
@@ -378,3 +427,9 @@ The current builder strategy for free packs is hybrid:
 - official API endpoints are used for discovery and metadata
 - public SVG URLs are preferred over the API SVG download endpoint
 - website page-state is kept only as a fallback when required metadata or SVG content is missing
+
+## License
+
+MIT licensed.  
+Copyright (c) 2026 Sebastian Software GmbH, Mainz, Germany.  
+OSS home: [oss.sebastian-software.com](https://oss.sebastian-software.com)

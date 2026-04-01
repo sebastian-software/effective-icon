@@ -7,10 +7,10 @@ export {
   registerIconDefinition,
 } from "./runtime"
 export type {
-  IconCompileProps,
   IconPackManifest,
   IconPackManifestIcon,
   IconRenderMode,
   IconTarget,
   IconkitVitePluginOptions,
 } from "./types"
+export type { IconCompileProps, IconName } from "./compile"

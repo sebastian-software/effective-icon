@@ -6,6 +6,7 @@ export interface IconkitVitePluginOptions {
   package: string
   target?: IconTarget
   renderMode?: IconRenderMode
+  typesOutputFile?: string | false
 }
 
 export interface IconPackManifestIcon {
@@ -30,9 +31,4 @@ export interface IconPackManifest {
   style: string
   iconCount: number
   icons: IconPackManifestIcon[]
-}
-
-export interface IconCompileProps {
-  name: string
-  [key: string]: unknown
 }

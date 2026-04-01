@@ -1,6 +1,7 @@
 import type { Plugin, ResolvedConfig } from "vite"
 
 import { resolveIconPackage, type ResolvedIconPackage } from "./resolve-package"
+import { syncIconkitTypeFile } from "./typegen"
 import { transformCompileTimeIcons } from "./transform"
 import type { IconkitVitePluginOptions } from "./types"
 
@@ -8,6 +9,7 @@ interface PluginState {
   config?: ResolvedConfig
   resolvedPackage?: ResolvedIconPackage
   promise?: Promise<ResolvedIconPackage>
+  typegenPromise?: Promise<void>
 }
 
 export function iconkitVitePlugin(options: IconkitVitePluginOptions): Plugin {
@@ -19,6 +21,7 @@ export function iconkitVitePlugin(options: IconkitVitePluginOptions): Plugin {
     package: options.package,
     target: options.target ?? "jsx",
     renderMode: normalizeRenderMode(options.renderMode),
+    typesOutputFile: options.typesOutputFile,
   } as const
 
   if (normalizedOptions.target === "web-component" && options.renderMode) {
@@ -30,11 +33,12 @@ export function iconkitVitePlugin(options: IconkitVitePluginOptions): Plugin {
   return {
     name: "iconkit-vite-plugin",
     enforce: "pre",
-    configResolved(config) {
+    async configResolved(config) {
       state.config = config
+      await ensureTypegen(state, normalizedOptions)
     },
     async buildStart() {
-      await ensurePackage(state, normalizedOptions.package)
+      await ensureTypegen(state, normalizedOptions)
     },
     async transform(code, id) {
       if (id.includes("/node_modules/")) {
@@ -79,4 +83,23 @@ async function ensurePackage(state: PluginState, packageName: string): Promise<R
 
   state.resolvedPackage = await state.promise
   return state.resolvedPackage
+}
+
+async function ensureTypegen(
+  state: PluginState,
+  options: Pick<IconkitVitePluginOptions, "package" | "typesOutputFile">
+): Promise<void> {
+  if (!state.typegenPromise) {
+    state.typegenPromise = (async () => {
+      const resolvedPackage = await ensurePackage(state, options.package)
+      const root = state.config?.root ?? process.cwd()
+      await syncIconkitTypeFile({
+        outputFile: options.typesOutputFile,
+        resolvedPackage,
+        root,
+      })
+    })()
+  }
+
+  await state.typegenPromise
 }

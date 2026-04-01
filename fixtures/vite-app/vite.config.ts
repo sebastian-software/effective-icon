@@ -29,6 +29,7 @@ export default defineConfig({
         ? {
             package: "@icon-pkg/streamline-core-line-free",
             target: "web-component",
+            typesOutputFile: false,
           }
         : {
             package: "@icon-pkg/streamline-core-line-free",
@@ -39,6 +40,7 @@ export default defineConfig({
                 : process.env.STREAMLINE_RENDER_MODE === "inline-svg"
                   ? "inline-svg"
                   : "image",
+            typesOutputFile: false,
           }
     ),
   ],

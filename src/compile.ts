@@ -1,4 +1,15 @@
-import type { IconCompileProps } from "./types"
+export interface IconkitCompileTypeRegistry {}
+
+export type IconName = IconkitCompileTypeRegistry extends {
+  iconName: infer TIconName extends string
+}
+  ? TIconName
+  : string
+
+export interface IconCompileProps {
+  name: IconName
+  [key: string]: unknown
+}
 
 function compileOnly(name: string): never {
   throw new Error(`${name} must be compiled away by iconkit.`)

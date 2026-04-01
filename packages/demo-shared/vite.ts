@@ -48,17 +48,20 @@ function resolvePluginOptions(variant: DemoVariant): IconkitVitePluginOptions {
         package: "@icon-pkg/streamline-core-line-free",
         renderMode: "mask",
         target: "jsx",
+        typesOutputFile: false,
       }
     case "inline-svg":
       return {
         package: "@icon-pkg/streamline-core-line-free",
         renderMode: "inline-svg",
         target: "jsx",
+        typesOutputFile: false,
       }
     case "web-component":
       return {
         package: "@icon-pkg/streamline-core-line-free",
         target: "web-component",
+        typesOutputFile: false,
       }
     case "image":
     default:
@@ -66,6 +69,7 @@ function resolvePluginOptions(variant: DemoVariant): IconkitVitePluginOptions {
         package: "@icon-pkg/streamline-core-line-free",
         renderMode: "image",
         target: "jsx",
+        typesOutputFile: false,
       }
   }
 }
