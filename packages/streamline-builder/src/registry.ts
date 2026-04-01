@@ -6,7 +6,7 @@ const ATTRIBUTION_URL = "https://www.streamlinehq.com/"
 function createEntry(slug: string, family: string, style: string): RegistryEntry {
   return {
     slug,
-    packageName: `@streamline-pkg/${slug}`,
+    packageName: `@icon-pkg/streamline-${slug}`,
     setPageUrl: `https://www.streamlinehq.com/icons/${slug}`,
     family,
     style,

@@ -1,6 +1,6 @@
-# vite-plugin-streamline
+# iconkit
 
-Vite plugin for compile-time Streamline icon resolution.
+Compile-time icon toolkit with package-backed icon resolution.
 
 Instead of importing icons manually or using a runtime registry, the plugin rewrites marker-based icon usage to static asset imports during the build.
 
@@ -9,7 +9,7 @@ Instead of importing icons manually or using a runtime registry, the plugin rewr
 The current V1 direction is a compile-time reset:
 
 - one selected icon package per project
-- marker-based authoring via `vite-plugin-streamline/compile`
+- marker-based authoring via `iconkit/compile`
 - static validation against the selected package manifest
 - build-time rewrites for:
   - JSX image output
@@ -26,13 +26,13 @@ The repo also contains the Streamline pack builder workspace that produces pack 
 ## Install
 
 ```bash
-pnpm add -D vite-plugin-streamline
+pnpm add -D iconkit
 ```
 
 Add or install at least one compatible icon pack, for example:
 
 ```bash
-pnpm add -D @streamline-pkg/core-line-free
+pnpm add -D @icon-pkg/streamline-core-line-free
 ```
 
 ## Authoring
@@ -40,7 +40,7 @@ pnpm add -D @streamline-pkg/core-line-free
 Import the compile-time markers:
 
 ```tsx
-import { Icon, icon } from "vite-plugin-streamline/compile"
+import { Icon, icon } from "iconkit/compile"
 ```
 
 Then use either surface:
@@ -59,12 +59,12 @@ Then use either surface:
 
 ```ts
 import { defineConfig } from "vite"
-import { streamlineIcons } from "vite-plugin-streamline"
+import { iconkitVitePlugin } from "iconkit/vite-plugin"
 
 export default defineConfig({
   plugins: [
-    streamlineIcons({
-      package: "@streamline-pkg/core-line-free",
+    iconkitVitePlugin({
+      package: "@icon-pkg/streamline-core-line-free",
       target: "jsx",
       renderMode: "image",
     }),
@@ -77,8 +77,8 @@ This rewrites icons to static image-style JSX output backed by URL imports.
 ### JSX Mask Output
 
 ```ts
-streamlineIcons({
-  package: "@streamline-pkg/core-line-free",
+iconkitVitePlugin({
+  package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "mask",
 })
@@ -89,8 +89,8 @@ This rewrites icons to static JSX output with mask-image styling.
 ### JSX Inline SVG Output
 
 ```ts
-streamlineIcons({
-  package: "@streamline-pkg/core-line-free",
+iconkitVitePlugin({
+  package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "inline-svg",
 })
@@ -101,13 +101,13 @@ This rewrites icons to inline `<svg>` markup in the emitted JSX.
 ### Web Component Output
 
 ```ts
-streamlineIcons({
-  package: "@streamline-pkg/core-line-free",
+iconkitVitePlugin({
+  package: "@icon-pkg/streamline-core-line-free",
   target: "web-component",
 })
 ```
 
-This rewrites icons to a generic `<streamline-icon>` custom element, keeps the icons as external SVG asset URLs, and renders them as tintable mask-based glyphs in shadow DOM.
+This rewrites icons to a generic `<iconkit-icon>` custom element, keeps the icons as external SVG asset URLs, and renders them as tintable mask-based glyphs in shadow DOM.
 
 ## Rules
 
@@ -171,9 +171,33 @@ Available commands:
 pnpm download:set -- core-line-free
 pnpm download:free
 pnpm validate:packs
+pnpm release:packs:check
+pnpm release:packs:publish
 ```
 
 The live downloader is still under active development for full Streamline pagination, but the emitted package contract is already aligned with the compile-time plugin.
+
+## Publishing the Initial Pack Set
+
+The first npm release is intentionally scoped to the three materialized pack workspaces already tracked in this repository:
+
+- `@icon-pkg/streamline-core-line-free`
+- `@icon-pkg/streamline-core-solid-free`
+- `@icon-pkg/streamline-core-remix-free`
+
+Use the dedicated release check before publishing:
+
+```bash
+pnpm release:packs:check
+```
+
+Then publish them manually in order with:
+
+```bash
+pnpm release:packs:publish
+```
+
+See [docs/npm-pack-publish.md](docs/npm-pack-publish.md) for the full manual release runbook.
 
 The current builder strategy for free packs is hybrid:
 

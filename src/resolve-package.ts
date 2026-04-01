@@ -2,14 +2,14 @@ import { access, readdir, readFile } from "node:fs/promises"
 import { createRequire } from "node:module"
 import path from "node:path"
 
-import type { StreamlinePackManifest, StreamlinePackManifestIcon } from "./types"
+import type { IconPackManifest, IconPackManifestIcon } from "./types"
 
-export interface ResolvedPackIcon extends StreamlinePackManifestIcon {
+export interface ResolvedPackIcon extends IconPackManifestIcon {
   absolutePath: string
 }
 
 export interface ResolvedIconPackage {
-  manifest: StreamlinePackManifest
+  manifest: IconPackManifest
   manifestPath: string
   packageDir: string
   packageName: string
@@ -18,7 +18,7 @@ export interface ResolvedIconPackage {
 
 export async function resolveIconPackage(packageName: string, root: string): Promise<ResolvedIconPackage> {
   const manifestPath = await resolveManifestPath(packageName, root)
-  const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as StreamlinePackManifest
+  const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as IconPackManifest
   const packageDir = path.dirname(manifestPath)
 
   if (manifest.name !== packageName) {

@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url"
 
 import { defineConfig } from "vite"
 
-import { streamlineIcons } from "../../src"
+import { iconkitVitePlugin } from "../../src/plugin"
 
 const fixtureRoot = fileURLToPath(new URL(".", import.meta.url))
 const repoRoot = path.resolve(fixtureRoot, "../..")
@@ -17,20 +17,21 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: /^vite-plugin-streamline$/, replacement: path.join(repoRoot, "src/index.ts") },
-      { find: /^vite-plugin-streamline\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
-      { find: /^vite-plugin-streamline\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
+      { find: /^iconkit$/, replacement: path.join(repoRoot, "src/index.ts") },
+      { find: /^iconkit\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
+      { find: /^iconkit\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
+      { find: /^iconkit\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
     ],
   },
   plugins: [
-    streamlineIcons(
+    iconkitVitePlugin(
       process.env.STREAMLINE_TARGET === "web-component"
         ? {
-            package: "@streamline-pkg/core-line-free",
+            package: "@icon-pkg/streamline-core-line-free",
             target: "web-component",
           }
         : {
-            package: "@streamline-pkg/core-line-free",
+            package: "@icon-pkg/streamline-core-line-free",
             target: "jsx",
             renderMode:
               process.env.STREAMLINE_RENDER_MODE === "mask"

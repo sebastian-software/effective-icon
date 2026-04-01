@@ -1,14 +1,14 @@
-export type StreamlineIconsTarget = "jsx" | "web-component"
+export type IconTarget = "jsx" | "web-component"
 
-export type StreamlineIconsRenderMode = "image" | "component" | "mask" | "inline-svg"
+export type IconRenderMode = "image" | "component" | "mask" | "inline-svg"
 
-export interface StreamlineIconsOptions {
+export interface IconkitVitePluginOptions {
   package: string
-  target?: StreamlineIconsTarget
-  renderMode?: StreamlineIconsRenderMode
+  target?: IconTarget
+  renderMode?: IconRenderMode
 }
 
-export interface StreamlinePackManifestIcon {
+export interface IconPackManifestIcon {
   name: string
   file: string
   originalName: string
@@ -20,7 +20,7 @@ export interface StreamlinePackManifestIcon {
   tags: string[]
 }
 
-export interface StreamlinePackManifest {
+export interface IconPackManifest {
   name: string
   slug: string
   version: string
@@ -29,10 +29,10 @@ export interface StreamlinePackManifest {
   family: string
   style: string
   iconCount: number
-  icons: StreamlinePackManifestIcon[]
+  icons: IconPackManifestIcon[]
 }
 
-export interface StreamlineCompileIconProps {
+export interface IconCompileProps {
   name: string
   [key: string]: unknown
 }

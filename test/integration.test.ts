@@ -59,7 +59,7 @@ describe.sequential("vite consumer integration", () => {
     const outputs = await buildFixtureApp()
     const code = collectChunkCode(outputs)
 
-    expect(code).toContain("buildStreamlineMaskStyle")
+    expect(code).toContain("buildIconMaskStyle")
     expect(code).toContain("maskImage")
     expect(code).not.toContain("anchor")
   })
@@ -70,9 +70,9 @@ describe.sequential("vite consumer integration", () => {
     const outputs = await buildFixtureApp()
     const code = collectChunkCode(outputs)
 
-    expect(code).toContain("streamline-icon")
-    expect(code).toContain("data-streamline-url")
-    expect(code).toContain("ensureStreamlineIconElement")
+    expect(code).toContain("iconkit-icon")
+    expect(code).toContain("data-icon-url")
+    expect(code).toContain("ensureIconElement")
     expect(code).not.toContain("anchor")
   })
 })

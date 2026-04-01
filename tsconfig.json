@@ -7,9 +7,10 @@
     "paths": {
       "@streamline-demo/shared": ["./packages/demo-shared/src/index.ts"],
       "@streamline-demo/shared/styles.css": ["./packages/demo-shared/src/styles.css"],
-      "vite-plugin-streamline": ["./src/index.ts"],
-      "vite-plugin-streamline/compile": ["./src/compile.ts"],
-      "vite-plugin-streamline/runtime": ["./src/runtime.ts"]
+      "iconkit": ["./src/index.ts"],
+      "iconkit/vite-plugin": ["./src/plugin.ts"],
+      "iconkit/compile": ["./src/compile.ts"],
+      "iconkit/runtime": ["./src/runtime.ts"]
     },
     "lib": ["ES2023", "DOM"],
     "strict": true,

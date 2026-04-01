@@ -34,7 +34,7 @@ describe.sequential("workspace demo builds", () => {
   it("builds the image app", async () => {
     const code = collectChunkCode(await buildDemo("image"))
 
-    expect(code).toContain("JSX image output")
+    expect(code).toContain("External SVG output")
     expect(code).toContain("../mask/")
     expect(code).toContain('"img"')
     expect(code).toContain("?url")
@@ -43,16 +43,16 @@ describe.sequential("workspace demo builds", () => {
   it("builds the mask app", async () => {
     const code = collectChunkCode(await buildDemo("mask"))
 
-    expect(code).toContain("JSX mask output")
+    expect(code).toContain("CSS mask output")
     expect(code).toContain("../image/")
-    expect(code).toContain("buildStreamlineMaskStyle")
+    expect(code).toContain("buildIconMaskStyle")
     expect(code).toContain('"span"')
   })
 
   it("builds the inline-svg app", async () => {
     const code = collectChunkCode(await buildDemo("inline-svg"))
 
-    expect(code).toContain("JSX inline SVG output")
+    expect(code).toContain("Inline SVG output")
     expect(code).toContain("../image/")
     expect(code).toContain('"svg"')
     expect(code).not.toContain('new URL("airplane')
@@ -63,9 +63,9 @@ describe.sequential("workspace demo builds", () => {
 
     expect(code).toContain("Web component output")
     expect(code).toContain("../image/")
-    expect(code).toContain("streamline-icon")
-    expect(code).toContain("data-streamline-url")
-    expect(code).toContain("ensureStreamlineIconElement")
+    expect(code).toContain("iconkit-icon")
+    expect(code).toContain("data-icon-url")
+    expect(code).toContain("ensureIconElement")
   })
 })
 

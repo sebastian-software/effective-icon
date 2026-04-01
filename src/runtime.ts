@@ -1,8 +1,8 @@
-const STREAMLINE_ICON_ELEMENT_NAME = "streamline-icon"
+const ICONKIT_ICON_ELEMENT_NAME = "iconkit-icon"
 
-export type StreamlineStyleValue = Record<string, unknown> | undefined
+export type IconStyleValue = Record<string, unknown> | undefined
 
-export function buildStreamlineMaskStyle(iconUrl: string, style?: StreamlineStyleValue): Record<string, unknown> {
+export function buildIconMaskStyle(iconUrl: string, style?: IconStyleValue): Record<string, unknown> {
   const baseStyle: Record<string, unknown> = {
     display: "inline-block",
     backgroundColor: "currentColor",
@@ -29,18 +29,18 @@ export function buildStreamlineMaskStyle(iconUrl: string, style?: StreamlineStyl
   }
 }
 
-export function registerStreamlineIconDefinition(_id: string, _svg: string): void {
+export function registerIconDefinition(_id: string, _svg: string): void {
   // Kept as a no-op for compatibility with earlier runtime wiring.
 }
 
-export function ensureStreamlineIconElement(): void {
-  if (typeof customElements === "undefined" || customElements.get(STREAMLINE_ICON_ELEMENT_NAME)) {
+export function ensureIconElement(): void {
+  if (typeof customElements === "undefined" || customElements.get(ICONKIT_ICON_ELEMENT_NAME)) {
     return
   }
 
-  class StreamlineIconElement extends HTMLElement {
+  class IconkitIconElement extends HTMLElement {
     static get observedAttributes(): string[] {
-      return ["data-streamline-url"]
+      return ["data-icon-url"]
     }
 
     connectedCallback(): void {
@@ -52,7 +52,7 @@ export function ensureStreamlineIconElement(): void {
     }
 
     private render(): void {
-      const iconUrl = this.getAttribute("data-streamline-url")
+      const iconUrl = this.getAttribute("data-icon-url")
 
       if (!iconUrl) {
         return
@@ -81,7 +81,7 @@ export function ensureStreamlineIconElement(): void {
         return
       }
 
-      const styles = buildStreamlineMaskStyle(iconUrl, {
+      const styles = buildIconMaskStyle(iconUrl, {
         width: "100%",
         height: "100%",
       })
@@ -102,10 +102,10 @@ export function ensureStreamlineIconElement(): void {
     }
   }
 
-  customElements.define(STREAMLINE_ICON_ELEMENT_NAME, StreamlineIconElement)
+  customElements.define(ICONKIT_ICON_ELEMENT_NAME, IconkitIconElement)
 }
 
-export { STREAMLINE_ICON_ELEMENT_NAME }
+export { ICONKIT_ICON_ELEMENT_NAME }
 
 function toCssPropertyName(input: string): string {
   return input

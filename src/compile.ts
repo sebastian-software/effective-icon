@@ -1,10 +1,10 @@
-import type { StreamlineCompileIconProps } from "./types"
+import type { IconCompileProps } from "./types"
 
 function compileOnly(name: string): never {
-  throw new Error(`${name} must be compiled away by vite-plugin-streamline.`)
+  throw new Error(`${name} must be compiled away by iconkit.`)
 }
 
-export function Icon(_props: StreamlineCompileIconProps): null {
+export function Icon(_props: IconCompileProps): null {
   compileOnly("Icon")
 }
 

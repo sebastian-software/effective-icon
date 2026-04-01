@@ -6,7 +6,7 @@ import { resolveIconPackage } from "../src/resolve-package"
 import { COMPILE_MODULE_ID, transformCompileTimeIcons } from "../src/transform"
 
 const repoRoot = path.resolve(process.cwd())
-const packageName = "@streamline-pkg/core-line-free"
+const packageName = "@icon-pkg/streamline-core-line-free"
 
 async function loadResolvedPackage() {
   return resolveIconPackage(packageName, repoRoot)
@@ -79,7 +79,7 @@ describe("compile-time transform", () => {
       resolvedPackage,
     })
 
-    expect(transformed).toContain("buildStreamlineMaskStyle")
+    expect(transformed).toContain("buildIconMaskStyle")
     expect(transformed).toContain("<span")
   })
 
@@ -101,9 +101,9 @@ describe("compile-time transform", () => {
     })
 
     expect(transformed).toContain("?url")
-    expect(transformed).toContain("data-streamline-url")
-    expect(transformed).toContain("ensureStreamlineIconElement")
-    expect(transformed).toContain("streamline-icon")
+    expect(transformed).toContain("data-icon-url")
+    expect(transformed).toContain("ensureIconElement")
+    expect(transformed).toContain("iconkit-icon")
   })
 
   it("fails on missing compile import", async () => {

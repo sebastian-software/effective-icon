@@ -4,7 +4,7 @@
 import { Fragment, h } from "./h"
 import { highlight } from "sugar-high"
 
-import { Icon, icon } from "vite-plugin-streamline/compile"
+import { Icon, icon } from "iconkit/compile"
 
 import {
   componentSource,
@@ -26,7 +26,7 @@ function StickyNav({ current }: { current: DemoVariantKey }): string {
   return (
     <header className="topbar">
       <div className="topbar__inner">
-        <span className="topbar__name">vite-plugin-streamline</span>
+        <span className="topbar__name">iconkit</span>
         <nav className="topbar__tabs" aria-label="Demo variants">
           <a
             className={`topbar__tab${current === "mask" ? " topbar__tab--active" : ""}`}

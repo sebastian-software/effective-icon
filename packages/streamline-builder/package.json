@@ -1,5 +1,5 @@
 {
-  "name": "@streamline-pkg/streamline-builder",
+  "name": "@icon-pkg/streamline-builder",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -7,9 +7,11 @@
     "streamline-builder": "./src/cli.ts"
   },
   "scripts": {
-    "download-all": "tsx src/cli.ts download-all",
-    "download-set": "tsx src/cli.ts download-set",
-    "validate-packs": "tsx src/cli.ts validate-packs"
+    "download-all": "node --import tsx src/cli.ts download-all",
+    "download-set": "node --import tsx src/cli.ts download-set",
+    "validate-packs": "node --import tsx src/cli.ts validate-packs",
+    "release-check": "node --import tsx src/cli.ts release-check",
+    "publish-release": "node --import tsx src/cli.ts publish-release"
   },
   "dependencies": {
     "playwright": "^1.54.2"

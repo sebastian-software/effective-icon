@@ -1,7 +1,7 @@
 {
-  "name": "vite-plugin-streamline",
+  "name": "iconkit",
   "version": "0.1.0",
-  "description": "Vite plugin for compile-time Streamline icon resolution",
+  "description": "Compile-time icon toolkit with framework integrations and package-backed icon resolution",
   "packageManager": "pnpm@9.15.9",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,6 +11,10 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./vite-plugin": {
+      "import": "./dist/plugin.js",
+      "types": "./dist/plugin.d.ts"
     },
     "./compile": {
       "import": "./dist/compile.js",
@@ -34,21 +38,31 @@
     "dev:demo:mask": "pnpm --filter @streamline-demo/mask dev",
     "dev:demo:inline-svg": "pnpm --filter @streamline-demo/inline-svg dev",
     "dev:demo:web-component": "pnpm --filter @streamline-demo/web-component dev",
-    "download:free": "pnpm --filter @streamline-pkg/streamline-builder download-all",
-    "download:set": "pnpm --filter @streamline-pkg/streamline-builder download-set",
+    "download:free": "pnpm --filter @icon-pkg/streamline-builder download-all",
+    "download:set": "pnpm --filter @icon-pkg/streamline-builder download-set",
+    "release:packs:check": "pnpm --filter @icon-pkg/streamline-builder release-check",
+    "release:packs:publish": "pnpm --filter @icon-pkg/streamline-builder publish-release",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "sync:streamline": "tsx scripts/sync-streamline.ts",
-    "validate:packs": "pnpm --filter @streamline-pkg/streamline-builder validate-packs"
+    "validate:packs": "pnpm --filter @icon-pkg/streamline-builder validate-packs"
   },
   "keywords": [
-    "vite",
-    "vite-plugin",
-    "streamline",
+    "iconkit",
     "icons",
-    "svg"
+    "svg",
+    "vite",
+    "vite-plugin"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastian-software/iconkit.git"
+  },
+  "homepage": "https://github.com/sebastian-software/iconkit#readme",
+  "bugs": {
+    "url": "https://github.com/sebastian-software/iconkit/issues"
+  },
   "license": "MIT",
   "engines": {
     "node": ">=22.0.0"

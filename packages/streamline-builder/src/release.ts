@@ -1,0 +1,52 @@
+import { spawn } from "node:child_process"
+import { tmpdir } from "node:os"
+import path from "node:path"
+
+import { findRegistryEntry } from "./registry"
+
+export const PACK_RELEASE_VERSION = "0.1.0"
+export const PACK_PACKAGE_LICENSE = "CC-BY-4.0"
+export const PACK_MANIFEST_LICENSE = "CC BY 4.0"
+export const PACK_REPOSITORY_URL = "https://github.com/sebastian-software/iconkit"
+export const PACK_REPOSITORY_GIT_URL = "git+https://github.com/sebastian-software/iconkit.git"
+export const PACK_HOMEPAGE_URL = `${PACK_REPOSITORY_URL}#readme`
+export const PACK_BUGS_URL = `${PACK_REPOSITORY_URL}/issues`
+export const PACK_OSS_HOMEPAGE_URL = "https://oss.sebastian-software.com"
+export const PACK_REDISTRIBUTOR = "Sebastian Software GmbH, Mainz, Germany"
+export const PACK_REDISTRIBUTOR_COPYRIGHT = "Copyright (c) 2026 Sebastian Software GmbH, Mainz, Germany"
+
+export const RELEASE_PACK_SLUGS = ["core-line-free", "core-solid-free", "core-remix-free"] as const
+
+export function getReleaseRegistryEntries() {
+  return RELEASE_PACK_SLUGS.map((slug) => findRegistryEntry(slug))
+}
+
+export function getPackDir(rootDir: string, slug: string): string {
+  return path.join(rootDir, "packages", "packs", slug)
+}
+
+export async function runCommand(command: string, args: string[], cwd: string): Promise<void> {
+  const env: NodeJS.ProcessEnv = {
+    ...process.env,
+    npm_config_cache: path.join(tmpdir(), "streamline-pkg-npm-cache"),
+  }
+  delete env.npm_config_recursive
+
+  await new Promise<void>((resolve, reject) => {
+    const child = spawn(command, args, {
+      cwd,
+      stdio: "inherit",
+      env,
+    })
+
+    child.on("error", reject)
+    child.on("exit", (code) => {
+      if (code === 0) {
+        resolve()
+        return
+      }
+
+      reject(new Error(`Command "${command} ${args.join(" ")}" failed with exit code ${code ?? "unknown"}`))
+    })
+  })
+}

@@ -3,7 +3,7 @@
 
 import { Fragment, h } from "./h"
 
-import { Icon, icon } from "vite-plugin-streamline/compile"
+import { Icon, icon } from "iconkit/compile"
 
 const app = document.querySelector<HTMLDivElement>("#app")
 

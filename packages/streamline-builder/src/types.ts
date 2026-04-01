@@ -1,6 +1,6 @@
 export interface RegistryEntry {
   slug: string
-  packageName: `@streamline-pkg/${string}`
+  packageName: `@icon-pkg/${string}`
   setPageUrl: string
   family: string
   style: string

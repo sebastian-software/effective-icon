@@ -4,10 +4,10 @@ import { readFileSync } from "node:fs"
 import ts from "typescript"
 
 import type { ResolvedIconPackage, ResolvedPackIcon } from "./resolve-package"
-import type { StreamlineIconsOptions } from "./types"
+import type { IconkitVitePluginOptions } from "./types"
 
-export const COMPILE_MODULE_ID = "vite-plugin-streamline/compile"
-export const RUNTIME_MODULE_ID = "vite-plugin-streamline/runtime"
+export const COMPILE_MODULE_ID = "iconkit/compile"
+export const RUNTIME_MODULE_ID = "iconkit/runtime"
 
 interface TransformContext {
   options: { package: string; target: "jsx" | "web-component"; renderMode: "image" | "mask" | "inline-svg" }
@@ -53,7 +53,7 @@ class TransformState {
 
     const record: IconImportRecord = {
       icon,
-      importName: `__streamlineIconAsset${this.importCounter++}`,
+      importName: `__iconAsset${this.importCounter++}`,
       inlineSvg:
         this.context.options.target === "jsx" && this.context.options.renderMode === "inline-svg"
           ? parseInlineSvg(icon.absolutePath, this.sourceFile.fileName)
@@ -89,8 +89,8 @@ class TransformState {
 
     if (this.context.options.target === "web-component") {
       return createJsxElement(
-        "streamline-icon",
-        [...attributes, createExpressionAttribute("data-streamline-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
+        "iconkit-icon",
+        [...attributes, createExpressionAttribute("data-icon-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
       )
     }
 
@@ -102,7 +102,7 @@ class TransformState {
         ...forwarded,
         createExpressionAttribute(
           "style",
-          ts.factory.createCallExpression(ts.factory.createIdentifier("__streamlineBuildMaskStyle"), undefined, [
+          ts.factory.createCallExpression(ts.factory.createIdentifier("__iconBuildMaskStyle"), undefined, [
             ts.factory.createIdentifier(record.importName),
             styleExpression,
           ])
@@ -135,14 +135,14 @@ class TransformState {
       statements.push(
         createNamedImport(
           RUNTIME_MODULE_ID,
-          [["buildStreamlineMaskStyle", "__streamlineBuildMaskStyle"]]
+          [["buildIconMaskStyle", "__iconBuildMaskStyle"]]
         )
       )
     }
 
     if (this.needsWebComponentRuntime) {
       statements.push(
-        createNamedImport(RUNTIME_MODULE_ID, [["ensureStreamlineIconElement", "__streamlineEnsureIconElement"]])
+        createNamedImport(RUNTIME_MODULE_ID, [["ensureIconElement", "__iconEnsureElement"]])
       )
     }
 
@@ -165,8 +165,8 @@ class TransformState {
     }
 
     return [
-      ts.factory.createExpressionStatement(
-        ts.factory.createCallExpression(ts.factory.createIdentifier("__streamlineEnsureIconElement"), undefined, [])
+        ts.factory.createExpressionStatement(
+        ts.factory.createCallExpression(ts.factory.createIdentifier("__iconEnsureElement"), undefined, [])
       ),
     ]
   }
@@ -259,7 +259,7 @@ function transformJsxIcon(
     }
 
     if (isReservedAttribute(attributeName, state)) {
-      throw state.errorAt(attribute, `Prop "${attributeName}" is reserved by vite-plugin-streamline`)
+          throw state.errorAt(attribute, `Prop "${attributeName}" is reserved by iconkit`)
     }
 
     forwarded.push(attribute)
@@ -653,7 +653,7 @@ function isReservedAttribute(name: string, state: TransformState): boolean {
     return true
   }
 
-  if (name === "data-streamline-id" || name === "data-streamline-url") {
+  if (name === "data-icon-id" || name === "data-icon-url") {
     return true
   }
 

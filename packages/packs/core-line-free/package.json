@@ -1,8 +1,8 @@
 {
-  "name": "@streamline-pkg/core-line-free",
+  "name": "@icon-pkg/streamline-core-line-free",
   "version": "0.1.0",
   "description": "Redistributed Streamline Core Line - Free icon pack",
-  "license": "CC BY 4.0",
+  "license": "CC-BY-4.0",
   "type": "module",
   "files": [
     "manifest.json",
@@ -14,6 +14,18 @@
   "exports": {
     "./manifest.json": "./manifest.json",
     "./icons/*": "./icons/*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastian-software/iconkit.git",
+    "directory": "packages/packs/core-line-free"
+  },
+  "homepage": "https://github.com/sebastian-software/iconkit#readme",
+  "bugs": {
+    "url": "https://github.com/sebastian-software/iconkit/issues"
   },
   "keywords": [
     "streamline",

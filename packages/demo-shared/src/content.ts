@@ -43,13 +43,13 @@ declare const __STREAMLINE_DEMO_LINKS__: DemoLinkMap
 export const packInfo = __STREAMLINE_DEMO_PACK_INFO__
 export const demoLinks = __STREAMLINE_DEMO_LINKS__
 
-export const componentSource = `import { Icon } from "vite-plugin-streamline/compile"
+export const componentSource = `import { Icon } from "iconkit/compile"
 
 function StatusBar() {
   return <Icon name="airplane" />
 }`
 
-export const inlineSource = `import { icon } from "vite-plugin-streamline/compile"
+export const inlineSource = `import { icon } from "iconkit/compile"
 
 function Toolbar() {
   return <Button startIcon={icon\`magic-wand-2\`}>Transform</Button>
@@ -107,8 +107,8 @@ function Toolbar() {
   mask: {
     colorNote: "Renders a span with mask-image and currentColor — tint updates live.",
     componentOutput: `import __s from ".../airplane.svg?url"
-import { buildStreamlineMaskStyle as __mask }
-  from "vite-plugin-streamline/runtime"
+import { buildIconMaskStyle as __mask }
+  from "iconkit/runtime"
 
 function StatusBar() {
   return <span style={__mask(__s)} />
@@ -120,8 +120,8 @@ function StatusBar() {
       "Extra runtime: mask style helper",
     ],
     inlineOutput: `import __s from ".../magic-wand-2.svg?url"
-import { buildStreamlineMaskStyle as __mask }
-  from "vite-plugin-streamline/runtime"
+import { buildIconMaskStyle as __mask }
+  from "iconkit/runtime"
 
 function Toolbar() {
   return <Button startIcon={<span style={__mask(__s)} />}>Transform</Button>
@@ -169,33 +169,33 @@ function Toolbar() {
     colorNote:
       "Renders a custom element with shadow DOM mask — tints via currentColor, no inline SVG.",
     componentOutput: `import __s from ".../airplane.svg?url"
-import { ensureStreamlineIconElement }
-  from "vite-plugin-streamline/runtime"
-ensureStreamlineIconElement()
+import { ensureIconElement }
+  from "iconkit/runtime"
+ensureIconElement()
 
 function StatusBar() {
-  return <streamline-icon data-streamline-url={__s} />
+  return <iconkit-icon data-icon-url={__s} />
 }`,
     defaultTint: "#1f9d63",
     differences: [
       "Asset import: `icon.svg?url`",
-      "Emitted element: `<streamline-icon>`",
+      "Emitted element: `<iconkit-icon>`",
       "Extra runtime: custom-element mask renderer",
     ],
     inlineOutput: `import __s from ".../magic-wand-2.svg?url"
-import { ensureStreamlineIconElement }
-  from "vite-plugin-streamline/runtime"
-ensureStreamlineIconElement()
+import { ensureIconElement }
+  from "iconkit/runtime"
+ensureIconElement()
 
 function Toolbar() {
   return (
     <Button startIcon={
-      <streamline-icon data-streamline-url={__s} />
+      <iconkit-icon data-icon-url={__s} />
     }>Transform</Button>
   )
 }`,
     lead: "Renders a custom element with shadow DOM mask for tintable icons without inlining SVG.",
-    liveElement: "<streamline-icon>",
+    liveElement: "<iconkit-icon>",
     renderMode: "web-component",
     supportsRuntimeTinting: true,
     tabLabel: "Web Component",

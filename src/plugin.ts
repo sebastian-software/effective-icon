@@ -2,7 +2,7 @@ import type { Plugin, ResolvedConfig } from "vite"
 
 import { resolveIconPackage, type ResolvedIconPackage } from "./resolve-package"
 import { transformCompileTimeIcons } from "./transform"
-import type { StreamlineIconsOptions } from "./types"
+import type { IconkitVitePluginOptions } from "./types"
 
 interface PluginState {
   config?: ResolvedConfig
@@ -10,9 +10,9 @@ interface PluginState {
   promise?: Promise<ResolvedIconPackage>
 }
 
-export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
+export function iconkitVitePlugin(options: IconkitVitePluginOptions): Plugin {
   if (!options?.package) {
-    throw new Error('streamlineIcons() requires a "package" option')
+    throw new Error('iconkitVitePlugin() requires a "package" option')
   }
 
   const normalizedOptions = {
@@ -28,7 +28,7 @@ export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
   const state: PluginState = {}
 
   return {
-    name: "vite-plugin-streamline",
+    name: "iconkit-vite-plugin",
     enforce: "pre",
     configResolved(config) {
       state.config = config
@@ -59,7 +59,7 @@ export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
   }
 }
 
-function normalizeRenderMode(renderMode: StreamlineIconsOptions["renderMode"] | undefined): "image" | "mask" | "inline-svg" {
+function normalizeRenderMode(renderMode: IconkitVitePluginOptions["renderMode"] | undefined): "image" | "mask" | "inline-svg" {
   if (renderMode === "component" || renderMode == null) {
     return "image"
   }

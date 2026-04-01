@@ -1,16 +1,16 @@
 export { Icon, icon } from "./compile"
-export { streamlineIcons } from "./plugin"
+export { iconkitVitePlugin } from "./plugin"
 export {
-  STREAMLINE_ICON_ELEMENT_NAME,
-  buildStreamlineMaskStyle,
-  ensureStreamlineIconElement,
-  registerStreamlineIconDefinition,
+  ICONKIT_ICON_ELEMENT_NAME,
+  buildIconMaskStyle,
+  ensureIconElement,
+  registerIconDefinition,
 } from "./runtime"
 export type {
-  StreamlineCompileIconProps,
-  StreamlineIconsOptions,
-  StreamlineIconsRenderMode,
-  StreamlineIconsTarget,
-  StreamlinePackManifest,
-  StreamlinePackManifestIcon,
+  IconCompileProps,
+  IconPackManifest,
+  IconPackManifestIcon,
+  IconRenderMode,
+  IconTarget,
+  IconkitVitePluginOptions,
 } from "./types"

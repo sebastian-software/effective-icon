@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url"
 
 import type { UserConfig } from "vite"
 
-import { streamlineIcons } from "../../src"
-import type { StreamlineIconsOptions } from "../../src/types"
+import { iconkitVitePlugin } from "../../src/plugin"
+import type { IconkitVitePluginOptions } from "../../src/types"
 
 type DemoVariant = "image" | "mask" | "inline-svg" | "web-component"
 
@@ -41,29 +41,29 @@ const demoPackInfo = {
   version: packManifest.version,
 } as const
 
-function resolvePluginOptions(variant: DemoVariant): StreamlineIconsOptions {
+function resolvePluginOptions(variant: DemoVariant): IconkitVitePluginOptions {
   switch (variant) {
     case "mask":
       return {
-        package: "@streamline-pkg/core-line-free",
+        package: "@icon-pkg/streamline-core-line-free",
         renderMode: "mask",
         target: "jsx",
       }
     case "inline-svg":
       return {
-        package: "@streamline-pkg/core-line-free",
+        package: "@icon-pkg/streamline-core-line-free",
         renderMode: "inline-svg",
         target: "jsx",
       }
     case "web-component":
       return {
-        package: "@streamline-pkg/core-line-free",
+        package: "@icon-pkg/streamline-core-line-free",
         target: "web-component",
       }
     case "image":
     default:
       return {
-        package: "@streamline-pkg/core-line-free",
+        package: "@icon-pkg/streamline-core-line-free",
         renderMode: "image",
         target: "jsx",
       }
@@ -111,11 +111,12 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
       alias: [
         { find: /^@streamline-demo\/shared$/, replacement: path.join(sharedRoot, "src/index.ts") },
         { find: /^@streamline-demo\/shared\/styles\.css$/, replacement: path.join(sharedRoot, "src/styles.css") },
-        { find: /^vite-plugin-streamline$/, replacement: path.join(repoRoot, "src/index.ts") },
-        { find: /^vite-plugin-streamline\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
-        { find: /^vite-plugin-streamline\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
+        { find: /^iconkit$/, replacement: path.join(repoRoot, "src/index.ts") },
+        { find: /^iconkit\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
+        { find: /^iconkit\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
+        { find: /^iconkit\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
       ],
     },
-    plugins: [streamlineIcons(resolvePluginOptions(variant))],
+    plugins: [iconkitVitePlugin(resolvePluginOptions(variant))],
   }
 }

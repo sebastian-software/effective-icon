@@ -10,6 +10,16 @@ import { extractSetDataFromPageProps } from "../src/extract"
 import { materializeDiscoveredSet } from "../src/materialize"
 import { normalizePackIconName, normalizeSvgToCurrentColor } from "../src/normalize"
 import { writePack } from "../src/pack"
+import {
+  PACK_BUGS_URL,
+  PACK_HOMEPAGE_URL,
+  PACK_OSS_HOMEPAGE_URL,
+  PACK_PACKAGE_LICENSE,
+  PACK_REDISTRIBUTOR_COPYRIGHT,
+  PACK_RELEASE_VERSION,
+  PACK_REPOSITORY_GIT_URL,
+} from "../src/release"
+import { validateReleasePacks } from "../src/validate"
 import { fetchGroupedWebsiteSet } from "../src/website-api"
 import type { BuilderApiClient, DiscoveredSetData, ExtractedSetData, RegistryEntry } from "../src/types"
 
@@ -18,7 +28,7 @@ const rootFixture = path.resolve(import.meta.dirname, "..", "..", "..")
 const tempDirs: string[] = []
 const registryEntry: RegistryEntry = {
   slug: "core-line-free",
-  packageName: "@streamline-pkg/core-line-free",
+  packageName: "@icon-pkg/streamline-core-line-free",
   setPageUrl: "https://www.streamlinehq.com/icons/core-line-free",
   family: "Core",
   style: "line",
@@ -69,19 +79,46 @@ describe("streamline builder", () => {
 
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
-    ) as { iconCount: number; icons: Array<{ file: string }> }
+    ) as { iconCount: number; version: string; icons: Array<{ file: string }> }
     const packageJson = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "package.json"), "utf8")
-    ) as { exports?: Record<string, string> }
+    ) as {
+      version?: string
+      license?: string
+      exports?: Record<string, string>
+      publishConfig?: { access?: string }
+      repository?: { url?: string; directory?: string }
+      homepage?: string
+      bugs?: { url?: string }
+    }
+    const licenseText = await readFile(
+      path.join(tempDir, "packages", "packs", "core-line-free", "LICENSE"),
+      "utf8"
+    )
 
     expect(manifest.iconCount).toBe(2)
+    expect(manifest.version).toBe(PACK_RELEASE_VERSION)
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
+    expect(packageJson.version).toBe(PACK_RELEASE_VERSION)
+    expect(packageJson.license).toBe(PACK_PACKAGE_LICENSE)
     expect(packageJson.exports?.["./manifest.json"]).toBe("./manifest.json")
     expect(packageJson.exports?.["./icons/*"]).toBe("./icons/*")
+    expect(packageJson.publishConfig?.access).toBe("public")
+    expect(packageJson.repository?.url).toBe(PACK_REPOSITORY_GIT_URL)
+    expect(packageJson.repository?.directory).toBe("packages/packs/core-line-free")
+    expect(packageJson.homepage).toBe(PACK_HOMEPAGE_URL)
+    expect(packageJson.bugs?.url).toBe(PACK_BUGS_URL)
     expect(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "icons", "add-1.svg"), "utf8")
     ).toContain("currentColor")
-    expect(await readFile(path.join(rootFixture, "LICENSE"), "utf8")).toContain("MIT License")
+    expect(licenseText).toContain("CC BY 4.0")
+    expect(licenseText).toContain("https://creativecommons.org/licenses/by/4.0/")
+    expect(licenseText).toContain(PACK_REDISTRIBUTOR_COPYRIGHT)
+    expect(licenseText).toContain(PACK_OSS_HOMEPAGE_URL)
+  })
+
+  it("validates the release pack set in the repository", async () => {
+    await validateReleasePacks(rootFixture)
   })
 
   it("loads builder config from .env.local", async () => {
