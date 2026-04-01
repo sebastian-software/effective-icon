@@ -1,8 +1,6 @@
 import { cp, mkdir, readdir } from "node:fs/promises"
 import path from "node:path"
 
-import { normalizeIconName } from "../src/manifest"
-
 interface CliArgs {
   from: string
   to: string
@@ -29,6 +27,17 @@ async function main() {
 
     console.log(`[sync] ${style}: copied ${copied} icons`)
   }
+}
+
+function normalizeIconName(input: string): string {
+  const fileName = input.replace(/\.svg$/i, "")
+  return fileName
+    .normalize("NFKD")
+    .replace(/[^a-zA-Z0-9]+/g, "-")
+    .replace(/([a-z0-9])([A-Z])/g, "$1-$2")
+    .replace(/-{2,}/g, "-")
+    .replace(/^-|-$/g, "")
+    .toLowerCase()
 }
 
 function parseArgs(argv: string[]): CliArgs {

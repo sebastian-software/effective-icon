@@ -1,35 +1,30 @@
 import type { Plugin, ResolvedConfig } from "vite"
 
-import {
-  buildLoaderModule,
-  createVirtualIconRegistry,
-  ICON_MODULE_PREFIX,
-  loadIconModule,
-  LOADER_MODULE_ID,
-  RESOLVED_ICON_MODULE_PREFIX,
-  RESOLVED_LOADER_MODULE_ID,
-  type VirtualIconRegistry,
-} from "./manifest"
-import {
-  resolveApiIconSet,
-  resolveArchiveIconSet,
-  resolveDirectoryIconSet,
-  resolveFreeIconSet,
-} from "./providers"
-import type {
-  ProviderContext,
-  ResolvedIconSet,
-  StreamlineIconsOptions,
-  StreamlineIconStyle,
-} from "./types"
+import { resolveIconPackage, type ResolvedIconPackage } from "./resolve-package"
+import { transformCompileTimeIcons } from "./transform"
+import type { StreamlineIconsOptions } from "./types"
 
 interface PluginState {
   config?: ResolvedConfig
-  registry?: VirtualIconRegistry
-  promise?: Promise<VirtualIconRegistry>
+  resolvedPackage?: ResolvedIconPackage
+  promise?: Promise<ResolvedIconPackage>
 }
 
-export function streamlineIcons(options: StreamlineIconsOptions = {}): Plugin {
+export function streamlineIcons(options: StreamlineIconsOptions): Plugin {
+  if (!options?.package) {
+    throw new Error('streamlineIcons() requires a "package" option')
+  }
+
+  const normalizedOptions = {
+    package: options.package,
+    target: options.target ?? "jsx",
+    renderMode: options.renderMode ?? "component",
+  } as const
+
+  if (normalizedOptions.target === "web-component" && options.renderMode) {
+    throw new Error('renderMode is only supported when target is "jsx"')
+  }
+
   const state: PluginState = {}
 
   return {
@@ -39,82 +34,41 @@ export function streamlineIcons(options: StreamlineIconsOptions = {}): Plugin {
       state.config = config
     },
     async buildStart() {
-      await ensureRegistry(state, options)
+      await ensurePackage(state, normalizedOptions.package)
     },
-    resolveId(id) {
-      if (id === LOADER_MODULE_ID) {
-        return RESOLVED_LOADER_MODULE_ID
-      }
-      if (id.startsWith(ICON_MODULE_PREFIX)) {
-        return id.replace(ICON_MODULE_PREFIX, RESOLVED_ICON_MODULE_PREFIX)
-      }
-      return undefined
-    },
-    async load(id) {
-      const registry = await ensureRegistry(state, options)
-
-      if (id === RESOLVED_LOADER_MODULE_ID) {
-        return buildLoaderModule(registry)
+    async transform(code, id) {
+      if (id.includes("/node_modules/")) {
+        return null
       }
 
-      if (id.startsWith(RESOLVED_ICON_MODULE_PREFIX)) {
-        const encodedName = id.slice(RESOLVED_ICON_MODULE_PREFIX.length)
-        const name = decodeURIComponent(encodedName)
-        const entry = registry.byName.get(name)
-        if (!entry) {
-          return "export default null"
-        }
-        return loadIconModule(entry)
+      const resolvedPackage = await ensurePackage(state, normalizedOptions.package)
+      const transformed = transformCompileTimeIcons(code, id, {
+        options: normalizedOptions,
+        resolvedPackage,
+      })
+
+      if (!transformed) {
+        return null
       }
 
-      return undefined
+      return {
+        code: transformed,
+        map: null,
+      }
     },
   }
 }
 
-async function ensureRegistry(
-  state: PluginState,
-  options: StreamlineIconsOptions
-): Promise<VirtualIconRegistry> {
-  if (state.registry) {
-    return state.registry
+async function ensurePackage(state: PluginState, packageName: string): Promise<ResolvedIconPackage> {
+  if (state.resolvedPackage) {
+    return state.resolvedPackage
   }
 
   if (!state.promise) {
-    state.promise = prepareRegistry(state, options)
+    const root = state.config?.root ?? process.cwd()
+    state.promise = resolveIconPackage(packageName, root)
   }
 
-  state.registry = await state.promise
-  return state.registry
-}
-
-async function prepareRegistry(
-  state: PluginState,
-  options: StreamlineIconsOptions
-): Promise<VirtualIconRegistry> {
-  const config = state.config
-  const root = config?.root ?? process.cwd()
-  const style = options.style ?? "regular"
-  const source = options.source ?? { type: "free" as const }
-  const iconSet = await resolveSourceIconSet(source, style, { root })
-  return createVirtualIconRegistry(iconSet)
-}
-
-async function resolveSourceIconSet(
-  source: StreamlineIconsOptions["source"],
-  style: StreamlineIconStyle,
-  context: ProviderContext
-): Promise<ResolvedIconSet> {
-  if (!source || source.type === "free") {
-    return resolveFreeIconSet(source ?? { type: "free" }, style, context)
-  }
-
-  switch (source.type) {
-    case "directory":
-      return resolveDirectoryIconSet(source, style, context)
-    case "archive":
-      return resolveArchiveIconSet(source, style, context)
-    case "api":
-      return resolveApiIconSet(source, style, context)
-  }
+  state.resolvedPackage = await state.promise
+  return state.resolvedPackage
 }

@@ -2,6 +2,7 @@ import { defineConfig } from "tsdown"
 
 export default defineConfig({
   entry: {
+    compile: "src/compile.ts",
     index: "src/index.ts",
     runtime: "src/runtime.ts",
   },
@@ -14,6 +15,6 @@ export default defineConfig({
     dts: ".d.ts",
   }),
   deps: {
-    neverBundle: ["vite"],
+    neverBundle: ["typescript", "vite"],
   },
 })

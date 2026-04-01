@@ -1,59 +1,38 @@
-export type StreamlineIconStyle = "light" | "regular" | "bold"
+export type StreamlineIconsTarget = "jsx" | "web-component"
 
-export interface StreamlineIconAsset {
-  name: string
-  style: StreamlineIconStyle
-  path?: string
-  svg?: string
-  origin: "api" | "archive" | "directory" | "free"
-}
-
-export interface ResolvedIconSet {
-  style: StreamlineIconStyle
-  icons: Map<string, StreamlineIconAsset>
-}
-
-export interface ProviderContext {
-  root: string
-}
-
-export interface FreeSourceOptions {
-  type: "free"
-  assetsDir?: string
-}
-
-export interface DirectorySourceOptions {
-  type: "directory"
-  path: string
-}
-
-export interface ArchiveSourceOptions {
-  type: "archive"
-  path: string
-}
-
-export interface ApiSourceOptions {
-  type: "api"
-  apiKey: string
-  icons: string[]
-  familySlug?: string
-  baseUrl?: string
-  productTier?: "all" | "free" | "premium"
-}
-
-export type StreamlineIconSourceOptions =
-  | FreeSourceOptions
-  | DirectorySourceOptions
-  | ArchiveSourceOptions
-  | ApiSourceOptions
+export type StreamlineIconsRenderMode = "component" | "mask"
 
 export interface StreamlineIconsOptions {
-  source?: StreamlineIconSourceOptions
-  style?: StreamlineIconStyle
+  package: string
+  target?: StreamlineIconsTarget
+  renderMode?: StreamlineIconsRenderMode
 }
 
-export interface StreamlineIconModule {
+export interface StreamlinePackManifestIcon {
   name: string
-  style: StreamlineIconStyle
-  svg: string
+  file: string
+  originalName: string
+  sourcePageUrl: string
+  category: string
+  categorySlug: string
+  subcategory: string
+  subcategorySlug: string
+  tags: string[]
+}
+
+export interface StreamlinePackManifest {
+  name: string
+  slug: string
+  version: string
+  license: string
+  sourceUrl: string
+  family: string
+  style: string
+  iconCount: number
+  icons: StreamlinePackManifestIcon[]
+}
+
+export interface StreamlineCompileIconProps {
+  name: string
+  [key: string]: unknown
 }

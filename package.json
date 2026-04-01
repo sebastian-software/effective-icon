@@ -1,7 +1,7 @@
 {
   "name": "vite-plugin-streamline",
   "version": "0.1.0",
-  "description": "Vite plugin for lazy-loading Streamline icon sets with free and commercial sources",
+  "description": "Vite plugin for compile-time Streamline icon resolution",
   "packageManager": "pnpm@9.15.9",
   "type": "module",
   "main": "./dist/index.js",
@@ -12,18 +12,17 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
+    "./compile": {
+      "import": "./dist/compile.js",
+      "types": "./dist/compile.d.ts"
+    },
     "./runtime": {
       "import": "./dist/runtime.js",
       "types": "./dist/runtime.d.ts"
-    },
-    "./virtual": {
-      "types": "./virtual.d.ts"
     }
   },
   "files": [
     "dist",
-    "assets",
-    "virtual.d.ts",
     "README.md",
     "LICENSE"
   ],
@@ -54,14 +53,14 @@
     "vite": "^6.0.0 || ^7.0.0 || ^8.0.0-beta.0"
   },
   "dependencies": {
-    "adm-zip": "^0.5.16"
+    "adm-zip": "^0.5.16",
+    "typescript": "^6.0.2"
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
     "@types/node": "^24.0.0",
     "tsdown": "^0.21.7",
     "tsx": "^4.20.6",
-    "typescript": "^6.0.2",
     "vite": "^8.0.3",
     "vitest": "^4.1.2"
   }

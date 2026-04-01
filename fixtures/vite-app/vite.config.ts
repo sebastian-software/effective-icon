@@ -1,32 +1,39 @@
+import path from "node:path"
+import { fileURLToPath } from "node:url"
+
 import { defineConfig } from "vite"
 
 import { streamlineIcons } from "../../src"
 
-function resolveSource() {
-  if (process.env.STREAMLINE_SOURCE_MODE === "api") {
-    const baseUrl = process.env.STREAMLINE_FIXTURE_BASE_URL
-    if (!baseUrl) {
-      throw new Error("Missing STREAMLINE_FIXTURE_BASE_URL for api fixture build")
-    }
-
-    return {
-      type: "api" as const,
-      baseUrl,
-      apiKey: process.env.STREAMLINE_FIXTURE_TOKEN ?? "",
-      familySlug: "fixture-regular",
-      icons: ["rocket", "search"],
-      productTier: "free" as const,
-    }
-  }
-
-  return { type: "free" as const }
-}
+const fixtureRoot = fileURLToPath(new URL(".", import.meta.url))
+const repoRoot = path.resolve(fixtureRoot, "../..")
 
 export default defineConfig({
+  root: fixtureRoot,
+  esbuild: {
+    jsx: "transform",
+    jsxFactory: "h",
+    jsxFragment: "Fragment",
+  },
+  resolve: {
+    alias: [
+      { find: /^vite-plugin-streamline$/, replacement: path.join(repoRoot, "src/index.ts") },
+      { find: /^vite-plugin-streamline\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
+      { find: /^vite-plugin-streamline\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
+    ],
+  },
   plugins: [
-    streamlineIcons({
-      style: "regular",
-      source: resolveSource(),
-    }),
+    streamlineIcons(
+      process.env.STREAMLINE_TARGET === "web-component"
+        ? {
+            package: "@streamline-pkg/core-line-free",
+            target: "web-component",
+          }
+        : {
+            package: "@streamline-pkg/core-line-free",
+            target: "jsx",
+            renderMode: process.env.STREAMLINE_RENDER_MODE === "mask" ? "mask" : "component",
+          }
+    ),
   ],
 })

@@ -1,14 +1,16 @@
+export { Icon, icon } from "./compile"
 export { streamlineIcons } from "./plugin"
-export { defineStreamlineIconLoader } from "./runtime"
+export {
+  STREAMLINE_ICON_ELEMENT_NAME,
+  buildStreamlineMaskStyle,
+  ensureStreamlineIconElement,
+  registerStreamlineIconDefinition,
+} from "./runtime"
 export type {
-  ApiSourceOptions,
-  ArchiveSourceOptions,
-  DirectorySourceOptions,
-  FreeSourceOptions,
-  ResolvedIconSet,
-  StreamlineIconAsset,
-  StreamlineIconModule,
+  StreamlineCompileIconProps,
   StreamlineIconsOptions,
-  StreamlineIconSourceOptions,
-  StreamlineIconStyle,
+  StreamlineIconsRenderMode,
+  StreamlineIconsTarget,
+  StreamlinePackManifest,
+  StreamlinePackManifestIcon,
 } from "./types"

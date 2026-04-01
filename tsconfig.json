@@ -3,22 +3,35 @@
     "target": "ES2022",
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "baseUrl": ".",
+    "paths": {
+      "vite-plugin-streamline": ["./src/index.ts"],
+      "vite-plugin-streamline/compile": ["./src/compile.ts"],
+      "vite-plugin-streamline/runtime": ["./src/runtime.ts"]
+    },
     "lib": ["ES2023", "DOM"],
     "strict": true,
     "noEmit": true,
     "skipLibCheck": true,
+    "ignoreDeprecations": "6.0",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
-    "types": ["node", "vitest/globals"]
+    "jsx": "preserve",
+    "types": ["node", "vitest/globals", "vite/client"]
   },
   "include": [
     "src/**/*.ts",
+    "src/**/*.tsx",
     "scripts/**/*.ts",
     "test/**/*.ts",
+    "test/**/*.tsx",
     "packages/**/*.ts",
+    "packages/**/*.tsx",
     "demo/**/*.ts",
+    "demo/**/*.tsx",
     "demo.d.ts",
-    "virtual.d.ts"
+    "fixtures/**/*.ts",
+    "fixtures/**/*.tsx"
   ]
 }

@@ -7,3 +7,5 @@ coverage
 packages/packs/**/node_modules
 *.tsbuildinfo
 .DS_Store
+.env
+.env.local

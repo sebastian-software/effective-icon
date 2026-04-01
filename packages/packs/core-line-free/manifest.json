@@ -1,0 +1,45 @@
+{
+  "name": "@streamline-pkg/core-line-free",
+  "slug": "core-line-free",
+  "version": "0.1.0",
+  "license": "CC BY 4.0",
+  "sourceUrl": "https://www.streamlinehq.com/icons/core-line-free",
+  "family": "Core",
+  "style": "line",
+  "iconCount": 3,
+  "icons": [
+    {
+      "name": "anchor",
+      "file": "icons/anchor.svg",
+      "originalName": "Anchor",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/core-line-free",
+      "category": "Travel",
+      "categorySlug": "travel",
+      "subcategory": "Navigation",
+      "subcategorySlug": "navigation",
+      "tags": ["anchor", "navigation"]
+    },
+    {
+      "name": "rocket",
+      "file": "icons/rocket.svg",
+      "originalName": "Rocket",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/core-line-free",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Navigation",
+      "subcategorySlug": "navigation",
+      "tags": ["rocket", "launch"]
+    },
+    {
+      "name": "search",
+      "file": "icons/search.svg",
+      "originalName": "Search",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/core-line-free",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Search",
+      "subcategorySlug": "search",
+      "tags": ["search", "find"]
+    }
+  ]
+}
