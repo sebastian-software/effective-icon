@@ -2,7 +2,7 @@ export type IconTarget = "jsx" | "web-component"
 
 export type IconRenderMode = "image" | "component" | "mask" | "inline-svg"
 
-export interface IconkitVitePluginOptions {
+export interface EffectiveIconVitePluginOptions {
   package: string
   target?: IconTarget
   renderMode?: IconRenderMode

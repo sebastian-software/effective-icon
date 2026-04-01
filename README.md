@@ -1,8 +1,8 @@
-# iconkit
+# @effective/icon
 
 Named icons without the runtime tax.
 
-`iconkit` lets you author icons the way people actually want to use them:
+`@effective/icon` lets you author icons the way people actually want to use them:
 
 ```tsx
 <Icon name="airplane" className="size-4" />
@@ -27,7 +27,7 @@ That tradeoff is so common it barely gets questioned:
 - tintable output means inline SVG payload
 - external asset files mean giving up ergonomics
 
-`iconkit` exists because that tradeoff is not actually necessary.
+`@effective/icon` exists because that tradeoff is not actually necessary.
 
 It resolves the selected icon pack at build time, validates every icon name against the manifest, and rewrites your marker usage to concrete output.
 
@@ -46,7 +46,7 @@ without the usual cost:
 
 ## You Really Can Have Both
 
-This is the thing `iconkit` is built around:
+This is the thing `@effective/icon` is built around:
 
 - author by name
 - validate by name
@@ -114,9 +114,9 @@ But it is also tedious.
 
 The output is fine. The authoring experience is not.
 
-## What iconkit Does Instead
+## What @effective/icon Does Instead
 
-`iconkit` is not trying to become another icon library.
+`@effective/icon` is not trying to become another icon library.
 
 It is a compile-time icon pipeline.
 
@@ -157,16 +157,16 @@ Usually you pick two:
 - tintability
 - strict validation
 
-`iconkit` is trying very hard to let you keep all four.
+`@effective/icon` is trying very hard to let you keep all four.
 
 ## The One-Sentence Pitch
 
-`iconkit` gives you the DX of `<Icon name="...">` with the bundle behavior of a static asset pipeline.
+`@effective/icon` gives you the DX of `<Icon name="...">` with the bundle behavior of a static asset pipeline.
 
 ## Install
 
 ```bash
-pnpm add -D iconkit
+pnpm add -D @effective/icon
 ```
 
 Add or install at least one compatible icon pack, for example:
@@ -180,7 +180,7 @@ pnpm add -D @icon-pkg/streamline-core-line-free
 Import the compile-time markers:
 
 ```tsx
-import { Icon, icon } from "iconkit/compile"
+import { Icon, icon } from "@effective/icon/compile"
 ```
 
 Then use either surface:
@@ -201,11 +201,11 @@ The important detail is that these are markers for the plugin, not a runtime com
 
 ```ts
 import { defineConfig } from "vite"
-import { iconkitVitePlugin } from "iconkit/vite-plugin"
+import { effectiveIconVitePlugin } from "@effective/icon/vite-plugin"
 
 export default defineConfig({
   plugins: [
-    iconkitVitePlugin({
+    effectiveIconVitePlugin({
       package: "@icon-pkg/streamline-core-line-free",
       target: "jsx",
       renderMode: "image",
@@ -216,19 +216,19 @@ export default defineConfig({
 
 By default, the plugin also generates a type-registration file for TypeScript:
 
-- `src/iconkit.generated.d.ts` when your project has a `src/` directory
-- otherwise `iconkit.generated.d.ts` in the project root
+- `src/effective-icon.generated.d.ts` when your project has a `src/` directory
+- otherwise `effective-icon.generated.d.ts` in the project root
 
-That file augments `iconkit/compile` with the icon-name union from the selected package, so `name="..."` becomes TypeScript-validated in editors and `tsc`.
+That file augments `@effective/icon/compile` with the icon-name union from the selected package, so `name="..."` becomes TypeScript-validated in editors and `tsc`.
 
 If you want a custom path or want to disable generation, use `typesOutputFile`:
 
 ```ts
-iconkitVitePlugin({
+effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "image",
-  typesOutputFile: "./types/iconkit.generated.d.ts",
+  typesOutputFile: "./types/effective-icon.generated.d.ts",
 })
 ```
 
@@ -241,7 +241,7 @@ Like other generated routing or type-registration files, it is reasonable to che
 ### JSX Image Output
 
 ```ts
-iconkitVitePlugin({
+effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "image",
@@ -259,7 +259,7 @@ Use it when you want:
 ### JSX Mask Output
 
 ```ts
-iconkitVitePlugin({
+effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "mask",
@@ -277,7 +277,7 @@ Use it when you want:
 ### JSX Inline SVG Output
 
 ```ts
-iconkitVitePlugin({
+effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
   target: "jsx",
   renderMode: "inline-svg",
@@ -295,13 +295,13 @@ Use it when you want:
 ### Web Component Output
 
 ```ts
-iconkitVitePlugin({
+effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
   target: "web-component",
 })
 ```
 
-This emits a generic `<iconkit-icon>` custom element. The icon still resolves to an external SVG asset URL and is rendered as a tintable mask-based glyph inside shadow DOM.
+This emits a generic `<effective-icon>` custom element. The icon still resolves to an external SVG asset URL and is rendered as a tintable mask-based glyph inside shadow DOM.
 
 Use it when you want:
 
@@ -321,7 +321,7 @@ The plugin is intentionally strict.
 - unknown icon names fail the build
 - marker imports are required
 
-That strictness is not accidental. It is what allows `iconkit` to behave like a real compile-time pipeline instead of a best-effort runtime helper.
+That strictness is not accidental. It is what allows `@effective/icon` to behave like a real compile-time pipeline instead of a best-effort runtime helper.
 
 ## Icon Pack Contract
 
@@ -339,7 +339,7 @@ The plugin reads the manifest during build setup and resolves icon file paths fr
 The current V1 direction is deliberately narrow:
 
 - one selected icon package per project
-- marker-based authoring via `iconkit/compile`
+- marker-based authoring via `@effective/icon/compile`
 - static validation against the selected package manifest
 - build-time rewrites for:
   - JSX image output

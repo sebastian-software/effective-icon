@@ -45,7 +45,7 @@ function renderIndexHtml(): string {
     "inline-svg":
       "Inlines the full <code>&lt;svg&gt;</code> markup. Zero runtime, full <code>currentColor</code> support.",
     "web-component":
-      "Custom <code>&lt;iconkit-icon&gt;</code> element with shadow DOM mask. Tintable, framework-agnostic.",
+      "Custom <code>&lt;effective-icon&gt;</code> element with shadow DOM mask. Tintable, framework-agnostic.",
   }
 
   function renderIcon(path: string, accent: string): string {
@@ -69,7 +69,7 @@ function renderIndexHtml(): string {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iconkit — compile-time icon resolution</title>
+    <title>@effective/icon — compile-time icon resolution</title>
     <meta name="description" content="Resolve package-backed icons at compile time into image, mask, inline SVG, or web component output." />
     <style>
       :root { color-scheme:light; --bg:oklch(0.97 0.008 84); --paper:oklch(0.992 0.005 84); --paper-soft:color-mix(in oklch,var(--paper) 92%,white); --ink:oklch(0.22 0.035 260); --muted:oklch(0.48 0.03 260); --line:color-mix(in oklch,var(--ink) 10%,transparent); --font-sans:ui-sans-serif,system-ui,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"; }
@@ -100,7 +100,7 @@ function renderIndexHtml(): string {
     </style>
   </head>
   <body>
-    <header class="topbar"><div class="topbar__inner"><span class="topbar__name">iconkit</span></div></header>
+    <header class="topbar"><div class="topbar__inner"><span class="topbar__name">@effective/icon</span></div></header>
     <main>
       <h1>Streamline icons, resolved at compile time.</h1>
       <p class="tagline">Write once, compile to any output format. Each demo below is its own build target — same authored source, different result.</p>
@@ -108,7 +108,7 @@ function renderIndexHtml(): string {
         ${cards}
       </div>
       <footer class="page-footer">
-        <span>iconkit</span>
+        <span>@effective/icon</span>
         <span>Each variant is its own pnpm workspace build</span>
       </footer>
     </main>

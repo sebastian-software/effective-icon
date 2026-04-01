@@ -63,7 +63,7 @@ describe.sequential("workspace demo builds", () => {
 
     expect(code).toContain("Web component output")
     expect(code).toContain("../image/")
-    expect(code).toContain("iconkit-icon")
+    expect(code).toContain("effective-icon")
     expect(code).toContain("data-icon-url")
     expect(code).toContain("ensureIconElement")
   })

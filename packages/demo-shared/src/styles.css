@@ -253,7 +253,7 @@ code, pre { font-family: var(--font-mono); }
 
 .icon-frame > img,
 .icon-frame > span,
-.icon-frame > iconkit-icon,
+.icon-frame > effective-icon,
 .icon-frame > svg {
   display: block;
   width: 100%;
@@ -262,7 +262,7 @@ code, pre { font-family: var(--font-mono); }
   max-height: 3.5rem;
 }
 
-.icon-frame > iconkit-icon {
+.icon-frame > effective-icon {
   inline-size: 3.5rem;
   block-size: 3.5rem;
 }

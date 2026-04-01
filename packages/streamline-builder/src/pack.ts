@@ -106,7 +106,7 @@ npm install ${set.packageName}
 - \`manifest.json\` for pack metadata and icon lookup
 - flat \`icons/*.svg\` files for downstream tooling and asset access
 
-This package redistributes the publicly available Streamline free icon set and is intended to be consumed by build tools such as \`iconkit\`.
+This package redistributes the publicly available Streamline free icon set and is intended to be consumed by build tools such as \`@effective/icon\`.
 `
 }
 

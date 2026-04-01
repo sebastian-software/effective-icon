@@ -3,7 +3,7 @@ import { fileURLToPath } from "node:url"
 
 import { defineConfig } from "vite"
 
-import { iconkitVitePlugin } from "../../src/plugin"
+import { effectiveIconVitePlugin } from "../../src/plugin"
 
 const fixtureRoot = fileURLToPath(new URL(".", import.meta.url))
 const repoRoot = path.resolve(fixtureRoot, "../..")
@@ -17,14 +17,14 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      { find: /^iconkit$/, replacement: path.join(repoRoot, "src/index.ts") },
-      { find: /^iconkit\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
-      { find: /^iconkit\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
-      { find: /^iconkit\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
+      { find: /^@effective\/icon$/, replacement: path.join(repoRoot, "src/index.ts") },
+      { find: /^@effective\/icon\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
+      { find: /^@effective\/icon\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
+      { find: /^@effective\/icon\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
     ],
   },
   plugins: [
-    iconkitVitePlugin(
+    effectiveIconVitePlugin(
       process.env.STREAMLINE_TARGET === "web-component"
         ? {
             package: "@icon-pkg/streamline-core-line-free",

@@ -1,10 +1,10 @@
-declare module "iconkit/compile" {
-  interface IconkitCompileTypeRegistry {
+declare module "@effective/icon/compile" {
+  interface EffectiveIconCompileTypeRegistry {
     iconName: "airplane" | "anchor"
   }
 }
 
-import { Icon, type IconCompileProps, type IconName } from "iconkit/compile"
+import { Icon, type IconCompileProps, type IconName } from "@effective/icon/compile"
 
 const validName: IconName = "airplane"
 const validProps: IconCompileProps = { name: "anchor" }

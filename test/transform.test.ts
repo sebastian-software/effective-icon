@@ -103,7 +103,7 @@ describe("compile-time transform", () => {
     expect(transformed).toContain("?url")
     expect(transformed).toContain("data-icon-url")
     expect(transformed).toContain("ensureIconElement")
-    expect(transformed).toContain("iconkit-icon")
+    expect(transformed).toContain("effective-icon")
   })
 
   it("fails on missing compile import", async () => {

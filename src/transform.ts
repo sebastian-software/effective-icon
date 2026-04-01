@@ -4,10 +4,10 @@ import { readFileSync } from "node:fs"
 import ts from "typescript"
 
 import type { ResolvedIconPackage, ResolvedPackIcon } from "./resolve-package"
-import type { IconkitVitePluginOptions } from "./types"
+import type { EffectiveIconVitePluginOptions } from "./types"
 
-export const COMPILE_MODULE_ID = "iconkit/compile"
-export const RUNTIME_MODULE_ID = "iconkit/runtime"
+export const COMPILE_MODULE_ID = "@effective/icon/compile"
+export const RUNTIME_MODULE_ID = "@effective/icon/runtime"
 
 interface TransformContext {
   options: { package: string; target: "jsx" | "web-component"; renderMode: "image" | "mask" | "inline-svg" }
@@ -89,7 +89,7 @@ class TransformState {
 
     if (this.context.options.target === "web-component") {
       return createJsxElement(
-        "iconkit-icon",
+        "effective-icon",
         [...attributes, createExpressionAttribute("data-icon-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
       )
     }
@@ -259,7 +259,7 @@ function transformJsxIcon(
     }
 
     if (isReservedAttribute(attributeName, state)) {
-          throw state.errorAt(attribute, `Prop "${attributeName}" is reserved by iconkit`)
+          throw state.errorAt(attribute, `Prop "${attributeName}" is reserved by @effective/icon`)
     }
 
     forwarded.push(attribute)

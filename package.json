@@ -1,5 +1,5 @@
 {
-  "name": "iconkit",
+  "name": "@effective/icon",
   "version": "0.1.0",
   "description": "Compile-time icon toolkit with framework integrations and package-backed icon resolution",
   "packageManager": "pnpm@10.33.0",
@@ -30,6 +30,9 @@
     "README.md",
     "LICENSE"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
     "build:demo": "node --import tsx scripts/build-demo.ts",
@@ -49,7 +52,8 @@
     "validate:packs": "pnpm --filter @icon-pkg/streamline-builder validate-packs"
   },
   "keywords": [
-    "iconkit",
+    "effective",
+    "icon",
     "icons",
     "svg",
     "vite",
@@ -57,11 +61,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebastian-software/iconkit.git"
+    "url": "git+https://github.com/sebastian-software/effective-icon.git"
   },
-  "homepage": "https://github.com/sebastian-software/iconkit#readme",
+  "homepage": "https://github.com/sebastian-software/effective-icon#readme",
   "bugs": {
-    "url": "https://github.com/sebastian-software/iconkit/issues"
+    "url": "https://github.com/sebastian-software/effective-icon/issues"
   },
   "author": "Sebastian Software GmbH, Mainz, Germany",
   "license": "MIT",

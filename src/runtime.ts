@@ -1,4 +1,4 @@
-const ICONKIT_ICON_ELEMENT_NAME = "iconkit-icon"
+const EFFECTIVE_ICON_ELEMENT_NAME = "effective-icon"
 
 export type IconStyleValue = Record<string, unknown> | undefined
 
@@ -34,11 +34,11 @@ export function registerIconDefinition(_id: string, _svg: string): void {
 }
 
 export function ensureIconElement(): void {
-  if (typeof customElements === "undefined" || customElements.get(ICONKIT_ICON_ELEMENT_NAME)) {
+  if (typeof customElements === "undefined" || customElements.get(EFFECTIVE_ICON_ELEMENT_NAME)) {
     return
   }
 
-  class IconkitIconElement extends HTMLElement {
+  class EffectiveIconElement extends HTMLElement {
     static get observedAttributes(): string[] {
       return ["data-icon-url"]
     }
@@ -102,10 +102,10 @@ export function ensureIconElement(): void {
     }
   }
 
-  customElements.define(ICONKIT_ICON_ELEMENT_NAME, IconkitIconElement)
+  customElements.define(EFFECTIVE_ICON_ELEMENT_NAME, EffectiveIconElement)
 }
 
-export { ICONKIT_ICON_ELEMENT_NAME }
+export { EFFECTIVE_ICON_ELEMENT_NAME }
 
 function toCssPropertyName(input: string): string {
   return input

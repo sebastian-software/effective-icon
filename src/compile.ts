@@ -1,6 +1,6 @@
-export interface IconkitCompileTypeRegistry {}
+export interface EffectiveIconCompileTypeRegistry {}
 
-export type IconName = IconkitCompileTypeRegistry extends {
+export type IconName = EffectiveIconCompileTypeRegistry extends {
   iconName: infer TIconName extends string
 }
   ? TIconName
@@ -12,7 +12,7 @@ export interface IconCompileProps {
 }
 
 function compileOnly(name: string): never {
-  throw new Error(`${name} must be compiled away by iconkit.`)
+  throw new Error(`${name} must be compiled away by @effective/icon.`)
 }
 
 export function Icon(_props: IconCompileProps): null {

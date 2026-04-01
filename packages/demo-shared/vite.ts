@@ -4,8 +4,8 @@ import { fileURLToPath } from "node:url"
 
 import type { UserConfig } from "vite"
 
-import { iconkitVitePlugin } from "../../src/plugin"
-import type { IconkitVitePluginOptions } from "../../src/types"
+import { effectiveIconVitePlugin } from "../../src/plugin"
+import type { EffectiveIconVitePluginOptions } from "../../src/types"
 
 type DemoVariant = "image" | "mask" | "inline-svg" | "web-component"
 
@@ -41,7 +41,7 @@ const demoPackInfo = {
   version: packManifest.version,
 } as const
 
-function resolvePluginOptions(variant: DemoVariant): IconkitVitePluginOptions {
+function resolvePluginOptions(variant: DemoVariant): EffectiveIconVitePluginOptions {
   switch (variant) {
     case "mask":
       return {
@@ -115,12 +115,12 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
       alias: [
         { find: /^@streamline-demo\/shared$/, replacement: path.join(sharedRoot, "src/index.ts") },
         { find: /^@streamline-demo\/shared\/styles\.css$/, replacement: path.join(sharedRoot, "src/styles.css") },
-        { find: /^iconkit$/, replacement: path.join(repoRoot, "src/index.ts") },
-        { find: /^iconkit\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
-        { find: /^iconkit\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
-        { find: /^iconkit\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
+        { find: /^@effective\/icon$/, replacement: path.join(repoRoot, "src/index.ts") },
+        { find: /^@effective\/icon\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
+        { find: /^@effective\/icon\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
+        { find: /^@effective\/icon\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
       ],
     },
-    plugins: [iconkitVitePlugin(resolvePluginOptions(variant))],
+    plugins: [effectiveIconVitePlugin(resolvePluginOptions(variant))],
   }
 }

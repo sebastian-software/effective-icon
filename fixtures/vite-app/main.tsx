@@ -3,7 +3,7 @@
 
 import { Fragment, h } from "./h"
 
-import { Icon, icon } from "iconkit/compile"
+import { Icon, icon } from "@effective/icon/compile"
 
 const app = document.querySelector<HTMLDivElement>("#app")
 

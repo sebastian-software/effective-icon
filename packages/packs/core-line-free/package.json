@@ -20,12 +20,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sebastian-software/iconkit.git",
+    "url": "git+https://github.com/sebastian-software/effective-icon.git",
     "directory": "packages/packs/core-line-free"
   },
-  "homepage": "https://github.com/sebastian-software/iconkit#readme",
+  "homepage": "https://github.com/sebastian-software/effective-icon#readme",
   "bugs": {
-    "url": "https://github.com/sebastian-software/iconkit/issues"
+    "url": "https://github.com/sebastian-software/effective-icon/issues"
   },
   "keywords": [
     "streamline",

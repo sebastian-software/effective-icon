@@ -43,13 +43,13 @@ declare const __STREAMLINE_DEMO_LINKS__: DemoLinkMap
 export const packInfo = __STREAMLINE_DEMO_PACK_INFO__
 export const demoLinks = __STREAMLINE_DEMO_LINKS__
 
-export const componentSource = `import { Icon } from "iconkit/compile"
+export const componentSource = `import { Icon } from "@effective/icon/compile"
 
 function StatusBar() {
   return <Icon name="airplane" />
 }`
 
-export const inlineSource = `import { icon } from "iconkit/compile"
+export const inlineSource = `import { icon } from "@effective/icon/compile"
 
 function Toolbar() {
   return <Button startIcon={icon\`magic-wand-2\`}>Transform</Button>
@@ -108,7 +108,7 @@ function Toolbar() {
     colorNote: "Renders a span with mask-image and currentColor — tint updates live.",
     componentOutput: `import __s from ".../airplane.svg?url"
 import { buildIconMaskStyle as __mask }
-  from "iconkit/runtime"
+  from "@effective/icon/runtime"
 
 function StatusBar() {
   return <span style={__mask(__s)} />
@@ -121,7 +121,7 @@ function StatusBar() {
     ],
     inlineOutput: `import __s from ".../magic-wand-2.svg?url"
 import { buildIconMaskStyle as __mask }
-  from "iconkit/runtime"
+  from "@effective/icon/runtime"
 
 function Toolbar() {
   return <Button startIcon={<span style={__mask(__s)} />}>Transform</Button>
@@ -170,32 +170,32 @@ function Toolbar() {
       "Renders a custom element with shadow DOM mask — tints via currentColor, no inline SVG.",
     componentOutput: `import __s from ".../airplane.svg?url"
 import { ensureIconElement }
-  from "iconkit/runtime"
+  from "@effective/icon/runtime"
 ensureIconElement()
 
 function StatusBar() {
-  return <iconkit-icon data-icon-url={__s} />
+  return <effective-icon data-icon-url={__s} />
 }`,
     defaultTint: "#1f9d63",
     differences: [
       "Asset import: `icon.svg?url`",
-      "Emitted element: `<iconkit-icon>`",
+      "Emitted element: `<effective-icon>`",
       "Extra runtime: custom-element mask renderer",
     ],
     inlineOutput: `import __s from ".../magic-wand-2.svg?url"
 import { ensureIconElement }
-  from "iconkit/runtime"
+  from "@effective/icon/runtime"
 ensureIconElement()
 
 function Toolbar() {
   return (
     <Button startIcon={
-      <iconkit-icon data-icon-url={__s} />
+      <effective-icon data-icon-url={__s} />
     }>Transform</Button>
   )
 }`,
     lead: "Renders a custom element with shadow DOM mask for tintable icons without inlining SVG.",
-    liveElement: "<iconkit-icon>",
+    liveElement: "<effective-icon>",
     renderMode: "web-component",
     supportsRuntimeTinting: true,
     tabLabel: "Web Component",

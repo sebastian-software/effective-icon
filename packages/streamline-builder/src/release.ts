@@ -7,8 +7,8 @@ import { findRegistryEntry } from "./registry"
 export const PACK_RELEASE_VERSION = "0.1.0"
 export const PACK_PACKAGE_LICENSE = "CC-BY-4.0"
 export const PACK_MANIFEST_LICENSE = "CC BY 4.0"
-export const PACK_REPOSITORY_URL = "https://github.com/sebastian-software/iconkit"
-export const PACK_REPOSITORY_GIT_URL = "git+https://github.com/sebastian-software/iconkit.git"
+export const PACK_REPOSITORY_URL = "https://github.com/sebastian-software/effective-icon"
+export const PACK_REPOSITORY_GIT_URL = "git+https://github.com/sebastian-software/effective-icon.git"
 export const PACK_HOMEPAGE_URL = `${PACK_REPOSITORY_URL}#readme`
 export const PACK_BUGS_URL = `${PACK_REPOSITORY_URL}/issues`
 export const PACK_OSS_HOMEPAGE_URL = "https://oss.sebastian-software.com"

@@ -4,7 +4,7 @@
 import { Fragment, h } from "./h"
 import { highlight } from "sugar-high"
 
-import { Icon, icon } from "iconkit/compile"
+import { Icon, icon } from "@effective/icon/compile"
 
 import {
   componentSource,
@@ -26,7 +26,7 @@ function StickyNav({ current }: { current: DemoVariantKey }): string {
   return (
     <header className="topbar">
       <div className="topbar__inner">
-        <span className="topbar__name">iconkit</span>
+        <span className="topbar__name">@effective/icon</span>
         <nav className="topbar__tabs" aria-label="Demo variants">
           <a
             className={`topbar__tab${current === "mask" ? " topbar__tab--active" : ""}`}

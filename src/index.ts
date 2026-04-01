@@ -1,7 +1,7 @@
 export { Icon, icon } from "./compile"
-export { iconkitVitePlugin } from "./plugin"
+export { effectiveIconVitePlugin } from "./plugin"
 export {
-  ICONKIT_ICON_ELEMENT_NAME,
+  EFFECTIVE_ICON_ELEMENT_NAME,
   buildIconMaskStyle,
   ensureIconElement,
   registerIconDefinition,
@@ -11,6 +11,6 @@ export type {
   IconPackManifestIcon,
   IconRenderMode,
   IconTarget,
-  IconkitVitePluginOptions,
+  EffectiveIconVitePluginOptions,
 } from "./types"
 export type { IconCompileProps, IconName } from "./compile"

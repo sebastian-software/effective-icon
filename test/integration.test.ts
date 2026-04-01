@@ -70,7 +70,7 @@ describe.sequential("vite consumer integration", () => {
     const outputs = await buildFixtureApp()
     const code = collectChunkCode(outputs)
 
-    expect(code).toContain("iconkit-icon")
+    expect(code).toContain("effective-icon")
     expect(code).toContain("data-icon-url")
     expect(code).toContain("ensureIconElement")
     expect(code).not.toContain("anchor")
