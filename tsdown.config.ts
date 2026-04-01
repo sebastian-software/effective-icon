@@ -4,6 +4,7 @@ export default defineConfig({
   entry: {
     compile: "src/compile.ts",
     index: "src/index.ts",
+    plugin: "src/plugin.ts",
     runtime: "src/runtime.ts",
   },
   format: ["esm"],
