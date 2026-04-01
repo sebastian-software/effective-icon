@@ -2,7 +2,7 @@
   "name": "iconkit",
   "version": "0.1.0",
   "description": "Compile-time icon toolkit with framework integrations and package-backed icon resolution",
-  "packageManager": "pnpm@9.15.9",
+  "packageManager": "pnpm@10.33.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -63,12 +63,13 @@
   "bugs": {
     "url": "https://github.com/sebastian-software/iconkit/issues"
   },
+  "author": "Sebastian Software GmbH, Mainz, Germany",
   "license": "MIT",
   "engines": {
     "node": ">=22.0.0"
   },
   "peerDependencies": {
-    "vite": "^6.0.0 || ^7.0.0 || ^8.0.0-beta.0"
+    "vite": "^6.0.0 || ^7.0.0 || ^8.0.0"
   },
   "dependencies": {
     "adm-zip": "^0.5.16",
@@ -76,9 +77,9 @@
   },
   "devDependencies": {
     "@types/adm-zip": "^0.5.7",
-    "@types/node": "^24.0.0",
+    "@types/node": "^25.5.0",
     "tsdown": "^0.21.7",
-    "tsx": "^4.20.6",
+    "tsx": "^4.21.0",
     "vite": "^8.0.3",
     "vitest": "^4.1.2"
   }
