@@ -1,6 +1,11 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
   "packages": {
+    ".": {
+      "release-type": "node",
+      "component": "effective-icon",
+      "package-name": "@effective/icon"
+    },
     "packages/packs/core-line-free": {
       "release-type": "node",
       "component": "streamline-core-line-free",

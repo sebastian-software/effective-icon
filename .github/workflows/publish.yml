@@ -17,6 +17,7 @@ jobs:
       pull-requests: write
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
+      root_released: ${{ steps.release.outputs['.--release_created'] }}
       core_line_free_released: ${{ steps.release.outputs['packages/packs/core-line-free--release_created'] }}
       core_solid_free_released: ${{ steps.release.outputs['packages/packs/core-solid-free--release_created'] }}
       core_remix_free_released: ${{ steps.release.outputs['packages/packs/core-remix-free--release_created'] }}
@@ -57,8 +58,16 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
+      - name: Validate root package release
+        if: ${{ needs.release-please.outputs.root_released == 'true' }}
+        run: pnpm release:root:check
+
       - name: Validate release packs
         run: pnpm release:packs:check
+
+      - name: Publish @effective/icon
+        if: ${{ needs.release-please.outputs.root_released == 'true' }}
+        run: npm publish --access public
 
       - name: Publish @icon-pkg/streamline-core-line-free
         if: ${{ needs.release-please.outputs.core_line_free_released == 'true' }}

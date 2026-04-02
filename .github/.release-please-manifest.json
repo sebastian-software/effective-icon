@@ -1,4 +1,5 @@
 {
+  ".": "0.1.0",
   "packages/packs/core-line-free": "0.1.0",
   "packages/packs/core-solid-free": "0.1.0",
   "packages/packs/core-remix-free": "0.1.0"

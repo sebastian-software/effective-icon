@@ -1,6 +1,9 @@
-# Publishing the Initial Streamline Packs
+# Publishing Automated npm Releases
 
-This repository currently publishes exactly three npm packages under the public `@icon-pkg` scope:
+This repository currently publishes:
+
+- the root package `@effective/icon`
+- three npm packages under the public `@icon-pkg` scope:
 
 - `@icon-pkg/streamline-core-line-free`
 - `@icon-pkg/streamline-core-solid-free`
@@ -10,7 +13,10 @@ They are published from the materialized workspace directories in `packages/pack
 
 ## Automated Release Flow
 
-The repository now uses Release Please plus npm trusted publishing for these three packages only:
+The repository now uses Release Please plus npm trusted publishing for:
+
+- the root package `@effective/icon`
+- the three pack packages:
 
 - `packages/packs/core-line-free`
 - `packages/packs/core-solid-free`
@@ -20,18 +26,23 @@ On pushes to `main`:
 
 1. Release Please updates or opens the release PR for the configured pack paths.
 2. When that release PR is merged, Release Please tags the released packages.
-3. The publish job validates the release set and publishes only the packages that actually released in that run.
+3. The publish job validates the released targets and publishes only the packages that actually released in that run.
 
 The publish workflow uses GitHub Actions OIDC trusted publishing on Node `24`, so it does not require an `NPM_TOKEN`.
 
-The root package `@effective/icon` is not part of this automated flow yet.
-Its one-time bootstrap publish is documented separately in [npm-root-publish.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/npm-root-publish.md).
+For the root package, the workflow publishes `@effective/icon`, which includes these subpath exports:
+
+- `@effective/icon/vite-plugin`
+- `@effective/icon/compile`
+- `@effective/icon/runtime`
 
 ## One-Time npm Setup
 
 Trusted publishing still requires an initial npm-side setup for each package.
 
 Configure a trusted publisher on npmjs.com for each of:
+
+- `@effective/icon`
 
 - `@icon-pkg/streamline-core-line-free`
 - `@icon-pkg/streamline-core-solid-free`
@@ -46,8 +57,8 @@ Point each package at this repository and workflow:
 
 ## Preflight
 
-1. Ensure the npm trusted publisher entries exist for all three packages.
-2. Ensure the repo is in a releasable state and the three pack directories contain the intended artifacts.
+1. Ensure the npm trusted publisher entries exist for the root package and all three pack packages.
+2. Ensure the repo is in a releasable state and the release targets contain the intended artifacts.
 3. Ensure changes intended for release use Conventional Commits so Release Please can version them correctly.
 
 ## Release Check
@@ -101,6 +112,5 @@ After publishing:
 
 Future expansion can add:
 
-- the root `@effective/icon` package
-- a broader release set beyond the first three icon packs
 - tighter path filtering or more package-specific publish checks
+- additional pack packages beyond the first three
