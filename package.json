@@ -1,6 +1,6 @@
 {
   "name": "@effective/icon",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Compile-time icon toolkit with framework integrations and package-backed icon resolution",
   "packageManager": "pnpm@10.33.0",
   "type": "module",
