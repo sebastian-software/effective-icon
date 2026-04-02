@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/sebastian-software/effective-icon/compare/icon-v0.2.0...icon-v0.2.1) (2026-04-02)
+
+
+### Bug Fixes
+
+* **release:** publish root releases and relax ci timeout ([15a0c5c](https://github.com/sebastian-software/effective-icon/commit/15a0c5cce4f96e3798921dbcf7b90bf66283639c))
+
 ## [0.2.0](https://github.com/sebastian-software/effective-icon/compare/icon-v0.1.0...icon-v0.2.0) (2026-04-02)
 
 
