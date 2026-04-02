@@ -1,0 +1,76 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      core_line_free_released: ${{ steps.release.outputs['packages/packs/core-line-free--release_created'] }}
+      core_solid_free_released: ${{ steps.release.outputs['packages/packs/core-solid-free--release_created'] }}
+      core_remix_free_released: ${{ steps.release.outputs['packages/packs/core-remix-free--release_created'] }}
+
+    steps:
+      - name: Run Release Please
+        id: release
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: .github/release-please-config.json
+          manifest-file: .github/.release-please-manifest.json
+          include-component-in-tag: true
+
+  publish-packs:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.releases_created == 'true' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: https://registry.npmjs.org
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Validate release packs
+        run: pnpm release:packs:check
+
+      - name: Publish @icon-pkg/streamline-core-line-free
+        if: ${{ needs.release-please.outputs.core_line_free_released == 'true' }}
+        working-directory: packages/packs/core-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-core-solid-free
+        if: ${{ needs.release-please.outputs.core_solid_free_released == 'true' }}
+        working-directory: packages/packs/core-solid-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-core-remix-free
+        if: ${{ needs.release-please.outputs.core_remix_free_released == 'true' }}
+        working-directory: packages/packs/core-remix-free
+        run: npm publish --access public

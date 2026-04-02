@@ -6,22 +6,53 @@ This repository currently publishes exactly three npm packages under the public 
 - `@icon-pkg/streamline-core-solid-free`
 - `@icon-pkg/streamline-core-remix-free`
 
-They are versioned in lockstep and are published from the materialized workspace directories in `packages/packs/*`.
+They are published from the materialized workspace directories in `packages/packs/*`.
+
+## Automated Release Flow
+
+The repository now uses Release Please plus npm trusted publishing for these three packages only:
+
+- `packages/packs/core-line-free`
+- `packages/packs/core-solid-free`
+- `packages/packs/core-remix-free`
+
+On pushes to `main`:
+
+1. Release Please updates or opens the release PR for the configured pack paths.
+2. When that release PR is merged, Release Please tags the released packages.
+3. The publish job validates the release set and publishes only the packages that actually released in that run.
+
+The publish workflow uses GitHub Actions OIDC trusted publishing on Node `24`, so it does not require an `NPM_TOKEN`.
+
+The root package `@effective/icon` is not part of this automated flow yet.
+Its one-time bootstrap publish is documented separately in [npm-root-publish.md](/Users/sebastian/Workspace/vite-plugin-streamline/docs/npm-root-publish.md).
+
+## One-Time npm Setup
+
+Trusted publishing still requires an initial npm-side setup for each package.
+
+Configure a trusted publisher on npmjs.com for each of:
+
+- `@icon-pkg/streamline-core-line-free`
+- `@icon-pkg/streamline-core-solid-free`
+- `@icon-pkg/streamline-core-remix-free`
+
+Point each package at this repository and workflow:
+
+- repository: `sebastian-software/effective-icon`
+- workflow file: `.github/workflows/publish.yml`
+- environment: none
+- branch: `main`
 
 ## Preflight
 
-1. Confirm you are authenticated with npm:
-
-   ```bash
-   npm whoami
-   ```
-
-2. Confirm your npm account has publish rights for the `@icon-pkg` scope.
-3. Ensure the repo is in a releasable state and the three pack directories contain the intended artifacts.
+1. Ensure the npm trusted publisher entries exist for all three packages.
+2. Ensure the repo is in a releasable state and the three pack directories contain the intended artifacts.
+3. Ensure changes intended for release use Conventional Commits so Release Please can version them correctly.
 
 ## Release Check
 
-Run the dedicated release validation before every publish:
+Run the dedicated release validation before every publish or workflow change:
 
 ```bash
 pnpm release:packs:check
@@ -35,20 +66,15 @@ This verifies:
 - all referenced icon files exist
 - `npm pack --dry-run` succeeds for each package
 
-## Publish
+## Manual Fallback Publish
 
-Publish the release set in the configured order:
+The normal path is the automated workflow. Manual `npm publish` should only be used as an emergency fallback.
+
+If a manual fallback is necessary, run:
 
 ```bash
-pnpm release:packs:publish
+pnpm release:packs:check
 ```
-
-The command:
-
-- re-runs the release checks
-- verifies npm authentication via `npm whoami`
-- publishes each pack with `npm publish --access public`
-- stops on the first failure
 
 ## Post-Publish Verification
 
@@ -73,8 +99,8 @@ After publishing:
 
 ## Later Expansion
 
-This first release flow is intentionally manual. Future expansion can add:
+Future expansion can add:
 
-- GitHub Actions or trusted publishing
-- a broader release set
-- independent pack versioning
+- the root `@effective/icon` package
+- a broader release set beyond the first three icon packs
+- tighter path filtering or more package-specific publish checks

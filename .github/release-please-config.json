@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "packages": {
+    "packages/packs/core-line-free": {
+      "release-type": "node",
+      "component": "streamline-core-line-free",
+      "package-name": "@icon-pkg/streamline-core-line-free"
+    },
+    "packages/packs/core-solid-free": {
+      "release-type": "node",
+      "component": "streamline-core-solid-free",
+      "package-name": "@icon-pkg/streamline-core-solid-free"
+    },
+    "packages/packs/core-remix-free": {
+      "release-type": "node",
+      "component": "streamline-core-remix-free",
+      "package-name": "@icon-pkg/streamline-core-remix-free"
+    }
+  }
+}
