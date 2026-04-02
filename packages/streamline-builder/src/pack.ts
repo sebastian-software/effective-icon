@@ -9,14 +9,15 @@ import {
   PACK_PACKAGE_LICENSE,
   PACK_REDISTRIBUTOR,
   PACK_REDISTRIBUTOR_COPYRIGHT,
-  PACK_RELEASE_VERSION,
   PACK_REPOSITORY_GIT_URL,
+  getSharedReleaseVersion,
 } from "./release"
 import type { ExtractedSetData, PackManifest } from "./types"
 
 export async function writePack(rootDir: string, set: ExtractedSetData): Promise<void> {
   const packDir = path.join(rootDir, "packages", "packs", set.slug)
   const iconsDir = path.join(packDir, "icons")
+  const releaseVersion = await getSharedReleaseVersion(rootDir)
 
   await rm(packDir, { recursive: true, force: true })
   await mkdir(iconsDir, { recursive: true })
@@ -24,7 +25,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
   const manifest: PackManifest = {
     name: set.packageName,
     slug: set.slug,
-    version: PACK_RELEASE_VERSION,
+    version: releaseVersion,
     license: PACK_MANIFEST_LICENSE,
     sourceUrl: set.sourceUrl,
     family: set.family,
@@ -53,7 +54,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
   await writeFile(path.join(packDir, "LICENSE"), renderLicense(set), "utf8")
   await writeJson(path.join(packDir, "package.json"), {
     name: set.packageName,
-    version: PACK_RELEASE_VERSION,
+    version: releaseVersion,
     description: `Redistributed Streamline ${set.familyName} icon pack`,
     license: PACK_PACKAGE_LICENSE,
     type: "module",

@@ -1,25 +1,42 @@
 {
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json",
+  "changelog-path": "CHANGELOG.md",
   "packages": {
     ".": {
       "release-type": "node",
-      "component": "effective-icon",
-      "package-name": "@effective/icon"
-    },
-    "packages/packs/core-line-free": {
-      "release-type": "node",
-      "component": "streamline-core-line-free",
-      "package-name": "@icon-pkg/streamline-core-line-free"
-    },
-    "packages/packs/core-solid-free": {
-      "release-type": "node",
-      "component": "streamline-core-solid-free",
-      "package-name": "@icon-pkg/streamline-core-solid-free"
-    },
-    "packages/packs/core-remix-free": {
-      "release-type": "node",
-      "component": "streamline-core-remix-free",
-      "package-name": "@icon-pkg/streamline-core-remix-free"
+      "package-name": "@effective/icon",
+      "extra-files": [
+        {
+          "type": "json",
+          "path": "packages/packs/core-line-free/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/core-solid-free/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/core-remix-free/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/core-line-free/manifest.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/core-solid-free/manifest.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/core-remix-free/manifest.json",
+          "jsonpath": "$.version"
+        }
+      ]
     }
   }
 }

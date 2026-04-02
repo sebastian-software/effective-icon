@@ -17,8 +17,8 @@ import {
   PACK_OSS_HOMEPAGE_URL,
   PACK_PACKAGE_LICENSE,
   PACK_REDISTRIBUTOR_COPYRIGHT,
-  PACK_RELEASE_VERSION,
   PACK_REPOSITORY_GIT_URL,
+  getSharedReleaseVersion,
 } from "../src/release"
 import { validateReleasePacks } from "../src/validate"
 import { fetchGroupedWebsiteSet } from "../src/website-api"
@@ -45,6 +45,14 @@ afterEach(async () => {
     })
   )
 })
+
+async function writeTempRootPackageJson(rootDir: string): Promise<void> {
+  await writeFile(
+    path.join(rootDir, "package.json"),
+    JSON.stringify({ name: "test-root", version: await getSharedReleaseVersion(rootFixture) }, null, 2),
+    "utf8"
+  )
+}
 
 describe("streamline builder", () => {
   it("normalizes icon names", () => {
@@ -119,8 +127,11 @@ describe("streamline builder", () => {
     const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-"))
     tempDirs.push(tempDir)
     await writeFile(path.join(tempDir, "LICENSE"), await readFile(path.join(rootFixture, "LICENSE"), "utf8"), "utf8")
+    await writeTempRootPackageJson(tempDir)
 
     await writePack(tempDir, set)
+
+    const releaseVersion = await getSharedReleaseVersion(tempDir)
 
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
@@ -142,9 +153,9 @@ describe("streamline builder", () => {
     )
 
     expect(manifest.iconCount).toBe(2)
-    expect(manifest.version).toBe(PACK_RELEASE_VERSION)
+    expect(manifest.version).toBe(releaseVersion)
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
-    expect(packageJson.version).toBe(PACK_RELEASE_VERSION)
+    expect(packageJson.version).toBe(releaseVersion)
     expect(packageJson.license).toBe(PACK_PACKAGE_LICENSE)
     expect(packageJson.exports?.["./manifest.json"]).toBe("./manifest.json")
     expect(packageJson.exports?.["./icons/*"]).toBe("./icons/*")
@@ -499,6 +510,7 @@ describe("streamline builder", () => {
     const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-pack-"))
     tempDirs.push(tempDir)
     await writeFile(path.join(tempDir, "LICENSE"), await readFile(path.join(rootFixture, "LICENSE"), "utf8"), "utf8")
+    await writeTempRootPackageJson(tempDir)
 
     const set: ExtractedSetData = {
       slug: registryEntry.slug,

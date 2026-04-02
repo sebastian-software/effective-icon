@@ -1,10 +1,10 @@
+import { readFile } from "node:fs/promises"
 import { spawn } from "node:child_process"
 import { tmpdir } from "node:os"
 import path from "node:path"
 
 import { findRegistryEntry } from "./registry"
 
-export const PACK_RELEASE_VERSION = "0.1.0"
 export const PACK_PACKAGE_LICENSE = "CC-BY-4.0"
 export const PACK_MANIFEST_LICENSE = "CC BY 4.0"
 export const PACK_REPOSITORY_URL = "https://github.com/sebastian-software/effective-icon"
@@ -23,6 +23,17 @@ export function getReleaseRegistryEntries() {
 
 export function getPackDir(rootDir: string, slug: string): string {
   return path.join(rootDir, "packages", "packs", slug)
+}
+
+export async function getSharedReleaseVersion(rootDir: string): Promise<string> {
+  const packageJsonPath = path.join(rootDir, "package.json")
+  const packageJson = JSON.parse(await readFile(packageJsonPath, "utf8")) as { version?: unknown }
+
+  if (typeof packageJson.version !== "string" || packageJson.version.length === 0) {
+    throw new Error(`Root package at "${packageJsonPath}" is missing a valid version`)
+  }
+
+  return packageJson.version
 }
 
 export async function runCommand(command: string, args: string[], cwd: string): Promise<void> {

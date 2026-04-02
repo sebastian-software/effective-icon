@@ -9,8 +9,8 @@ import {
   PACK_HOMEPAGE_URL,
   PACK_MANIFEST_LICENSE,
   PACK_PACKAGE_LICENSE,
-  PACK_RELEASE_VERSION,
   PACK_REPOSITORY_GIT_URL,
+  getSharedReleaseVersion,
   runCommand,
 } from "./release"
 import { validatePackSvg } from "./svg"
@@ -47,10 +47,12 @@ export async function validatePacks(rootDir: string): Promise<void> {
 }
 
 export async function validateReleasePacks(rootDir: string): Promise<void> {
+  const releaseVersion = await getSharedReleaseVersion(rootDir)
+
   for (const entry of getReleaseRegistryEntries()) {
     const pack = await loadPackState(rootDir, entry)
     assertPackStructure(pack)
-    assertReleaseMetadata(pack)
+    assertReleaseMetadata(pack, releaseVersion)
     await runCommand("npm", ["pack", "--dry-run", "--json"], pack.packDir)
   }
 }
@@ -125,10 +127,10 @@ function assertPackStructure(pack: PackState): void {
   }
 }
 
-function assertReleaseMetadata(pack: PackState): void {
+function assertReleaseMetadata(pack: PackState, releaseVersion: string): void {
   const { entry, manifest, packageJson } = pack
 
-  if (manifest.version !== PACK_RELEASE_VERSION) {
+  if (manifest.version !== releaseVersion) {
     throw new Error(`Pack "${entry.slug}" has unexpected manifest version "${manifest.version}"`)
   }
   if (manifest.license !== PACK_MANIFEST_LICENSE) {
@@ -137,7 +139,7 @@ function assertReleaseMetadata(pack: PackState): void {
   if (packageJson.name !== entry.packageName) {
     throw new Error(`Pack "${entry.slug}" has unexpected package name "${packageJson.name}"`)
   }
-  if (packageJson.version !== PACK_RELEASE_VERSION) {
+  if (packageJson.version !== releaseVersion) {
     throw new Error(`Pack "${entry.slug}" has unexpected package version "${packageJson.version}"`)
   }
   if (packageJson.license !== PACK_PACKAGE_LICENSE) {

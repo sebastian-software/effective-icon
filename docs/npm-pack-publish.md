@@ -4,7 +4,6 @@ This repository currently publishes:
 
 - the root package `@effective/icon`
 - three npm packages under the public `@icon-pkg` scope:
-
 - `@icon-pkg/streamline-core-line-free`
 - `@icon-pkg/streamline-core-solid-free`
 - `@icon-pkg/streamline-core-remix-free`
@@ -13,20 +12,19 @@ They are published from the materialized workspace directories in `packages/pack
 
 ## Automated Release Flow
 
-The repository now uses Release Please plus npm trusted publishing for:
+The repository now uses one shared Release Please flow plus npm trusted publishing for:
 
-- the root package `@effective/icon`
-- the three pack packages:
-
+- `@effective/icon`
 - `packages/packs/core-line-free`
 - `packages/packs/core-solid-free`
 - `packages/packs/core-remix-free`
 
 On pushes to `main`:
 
-1. Release Please updates or opens the release PR for the configured pack paths.
-2. When that release PR is merged, Release Please tags the released packages.
-3. The publish job validates the released targets and publishes only the packages that actually released in that run.
+1. Release Please updates or opens a single release PR for the product.
+2. That PR bumps the root package version and keeps all three pack `package.json` and `manifest.json` versions in lockstep.
+3. Release Please updates one root `CHANGELOG.md`.
+4. When the release PR is merged, the publish workflow validates and publishes all four public packages together.
 
 The publish workflow uses GitHub Actions OIDC trusted publishing on Node `24`, so it does not require an `NPM_TOKEN`.
 
@@ -43,7 +41,6 @@ Trusted publishing still requires an initial npm-side setup for each package.
 Configure a trusted publisher on npmjs.com for each of:
 
 - `@effective/icon`
-
 - `@icon-pkg/streamline-core-line-free`
 - `@icon-pkg/streamline-core-solid-free`
 - `@icon-pkg/streamline-core-remix-free`
@@ -58,7 +55,7 @@ Point each package at this repository and workflow:
 ## Preflight
 
 1. Ensure the npm trusted publisher entries exist for the root package and all three pack packages.
-2. Ensure the repo is in a releasable state and the release targets contain the intended artifacts.
+2. Ensure the repo is in a releasable state and the four public packages contain the intended artifacts.
 3. Ensure changes intended for release use Conventional Commits so Release Please can version them correctly.
 
 ## Release Check
@@ -72,7 +69,7 @@ pnpm release:packs:check
 This verifies:
 
 - the release set contains the expected three pack workspaces
-- `manifest.json` and `package.json` are on the shared release version
+- root `package.json`, pack `package.json`, and pack `manifest.json` are on the shared release version
 - npm metadata required for public publish is present
 - all referenced icon files exist
 - `npm pack --dry-run` succeeds for each package
@@ -112,5 +109,5 @@ After publishing:
 
 Future expansion can add:
 
-- tighter path filtering or more package-specific publish checks
+- additional public packages that should join the same lockstep release
 - additional pack packages beyond the first three

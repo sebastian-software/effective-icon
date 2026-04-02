@@ -13,6 +13,13 @@ This is the package that ships:
 
 It is now part of the automated Release Please + trusted publishing flow in `.github/workflows/publish.yml`.
 
+That automated flow is product-level, not package-by-package:
+
+- one shared version for `@effective/icon` and all three public icon packs
+- one root `CHANGELOG.md`
+- one release PR
+- one publish workflow run that publishes all four public packages together
+
 ## Release Check
 
 Before the first publish, run:
@@ -52,9 +59,9 @@ the `dist/` output is rebuilt automatically before `npm pack` and `npm publish`.
 
 The automated workflow now handles:
 
-1. Release Please versioning for the root package.
-2. Release PR creation and tagging.
-3. Trusted publishing of `@effective/icon` on successful release runs.
+1. Release Please versioning for the root package and the three public icon packs in lockstep.
+2. Release PR creation, root changelog generation, and tagging.
+3. Trusted publishing of `@effective/icon` and the three public icon packs on successful release runs.
 
 ## Notes
 
