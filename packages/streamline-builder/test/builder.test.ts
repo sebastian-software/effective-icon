@@ -10,6 +10,7 @@ import { extractSetDataFromPageProps } from "../src/extract"
 import { materializeDiscoveredSet } from "../src/materialize"
 import { normalizePackIconName, normalizeSvgToCurrentColor } from "../src/normalize"
 import { writePack } from "../src/pack"
+import { preparePackSvg, validatePackSvg } from "../src/svg"
 import {
   PACK_BUGS_URL,
   PACK_HOMEPAGE_URL,
@@ -56,6 +57,50 @@ describe("streamline builder", () => {
       'stroke="currentColor"'
     )
     expect(normalizeSvgToCurrentColor('<svg><path fill="#ff0000" /></svg>')).toContain('fill="#ff0000"')
+  })
+
+  it("prepares pack svg conservatively before writing", () => {
+    const prepared = preparePackSvg(
+      '<?xml version="1.0"?><svg viewBox="0 0 24 24" width="24" height="24" role="img"><title>Rocket</title><desc>Decorative</desc><path d="M1 1h22" stroke="#000000" /></svg>',
+      {
+        packSlug: registryEntry.slug,
+        iconName: "rocket",
+      }
+    )
+
+    expect(prepared).toContain('stroke="currentColor"')
+    expect(prepared).toContain('viewBox="0 0 24 24"')
+    expect(prepared).not.toContain("width=")
+    expect(prepared).not.toContain("height=")
+    expect(prepared).not.toContain("<title")
+    expect(prepared).not.toContain("<desc")
+    expect(prepared).not.toContain('role="img"')
+  })
+
+  it("keeps multicolor svg fills unchanged when preparing pack svg", () => {
+    const prepared = preparePackSvg(
+      '<svg viewBox="0 0 24 24"><path d="M1 1h10v10H1z" fill="#ff0000" /><path d="M2 2h20" stroke="#000000" /></svg>'
+    )
+
+    expect(prepared).not.toContain('fill="currentColor"')
+    expect(prepared).toContain('fill="red"')
+    expect(prepared).toContain('stroke="#000"')
+  })
+
+  it("rejects inline-unsafe svg constructs", () => {
+    expect(() =>
+      validatePackSvg('<svg viewBox="0 0 24 24"><defs><path id="a" /></defs><use href="#a" /></svg>', {
+        packSlug: registryEntry.slug,
+        iconName: "rocket",
+      })
+    ).toThrow(/Forbidden SVG attribute "id"|Forbidden SVG element <defs>|Forbidden SVG reference "#\.\.\."/)
+
+    expect(() =>
+      preparePackSvg('<svg viewBox="0 0 24 24"><path onclick="alert(1)" /></svg>', {
+        packSlug: registryEntry.slug,
+        iconName: "rocket",
+      })
+    ).toThrow(/Forbidden inline event handler/)
   })
 
   it("extracts set data from page props", async () => {
@@ -269,7 +314,7 @@ describe("streamline builder", () => {
         requests.push(url.pathname)
 
         if (url.pathname === "/rocket.svg") {
-          return textResponse('<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>')
+          return textResponse('<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>')
         }
 
         if (url.pathname.includes("/download/svg")) {
@@ -337,7 +382,7 @@ describe("streamline builder", () => {
           categorySlug: "interface-essential",
           subcategory: "Search",
           subcategorySlug: "search",
-          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+          svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>',
         },
       ],
     }
@@ -395,7 +440,7 @@ describe("streamline builder", () => {
                 slug: "rocket",
                 name: "Rocket",
                 imagePublicId: "icons/interface-essential/rocket-a.png/rocket-b",
-                svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+                svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>',
                 url: "/icons/download/rocket--123",
                 familySlug: "core-line-free",
                 subcategoryHash: "subc_a",
@@ -423,7 +468,7 @@ describe("streamline builder", () => {
                 slug: "search",
                 name: "Search",
                 imagePublicId: "icons/interface-essential/search-a.png/search-b",
-                svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+                svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>',
                 url: "/icons/download/search--123",
                 familySlug: "core-line-free",
                 subcategoryHash: "subc_b",
@@ -519,7 +564,7 @@ describe("streamline builder", () => {
           categorySlug: "money-shopping",
           subcategory: "Money Shopping",
           subcategorySlug: "money-shopping",
-          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+          svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>',
         },
         {
           hash: "ico_second",
@@ -528,7 +573,7 @@ describe("streamline builder", () => {
           categorySlug: "interface-essential",
           subcategory: "Interface Essential",
           subcategorySlug: "interface-essential",
-          svg: '<svg viewBox="0 0 24 24"><path stroke="#000000" /></svg>',
+          svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="#000000" /></svg>',
         },
       ],
     }
@@ -538,6 +583,46 @@ describe("streamline builder", () => {
     })
 
     expect(materialized.icons.map((icon) => icon.name).sort()).toEqual(["tag-interface-essential", "tag-money-shopping"])
+  })
+
+  it("fails materialization when an svg violates the inline-safe pack contract", async () => {
+    const apiClient: BuilderApiClient = {
+      discoverSet: async () => {
+        throw new Error("not used")
+      },
+      getIconDetails: async () => null,
+    }
+
+    const discovered: DiscoveredSetData = {
+      slug: registryEntry.slug,
+      packageName: registryEntry.packageName,
+      setPageUrl: registryEntry.setPageUrl,
+      family: registryEntry.family,
+      style: registryEntry.style,
+      license: registryEntry.license,
+      attributionUrl: registryEntry.attributionUrl,
+      sourceUrl: registryEntry.setPageUrl,
+      familyGroupSlug: "core-sets",
+      familyName: "Core Line Free",
+      familyDescription: null,
+      icons: [
+        {
+          hash: "ico_bad",
+          name: "Rocket",
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Navigation",
+          subcategorySlug: "navigation",
+          svg: '<svg viewBox="0 0 24 24"><style>.x{fill:red}</style><path d="M0 0h1v1H0z" /></svg>',
+        },
+      ],
+    }
+
+    await expect(
+      materializeDiscoveredSet(registryEntry, discovered, {
+        apiClient,
+      })
+    ).rejects.toThrow(/Forbidden SVG element <style>/)
   })
 })
 

@@ -292,6 +292,9 @@ Use it when you want:
 - the easiest path for `currentColor`
 - CSS and accessibility control on the final `<svg>`
 
+This mode assumes the icon pack already ships normalized, inline-safe SVG assets.
+The builder pipeline owns that normalization and validation step; the Vite transform does not run SVGO or broad SVG repair at app-build time.
+
 ### Web Component Output
 
 ```ts

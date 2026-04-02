@@ -4,8 +4,8 @@ import {
   deriveCategorySlugFromImagePublicId,
   normalizePackIconName,
   normalizeSubcategorySlug,
-  normalizeSvgToCurrentColor,
 } from "./normalize"
+import { preparePackSvg } from "./svg"
 
 interface NextPageData {
   metaTags?: {
@@ -59,7 +59,10 @@ export function extractSetDataFromPageProps(pageProps: unknown, entry: RegistryE
       subcategory: icon.subcategoryName,
       subcategorySlug: normalizeSubcategorySlug(icon.subcategoryName),
       tags: icon.tags && icon.tags.length > 0 ? [...icon.tags].sort() : undefined,
-      svg: normalizeSvgToCurrentColor(icon.svg),
+      svg: preparePackSvg(icon.svg, {
+        packSlug: entry.slug,
+        iconName: normalizedName,
+      }),
     })
   }
 

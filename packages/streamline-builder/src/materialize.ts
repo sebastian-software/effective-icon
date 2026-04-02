@@ -1,5 +1,6 @@
 import type { BuilderApiClient } from "./types"
-import { createPackIconFileName, normalizePackIconName, normalizeSubcategorySlug, normalizeSvgToCurrentColor } from "./normalize"
+import { createPackIconFileName, normalizePackIconName, normalizeSubcategorySlug } from "./normalize"
+import { preparePackSvg } from "./svg"
 import type { DiscoveredIcon, DiscoveredSetData, ExtractedIcon, ExtractedSetData, RegistryEntry } from "./types"
 
 type FetchLike = typeof fetch
@@ -105,7 +106,10 @@ export async function materializeDiscoveredSet(
       subcategory,
       subcategorySlug,
       tags,
-      svg: normalizeSvgToCurrentColor(resolvedSvg),
+      svg: preparePackSvg(resolvedSvg, {
+        packSlug: entry.slug,
+        iconName: resolvedName,
+      }),
     })
   }
 

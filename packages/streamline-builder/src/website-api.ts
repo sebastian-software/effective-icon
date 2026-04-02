@@ -1,4 +1,5 @@
-import { createPackIconFileName, deriveCategorySlugFromImagePublicId, normalizePackIconName, normalizeSubcategorySlug, normalizeSvgToCurrentColor } from "./normalize"
+import { createPackIconFileName, deriveCategorySlugFromImagePublicId, normalizePackIconName, normalizeSubcategorySlug } from "./normalize"
+import { preparePackSvg } from "./svg"
 import type { DiscoveredIcon, DiscoveredSetData, ExtractedIcon, ExtractedSetData, RawGroupedIcon, RegistryEntry } from "./types"
 
 type FetchLike = typeof fetch
@@ -90,9 +91,10 @@ function toExtractedIcon(icon: RawGroupedIcon, discovered: DiscoveredIcon | unde
   const category = discovered?.category ?? humanizeSlug(categorySlug)
   const subcategory = discovered?.subcategory ?? icon.subcategoryName
   const subcategorySlug = discovered?.subcategorySlug ?? normalizeSubcategorySlug(icon.subcategoryName)
+  const normalizedName = normalizePackIconName(icon.name)
 
   return {
-    name: normalizePackIconName(icon.name),
+    name: normalizedName,
     file: createPackIconFileName(icon.name),
     originalName: icon.name,
     sourcePageUrl: new URL(icon.url, WEBSITE_ORIGIN).toString(),
@@ -101,7 +103,10 @@ function toExtractedIcon(icon: RawGroupedIcon, discovered: DiscoveredIcon | unde
     subcategory,
     subcategorySlug,
     tags: icon.tags && icon.tags.length > 0 ? [...new Set(icon.tags)].sort() : discovered?.tags,
-    svg: normalizeSvgToCurrentColor(icon.svg),
+    svg: preparePackSvg(icon.svg, {
+      packSlug: entry.slug,
+      iconName: normalizedName,
+    }),
   }
 }
 

@@ -14,6 +14,7 @@
     "publish-release": "node --import tsx src/cli.ts publish-release"
   },
   "dependencies": {
-    "playwright": "^1.59.1"
+    "playwright": "^1.59.1",
+    "svgo": "^4.0.0"
   }
 }

@@ -13,6 +13,7 @@ import {
   PACK_REPOSITORY_GIT_URL,
   runCommand,
 } from "./release"
+import { validatePackSvg } from "./svg"
 import type { RegistryEntry } from "./types"
 
 interface PackState {
@@ -78,7 +79,13 @@ async function loadPackState(rootDir: string, entry: RegistryEntry): Promise<Pac
     if (!icon.file) {
       throw new Error(`Pack "${entry.slug}" has an icon entry without a file`)
     }
-    await assertExists(path.join(packDir, icon.file))
+    const iconPath = path.join(packDir, icon.file)
+    await assertExists(iconPath)
+    const iconName = path.basename(icon.file, ".svg")
+    validatePackSvg(await readFile(iconPath, "utf8"), {
+      packSlug: entry.slug,
+      iconName,
+    })
   }
 
   return {
