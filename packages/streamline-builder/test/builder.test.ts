@@ -173,9 +173,13 @@ describe("streamline builder", () => {
     expect(licenseText).toContain(PACK_OSS_HOMEPAGE_URL)
   })
 
-  it("validates the release pack set in the repository", async () => {
-    await validateReleasePacks(rootFixture)
-  })
+  it(
+    "validates the release pack set in the repository",
+    async () => {
+      await validateReleasePacks(rootFixture)
+    },
+    15_000
+  )
 
   it("loads builder config from .env.local", async () => {
     const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-config-"))

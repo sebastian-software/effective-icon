@@ -17,7 +17,7 @@ jobs:
       pull-requests: write
     outputs:
       releases_created: ${{ steps.release.outputs.releases_created }}
-      root_released: ${{ steps.release.outputs['.--release_created'] }}
+      root_released: ${{ steps.release.outputs.release_created }}
 
     steps:
       - name: Run Release Please
