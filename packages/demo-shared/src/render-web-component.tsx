@@ -4,56 +4,37 @@
 import { Fragment, h } from "./h"
 import { highlight } from "sugar-high"
 
-import { Icon } from "@effective/icon/compile"
-
 import {
   demoLinks,
   failureCases,
-  jsxComponentSource,
-  jsxInlineSource,
-  jsxLiveExamples,
   packInfo,
   runtimeTintPalette,
-  type DemoVariantKey,
   variantDefinitions,
+  webComponentComponentSource,
+  webComponentInlineSource,
+  webComponentLiveExamples,
 } from "./content"
 
 function escapeHtml(input: string): string {
   return input.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
 }
 
-function StickyNav({ current }: { current: DemoVariantKey }): string {
+function StickyNav(): string {
   return (
     <header className="topbar">
       <div className="topbar__inner">
         <span className="topbar__name">@effective/icon</span>
         <nav className="topbar__tabs" aria-label="Demo variants">
-          <a
-            className={`topbar__tab${current === "mask" ? " topbar__tab--active" : ""}`}
-            href={demoLinks.mask}
-            aria-current={current === "mask" ? "page" : undefined}
-          >
+          <a className="topbar__tab" href={demoLinks.mask}>
             {variantDefinitions.mask.tabLabel}
           </a>
-          <a
-            className={`topbar__tab${current === "image" ? " topbar__tab--active" : ""}`}
-            href={demoLinks.image}
-            aria-current={current === "image" ? "page" : undefined}
-          >
+          <a className="topbar__tab" href={demoLinks.image}>
             {variantDefinitions.image.tabLabel}
           </a>
-          <a
-            className={`topbar__tab${current === "svg" ? " topbar__tab--active" : ""}`}
-            href={demoLinks.svg}
-            aria-current={current === "svg" ? "page" : undefined}
-          >
+          <a className="topbar__tab" href={demoLinks.svg}>
             {variantDefinitions.svg.tabLabel}
           </a>
-          <a
-            className={`topbar__tab${current === "custom-element" ? " topbar__tab--active" : ""}`}
-            href={demoLinks["custom-element"]}
-            aria-current={current === "custom-element" ? "page" : undefined}
-          >
+          <a className="topbar__tab topbar__tab--active" href={demoLinks["custom-element"]} aria-current="page">
             {variantDefinitions["custom-element"].tabLabel}
           </a>
         </nav>
@@ -67,24 +48,24 @@ function IconStrip(): string {
     <div className="icon-strip" aria-label="Live compile-time icon output">
       <div className="icon-slot">
         <div className="icon-frame">
-          <Icon name="airplane" aria-hidden="true" />
+          <effective-icon name="airplane" aria-hidden="true" />
         </div>
-        <span className="icon-slot__name">{jsxLiveExamples[0].title}</span>
-        <code className="icon-slot__syntax">{escapeHtml(jsxLiveExamples[0].code)}</code>
+        <span className="icon-slot__name">{webComponentLiveExamples[0].title}</span>
+        <code className="icon-slot__syntax">{escapeHtml(webComponentLiveExamples[0].code)}</code>
       </div>
       <div className="icon-slot">
         <div className="icon-frame">
-          <Icon name="magic-wand-2" aria-hidden="true" />
+          <effective-icon name="magic-wand-2" aria-hidden="true" />
         </div>
-        <span className="icon-slot__name">{jsxLiveExamples[1].title}</span>
-        <code className="icon-slot__syntax">{escapeHtml(jsxLiveExamples[1].code)}</code>
+        <span className="icon-slot__name">{webComponentLiveExamples[1].title}</span>
+        <code className="icon-slot__syntax">{escapeHtml(webComponentLiveExamples[1].code)}</code>
       </div>
     </div>
   )
 }
 
-function TintRow({ current }: { current: DemoVariantKey }): string {
-  const definition = variantDefinitions[current]
+function TintRow(): string {
+  const definition = variantDefinitions["custom-element"]
 
   return (
     <div className="tint-row" aria-label="Runtime tint demo">
@@ -122,12 +103,10 @@ function CodeBlock({ code, label }: { code: string; label: string }): string {
   )
 }
 
-function DifferenceList({ current }: { current: DemoVariantKey }): string {
-  const definition = variantDefinitions[current]
-
+function DifferenceList(): string {
   return (
     <dl className="detail-list">
-      {definition.differences.map((item) => (
+      {variantDefinitions["custom-element"].differences.map((item) => (
         <div className="detail-list__item">
           <dd>{escapeHtml(item)}</dd>
         </div>
@@ -169,33 +148,29 @@ function PackFacts(): string {
   )
 }
 
-export function renderDemoPage(variant: DemoVariantKey): string {
-  const definition = variantDefinitions[variant]
+export function renderWebComponentDemoPage(): string {
+  const definition = variantDefinitions["custom-element"]
 
   return (
     <>
-      <StickyNav current={variant} />
-      <div
-        className={`page page--${variant}`}
-        data-demo-page
-        style={{ "--demo-icon-color": definition.defaultTint }}
-      >
+      <StickyNav />
+      <div className="page page--custom-element" data-demo-page style={{ "--demo-icon-color": definition.defaultTint }}>
         <main>
           <section className="hero">
             <div className="hero__text">
               <h1 className="hero__title">{definition.title}</h1>
               <p className="hero__tagline">{definition.lead}</p>
-              {definition.supportsRuntimeTinting ? <TintRow current={variant} /> : ""}
+              <TintRow />
             </div>
             <IconStrip />
           </section>
 
           <section className="code-section">
             <h2 className="code-section__heading">Component usage</h2>
-            <p className="code-section__note">{'Use <Icon> as a standalone JSX element.'}</p>
+            <p className="code-section__note">{'Use <effective-icon> directly when surface is "custom-element".'}</p>
             <div className="code-pair">
               <div className="code-pair__panel">
-                <CodeBlock label="Source" code={jsxComponentSource} />
+                <CodeBlock label="Source" code={webComponentComponentSource} />
               </div>
               <div className="code-pair__panel">
                 <CodeBlock label={`Output — ${definition.renderMode}`} code={definition.componentOutput} />
@@ -205,10 +180,10 @@ export function renderDemoPage(variant: DemoVariantKey): string {
 
           <section className="code-section">
             <h2 className="code-section__heading">Inline usage</h2>
-            <p className="code-section__note">{'Use a direct <Icon> element as a prop value when you need inline composition.'}</p>
+            <p className="code-section__note">{'Use a direct <effective-icon> element as a prop value when you need inline composition.'}</p>
             <div className="code-pair">
               <div className="code-pair__panel">
-                <CodeBlock label="Source" code={jsxInlineSource} />
+                <CodeBlock label="Source" code={webComponentInlineSource} />
               </div>
               <div className="code-pair__panel">
                 <CodeBlock label={`Output — ${definition.renderMode}`} code={definition.inlineOutput} />
@@ -219,7 +194,7 @@ export function renderDemoPage(variant: DemoVariantKey): string {
           <section className="details-grid">
             <div>
               <h2 className="details-heading">How this variant differs</h2>
-              <DifferenceList current={variant} />
+              <DifferenceList />
             </div>
             <div>
               <h2 className="details-heading">Compile-time validation</h2>

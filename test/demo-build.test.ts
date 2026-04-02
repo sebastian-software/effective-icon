@@ -3,7 +3,7 @@ import path from "node:path"
 import { describe, expect, it } from "vitest"
 import { build } from "vite"
 
-type DemoApp = "image" | "mask" | "inline-svg" | "web-component"
+type DemoApp = "image" | "mask" | "svg" | "custom-element" | "solid"
 
 interface BuildChunk {
   code: string
@@ -26,8 +26,9 @@ const repoRoot = path.resolve(process.cwd())
 const configFiles: Record<DemoApp, string> = {
   image: path.join(repoRoot, "packages", "demo-image", "vite.config.ts"),
   mask: path.join(repoRoot, "packages", "demo-mask", "vite.config.ts"),
-  "inline-svg": path.join(repoRoot, "packages", "demo-inline-svg", "vite.config.ts"),
-  "web-component": path.join(repoRoot, "packages", "demo-web-component", "vite.config.ts"),
+  svg: path.join(repoRoot, "packages", "demo-inline-svg", "vite.config.ts"),
+  "custom-element": path.join(repoRoot, "packages", "demo-web-component", "vite.config.ts"),
+  solid: path.join(repoRoot, "packages", "demo-solid", "vite.config.ts"),
 }
 
 describe.sequential("workspace demo builds", () => {
@@ -49,8 +50,8 @@ describe.sequential("workspace demo builds", () => {
     expect(code).toContain('"span"')
   })
 
-  it("builds the inline-svg app", async () => {
-    const code = collectChunkCode(await buildDemo("inline-svg"))
+  it("builds the svg app", async () => {
+    const code = collectChunkCode(await buildDemo("svg"))
 
     expect(code).toContain("Inline SVG output")
     expect(code).toContain("../image/")
@@ -58,14 +59,23 @@ describe.sequential("workspace demo builds", () => {
     expect(code).not.toContain('new URL("airplane')
   })
 
-  it("builds the web-component app", async () => {
-    const code = collectChunkCode(await buildDemo("web-component"))
+  it("builds the custom-element app", async () => {
+    const code = collectChunkCode(await buildDemo("custom-element"))
 
-    expect(code).toContain("Web component output")
+    expect(code).toContain("Custom element output")
     expect(code).toContain("../image/")
     expect(code).toContain("effective-icon")
     expect(code).toContain("data-icon-url")
     expect(code).toContain("ensureIconElement")
+  })
+
+  it("builds the solid app", async () => {
+    const code = collectChunkCode(await buildDemo("solid"))
+
+    expect(code).toContain("SolidJS consumer proof")
+    expect(code).toContain("magic-wand-2")
+    expect(code).toContain("<svg")
+    expect(code).toContain("render(() => createComponent(App, {}), app);")
   })
 })
 

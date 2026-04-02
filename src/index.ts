@@ -1,4 +1,4 @@
-export { Icon, icon } from "./compile"
+export { Icon } from "./compile"
 export { effectiveIconVitePlugin } from "./plugin"
 export {
   EFFECTIVE_ICON_ELEMENT_NAME,
@@ -10,7 +10,7 @@ export type {
   IconPackManifest,
   IconPackManifestIcon,
   IconRenderMode,
-  IconTarget,
+  IconSurface,
   EffectiveIconVitePluginOptions,
 } from "./types"
 export type { IconCompileProps, IconName } from "./compile"

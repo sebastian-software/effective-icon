@@ -4,8 +4,9 @@ const repoRoot = process.cwd()
 const demos = [
   { filter: "@streamline-demo/image", label: "image" },
   { filter: "@streamline-demo/mask", label: "mask" },
-  { filter: "@streamline-demo/inline-svg", label: "inline-svg" },
-  { filter: "@streamline-demo/web-component", label: "web-component" },
+  { filter: "@streamline-demo/inline-svg", label: "svg" },
+  { filter: "@streamline-demo/web-component", label: "custom-element" },
+  { filter: "@streamline-demo/solid", label: "solid" },
 ] as const
 
 const children: ChildProcess[] = []

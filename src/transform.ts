@@ -4,19 +4,17 @@ import { readFileSync } from "node:fs"
 import ts from "typescript"
 
 import type { ResolvedIconPackage, ResolvedPackIcon } from "./resolve-package"
-import type { EffectiveIconVitePluginOptions } from "./types"
 
 export const COMPILE_MODULE_ID = "@effective/icon/compile"
 export const RUNTIME_MODULE_ID = "@effective/icon/runtime"
 
 interface TransformContext {
-  options: { package: string; target: "jsx" | "web-component"; renderMode: "image" | "mask" | "inline-svg" }
+  options: { package: string; surface: "jsx" | "custom-element"; renderMode: "image" | "mask" | "svg" }
   resolvedPackage: ResolvedIconPackage
 }
 
 interface CompileBindings {
   component?: string
-  tag?: string
 }
 
 interface IconImportRecord {
@@ -55,16 +53,16 @@ class TransformState {
       icon,
       importName: `__iconAsset${this.importCounter++}`,
       inlineSvg:
-        this.context.options.target === "jsx" && this.context.options.renderMode === "inline-svg"
+        this.context.options.surface === "jsx" && this.context.options.renderMode === "svg"
           ? parseInlineSvg(icon.absolutePath, this.sourceFile.fileName)
           : undefined,
     }
 
-    if (this.context.options.target === "jsx" && this.context.options.renderMode === "mask") {
+    if (this.context.options.surface === "jsx" && this.context.options.renderMode === "mask") {
       this.needsMaskRuntime = true
     }
 
-    if (this.context.options.target === "web-component") {
+    if (this.context.options.surface === "custom-element") {
       this.needsWebComponentRuntime = true
     }
 
@@ -87,7 +85,7 @@ class TransformState {
   buildElement(iconName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement | ts.JsxElement {
     const record = this.ensureIcon(iconName)
 
-    if (this.context.options.target === "web-component") {
+    if (this.context.options.surface === "custom-element") {
       return createJsxElement(
         "effective-icon",
         [...attributes, createExpressionAttribute("data-icon-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
@@ -111,7 +109,7 @@ class TransformState {
       ])
     }
 
-    if (this.context.options.renderMode === "inline-svg") {
+    if (this.context.options.renderMode === "svg") {
       return createInlineSvgElement(record, [...attributes, ...createA11yFallback(attributes)])
     }
 
@@ -147,7 +145,7 @@ class TransformState {
     }
 
     for (const record of this.iconImports.values()) {
-      if (this.context.options.target === "jsx" && this.context.options.renderMode === "inline-svg") {
+      if (this.context.options.surface === "jsx" && this.context.options.renderMode === "svg") {
         continue
       }
 
@@ -165,7 +163,7 @@ class TransformState {
     }
 
     return [
-        ts.factory.createExpressionStatement(
+      ts.factory.createExpressionStatement(
         ts.factory.createCallExpression(ts.factory.createIdentifier("__iconEnsureElement"), undefined, [])
       ),
     ]
@@ -187,22 +185,31 @@ export function transformCompileTimeIcons(code: string, id: string, context: Tra
         const tagName = getJsxTagName(node)
         const activeBinding = bindings.component
 
-        if (activeBinding && tagName === activeBinding) {
-          return transformJsxIcon(node, state)
+        if (context.options.surface === "jsx") {
+          if (activeBinding && tagName === activeBinding) {
+            return transformJsxIcon(node, state, "Icon")
+          }
+
+          if (tagName === "effective-icon") {
+            throw state.errorAt(
+              node,
+              'Direct <effective-icon> authoring is only supported when surface is "custom-element"'
+            )
+          }
+
+          if (!activeBinding && tagName === "Icon") {
+            throw state.errorAt(node, `Import { Icon } from "${COMPILE_MODULE_ID}" before using compile-time icons`)
+          }
+
+          return ts.visitEachChild(node, visit, transformationContext)
         }
 
-        if (!activeBinding && tagName === "Icon") {
-          throw state.errorAt(node, `Import { Icon } from "${COMPILE_MODULE_ID}" before using compile-time icons`)
-        }
-      }
-
-      if (ts.isTaggedTemplateExpression(node)) {
-        if (bindings.tag && ts.isIdentifier(node.tag) && node.tag.text === bindings.tag) {
-          return transformTaggedIcon(node, state)
+        if (tagName === "effective-icon") {
+          return transformJsxIcon(node, state, "effective-icon")
         }
 
-        if (!bindings.tag && ts.isIdentifier(node.tag) && node.tag.text === "icon") {
-          throw state.errorAt(node, `Import { icon } from "${COMPILE_MODULE_ID}" before using compile-time icons`)
+        if ((activeBinding && tagName === activeBinding) || tagName === "Icon") {
+          throw state.errorAt(node, 'Compile-time <Icon> is only supported when surface is "jsx"')
         }
       }
 
@@ -233,24 +240,25 @@ export function transformCompileTimeIcons(code: string, id: string, context: Tra
 
 function transformJsxIcon(
   node: ts.JsxSelfClosingElement | ts.JsxElement,
-  state: TransformState
+  state: TransformState,
+  surfaceName: "Icon" | "effective-icon"
 ): ts.JsxSelfClosingElement | ts.JsxElement {
   if (ts.isJsxElement(node)) {
-    throw state.errorAt(node, "Compile-time <Icon> does not support children")
+    throw state.errorAt(node, `Compile-time <${surfaceName}> does not support children`)
   }
 
   const attributes = node.attributes.properties
   const nameAttribute = findNameAttribute(attributes)
 
   if (!nameAttribute || !nameAttribute.initializer || !ts.isStringLiteral(nameAttribute.initializer)) {
-    throw state.errorAt(node, 'Compile-time <Icon> requires name="literal"')
+    throw state.errorAt(node, `Compile-time <${surfaceName}> requires name="literal"`)
   }
 
   const forwarded: ts.JsxAttributeLike[] = []
 
   for (const attribute of attributes) {
     if (ts.isJsxSpreadAttribute(attribute)) {
-      throw state.errorAt(attribute, "Compile-time <Icon> does not support spread props")
+      throw state.errorAt(attribute, `Compile-time <${surfaceName}> does not support spread props`)
     }
 
     const attributeName = getJsxAttributeIdentifier(attribute.name)
@@ -266,19 +274,6 @@ function transformJsxIcon(
   }
 
   return state.buildElement(nameAttribute.initializer.text, forwarded)
-}
-
-function transformTaggedIcon(node: ts.TaggedTemplateExpression, state: TransformState): ts.JsxSelfClosingElement | ts.JsxElement {
-  const fileExtension = path.extname(node.getSourceFile().fileName.replace(/\?.*$/, ""))
-  if (![".tsx", ".jsx", ".mdx"].includes(fileExtension)) {
-    throw state.errorAt(node, "Compile-time icon templates are only supported in JSX, TSX, or MDX files")
-  }
-
-  if (!ts.isNoSubstitutionTemplateLiteral(node.template)) {
-    throw state.errorAt(node, "Compile-time icon templates do not support interpolation")
-  }
-
-  return state.buildElement(node.template.text, [])
 }
 
 function findCompileBindings(sourceFile: ts.SourceFile): CompileBindings {
@@ -304,10 +299,6 @@ function findCompileBindings(sourceFile: ts.SourceFile): CompileBindings {
 
       if (importedName === "Icon") {
         bindings.component = localName
-      }
-
-      if (importedName === "icon") {
-        bindings.tag = localName
       }
     }
   }
@@ -668,7 +659,7 @@ function looksLikeCompileTimeIconFile(code: string, id: string): boolean {
     return false
   }
 
-  return code.includes("Icon") || code.includes("icon`") || code.includes(COMPILE_MODULE_ID)
+  return code.includes("Icon") || code.includes("effective-icon") || code.includes(COMPILE_MODULE_ID)
 }
 
 function getScriptKind(id: string): ts.ScriptKind {

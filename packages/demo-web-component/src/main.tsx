@@ -1,6 +1,6 @@
 import "@streamline-demo/shared/styles.css"
 
-import { mountDemoPage } from "@streamline-demo/shared"
+import { mountWebComponentDemoPage } from "@streamline-demo/shared/web-component"
 
 const app = document.querySelector<HTMLDivElement>("#app")
 
@@ -8,4 +8,4 @@ if (!app) {
   throw new Error("Missing #app root element")
 }
 
-mountDemoPage(app, "web-component")
+mountWebComponentDemoPage(app)

@@ -16,12 +16,12 @@ describe("compile-time transform", () => {
   it("rewrites JSX icons for image mode", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
-      import { Icon, icon } from "${COMPILE_MODULE_ID}"
+      import { Icon } from "${COMPILE_MODULE_ID}"
 
       const view = (
         <section>
           <Icon name="airplane" className="icon" />
-          {icon\`add-1\`}
+          <div className="slot"><Icon name="add-1" /></div>
         </section>
       )
     `
@@ -29,7 +29,7 @@ describe("compile-time transform", () => {
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
-        target: "jsx",
+        surface: "jsx",
         renderMode: "image",
       },
       resolvedPackage,
@@ -40,7 +40,7 @@ describe("compile-time transform", () => {
     expect(transformed).not.toContain(COMPILE_MODULE_ID)
   })
 
-  it("rewrites JSX icons for inline-svg mode", async () => {
+  it("rewrites JSX icons for svg mode", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
       import { Icon } from "${COMPILE_MODULE_ID}"
@@ -51,8 +51,8 @@ describe("compile-time transform", () => {
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
-        target: "jsx",
-        renderMode: "inline-svg",
+        surface: "jsx",
+        renderMode: "svg",
       },
       resolvedPackage,
     })
@@ -73,7 +73,7 @@ describe("compile-time transform", () => {
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
-        target: "jsx",
+        surface: "jsx",
         renderMode: "mask",
       },
       resolvedPackage,
@@ -83,18 +83,16 @@ describe("compile-time transform", () => {
     expect(transformed).toContain("<span")
   })
 
-  it("rewrites template tags for web-component mode", async () => {
+  it("rewrites direct custom-element icons for custom-element surface", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
-      import { icon } from "${COMPILE_MODULE_ID}"
-
-      const view = <section>{icon\`airplane\`}</section>
+      const view = <section><effective-icon name="airplane" className="icon" /></section>
     `
 
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
-        target: "web-component",
+        surface: "custom-element",
         renderMode: "image",
       },
       resolvedPackage,
@@ -104,6 +102,7 @@ describe("compile-time transform", () => {
     expect(transformed).toContain("data-icon-url")
     expect(transformed).toContain("ensureIconElement")
     expect(transformed).toContain("effective-icon")
+    expect(transformed).not.toContain('name="airplane"')
   })
 
   it("fails on missing compile import", async () => {
@@ -113,7 +112,7 @@ describe("compile-time transform", () => {
       transformCompileTimeIcons(`const view = <Icon name="airplane" />`, "/virtual/input.tsx", {
         options: {
           package: packageName,
-          target: "jsx",
+          surface: "jsx",
           renderMode: "image",
         },
         resolvedPackage,
@@ -131,7 +130,7 @@ describe("compile-time transform", () => {
         {
           options: {
           package: packageName,
-          target: "jsx",
+          surface: "jsx",
           renderMode: "image",
         },
           resolvedPackage,
@@ -150,7 +149,7 @@ describe("compile-time transform", () => {
         {
           options: {
           package: packageName,
-          target: "jsx",
+          surface: "jsx",
           renderMode: "image",
         },
           resolvedPackage,
@@ -159,23 +158,38 @@ describe("compile-time transform", () => {
     ).toThrow(/requires name="literal"/)
   })
 
-  it("fails on template interpolation", async () => {
+  it("fails on the wrong authoring surface for each surface", async () => {
     const resolvedPackage = await loadResolvedPackage()
 
     expect(() =>
       transformCompileTimeIcons(
-        `import { icon } from "${COMPILE_MODULE_ID}"; const value = "airplane"; const view = <section>{icon\`${"${value}"}\`}</section>`,
+        `const view = <effective-icon name="airplane" />`,
         "/virtual/input.tsx",
         {
           options: {
-          package: packageName,
-          target: "jsx",
-          renderMode: "image",
-        },
+            package: packageName,
+            surface: "jsx",
+            renderMode: "image",
+          },
           resolvedPackage,
         }
       )
-    ).toThrow(/do not support interpolation/)
+    ).toThrow(/only supported when surface is "custom-element"/)
+
+    expect(() =>
+      transformCompileTimeIcons(
+        `import { Icon } from "${COMPILE_MODULE_ID}"; const view = <Icon name="airplane" />`,
+        "/virtual/input.tsx",
+        {
+          options: {
+            package: packageName,
+            surface: "custom-element",
+            renderMode: "image",
+          },
+          resolvedPackage,
+        }
+      )
+    ).toThrow(/only supported when surface is "jsx"/)
   })
 
   it("fails on spread props and children", async () => {
@@ -188,7 +202,7 @@ describe("compile-time transform", () => {
         {
           options: {
           package: packageName,
-          target: "jsx",
+          surface: "jsx",
           renderMode: "image",
         },
           resolvedPackage,
@@ -203,7 +217,7 @@ describe("compile-time transform", () => {
         {
           options: {
           package: packageName,
-          target: "jsx",
+          surface: "jsx",
           renderMode: "image",
         },
           resolvedPackage,

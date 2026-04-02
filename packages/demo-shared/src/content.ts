@@ -1,4 +1,4 @@
-export type DemoVariantKey = "image" | "mask" | "inline-svg" | "web-component"
+export type DemoVariantKey = "image" | "mask" | "svg" | "custom-element"
 
 interface DemoPackInfo {
   family: string
@@ -13,8 +13,8 @@ interface DemoPackInfo {
 interface DemoLinkMap {
   image: string
   mask: string
-  "inline-svg": string
-  "web-component": string
+  svg: string
+  "custom-element": string
 }
 
 interface DemoVariantDefinition {
@@ -43,26 +43,47 @@ declare const __STREAMLINE_DEMO_LINKS__: DemoLinkMap
 export const packInfo = __STREAMLINE_DEMO_PACK_INFO__
 export const demoLinks = __STREAMLINE_DEMO_LINKS__
 
-export const componentSource = `import { Icon } from "@effective/icon/compile"
+export const jsxComponentSource = `import { Icon } from "@effective/icon/compile"
 
 function StatusBar() {
   return <Icon name="airplane" />
 }`
 
-export const inlineSource = `import { icon } from "@effective/icon/compile"
+export const jsxInlineSource = `import { Icon } from "@effective/icon/compile"
 
 function Toolbar() {
-  return <Button startIcon={icon\`magic-wand-2\`}>Transform</Button>
+  return <Button startIcon={<Icon name="magic-wand-2" />}>Transform</Button>
 }`
 
-export const liveExamples: DemoLiveExample[] = [
+export const webComponentComponentSource = `function StatusBar() {
+  return <effective-icon name="airplane" />
+}`
+
+export const webComponentInlineSource = `function Toolbar() {
+  return <Button startIcon={<effective-icon name="magic-wand-2" />}>Transform</Button>
+}`
+
+export const jsxLiveExamples: DemoLiveExample[] = [
   {
     code: `<Icon name="airplane" />`,
     label: "Standalone component",
     title: "airplane",
   },
   {
-    code: `startIcon={icon\`magic-wand-2\`}`,
+    code: `startIcon={<Icon name="magic-wand-2" />}`,
+    label: "As prop value",
+    title: "magic-wand-2",
+  },
+] as const
+
+export const webComponentLiveExamples: DemoLiveExample[] = [
+  {
+    code: `<effective-icon name="airplane" />`,
+    label: "Standalone custom element",
+    title: "airplane",
+  },
+  {
+    code: `startIcon={<effective-icon name="magic-wand-2" />}`,
     label: "As prop value",
     title: "magic-wand-2",
   },
@@ -72,8 +93,8 @@ export const runtimeTintPalette = ["#dc5a29", "#2f7df4", "#1f9d63", "#8b5cf6", "
 
 export const failureCases = [
   'Unknown icon names fail the build immediately.',
-  'Compile-time <Icon> requires name="literal".',
-  "Template-tag usage does not support interpolation.",
+  'Compile-time <Icon> and <effective-icon> require name="literal".',
+  'Each surface only accepts its own authoring syntax.',
   "Spread props and children are rejected.",
 ] as const
 
@@ -133,7 +154,7 @@ function Toolbar() {
     tabLabel: "CSS Mask",
     title: "CSS mask output",
   },
-  "inline-svg": {
+  svg: {
     colorNote:
       "Inlines SVG markup directly — fill and stroke respond to currentColor.",
     componentOutput: `function StatusBar() {
@@ -160,12 +181,12 @@ function Toolbar() {
 }`,
     lead: "Inlines SVG markup directly into JSX — zero runtime, full currentColor support.",
     liveElement: "<svg>",
-    renderMode: "jsx / inline-svg",
+    renderMode: "jsx / svg",
     supportsRuntimeTinting: true,
-    tabLabel: "Inline SVG",
+    tabLabel: "SVG",
     title: "Inline SVG output",
   },
-  "web-component": {
+  "custom-element": {
     colorNote:
       "Renders a custom element with shadow DOM mask — tints via currentColor, no inline SVG.",
     componentOutput: `import __s from ".../airplane.svg?url"
@@ -196,9 +217,9 @@ function Toolbar() {
 }`,
     lead: "Renders a custom element with shadow DOM mask for tintable icons without inlining SVG.",
     liveElement: "<effective-icon>",
-    renderMode: "web-component",
+    renderMode: "custom-element",
     supportsRuntimeTinting: true,
-    tabLabel: "Web Component",
-    title: "Web component output",
+    tabLabel: "Custom Element",
+    title: "Custom element output",
   },
 }

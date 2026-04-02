@@ -14,6 +14,6 @@ export default defineConfig(({ command }) =>
     isDevServer: command === "serve",
     outDir: path.join(repoRoot, "demo", "dist", "inline-svg"),
     port: 4176,
-    variant: "inline-svg",
+    variant: "svg",
   })
 )

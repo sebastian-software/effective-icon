@@ -8,4 +8,4 @@ if (!app) {
   throw new Error("Missing #app root element")
 }
 
-mountDemoPage(app, "inline-svg")
+mountDemoPage(app, "svg")

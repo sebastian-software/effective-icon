@@ -19,13 +19,13 @@ export function effectiveIconVitePlugin(options: EffectiveIconVitePluginOptions)
 
   const normalizedOptions = {
     package: options.package,
-    target: options.target ?? "jsx",
+    surface: options.surface ?? "jsx",
     renderMode: normalizeRenderMode(options.renderMode),
     typesOutputFile: options.typesOutputFile,
   } as const
 
-  if (normalizedOptions.target === "web-component" && options.renderMode) {
-    throw new Error('renderMode is only supported when target is "jsx"')
+  if (normalizedOptions.surface === "custom-element" && options.renderMode) {
+    throw new Error('renderMode is only supported when surface is "jsx"')
   }
 
   const state: PluginState = {}
@@ -63,9 +63,13 @@ export function effectiveIconVitePlugin(options: EffectiveIconVitePluginOptions)
   }
 }
 
-function normalizeRenderMode(renderMode: EffectiveIconVitePluginOptions["renderMode"] | undefined): "image" | "mask" | "inline-svg" {
+function normalizeRenderMode(renderMode: EffectiveIconVitePluginOptions["renderMode"] | undefined): "image" | "mask" | "svg" {
   if (renderMode === "component" || renderMode == null) {
     return "image"
+  }
+
+  if (renderMode === "svg") {
+    return "svg"
   }
 
   return renderMode

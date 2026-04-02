@@ -1,6 +1,6 @@
 declare module "@effective/icon/compile" {
   interface EffectiveIconCompileTypeRegistry {
-    iconName: "airplane" | "anchor"
+    iconName: "add-1" | "airplane" | "anchor" | "magic-wand-2"
   }
 }
 

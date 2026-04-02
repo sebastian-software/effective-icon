@@ -3,7 +3,7 @@ import path from "node:path"
 import { afterEach, describe, expect, it } from "vitest"
 import { build } from "vite"
 
-const fixtureAppRoot = path.resolve(process.cwd(), "fixtures/vite-app")
+const fixtureAppRoot = path.resolve(process.cwd(), "fixtures", "solid-app")
 
 interface BuildChunk {
   code: string
@@ -22,58 +22,42 @@ interface BuildOutput {
   output: Array<BuildAsset | BuildChunk>
 }
 
-describe.sequential("vite consumer integration", () => {
+describe.sequential("solid consumer integration", () => {
   afterEach(() => {
-    delete process.env.STREAMLINE_SURFACE
     delete process.env.STREAMLINE_RENDER_MODE
   })
 
-  it("builds the fixture app for image mode and includes only referenced icons", async () => {
-    process.env.STREAMLINE_SURFACE = "jsx"
+  it("builds the solid fixture app for image mode", async () => {
     process.env.STREAMLINE_RENDER_MODE = "image"
 
-    const outputs = await buildFixtureApp()
-    const code = collectChunkCode(outputs)
+    const code = collectChunkCode(await buildFixtureApp())
 
-    expect(code).toContain("icon--airplane")
-    expect(code).toContain('"img"')
-    expect(code).not.toContain("anchor")
+    expect(code).toContain("Solid Fixture")
+    expect(code).toContain("<img")
+    expect(code).toContain("?url")
+    expect(code).not.toContain("@effective/icon/compile")
   })
 
-  it("builds the fixture app for svg mode", async () => {
-    process.env.STREAMLINE_SURFACE = "jsx"
-    process.env.STREAMLINE_RENDER_MODE = "svg"
-
-    const outputs = await buildFixtureApp()
-    const code = collectChunkCode(outputs)
-
-    expect(code).toContain('"svg"')
-    expect(code).not.toContain("?url")
-    expect(code).not.toContain("anchor")
-  })
-
-  it("builds the fixture app for mask mode", async () => {
-    process.env.STREAMLINE_SURFACE = "jsx"
+  it("builds the solid fixture app for mask mode", async () => {
     process.env.STREAMLINE_RENDER_MODE = "mask"
 
-    const outputs = await buildFixtureApp()
-    const code = collectChunkCode(outputs)
+    const code = collectChunkCode(await buildFixtureApp())
 
+    expect(code).toContain("Solid Fixture")
     expect(code).toContain("buildIconMaskStyle")
     expect(code).toContain("maskImage")
-    expect(code).not.toContain("anchor")
+    expect(code).not.toContain("@effective/icon/compile")
   })
 
-  it("builds the fixture app for custom-element surface", async () => {
-    process.env.STREAMLINE_SURFACE = "custom-element"
+  it("builds the solid fixture app for svg mode", async () => {
+    process.env.STREAMLINE_RENDER_MODE = "svg"
 
-    const outputs = await buildFixtureApp()
-    const code = collectChunkCode(outputs)
+    const code = collectChunkCode(await buildFixtureApp())
 
-    expect(code).toContain("effective-icon")
-    expect(code).toContain("data-icon-url")
-    expect(code).toContain("ensureIconElement")
-    expect(code).not.toContain("anchor")
+    expect(code).toContain("Solid Fixture")
+    expect(code).toContain("<svg")
+    expect(code).not.toContain("?url")
+    expect(code).not.toContain("@effective/icon/compile")
   })
 })
 

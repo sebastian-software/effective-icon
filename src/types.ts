@@ -1,10 +1,10 @@
-export type IconTarget = "jsx" | "web-component"
+export type IconSurface = "jsx" | "custom-element"
 
-export type IconRenderMode = "image" | "component" | "mask" | "inline-svg"
+export type IconRenderMode = "image" | "component" | "mask" | "svg"
 
 export interface EffectiveIconVitePluginOptions {
   package: string
-  target?: IconTarget
+  surface?: IconSurface
   renderMode?: IconRenderMode
   typesOutputFile?: string | false
 }

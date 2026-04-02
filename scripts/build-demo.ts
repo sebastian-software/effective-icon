@@ -7,8 +7,9 @@ const outputRoot = path.join(repoRoot, "demo", "dist")
 const demos = [
   { filter: "@streamline-demo/mask", href: "./mask/", label: "CSS mask output" },
   { filter: "@streamline-demo/image", href: "./image/", label: "External SVG output" },
-  { filter: "@streamline-demo/inline-svg", href: "./inline-svg/", label: "Inline SVG output" },
-  { filter: "@streamline-demo/web-component", href: "./web-component/", label: "Web component output" },
+  { filter: "@streamline-demo/inline-svg", href: "./inline-svg/", label: "SVG output" },
+  { filter: "@streamline-demo/web-component", href: "./web-component/", label: "Custom element output" },
+  { filter: "@streamline-demo/solid", href: "./solid/", label: "SolidJS consumer demo" },
 ] as const
 
 async function main(): Promise<void> {
@@ -36,6 +37,7 @@ function renderIndexHtml(): string {
     mask: "oklch(0.56 0.2 250)",
     "inline-svg": "oklch(0.55 0.22 295)",
     "web-component": "oklch(0.58 0.19 155)",
+    solid: "oklch(0.54 0.18 228)",
   }
 
   const descriptions: Record<string, string> = {
@@ -46,6 +48,8 @@ function renderIndexHtml(): string {
       "Inlines the full <code>&lt;svg&gt;</code> markup. Zero runtime, full <code>currentColor</code> support.",
     "web-component":
       "Custom <code>&lt;effective-icon&gt;</code> element with shadow DOM mask. Tintable, framework-agnostic.",
+    solid:
+      "Real <code>vite-plugin-solid</code> consumer app proving the JSX surface works inside a SolidJS pipeline.",
   }
 
   function renderIcon(path: string, accent: string): string {
@@ -103,7 +107,7 @@ function renderIndexHtml(): string {
     <header class="topbar"><div class="topbar__inner"><span class="topbar__name">@effective/icon</span></div></header>
     <main>
       <h1>Streamline icons, resolved at compile time.</h1>
-      <p class="tagline">Write once, compile to any output format. Each demo below is its own build target — same authored source, different result.</p>
+      <p class="tagline">Write once, compile to any output format. The output demos below are separate build targets, and the SolidJS card proves the JSX surface in a real framework app.</p>
       <div class="card-grid">
         ${cards}
       </div>

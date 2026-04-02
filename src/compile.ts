@@ -18,7 +18,3 @@ function compileOnly(name: string): never {
 export function Icon(_props: IconCompileProps): null {
   compileOnly("Icon")
 }
-
-export function icon(_strings: TemplateStringsArray, ..._values: never[]): null {
-  compileOnly("icon")
-}

@@ -7,7 +7,7 @@ import type { UserConfig } from "vite"
 import { effectiveIconVitePlugin } from "../../src/plugin"
 import type { EffectiveIconVitePluginOptions } from "../../src/types"
 
-type DemoVariant = "image" | "mask" | "inline-svg" | "web-component"
+type DemoVariant = "image" | "mask" | "svg" | "custom-element"
 
 interface CreateDemoConfigOptions {
   appRoot: string
@@ -47,20 +47,20 @@ function resolvePluginOptions(variant: DemoVariant): EffectiveIconVitePluginOpti
       return {
         package: "@icon-pkg/streamline-core-line-free",
         renderMode: "mask",
-        target: "jsx",
+        surface: "jsx",
         typesOutputFile: false,
       }
-    case "inline-svg":
+    case "svg":
       return {
         package: "@icon-pkg/streamline-core-line-free",
-        renderMode: "inline-svg",
-        target: "jsx",
+        renderMode: "svg",
+        surface: "jsx",
         typesOutputFile: false,
       }
-    case "web-component":
+    case "custom-element":
       return {
         package: "@icon-pkg/streamline-core-line-free",
-        target: "web-component",
+        surface: "custom-element",
         typesOutputFile: false,
       }
     case "image":
@@ -68,7 +68,7 @@ function resolvePluginOptions(variant: DemoVariant): EffectiveIconVitePluginOpti
       return {
         package: "@icon-pkg/streamline-core-line-free",
         renderMode: "image",
-        target: "jsx",
+        surface: "jsx",
         typesOutputFile: false,
       }
   }
@@ -79,14 +79,14 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
     ? {
         image: "http://127.0.0.1:4174/",
         mask: "http://127.0.0.1:4175/",
-        "inline-svg": "http://127.0.0.1:4176/",
-        "web-component": "http://127.0.0.1:4177/",
+        svg: "http://127.0.0.1:4176/",
+        "custom-element": "http://127.0.0.1:4177/",
       }
     : {
         image: "../image/",
         mask: "../mask/",
-        "inline-svg": "../inline-svg/",
-        "web-component": "../web-component/",
+        svg: "../inline-svg/",
+        "custom-element": "../web-component/",
       }
 
   return {
@@ -114,6 +114,7 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
     resolve: {
       alias: [
         { find: /^@streamline-demo\/shared$/, replacement: path.join(sharedRoot, "src/index.ts") },
+        { find: /^@streamline-demo\/shared\/web-component$/, replacement: path.join(sharedRoot, "src/mount-web-component.ts") },
         { find: /^@streamline-demo\/shared\/styles\.css$/, replacement: path.join(sharedRoot, "src/styles.css") },
         { find: /^@effective\/icon$/, replacement: path.join(repoRoot, "src/index.ts") },
         { find: /^@effective\/icon\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },

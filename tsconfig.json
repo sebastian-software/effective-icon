@@ -6,7 +6,9 @@
     "baseUrl": ".",
     "paths": {
       "@streamline-demo/shared": ["./packages/demo-shared/src/index.ts"],
+      "@streamline-demo/shared/web-component": ["./packages/demo-shared/src/mount-web-component.ts"],
       "@streamline-demo/shared/styles.css": ["./packages/demo-shared/src/styles.css"],
+      "@fixture/app": ["./fixtures/vite-app/main-jsx.tsx"],
       "@effective/icon": ["./src/index.ts"],
       "@effective/icon/vite-plugin": ["./src/plugin.ts"],
       "@effective/icon/compile": ["./src/compile.ts"],

@@ -14,6 +14,6 @@ export default defineConfig(({ command }) =>
     isDevServer: command === "serve",
     outDir: path.join(repoRoot, "demo", "dist", "web-component"),
     port: 4177,
-    variant: "web-component",
+    variant: "custom-element",
   })
 )

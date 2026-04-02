@@ -8,15 +8,15 @@ Named icons without the runtime tax.
 <Icon name="airplane" className="size-4" />
 ```
 
-or:
+For custom-element surface output, author directly with the custom element:
 
 ```tsx
-{icon`anchor`}
+<effective-icon name="airplane"></effective-icon>
 ```
 
-That API is the whole point.
+The API is the whole point.
 
-One icon surface. One `name` prop. No per-icon imports scattered through the app. No giant switch statement. No hand-written registry. No component graveyard where every icon becomes another symbol to remember.
+Two surface-specific entry points. One `name` prop. No per-icon imports scattered through the app. No giant switch statement. No hand-written registry. No component graveyard where every icon becomes another symbol to remember.
 
 Most teams assume that if they want named icons, they have to pay for that convenience at runtime.
 
@@ -29,13 +29,13 @@ That tradeoff is so common it barely gets questioned:
 
 `@effective/icon` exists because that tradeoff is not actually necessary.
 
-It resolves the selected icon pack at build time, validates every icon name against the manifest, and rewrites your marker usage to concrete output.
+It resolves the selected icon pack at build time, validates every icon name against the manifest, and rewrites your source usage to concrete output.
 
 So you get the part people like:
 
 - `<Icon name="...">`
-- ``icon`anchor` ``
-- a single icon abstraction for the whole app
+- `<effective-icon name="...">`
+- a single named-icon model across JSX and web components
 
 without the usual cost:
 
@@ -124,16 +124,16 @@ It reads the selected pack manifest during the build, validates the icon names y
 
 - `image` for external SVG URL output
 - `mask` for tintable monochrome output with external assets
-- `inline-svg` for direct DOM SVG output
-- `web-component` for framework-agnostic tintable output with external assets
+- `svg` for direct DOM SVG output
+- `custom-element` for framework-agnostic tintable output with external assets
 
-So the same authoring code can compile down to different delivery strategies without changing every call site in your app.
+So you can keep named-icon authoring while still choosing the delivery strategy that fits the surface.
 
 That is the real unlock.
 
 ## Why This Feels Better In Practice
 
-You keep the API people naturally reach for:
+For JSX targets, you keep the API people naturally reach for:
 
 ```tsx
 <Icon name="airplane" />
@@ -161,7 +161,7 @@ Usually you pick two:
 
 ## The One-Sentence Pitch
 
-`@effective/icon` gives you the DX of `<Icon name="...">` with the bundle behavior of a static asset pipeline.
+`@effective/icon` gives you named-icon DX with the bundle behavior of a static asset pipeline.
 
 ## Install
 
@@ -177,25 +177,61 @@ pnpm add -D @icon-pkg/streamline-core-line-free
 
 ## Authoring
 
-Import the compile-time markers:
+For the `jsx` surface, import the compile-time marker:
 
 ```tsx
-import { Icon, icon } from "@effective/icon/compile"
+import { Icon } from "@effective/icon/compile"
 ```
 
-Then use either surface:
+Then use it directly:
 
 ```tsx
 <Icon name="airplane" className="size-4" />
 ```
 
+For `surface: "custom-element"`, author directly in JSX/TSX/MDX with:
+
 ```tsx
-{icon`anchor`}
+<effective-icon name="airplane" className="size-4" />
 ```
 
-For the template-tag form, descriptive names like `anchor`, `airplane`, or `calendar-add` read much better than abstract internal-looking IDs.
+The important detail is that both are compile-time authoring surfaces for the plugin, not runtime name-resolution systems.
 
-The important detail is that these are markers for the plugin, not a runtime component system.
+## SolidJS
+
+The `jsx` surface is not React-specific. It works with JSX-based consumers such as SolidJS as long as the file still passes through the Vite transform pipeline.
+
+```ts
+import { defineConfig } from "vite"
+import solid from "vite-plugin-solid"
+
+import { effectiveIconVitePlugin } from "@effective/icon/vite-plugin"
+
+export default defineConfig({
+  plugins: [
+    effectiveIconVitePlugin({
+      package: "@icon-pkg/streamline-core-line-free",
+      surface: "jsx",
+      renderMode: "svg",
+    }),
+    solid(),
+  ],
+})
+```
+
+In a Solid component you can stay idiomatic and use `class`:
+
+```tsx
+/** @jsxImportSource solid-js */
+
+import { Icon } from "@effective/icon/compile"
+
+export function StatusCard() {
+  return <Icon name="airplane" class="status-card__icon" aria-hidden="true" />
+}
+```
+
+The workspace also includes a real Solid demo app at `pnpm dev:demo:solid`, and the test suite builds a Solid fixture in `image`, `mask`, and `svg` modes.
 
 ## Vite Config
 
@@ -207,7 +243,7 @@ export default defineConfig({
   plugins: [
     effectiveIconVitePlugin({
       package: "@icon-pkg/streamline-core-line-free",
-      target: "jsx",
+      surface: "jsx",
       renderMode: "image",
     }),
   ],
@@ -226,7 +262,7 @@ If you want a custom path or want to disable generation, use `typesOutputFile`:
 ```ts
 effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
-  target: "jsx",
+  surface: "jsx",
   renderMode: "image",
   typesOutputFile: "./types/effective-icon.generated.d.ts",
 })
@@ -243,7 +279,7 @@ Like other generated routing or type-registration files, it is reasonable to che
 ```ts
 effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
-  target: "jsx",
+  surface: "jsx",
   renderMode: "image",
 })
 ```
@@ -261,7 +297,7 @@ Use it when you want:
 ```ts
 effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
-  target: "jsx",
+  surface: "jsx",
   renderMode: "mask",
 })
 ```
@@ -274,13 +310,13 @@ Use it when you want:
 - runtime tinting via `currentColor`
 - monochrome UI glyphs with small JS overhead
 
-### JSX Inline SVG Output
+### JSX SVG Output
 
 ```ts
 effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
-  target: "jsx",
-  renderMode: "inline-svg",
+  surface: "jsx",
+  renderMode: "svg",
 })
 ```
 
@@ -295,16 +331,16 @@ Use it when you want:
 This mode assumes the icon pack already ships normalized, inline-safe SVG assets.
 The builder pipeline owns that normalization and validation step; the Vite transform does not run SVGO or broad SVG repair at app-build time.
 
-### Web Component Output
+### Custom Element Output
 
 ```ts
 effectiveIconVitePlugin({
   package: "@icon-pkg/streamline-core-line-free",
-  target: "web-component",
+  surface: "custom-element",
 })
 ```
 
-This emits a generic `<effective-icon>` custom element. The icon still resolves to an external SVG asset URL and is rendered as a tintable mask-based glyph inside shadow DOM.
+This accepts direct `<effective-icon name="...">` authoring in JSX/TSX/MDX. The build rewrites `name` to an external SVG asset URL, injects `ensureIconElement()`, and the runtime renders a tintable mask-based glyph inside shadow DOM.
 
 Use it when you want:
 
@@ -318,11 +354,12 @@ The plugin is intentionally strict.
 
 - `package` must be an explicit package name
 - `name` must be a static string literal
-- template-tag usage must not contain interpolation
 - spread props are rejected
 - children are rejected
 - unknown icon names fail the build
-- marker imports are required
+- `<Icon ...>` is only valid for `surface: "jsx"`
+- `<effective-icon ...>` is only valid for `surface: "custom-element"`
+- marker imports are only required for the JSX surface
 
 That strictness is not accidental. It is what allows `@effective/icon` to behave like a real compile-time pipeline instead of a best-effort runtime helper.
 
@@ -342,13 +379,14 @@ The plugin reads the manifest during build setup and resolves icon file paths fr
 The current V1 direction is deliberately narrow:
 
 - one selected icon package per project
-- marker-based authoring via `@effective/icon/compile`
+- `<Icon ...>` authoring for the `jsx` surface
+- direct `<effective-icon ...>` authoring for the `custom-element` surface
 - static validation against the selected package manifest
 - build-time rewrites for:
   - JSX image output
   - JSX mask output
-  - JSX inline SVG output
-  - generic web-component output
+  - JSX SVG output
+  - generic custom-element output
 
 The repo also contains the Streamline pack builder workspace that produces pack packages with:
 
@@ -365,18 +403,20 @@ pnpm dev:demo
 
 The demo is structured as four real pnpm workspace apps that share most of their content and UI:
 
-- `pnpm dev:demo` starts all four dev servers together
+- `pnpm dev:demo` starts all demo dev servers together
 - `pnpm dev:demo:image` for `jsx/image`
 - `pnpm dev:demo:mask` for `jsx/mask`
-- `pnpm dev:demo:inline-svg` for `jsx/inline-svg`
-- `pnpm dev:demo:web-component` for `web-component`
+- `pnpm dev:demo:svg` for `jsx/svg`
+- `pnpm dev:demo:custom-element` for `custom-element`
+- `pnpm dev:demo:solid` for the SolidJS consumer demo
 
 Default local ports:
 
 - `http://127.0.0.1:4174/` for `jsx/image`
 - `http://127.0.0.1:4175/` for `jsx/mask`
-- `http://127.0.0.1:4176/` for `jsx/inline-svg`
-- `http://127.0.0.1:4177/` for `web-component`
+- `http://127.0.0.1:4176/` for `jsx/svg`
+- `http://127.0.0.1:4177/` for `custom-element`
+- `http://127.0.0.1:4178/` for the SolidJS consumer demo
 
 `pnpm build:demo` builds the four apps plus a small landing index into `demo/dist` against the sample workspace pack in `packages/packs/core-line-free`.
 
