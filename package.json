@@ -49,7 +49,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "sync:streamline": "tsx scripts/sync-streamline.ts",
-    "validate:packs": "pnpm --filter @icon-pkg/streamline-builder validate-packs"
+    "validate:packs": "pnpm --filter @icon-pkg/streamline-builder validate-packs",
+    "release:root:check": "pnpm build && pnpm typecheck && pnpm test && npm --cache .npm-cache-release-root pack --dry-run",
+    "release:root:publish": "npm --cache .npm-cache-release-root publish --access public",
+    "prepack": "pnpm build"
   },
   "keywords": [
     "effective",
