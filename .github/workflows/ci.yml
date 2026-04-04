@@ -22,7 +22,6 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 24
-          cache: pnpm
 
       - name: Enable pnpm via Corepack
         run: |
@@ -75,7 +74,6 @@ jobs:
         uses: actions/setup-node@v5
         with:
           node-version: 24
-          cache: pnpm
 
       - name: Enable pnpm via Corepack
         run: |
