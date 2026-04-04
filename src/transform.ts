@@ -7,9 +7,17 @@ import type { ResolvedIconPackage, ResolvedPackIcon } from "./resolve-package"
 
 export const COMPILE_MODULE_ID = "@effective/icon/compile"
 export const RUNTIME_MODULE_ID = "@effective/icon/runtime"
+const MASK_CSS_MODULE_ID = "virtual:effective-icon/mask.css"
+const MASK_CLASS_NAME = "effective-icon-mask"
+const MASK_IMAGE_VAR_NAME = "--effective-icon-mask-image"
 
 interface TransformContext {
-  options: { package: string; surface: "jsx" | "custom-element"; renderMode: "image" | "mask" | "svg" }
+  options: {
+    package: string
+    surface: "jsx"
+    renderMode: "image" | "mask" | "svg"
+    styleTarget?: "object" | "string"
+  }
   resolvedPackage: ResolvedIconPackage
 }
 
@@ -26,8 +34,8 @@ interface IconImportRecord {
 class TransformState {
   private iconImports = new Map<string, IconImportRecord>()
   private importCounter = 0
+  private needsMaskCss = false
   private needsMaskRuntime = false
-  private needsWebComponentRuntime = false
 
   constructor(
     private readonly sourceFile: ts.SourceFile,
@@ -53,17 +61,7 @@ class TransformState {
       icon,
       importName: `__iconAsset${this.importCounter++}`,
       inlineSvg:
-        this.context.options.surface === "jsx" && this.context.options.renderMode === "svg"
-          ? parseInlineSvg(icon.absolutePath, this.sourceFile.fileName)
-          : undefined,
-    }
-
-    if (this.context.options.surface === "jsx" && this.context.options.renderMode === "mask") {
-      this.needsMaskRuntime = true
-    }
-
-    if (this.context.options.surface === "custom-element") {
-      this.needsWebComponentRuntime = true
+        this.context.options.renderMode === "svg" ? parseInlineSvg(icon.absolutePath, this.sourceFile.fileName) : undefined,
     }
 
     this.iconImports.set(iconName, record)
@@ -79,32 +77,43 @@ class TransformState {
     const retainedStatements = statements.filter((statement) => !isCompileImport(statement))
     const registrationStatements = this.buildRegistrationStatements()
 
-    return [...leadingImports, ...retainedStatements, ...registrationStatements]
+    return [...leadingImports, ...registrationStatements, ...retainedStatements]
   }
 
   buildElement(iconName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement | ts.JsxElement {
     const record = this.ensureIcon(iconName)
 
-    if (this.context.options.surface === "custom-element") {
-      return createJsxElement(
-        "effective-icon",
-        [...attributes, createExpressionAttribute("data-icon-url", ts.factory.createIdentifier(record.importName)), ...createA11yFallback(attributes)]
-      )
-    }
-
     if (this.context.options.renderMode === "mask") {
-      const forwarded = attributes.filter((attribute) => getJsxAttributeName(attribute) !== "style")
-      const styleExpression = getJsxAttributeExpression(attributes, "style") ?? ts.factory.createIdentifier("undefined")
+      this.needsMaskCss = true
+
+      const forwarded = withMaskClass(
+        attributes.filter((attribute) => getJsxAttributeName(attribute) !== "style"),
+        styleTargetToClassPropName(this.context.options.styleTarget ?? "object")
+      )
+      const styleExpression = getJsxAttributeExpression(attributes, "style")
+      const styleTarget = this.context.options.styleTarget ?? "object"
+      const inlinedStyle = createInlineMaskStyle(styleExpression, record.importName, styleTarget)
+      const styleAttribute =
+        inlinedStyle != null
+          ? createExpressionAttribute("style", inlinedStyle)
+          : (() => {
+              this.needsMaskRuntime = true
+
+              return createExpressionAttribute(
+                "style",
+                ts.factory.createCallExpression(
+                  ts.factory.createIdentifier(
+                    styleTarget === "string" ? "__iconBuildMaskStyleString" : "__iconBuildMaskStyle"
+                  ),
+                  undefined,
+                  [ts.factory.createIdentifier(record.importName), styleExpression ?? ts.factory.createIdentifier("undefined")]
+                )
+              )
+            })()
 
       return createJsxElement("span", [
         ...forwarded,
-        createExpressionAttribute(
-          "style",
-          ts.factory.createCallExpression(ts.factory.createIdentifier("__iconBuildMaskStyle"), undefined, [
-            ts.factory.createIdentifier(record.importName),
-            styleExpression,
-          ])
-        ),
+        styleAttribute,
         ...createA11yFallback(forwarded),
       ])
     }
@@ -128,24 +137,26 @@ class TransformState {
 
   private buildImportStatements(): ts.Statement[] {
     const statements: ts.Statement[] = []
+    const runtimeBindings: Array<[string, string]> = []
 
-    if (this.needsMaskRuntime) {
-      statements.push(
-        createNamedImport(
-          RUNTIME_MODULE_ID,
-          [["buildIconMaskStyle", "__iconBuildMaskStyle"]]
-        )
-      )
+    if (this.needsMaskCss) {
+      statements.push(createSideEffectImport(MASK_CSS_MODULE_ID))
     }
 
-    if (this.needsWebComponentRuntime) {
-      statements.push(
-        createNamedImport(RUNTIME_MODULE_ID, [["ensureIconElement", "__iconEnsureElement"]])
-      )
+    if (this.needsMaskRuntime) {
+      if ((this.context.options.styleTarget ?? "object") === "string") {
+        runtimeBindings.push(["buildIconMaskStyleString", "__iconBuildMaskStyleString"])
+      } else {
+        runtimeBindings.push(["buildIconMaskStyle", "__iconBuildMaskStyle"])
+      }
+    }
+
+    if (runtimeBindings.length > 0) {
+      statements.push(createNamedImport(RUNTIME_MODULE_ID, runtimeBindings))
     }
 
     for (const record of this.iconImports.values()) {
-      if (this.context.options.surface === "jsx" && this.context.options.renderMode === "svg") {
+      if (this.context.options.renderMode === "svg") {
         continue
       }
 
@@ -158,15 +169,7 @@ class TransformState {
   }
 
   private buildRegistrationStatements(): ts.Statement[] {
-    if (!this.needsWebComponentRuntime) {
-      return []
-    }
-
-    return [
-      ts.factory.createExpressionStatement(
-        ts.factory.createCallExpression(ts.factory.createIdentifier("__iconEnsureElement"), undefined, [])
-      ),
-    ]
+    return []
   }
 }
 
@@ -185,31 +188,19 @@ export function transformCompileTimeIcons(code: string, id: string, context: Tra
         const tagName = getJsxTagName(node)
         const activeBinding = bindings.component
 
-        if (context.options.surface === "jsx") {
-          if (activeBinding && tagName === activeBinding) {
-            return transformJsxIcon(node, state, "Icon")
-          }
-
-          if (tagName === "effective-icon") {
-            throw state.errorAt(
-              node,
-              'Direct <effective-icon> authoring is only supported when surface is "custom-element"'
-            )
-          }
-
-          if (!activeBinding && tagName === "Icon") {
-            throw state.errorAt(node, `Import { Icon } from "${COMPILE_MODULE_ID}" before using compile-time icons`)
-          }
-
-          return ts.visitEachChild(node, visit, transformationContext)
+        if (activeBinding && tagName === activeBinding) {
+          return transformJsxIcon(node, state)
         }
 
         if (tagName === "effective-icon") {
-          return transformJsxIcon(node, state, "effective-icon")
+          throw state.errorAt(
+            node,
+            'Direct <effective-icon> authoring is no longer supported by @effective/icon'
+          )
         }
 
-        if ((activeBinding && tagName === activeBinding) || tagName === "Icon") {
-          throw state.errorAt(node, 'Compile-time <Icon> is only supported when surface is "jsx"')
+        if (!activeBinding && tagName === "Icon") {
+          throw state.errorAt(node, `Import { Icon } from "${COMPILE_MODULE_ID}" before using compile-time icons`)
         }
       }
 
@@ -240,25 +231,24 @@ export function transformCompileTimeIcons(code: string, id: string, context: Tra
 
 function transformJsxIcon(
   node: ts.JsxSelfClosingElement | ts.JsxElement,
-  state: TransformState,
-  surfaceName: "Icon" | "effective-icon"
+  state: TransformState
 ): ts.JsxSelfClosingElement | ts.JsxElement {
   if (ts.isJsxElement(node)) {
-    throw state.errorAt(node, `Compile-time <${surfaceName}> does not support children`)
+    throw state.errorAt(node, "Compile-time <Icon> does not support children")
   }
 
   const attributes = node.attributes.properties
   const nameAttribute = findNameAttribute(attributes)
 
   if (!nameAttribute || !nameAttribute.initializer || !ts.isStringLiteral(nameAttribute.initializer)) {
-    throw state.errorAt(node, `Compile-time <${surfaceName}> requires name="literal"`)
+    throw state.errorAt(node, 'Compile-time <Icon> requires name="literal"')
   }
 
   const forwarded: ts.JsxAttributeLike[] = []
 
   for (const attribute of attributes) {
     if (ts.isJsxSpreadAttribute(attribute)) {
-      throw state.errorAt(attribute, `Compile-time <${surfaceName}> does not support spread props`)
+      throw state.errorAt(attribute, "Compile-time <Icon> does not support spread props")
     }
 
     const attributeName = getJsxAttributeIdentifier(attribute.name)
@@ -429,6 +419,232 @@ function createExpressionAttribute(name: string, expression: ts.Expression): ts.
   )
 }
 
+function createInlineMaskStyle(
+  styleExpression: ts.Expression | undefined,
+  iconImportName: string,
+  styleTarget: "object" | "string"
+): ts.Expression | undefined {
+  const mergedObjectStyle = mergeInlineMaskStyleObject(styleExpression, iconImportName)
+  if (!mergedObjectStyle) {
+    return undefined
+  }
+
+  if (styleTarget === "string") {
+    return createCssTextExpression(mergedObjectStyle)
+  }
+
+  return mergedObjectStyle
+}
+
+function mergeInlineMaskStyleObject(
+  styleExpression: ts.Expression | undefined,
+  iconImportName: string
+): ts.ObjectLiteralExpression | undefined {
+  if (!styleExpression) {
+    return createMaskVariableStyle(iconImportName)
+  }
+
+  if (!ts.isObjectLiteralExpression(styleExpression)) {
+    return undefined
+  }
+
+  const baseProperties = createMaskVariableStyle(iconImportName).properties
+  const mergedProperties: ts.ObjectLiteralElementLike[] = [...baseProperties]
+  const indexByName = new Map<string, number>()
+
+  for (const [index, property] of mergedProperties.entries()) {
+    const name = getObjectLiteralPropertyName(property)
+    if (name) {
+      indexByName.set(name, index)
+    }
+  }
+
+  for (const property of styleExpression.properties) {
+    if (!ts.isPropertyAssignment(property)) {
+      return undefined
+    }
+
+    const name = getObjectLiteralPropertyName(property)
+    if (!name) {
+      return undefined
+    }
+
+    const clonedProperty = ts.factory.createPropertyAssignment(clonePropertyName(property.name), property.initializer)
+    const existingIndex = indexByName.get(name)
+
+    if (existingIndex == null) {
+      indexByName.set(name, mergedProperties.length)
+      mergedProperties.push(clonedProperty)
+      continue
+    }
+
+    mergedProperties[existingIndex] = clonedProperty
+  }
+
+  return ts.factory.createObjectLiteralExpression(mergedProperties, true)
+}
+
+function createMaskVariableStyle(iconImportName: string): ts.ObjectLiteralExpression {
+  const iconUrl = ts.factory.createIdentifier(iconImportName)
+
+  return ts.factory.createObjectLiteralExpression(
+    [createObjectStyleProperty(MASK_IMAGE_VAR_NAME, createCssUrlExpression(iconUrl))],
+    true
+  )
+}
+
+function createObjectStyleProperty(name: string, value: ts.Expression): ts.PropertyAssignment {
+  return ts.factory.createPropertyAssignment(createPropertyName(name), value)
+}
+
+function createCssUrlExpression(iconUrlExpression: ts.Expression): ts.Expression {
+  return ts.factory.createTemplateExpression(ts.factory.createTemplateHead('url("'), [
+    ts.factory.createTemplateSpan(iconUrlExpression, ts.factory.createTemplateTail('")')),
+  ])
+}
+
+function createCssTextExpression(styleObject: ts.ObjectLiteralExpression): ts.Expression {
+  return styleObject.properties.reduce<ts.Expression | undefined>((expression, property) => {
+    if (!ts.isPropertyAssignment(property)) {
+      return expression
+    }
+
+    const propertyName = getObjectLiteralPropertyName(property)
+    if (!propertyName) {
+      return expression
+    }
+
+    const propertyChunk = ts.factory.createTemplateExpression(
+      ts.factory.createTemplateHead(`${toCssPropertyName(propertyName)}:`),
+      [ts.factory.createTemplateSpan(property.initializer, ts.factory.createTemplateTail(";"))]
+    )
+
+    if (!expression) {
+      return propertyChunk
+    }
+
+    return ts.factory.createBinaryExpression(expression, ts.SyntaxKind.PlusToken, propertyChunk)
+  }, undefined) ?? ts.factory.createStringLiteral("")
+}
+
+function getObjectLiteralPropertyName(property: ts.ObjectLiteralElementLike): string | undefined {
+  if (!ts.isPropertyAssignment(property)) {
+    return undefined
+  }
+
+  if (ts.isIdentifier(property.name)) {
+    return property.name.text
+  }
+
+  if (ts.isStringLiteral(property.name) || ts.isNumericLiteral(property.name)) {
+    return property.name.text
+  }
+
+  return undefined
+}
+
+function clonePropertyName(name: ts.PropertyName): ts.PropertyName {
+  if (ts.isIdentifier(name)) {
+    return ts.factory.createIdentifier(name.text)
+  }
+
+  if (ts.isStringLiteral(name)) {
+    return ts.factory.createStringLiteral(name.text)
+  }
+
+  if (ts.isNumericLiteral(name)) {
+    return ts.factory.createNumericLiteral(name.text)
+  }
+
+  return name
+}
+
+function createPropertyName(name: string): ts.PropertyName {
+  return /^[$A-Z_a-z][$\w]*$/.test(name)
+    ? ts.factory.createIdentifier(name)
+    : ts.factory.createStringLiteral(name)
+}
+
+function toCssPropertyName(propertyName: string): string {
+  if (propertyName.startsWith("--")) {
+    return propertyName
+  }
+
+  if (propertyName.startsWith("Webkit")) {
+    return `-webkit-${camelToKebab(propertyName.slice("Webkit".length))}`
+  }
+
+  return camelToKebab(propertyName)
+}
+
+function camelToKebab(value: string): string {
+  return value
+    .replace(/^[A-Z]/, (character) => character.toLowerCase())
+    .replace(/[A-Z]/g, (character) => `-${character.toLowerCase()}`)
+}
+
+function withMaskClass(attributes: readonly ts.JsxAttributeLike[], preferredName: "class" | "className"): ts.JsxAttributeLike[] {
+  const merged = [...attributes]
+  const classIndex = merged.findIndex((attribute) => {
+    const name = getJsxAttributeName(attribute)
+    return name === "class" || name === "className"
+  })
+
+  if (classIndex === -1) {
+    merged.push(createStringAttribute(preferredName, MASK_CLASS_NAME))
+    return merged
+  }
+
+  const attribute = merged[classIndex]
+  if (!ts.isJsxAttribute(attribute)) {
+    return merged
+  }
+
+  merged[classIndex] = appendClassName(attribute, MASK_CLASS_NAME)
+  return merged
+}
+
+function appendClassName(attribute: ts.JsxAttribute, className: string): ts.JsxAttribute {
+  if (!attribute.initializer) {
+    return createStringAttribute(getJsxAttributeIdentifier(attribute.name), className)
+  }
+
+  if (ts.isStringLiteral(attribute.initializer)) {
+    return createStringAttribute(getJsxAttributeIdentifier(attribute.name), `${attribute.initializer.text} ${className}`)
+  }
+
+  if (ts.isJsxExpression(attribute.initializer) && attribute.initializer.expression) {
+    return createExpressionAttribute(
+      getJsxAttributeIdentifier(attribute.name),
+      createJoinedClassNameExpression(attribute.initializer.expression, className)
+    )
+  }
+
+  return attribute
+}
+
+function createJoinedClassNameExpression(expression: ts.Expression, className: string): ts.Expression {
+  return ts.factory.createCallExpression(
+    ts.factory.createPropertyAccessExpression(
+      ts.factory.createCallExpression(
+        ts.factory.createPropertyAccessExpression(
+          ts.factory.createArrayLiteralExpression([expression, ts.factory.createStringLiteral(className)]),
+          "filter"
+        ),
+        undefined,
+        [ts.factory.createIdentifier("Boolean")]
+      ),
+      "join"
+    ),
+    undefined,
+    [ts.factory.createStringLiteral(" ")]
+  )
+}
+
+function styleTargetToClassPropName(styleTarget: "object" | "string"): "class" | "className" {
+  return styleTarget === "string" ? "class" : "className"
+}
+
 function createA11yFallback(attributes: readonly ts.JsxAttributeLike[]): ts.JsxAttribute[] {
   const names = new Set(attributes.map((attribute) => getJsxAttributeName(attribute)).filter(Boolean))
   if (names.has("aria-hidden") || names.has("aria-label") || names.has("aria-labelledby") || names.has("role")) {
@@ -479,12 +695,16 @@ function createNamedImport(moduleId: string, bindings: Array<[string, string]>):
   )
 }
 
+function createSideEffectImport(specifier: string): ts.ImportDeclaration {
+  return ts.factory.createImportDeclaration(undefined, undefined, ts.factory.createStringLiteral(specifier), undefined)
+}
+
 function getJsxAttributeIdentifier(name: ts.JsxAttributeName): string {
   return ts.isIdentifier(name) ? name.text : name.getText()
 }
 
 function parseInlineSvg(iconPath: string, fromFile: string): ts.JsxElement | ts.JsxSelfClosingElement {
-  const rawSvg = readFileSync(iconPath, "utf8").trim()
+  const rawSvg = readRawSvg(iconPath)
   const source = ts.createSourceFile(
     `${iconPath}.tsx`,
     `const __streamlineInlineIcon = (${rawSvg});`,
@@ -511,6 +731,10 @@ function parseInlineSvg(iconPath: string, fromFile: string): ts.JsxElement | ts.
   }
 
   return cloneStaticJsxNode(expression)
+}
+
+function readRawSvg(iconPath: string): string {
+  return readFileSync(iconPath, "utf8").trim()
 }
 
 function cloneStaticJsxNode(node: ts.JsxElement | ts.JsxSelfClosingElement): ts.JsxElement | ts.JsxSelfClosingElement {
@@ -641,10 +865,6 @@ function isCompileImport(statement: ts.Statement): boolean {
 
 function isReservedAttribute(name: string, state: TransformState): boolean {
   if (name === "src") {
-    return true
-  }
-
-  if (name === "data-icon-id" || name === "data-icon-url") {
     return true
   }
 

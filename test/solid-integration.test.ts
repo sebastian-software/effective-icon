@@ -41,11 +41,15 @@ describe.sequential("solid consumer integration", () => {
   it("builds the solid fixture app for mask mode", async () => {
     process.env.STREAMLINE_RENDER_MODE = "mask"
 
-    const code = collectChunkCode(await buildFixtureApp())
+    const outputs = await buildFixtureApp()
+    const code = collectChunkCode(outputs)
+    const assets = collectAssetText(outputs)
 
+    expect(assets).toContain(".effective-icon-mask")
     expect(code).toContain("Solid Fixture")
-    expect(code).toContain("buildIconMaskStyle")
-    expect(code).toContain("maskImage")
+    expect(code).toContain("effective-icon-mask")
+    expect(code).toContain("--effective-icon-mask-image")
+    expect(code).not.toContain("buildIconMaskStyleString")
     expect(code).not.toContain("@effective/icon/compile")
   })
 
@@ -92,6 +96,14 @@ function collectChunkCode(outputs: BuildOutput[]): string {
     .flatMap((output) => output.output)
     .filter(isOutputChunk)
     .map((chunk) => chunk.code)
+    .join("\n")
+}
+
+function collectAssetText(outputs: BuildOutput[]): string {
+  return outputs
+    .flatMap((output) => output.output)
+    .filter((asset): asset is BuildAsset => asset.type === "asset")
+    .map((asset) => (typeof asset.source === "string" ? asset.source : Buffer.from(asset.source).toString("utf8")))
     .join("\n")
 }
 

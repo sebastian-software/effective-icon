@@ -17,13 +17,7 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      {
-        find: /^@fixture\/app$/,
-        replacement:
-          process.env.STREAMLINE_SURFACE === "custom-element"
-            ? path.join(fixtureRoot, "main-web-component.tsx")
-            : path.join(fixtureRoot, "main-jsx.tsx"),
-      },
+      { find: /^@fixture\/app$/, replacement: path.join(fixtureRoot, "main-jsx.tsx") },
       { find: /^@effective\/icon$/, replacement: path.join(repoRoot, "src/index.ts") },
       { find: /^@effective\/icon\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
       { find: /^@effective\/icon\/compile$/, replacement: path.join(repoRoot, "src/compile.ts") },
@@ -31,24 +25,16 @@ export default defineConfig({
     ],
   },
   plugins: [
-    effectiveIconVitePlugin(
-      process.env.STREAMLINE_SURFACE === "custom-element"
-        ? {
-            package: "@icon-pkg/streamline-core-line-free",
-            surface: "custom-element",
-            typesOutputFile: false,
-          }
-        : {
-            package: "@icon-pkg/streamline-core-line-free",
-            surface: "jsx",
-            renderMode:
-              process.env.STREAMLINE_RENDER_MODE === "mask"
-                ? "mask"
-                : process.env.STREAMLINE_RENDER_MODE === "svg"
-                  ? "svg"
-                  : "image",
-            typesOutputFile: false,
-          }
-    ),
+    effectiveIconVitePlugin({
+      package: "@icon-pkg/streamline-core-line-free",
+      surface: "jsx",
+      renderMode:
+        process.env.STREAMLINE_RENDER_MODE === "mask"
+          ? "mask"
+          : process.env.STREAMLINE_RENDER_MODE === "svg"
+            ? "svg"
+            : "image",
+      typesOutputFile: false,
+    }),
   ],
 })

@@ -62,7 +62,7 @@ describe("compile-time transform", () => {
     expect(transformed).not.toContain("?url")
   })
 
-  it("rewrites JSX icons for mask mode", async () => {
+  it("inlines mask styles for static object literals", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
       import { Icon } from "${COMPILE_MODULE_ID}"
@@ -79,30 +79,126 @@ describe("compile-time transform", () => {
       resolvedPackage,
     })
 
-    expect(transformed).toContain("buildIconMaskStyle")
+    expect(transformed).toContain('import "virtual:effective-icon/mask.css"')
+    expect(transformed).toContain("effective-icon-mask")
+    expect(transformed).toContain("--effective-icon-mask-image")
+    expect(transformed).toContain('color: "tomato"')
+    expect(transformed).not.toContain("buildIconMaskStyle")
     expect(transformed).toContain("<span")
   })
 
-  it("rewrites direct custom-element icons for custom-element surface", async () => {
+  it("inlines solid mask styles as CSS text for static paths", async () => {
     const resolvedPackage = await loadResolvedPackage()
     const source = `
-      const view = <section><effective-icon name="airplane" className="icon" /></section>
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const view = <Icon name="airplane" class="icon" />
     `
 
     const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
       options: {
         package: packageName,
-        surface: "custom-element",
-        renderMode: "image",
+        surface: "jsx",
+        renderMode: "mask",
+        styleTarget: "string",
       },
       resolvedPackage,
     })
 
-    expect(transformed).toContain("?url")
-    expect(transformed).toContain("data-icon-url")
-    expect(transformed).toContain("ensureIconElement")
-    expect(transformed).toContain("effective-icon")
-    expect(transformed).not.toContain('name="airplane"')
+    expect(transformed).toContain('import "virtual:effective-icon/mask.css"')
+    expect(transformed).toContain("effective-icon-mask")
+    expect(transformed).toContain("--effective-icon-mask-image")
+    expect(transformed).not.toContain("buildIconMaskStyleString")
+    expect(transformed).toContain("<span")
+  })
+
+  it("keeps the runtime helper for dynamic mask styles", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const iconStyle = getIconStyle()
+      const view = <Icon name="airplane" className="icon" style={iconStyle} />
+    `
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        surface: "jsx",
+        renderMode: "mask",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed).toContain("buildIconMaskStyle")
+    expect(transformed).toContain("iconStyle")
+    expect(transformed).toContain("<span")
+  })
+
+  it("merges dynamic className expressions for mask output", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const iconClass = getIconClass()
+      const view = <Icon name="airplane" className={iconClass} />
+    `
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        surface: "jsx",
+        renderMode: "mask",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed).toContain("effective-icon-mask")
+    expect(transformed).toContain(".filter(Boolean).join(\" \")")
+  })
+
+  it("merges dynamic class expressions for solid mask output", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const iconClass = getIconClass()
+      const view = <Icon name="airplane" class={iconClass} />
+    `
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        surface: "jsx",
+        renderMode: "mask",
+        styleTarget: "string",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed).toContain("effective-icon-mask")
+    expect(transformed).toContain(".filter(Boolean).join(\" \")")
+  })
+
+  it("imports the virtual mask css only once per file", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `
+      import { Icon } from "${COMPILE_MODULE_ID}"
+
+      const first = <Icon name="airplane" />
+      const second = <Icon name="add-1" />
+    `
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        surface: "jsx",
+        renderMode: "mask",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed?.match(/virtual:effective-icon\/mask\.css/g)).toHaveLength(1)
   })
 
   it("fails on missing compile import", async () => {
@@ -158,7 +254,7 @@ describe("compile-time transform", () => {
     ).toThrow(/requires name="literal"/)
   })
 
-  it("fails on the wrong authoring surface for each surface", async () => {
+  it("fails on unsupported direct custom-element authoring", async () => {
     const resolvedPackage = await loadResolvedPackage()
 
     expect(() =>
@@ -174,22 +270,7 @@ describe("compile-time transform", () => {
           resolvedPackage,
         }
       )
-    ).toThrow(/only supported when surface is "custom-element"/)
-
-    expect(() =>
-      transformCompileTimeIcons(
-        `import { Icon } from "${COMPILE_MODULE_ID}"; const view = <Icon name="airplane" />`,
-        "/virtual/input.tsx",
-        {
-          options: {
-            package: packageName,
-            surface: "custom-element",
-            renderMode: "image",
-          },
-          resolvedPackage,
-        }
-      )
-    ).toThrow(/only supported when surface is "jsx"/)
+    ).toThrow(/no longer supported/)
   })
 
   it("fails on spread props and children", async () => {

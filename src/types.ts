@@ -1,4 +1,4 @@
-export type IconSurface = "jsx" | "custom-element"
+export type IconSurface = "jsx"
 
 export type IconRenderMode = "image" | "component" | "mask" | "svg"
 

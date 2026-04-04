@@ -1,9 +1,13 @@
 import type { Plugin, ResolvedConfig } from "vite"
 
 import { resolveIconPackage, type ResolvedIconPackage } from "./resolve-package"
+import { EFFECTIVE_ICON_MASK_CLASS_NAME, EFFECTIVE_ICON_MASK_IMAGE_VAR_NAME } from "./runtime"
 import { syncEffectiveIconTypeFile } from "./typegen"
 import { transformCompileTimeIcons } from "./transform"
 import type { EffectiveIconVitePluginOptions } from "./types"
+
+export const MASK_CSS_MODULE_ID = "virtual:effective-icon/mask.css"
+const RESOLVED_MASK_CSS_MODULE_ID = "\0virtual:effective-icon/mask.css"
 
 interface PluginState {
   config?: ResolvedConfig
@@ -17,22 +21,55 @@ export function effectiveIconVitePlugin(options: EffectiveIconVitePluginOptions)
     throw new Error('effectiveIconVitePlugin() requires a "package" option')
   }
 
+  const surface = options.surface ?? "jsx"
+  if (surface !== "jsx") {
+    throw new Error(`effectiveIconVitePlugin() no longer supports surface "${surface}"`)
+  }
+
   const normalizedOptions = {
     package: options.package,
-    surface: options.surface ?? "jsx",
-    renderMode: normalizeRenderMode(options.renderMode),
+    surface,
+    renderMode: normalizeRenderMode(options.renderMode, surface),
+    styleTarget: "object" as const,
     typesOutputFile: options.typesOutputFile,
   } as const
-
-  if (normalizedOptions.surface === "custom-element" && options.renderMode) {
-    throw new Error('renderMode is only supported when surface is "jsx"')
-  }
 
   const state: PluginState = {}
 
   return {
     name: "effective-icon-vite-plugin",
     enforce: "pre",
+    resolveId(id) {
+      if (id === MASK_CSS_MODULE_ID) {
+        return RESOLVED_MASK_CSS_MODULE_ID
+      }
+
+      return null
+    },
+    load(id) {
+      if (id === RESOLVED_MASK_CSS_MODULE_ID) {
+        return `@layer effective-icon {
+  .${EFFECTIVE_ICON_MASK_CLASS_NAME} {
+  display: inline-block;
+  background-color: currentColor;
+  -webkit-mask-image: var(${EFFECTIVE_ICON_MASK_IMAGE_VAR_NAME});
+  mask-image: var(${EFFECTIVE_ICON_MASK_IMAGE_VAR_NAME});
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  }
+}
+`
+      }
+
+      return null
+    },
     async configResolved(config) {
       state.config = config
       await ensureTypegen(state, normalizedOptions)
@@ -47,7 +84,10 @@ export function effectiveIconVitePlugin(options: EffectiveIconVitePluginOptions)
 
       const resolvedPackage = await ensurePackage(state, normalizedOptions.package)
       const transformed = transformCompileTimeIcons(code, id, {
-        options: normalizedOptions,
+        options: {
+          ...normalizedOptions,
+          styleTarget: resolveStyleTarget(state.config),
+        },
         resolvedPackage,
       })
 
@@ -63,8 +103,20 @@ export function effectiveIconVitePlugin(options: EffectiveIconVitePluginOptions)
   }
 }
 
-function normalizeRenderMode(renderMode: EffectiveIconVitePluginOptions["renderMode"] | undefined): "image" | "mask" | "svg" {
-  if (renderMode === "component" || renderMode == null) {
+function resolveStyleTarget(config: ResolvedConfig | undefined): "object" | "string" {
+  const usesSolid = config?.plugins.some((plugin) => plugin.name.toLowerCase().includes("solid")) ?? false
+  return usesSolid ? "string" : "object"
+}
+
+function normalizeRenderMode(
+  renderMode: EffectiveIconVitePluginOptions["renderMode"] | undefined,
+  _surface: EffectiveIconVitePluginOptions["surface"] | undefined
+): "image" | "mask" | "svg" {
+  if (renderMode === "component") {
+    return "image"
+  }
+
+  if (renderMode == null) {
     return "image"
   }
 

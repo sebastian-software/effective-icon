@@ -58,21 +58,12 @@ describe.sequential("vite consumer integration", () => {
 
     const outputs = await buildFixtureApp()
     const code = collectChunkCode(outputs)
+    const assets = collectAssetText(outputs)
 
-    expect(code).toContain("buildIconMaskStyle")
-    expect(code).toContain("maskImage")
-    expect(code).not.toContain("anchor")
-  })
-
-  it("builds the fixture app for custom-element surface", async () => {
-    process.env.STREAMLINE_SURFACE = "custom-element"
-
-    const outputs = await buildFixtureApp()
-    const code = collectChunkCode(outputs)
-
-    expect(code).toContain("effective-icon")
-    expect(code).toContain("data-icon-url")
-    expect(code).toContain("ensureIconElement")
+    expect(assets).toContain(".effective-icon-mask")
+    expect(code).toContain("effective-icon-mask")
+    expect(code).toContain("--effective-icon-mask-image")
+    expect(code).not.toContain("buildIconMaskStyle")
     expect(code).not.toContain("anchor")
   })
 })
@@ -108,6 +99,14 @@ function collectChunkCode(outputs: BuildOutput[]): string {
     .flatMap((output) => output.output)
     .filter(isOutputChunk)
     .map((chunk) => chunk.code)
+    .join("\n")
+}
+
+function collectAssetText(outputs: BuildOutput[]): string {
+  return outputs
+    .flatMap((output) => output.output)
+    .filter((asset): asset is BuildAsset => asset.type === "asset")
+    .map((asset) => (typeof asset.source === "string" ? asset.source : Buffer.from(asset.source).toString("utf8")))
     .join("\n")
 }
 
