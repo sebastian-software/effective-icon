@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/sebastian-software/effective-icon/compare/icon-v0.2.1...icon-v0.3.0) (2026-04-04)
+
+
+### Features
+
+* **demo:** rebuild demos around React and Solid integrations ([404687c](https://github.com/sebastian-software/effective-icon/commit/404687c930f664a939e95257921bdbb886ac578b))
+
 ## [0.2.1](https://github.com/sebastian-software/effective-icon/compare/icon-v0.2.0...icon-v0.2.1) (2026-04-02)
 
 
