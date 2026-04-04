@@ -1,0 +1,20 @@
+codecov:
+  require_ci_to_pass: true
+
+coverage:
+  status:
+    project:
+      default:
+        target: 90%
+    patch: off
+
+ignore:
+  - "coverage/**"
+  - "demo/**"
+  - "dist/**"
+  - "fixtures/**"
+  - "packages/demo-*/**"
+  - "packages/demo-shared/**"
+  - "scripts/**"
+  - "test/**"
+  - "**/*.d.ts"

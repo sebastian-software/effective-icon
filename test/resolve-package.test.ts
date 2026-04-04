@@ -62,6 +62,31 @@ describe("resolveIconPackage", () => {
 
     await expect(resolveIconPackage(packageName, root)).rejects.toThrow(/invalid icon entry/)
   })
+
+  it("fails when the manifest does not declare any icons", async () => {
+    const root = await createWorkspacePack({
+      manifest: {
+        name: packageName,
+        icons: [],
+      },
+      files: [],
+    })
+
+    await expect(resolveIconPackage(packageName, root)).rejects.toThrow(/does not declare any icons/)
+  })
+
+  it("ignores non-directory and broken workspace candidates while searching for a pack", async () => {
+    const root = await createTempRoot()
+    const packsDir = path.join(root, "packages", "packs")
+
+    await mkdir(path.join(packsDir, "broken-pack"), { recursive: true })
+    await mkdir(path.join(packsDir, "other-pack"), { recursive: true })
+    await writeFile(path.join(packsDir, "README.md"), "not a directory entry candidate")
+    await writeFile(path.join(packsDir, "broken-pack", "package.json"), "{invalid json")
+    await writeFile(path.join(packsDir, "other-pack", "package.json"), JSON.stringify({ name: "@icon-pkg/other-pack" }))
+
+    await expect(resolveIconPackage(packageName, root)).rejects.toThrow(/Unable to resolve manifest/)
+  })
 })
 
 async function createTempRoot(): Promise<string> {

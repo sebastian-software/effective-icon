@@ -1,5 +1,7 @@
 # @effective/icon
 
+[![codecov](https://codecov.io/gh/sebastian-software/effective-icon/graph/badge.svg)](https://codecov.io/gh/sebastian-software/effective-icon)
+
 Named icons without the runtime tax.
 
 `@effective/icon` lets you author icons the way people actually want to use them:
@@ -226,6 +228,12 @@ Run the node-side suite with:
 pnpm test
 ```
 
+Run the node-side suite with coverage enforcement and Codecov-compatible reports with:
+
+```bash
+pnpm test:coverage
+```
+
 Run the visual mask smoke checks in real browser mode with:
 
 ```bash
@@ -239,6 +247,7 @@ pnpm test:browser:update
 ```
 
 The browser tests use Vitest Browser Mode with the Playwright provider. On macOS they automatically use the system Google Chrome binary when present. You can override that with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
+The CI workflow uploads `pnpm test:coverage` results to Codecov and enforces a global 90%+ line coverage target.
 
 ## Vite Config
 
