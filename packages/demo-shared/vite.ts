@@ -6,15 +6,13 @@ import type { UserConfig } from "vite"
 
 import { effectiveIconVitePlugin } from "../../src/plugin"
 import type { EffectiveIconVitePluginOptions } from "../../src/types"
-
-type DemoVariant = "image" | "mask" | "svg" | "custom-element"
+import { demoRouteByKey, demoRoutes, type DemoKey } from "./src/catalog"
 
 interface CreateDemoConfigOptions {
   appRoot: string
   isDevServer: boolean
   outDir: string
   port: number
-  variant: DemoVariant
 }
 
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..")
@@ -41,62 +39,23 @@ const demoPackInfo = {
   version: packManifest.version,
 } as const
 
-function resolvePluginOptions(variant: DemoVariant): EffectiveIconVitePluginOptions {
-  switch (variant) {
-    case "mask":
-      return {
-        package: "@icon-pkg/streamline-core-line-free",
-        renderMode: "mask",
-        surface: "jsx",
-        typesOutputFile: false,
-      }
-    case "svg":
-      return {
-        package: "@icon-pkg/streamline-core-line-free",
-        renderMode: "svg",
-        surface: "jsx",
-        typesOutputFile: false,
-      }
-    case "custom-element":
-      return {
-        package: "@icon-pkg/streamline-core-line-free",
-        surface: "custom-element",
-        typesOutputFile: false,
-      }
-    case "image":
-    default:
-      return {
-        package: "@icon-pkg/streamline-core-line-free",
-        renderMode: "image",
-        surface: "jsx",
-        typesOutputFile: false,
-      }
+export function createDemoLinks(isDevServer: boolean): Record<DemoKey, string> {
+  return Object.fromEntries(
+    demoRoutes.map((route) => [route.key, isDevServer ? `http://127.0.0.1:${route.port}/` : `../${route.slug}/`])
+  ) as Record<DemoKey, string>
+}
+
+export function createFrameworkDemoConfig(options: CreateDemoConfigOptions & { demo: DemoKey }): UserConfig {
+  return {
+    ...createBaseDemoConfig(options),
+    plugins: [effectiveIconVitePlugin(resolvePluginOptions(options.demo))],
   }
 }
 
-export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }: CreateDemoConfigOptions): UserConfig {
-  const links = isDevServer
-    ? {
-        image: "http://127.0.0.1:4174/",
-        mask: "http://127.0.0.1:4175/",
-        svg: "http://127.0.0.1:4176/",
-        "custom-element": "http://127.0.0.1:4177/",
-      }
-    : {
-        image: "../image/",
-        mask: "../mask/",
-        svg: "../inline-svg/",
-        "custom-element": "../web-component/",
-      }
-
+function createBaseDemoConfig({ appRoot, isDevServer, outDir, port }: CreateDemoConfigOptions): UserConfig {
   return {
     root: appRoot,
     base: "./",
-    esbuild: {
-      jsx: "transform",
-      jsxFactory: "h",
-      jsxFragment: "Fragment",
-    },
     server: {
       host: "127.0.0.1",
       port,
@@ -108,13 +67,14 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
       emptyOutDir: true,
     },
     define: {
-      __STREAMLINE_DEMO_LINKS__: JSON.stringify(links),
+      __STREAMLINE_DEMO_LINKS__: JSON.stringify(createDemoLinks(isDevServer)),
       __STREAMLINE_DEMO_PACK_INFO__: JSON.stringify(demoPackInfo),
     },
     resolve: {
       alias: [
         { find: /^@streamline-demo\/shared$/, replacement: path.join(sharedRoot, "src/index.ts") },
-        { find: /^@streamline-demo\/shared\/web-component$/, replacement: path.join(sharedRoot, "src/mount-web-component.ts") },
+        { find: /^@streamline-demo\/shared\/react-app$/, replacement: path.join(sharedRoot, "src/react-app.tsx") },
+        { find: /^@streamline-demo\/shared\/solid-app$/, replacement: path.join(sharedRoot, "src/solid-app.tsx") },
         { find: /^@streamline-demo\/shared\/styles\.css$/, replacement: path.join(sharedRoot, "src/styles.css") },
         { find: /^@effective\/icon$/, replacement: path.join(repoRoot, "src/index.ts") },
         { find: /^@effective\/icon\/vite-plugin$/, replacement: path.join(repoRoot, "src/plugin.ts") },
@@ -122,6 +82,16 @@ export function createDemoConfig({ appRoot, isDevServer, outDir, port, variant }
         { find: /^@effective\/icon\/runtime$/, replacement: path.join(repoRoot, "src/runtime.ts") },
       ],
     },
-    plugins: [effectiveIconVitePlugin(resolvePluginOptions(variant))],
+  }
+}
+
+function resolvePluginOptions(key: DemoKey): EffectiveIconVitePluginOptions {
+  const route = demoRouteByKey[key]
+
+  return {
+    package: "@icon-pkg/streamline-core-line-free",
+    surface: route.surface,
+    renderMode: route.renderMode,
+    typesOutputFile: false,
   }
 }

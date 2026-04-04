@@ -1,4 +1,4 @@
-export type DemoVariantKey = "image" | "mask" | "svg" | "custom-element"
+import { demoRouteByKey, type DemoFramework, type DemoKey, type DemoRenderMode, type DemoRoute } from "./catalog"
 
 interface DemoPackInfo {
   family: string
@@ -10,31 +10,21 @@ interface DemoPackInfo {
   version: string
 }
 
-interface DemoLinkMap {
-  image: string
-  mask: string
-  svg: string
-  "custom-element": string
-}
+type DemoLinkMap = Record<DemoKey, string>
 
-interface DemoVariantDefinition {
-  colorNote: string
-  componentOutput: string
-  defaultTint: string
-  differences: [string, string, string]
-  inlineOutput: string
-  lead: string
-  liveElement: string
-  renderMode: string
-  supportsRuntimeTinting: boolean
-  tabLabel: string
-  title: string
-}
-
-interface DemoLiveExample {
-  code: string
+interface DemoFact {
   label: string
-  title: string
+  value: string
+}
+
+export interface DemoPageDefinition {
+  facts: DemoFact[]
+  outputCode: string
+  outputLabel: string
+  proofLabel: string
+  route: DemoRoute
+  sourceCode: string
+  sourceLabel: string
 }
 
 declare const __STREAMLINE_DEMO_PACK_INFO__: DemoPackInfo
@@ -43,183 +33,89 @@ declare const __STREAMLINE_DEMO_LINKS__: DemoLinkMap
 export const packInfo = __STREAMLINE_DEMO_PACK_INFO__
 export const demoLinks = __STREAMLINE_DEMO_LINKS__
 
-export const jsxComponentSource = `import { Icon } from "@effective/icon/compile"
+export function getDemoPageDefinition(key: DemoKey): DemoPageDefinition {
+  const route = demoRouteByKey[key]
 
-function StatusBar() {
-  return <Icon name="airplane" />
+  return {
+    route,
+    proofLabel: `${route.familyLabel} demo`,
+    sourceLabel: `${route.familyLabel} source`,
+    sourceCode: getFrameworkSource(route.framework, route.renderMode),
+    outputLabel: `Output — ${route.modeLabel}`,
+    outputCode: getOutputCode(route.framework, route.renderMode),
+    facts: buildFacts(route),
+  }
+}
+
+export function getProofSyntax(): string {
+  return `<Icon name="airplane" />`
+}
+
+function buildFacts(route: DemoRoute): DemoFact[] {
+  return [
+    { label: "Demo", value: "Framework integration" },
+    { label: "Consumer", value: route.familyLabel },
+    { label: "Authoring API", value: "`<Icon />`" },
+    { label: "Render mode", value: route.modeLabel },
+    { label: "Emitted element", value: route.emittedElement },
+    { label: "Runtime", value: route.runtimeLabel },
+  ]
+}
+
+function getFrameworkSource(framework: DemoFramework, renderMode: DemoRenderMode): string {
+  if (framework === "solid") {
+    return `import { Icon } from "@effective/icon/compile"
+
+export function StatusCard() {
+  return <Icon name="airplane" class="status-icon" aria-label="Airplane" />
+}
+
+// Vite plugin config uses renderMode: "${renderMode}".`
+  }
+
+  return `import { Icon } from "@effective/icon/compile"
+
+export function StatusCard() {
+  return <Icon name="airplane" className="status-icon" aria-label="Airplane" />
+}
+
+// Vite plugin config uses renderMode: "${renderMode}".`
+}
+
+function getOutputCode(framework: DemoFramework, renderMode: DemoRenderMode): string {
+  if (renderMode === "mask") {
+    if (framework === "solid") {
+      return `import "virtual:effective-icon/mask.css"
+import __iconAsset0 from ".../airplane.svg?url"
+
+function StatusDemo() {
+  return <span class="status-icon effective-icon-mask" style={\`--effective-icon-mask-image:url("\${__iconAsset0}");\`} aria-label="Airplane" />
 }`
+    }
 
-export const jsxInlineSource = `import { Icon } from "@effective/icon/compile"
+    return `import "virtual:effective-icon/mask.css"
+import __iconAsset0 from ".../airplane.svg?url"
 
-function Toolbar() {
-  return <Button startIcon={<Icon name="magic-wand-2" />}>Transform</Button>
+function StatusDemo() {
+  return <span className="status-icon" style={{
+    "--effective-icon-mask-image": \`url("\${__iconAsset0}")\`,
+  }} className="status-icon effective-icon-mask" aria-label="Airplane" />
 }`
+  }
 
-export const webComponentComponentSource = `function StatusBar() {
-  return <effective-icon name="airplane" />
-}`
-
-export const webComponentInlineSource = `function Toolbar() {
-  return <Button startIcon={<effective-icon name="magic-wand-2" />}>Transform</Button>
-}`
-
-export const jsxLiveExamples: DemoLiveExample[] = [
-  {
-    code: `<Icon name="airplane" />`,
-    label: "Standalone component",
-    title: "airplane",
-  },
-  {
-    code: `startIcon={<Icon name="magic-wand-2" />}`,
-    label: "As prop value",
-    title: "magic-wand-2",
-  },
-] as const
-
-export const webComponentLiveExamples: DemoLiveExample[] = [
-  {
-    code: `<effective-icon name="airplane" />`,
-    label: "Standalone custom element",
-    title: "airplane",
-  },
-  {
-    code: `startIcon={<effective-icon name="magic-wand-2" />}`,
-    label: "As prop value",
-    title: "magic-wand-2",
-  },
-] as const
-
-export const runtimeTintPalette = ["#dc5a29", "#2f7df4", "#1f9d63", "#8b5cf6", "#171717"] as const
-
-export const failureCases = [
-  'Unknown icon names fail the build immediately.',
-  'Compile-time <Icon> and <effective-icon> require name="literal".',
-  'Each surface only accepts its own authoring syntax.',
-  "Spread props and children are rejected.",
-] as const
-
-export const variantDefinitions: Record<DemoVariantKey, DemoVariantDefinition> = {
-  image: {
-    colorNote:
-      "Emits external SVG URLs as img elements — runtime tinting not supported. Switch to mask or inline SVG to tint.",
-    componentOutput: `import __s from ".../airplane.svg?url"
-
-function StatusBar() {
-  return <img src={__s} />
-}`,
-    defaultTint: "#dc5a29",
-    differences: [
-      "Asset import: `icon.svg?url`",
-      "Emitted element: `<img src={asset}>`",
-      "Extra runtime: none",
-    ],
-    inlineOutput: `import __s from ".../magic-wand-2.svg?url"
-
-function Toolbar() {
-  return <Button startIcon={<img src={__s} />}>Transform</Button>
-}`,
-    lead: "Rewrites compile-time markers to static img elements referencing external SVG assets.",
-    liveElement: "<img>",
-    renderMode: "jsx / image",
-    supportsRuntimeTinting: false,
-    tabLabel: "External SVG",
-    title: "External SVG output",
-  },
-  mask: {
-    colorNote: "Renders a span with mask-image and currentColor — tint updates live.",
-    componentOutput: `import __s from ".../airplane.svg?url"
-import { buildIconMaskStyle as __mask }
-  from "@effective/icon/runtime"
-
-function StatusBar() {
-  return <span style={__mask(__s)} />
-}`,
-    defaultTint: "#2f7df4",
-    differences: [
-      "Asset import: `icon.svg?url`",
-      "Emitted element: `<span style={mask(asset)}>`",
-      "Extra runtime: mask style helper",
-    ],
-    inlineOutput: `import __s from ".../magic-wand-2.svg?url"
-import { buildIconMaskStyle as __mask }
-  from "@effective/icon/runtime"
-
-function Toolbar() {
-  return <Button startIcon={<span style={__mask(__s)} />}>Transform</Button>
-}`,
-    lead: "Uses mask-image on a span so icons tint through currentColor without inlining SVG.",
-    liveElement: "<span>",
-    renderMode: "jsx / mask",
-    supportsRuntimeTinting: true,
-    tabLabel: "CSS Mask",
-    title: "CSS mask output",
-  },
-  svg: {
-    colorNote:
-      "Inlines SVG markup directly — fill and stroke respond to currentColor.",
-    componentOutput: `function StatusBar() {
+  if (renderMode === "svg") {
+    return `function StatusDemo() {
   return (
-    <svg viewBox="0 0 14 14" fill="none">
-      <path stroke="currentColor" d="M9.54..." />
+    <svg className="status-icon" viewBox="0 0 14 14" fill="none" aria-label="Airplane">
+      <path stroke="currentColor" d="M9.54 4.46..." />
     </svg>
   )
-}`,
-    defaultTint: "#8b5cf6",
-    differences: [
-      "Asset import: none",
-      "Emitted element: inline `<svg ...>` markup",
-      "Extra runtime: none",
-    ],
-    inlineOutput: `function Toolbar() {
-  return (
-    <Button startIcon={
-      <svg viewBox="0 0 14 14" fill="none">
-        <path stroke="currentColor" d="M13.5..." />
-      </svg>
-    }>Transform</Button>
-  )
-}`,
-    lead: "Inlines SVG markup directly into JSX — zero runtime, full currentColor support.",
-    liveElement: "<svg>",
-    renderMode: "jsx / svg",
-    supportsRuntimeTinting: true,
-    tabLabel: "SVG",
-    title: "Inline SVG output",
-  },
-  "custom-element": {
-    colorNote:
-      "Renders a custom element with shadow DOM mask — tints via currentColor, no inline SVG.",
-    componentOutput: `import __s from ".../airplane.svg?url"
-import { ensureIconElement }
-  from "@effective/icon/runtime"
-ensureIconElement()
+}`
+  }
 
-function StatusBar() {
-  return <effective-icon data-icon-url={__s} />
-}`,
-    defaultTint: "#1f9d63",
-    differences: [
-      "Asset import: `icon.svg?url`",
-      "Emitted element: `<effective-icon>`",
-      "Extra runtime: custom-element mask renderer",
-    ],
-    inlineOutput: `import __s from ".../magic-wand-2.svg?url"
-import { ensureIconElement }
-  from "@effective/icon/runtime"
-ensureIconElement()
+  return `import __iconAsset0 from ".../airplane.svg?url"
 
-function Toolbar() {
-  return (
-    <Button startIcon={
-      <effective-icon data-icon-url={__s} />
-    }>Transform</Button>
-  )
-}`,
-    lead: "Renders a custom element with shadow DOM mask for tintable icons without inlining SVG.",
-    liveElement: "<effective-icon>",
-    renderMode: "custom-element",
-    supportsRuntimeTinting: true,
-    tabLabel: "Custom Element",
-    title: "Custom element output",
-  },
+function StatusDemo() {
+  return <img className="status-icon" src={__iconAsset0} alt="" aria-label="Airplane" />
+}`
 }

@@ -1,3 +1,3 @@
-export { renderDemoPage } from "./render"
-export { mountDemoPage } from "./mount"
-export type { DemoVariantKey } from "./content"
+export { demoKeys, demoNavSections, demoRouteByKey, demoRoutes } from "./catalog"
+export { demoLinks, getDemoPageDefinition, getProofSyntax, packInfo } from "./content"
+export type { DemoFramework, DemoKey, DemoRenderMode, DemoRoute } from "./catalog"

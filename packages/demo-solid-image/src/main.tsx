@@ -12,4 +12,4 @@ if (!app) {
   throw new Error("Missing #app root element")
 }
 
-render(() => <SolidDemoApp demo="solid-svg" />, app)
+render(() => <SolidDemoApp demo="solid-image" />, app)

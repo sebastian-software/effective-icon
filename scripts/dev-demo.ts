@@ -1,19 +1,13 @@
 import { spawn, type ChildProcess } from "node:child_process"
 
-const repoRoot = process.cwd()
-const demos = [
-  { filter: "@streamline-demo/image", label: "image" },
-  { filter: "@streamline-demo/mask", label: "mask" },
-  { filter: "@streamline-demo/inline-svg", label: "svg" },
-  { filter: "@streamline-demo/web-component", label: "custom-element" },
-  { filter: "@streamline-demo/solid", label: "solid" },
-] as const
+import { demoRoutes } from "../packages/demo-shared/src/catalog"
 
+const repoRoot = process.cwd()
 const children: ChildProcess[] = []
 
 async function main(): Promise<void> {
-  for (const demo of demos) {
-    children.push(spawnPnpm(demo.filter, demo.label))
+  for (const demo of demoRoutes) {
+    children.push(spawnPnpm(demo.workspace, demo.slug))
   }
 }
 

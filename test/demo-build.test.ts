@@ -3,7 +3,7 @@ import path from "node:path"
 import { describe, expect, it } from "vitest"
 import { build } from "vite"
 
-type DemoApp = "image" | "mask" | "svg" | "custom-element" | "solid"
+import type { DemoKey } from "../packages/demo-shared/src/catalog"
 
 interface BuildChunk {
   code: string
@@ -23,63 +23,60 @@ interface BuildOutput {
 }
 
 const repoRoot = path.resolve(process.cwd())
-const configFiles: Record<DemoApp, string> = {
-  image: path.join(repoRoot, "packages", "demo-image", "vite.config.ts"),
-  mask: path.join(repoRoot, "packages", "demo-mask", "vite.config.ts"),
-  svg: path.join(repoRoot, "packages", "demo-inline-svg", "vite.config.ts"),
-  "custom-element": path.join(repoRoot, "packages", "demo-web-component", "vite.config.ts"),
-  solid: path.join(repoRoot, "packages", "demo-solid", "vite.config.ts"),
+const configFiles: Record<DemoKey, string> = {
+  "react-image": path.join(repoRoot, "packages", "demo-react-image", "vite.config.ts"),
+  "react-mask": path.join(repoRoot, "packages", "demo-react-mask", "vite.config.ts"),
+  "react-svg": path.join(repoRoot, "packages", "demo-react-svg", "vite.config.ts"),
+  "solid-image": path.join(repoRoot, "packages", "demo-solid-image", "vite.config.ts"),
+  "solid-mask": path.join(repoRoot, "packages", "demo-solid-mask", "vite.config.ts"),
+  "solid-svg": path.join(repoRoot, "packages", "demo-solid", "vite.config.ts"),
 }
 
 describe.sequential("workspace demo builds", () => {
-  it("builds the image app", async () => {
-    const code = collectChunkCode(await buildDemo("image"))
+  for (const demo of Object.keys(configFiles) as DemoKey[]) {
+    it(`builds the ${demo} app`, async () => {
+      const outputs = await buildDemo(demo)
+      const code = collectChunkCode(outputs)
+      const assets = collectAssetText(outputs)
 
-    expect(code).toContain("External SVG output")
-    expect(code).toContain("../mask/")
-    expect(code).toContain('"img"')
-    expect(code).toContain("?url")
-  })
+      expect(code).toContain("Framework demos")
+      expect(code).toContain("React")
+      expect(code).toContain("Solid")
+      expect(code).not.toContain("Inline usage")
 
-  it("builds the mask app", async () => {
-    const code = collectChunkCode(await buildDemo("mask"))
+      if (demo.startsWith("react-")) {
+        expect(code).toContain("React /")
+        expect(code).toContain("createRoot")
+      }
 
-    expect(code).toContain("CSS mask output")
-    expect(code).toContain("../image/")
-    expect(code).toContain("buildIconMaskStyle")
-    expect(code).toContain('"span"')
-  })
+      if (demo.startsWith("solid-")) {
+        expect(code).toContain("Solid /")
+        expect(code).toContain("solid-js/web")
+      }
 
-  it("builds the svg app", async () => {
-    const code = collectChunkCode(await buildDemo("svg"))
+      if (demo.endsWith("image")) {
+        expect(code).toContain("?url")
+        expect(code.includes("<img") || code.includes('"img"')).toBe(true)
+      }
 
-    expect(code).toContain("Inline SVG output")
-    expect(code).toContain("../image/")
-    expect(code).toContain('"svg"')
-    expect(code).not.toContain('new URL("airplane')
-  })
+      if (demo.endsWith("mask")) {
+        expect(assets).toContain(".effective-icon-mask")
+        expect(code).toContain("effective-icon-mask")
+        expect(code).toContain("--effective-icon-mask-image")
+        expect(code).not.toContain("buildIconMaskStyle")
+        expect(code).not.toContain("buildIconMaskStyleString")
+        expect(code).toContain('"span"')
+      }
 
-  it("builds the custom-element app", async () => {
-    const code = collectChunkCode(await buildDemo("custom-element"))
-
-    expect(code).toContain("Custom element output")
-    expect(code).toContain("../image/")
-    expect(code).toContain("effective-icon")
-    expect(code).toContain("data-icon-url")
-    expect(code).toContain("ensureIconElement")
-  })
-
-  it("builds the solid app", async () => {
-    const code = collectChunkCode(await buildDemo("solid"))
-
-    expect(code).toContain("SolidJS consumer proof")
-    expect(code).toContain("magic-wand-2")
-    expect(code).toContain("<svg")
-    expect(code).toContain("render(() => createComponent(App, {}), app);")
-  })
+      if (demo.endsWith("svg")) {
+        expect(code).toContain("<svg")
+        expect(code).not.toContain('new URL("airplane')
+      }
+    })
+  }
 })
 
-async function buildDemo(app: DemoApp): Promise<BuildOutput[]> {
+async function buildDemo(app: DemoKey): Promise<BuildOutput[]> {
   const result = await build({
     configFile: configFiles[app],
     logLevel: "silent",
@@ -109,6 +106,14 @@ function collectChunkCode(outputs: BuildOutput[]): string {
     .flatMap((output) => output.output)
     .filter(isOutputChunk)
     .map((chunk) => chunk.code)
+    .join("\n")
+}
+
+function collectAssetText(outputs: BuildOutput[]): string {
+  return outputs
+    .flatMap((output) => output.output)
+    .filter((asset): asset is BuildAsset => asset.type === "asset")
+    .map((asset) => (typeof asset.source === "string" ? asset.source : Buffer.from(asset.source).toString("utf8")))
     .join("\n")
 }
 

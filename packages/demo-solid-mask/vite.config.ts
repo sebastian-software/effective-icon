@@ -13,9 +13,9 @@ export default defineConfig(({ command }) => {
   const base = createFrameworkDemoConfig({
     appRoot,
     isDevServer: command === "serve",
-    outDir: path.join(repoRoot, "demo", "dist", "solid-svg"),
-    port: 4179,
-    demo: "solid-svg",
+    outDir: path.join(repoRoot, "demo", "dist", "solid-mask"),
+    port: 4178,
+    demo: "solid-mask",
   })
 
   return {

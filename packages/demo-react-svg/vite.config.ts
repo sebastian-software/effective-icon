@@ -1,8 +1,8 @@
 import path from "node:path"
 import { fileURLToPath } from "node:url"
 
+import react from "@vitejs/plugin-react"
 import { defineConfig } from "vite"
-import solid from "vite-plugin-solid"
 
 import { createFrameworkDemoConfig } from "../demo-shared/vite"
 
@@ -13,13 +13,13 @@ export default defineConfig(({ command }) => {
   const base = createFrameworkDemoConfig({
     appRoot,
     isDevServer: command === "serve",
-    outDir: path.join(repoRoot, "demo", "dist", "solid-svg"),
-    port: 4179,
-    demo: "solid-svg",
+    outDir: path.join(repoRoot, "demo", "dist", "react-svg"),
+    port: 4176,
+    demo: "react-svg",
   })
 
   return {
     ...base,
-    plugins: [...(base.plugins ?? []), solid()],
+    plugins: [...(base.plugins ?? []), react()],
   }
 })
