@@ -8,15 +8,9 @@ Named icons without the runtime tax.
 <Icon name="airplane" className="size-4" />
 ```
 
-For custom-element surface output, author directly with the custom element:
-
-```tsx
-<effective-icon name="airplane"></effective-icon>
-```
-
 The API is the whole point.
 
-Two surface-specific entry points. One `name` prop. No per-icon imports scattered through the app. No giant switch statement. No hand-written registry. No component graveyard where every icon becomes another symbol to remember.
+One `name` prop. No per-icon imports scattered through the app. No giant switch statement. No hand-written registry. No component graveyard where every icon becomes another symbol to remember.
 
 Most teams assume that if they want named icons, they have to pay for that convenience at runtime.
 
@@ -34,8 +28,6 @@ It resolves the selected icon pack at build time, validates every icon name agai
 So you get the part people like:
 
 - `<Icon name="...">`
-- `<effective-icon name="...">`
-- a single named-icon model across JSX and web components
 
 without the usual cost:
 
@@ -125,7 +117,6 @@ It reads the selected pack manifest during the build, validates the icon names y
 - `image` for external SVG URL output
 - `mask` for tintable monochrome output with external assets
 - `svg` for direct DOM SVG output
-- `custom-element` for framework-agnostic tintable output with external assets
 
 So you can keep named-icon authoring while still choosing the delivery strategy that fits the surface.
 
@@ -169,6 +160,8 @@ Usually you pick two:
 pnpm add -D @effective/icon
 ```
 
+Current plugin support targets Vite 8.
+
 Add or install at least one compatible icon pack, for example:
 
 ```bash
@@ -189,13 +182,7 @@ Then use it directly:
 <Icon name="airplane" className="size-4" />
 ```
 
-For `surface: "custom-element"`, author directly in JSX/TSX/MDX with:
-
-```tsx
-<effective-icon name="airplane" className="size-4" />
-```
-
-The important detail is that both are compile-time authoring surfaces for the plugin, not runtime name-resolution systems.
+The important detail is that this is a compile-time authoring surface for the plugin, not a runtime name-resolution system.
 
 ## SolidJS
 
@@ -222,8 +209,6 @@ export default defineConfig({
 In a Solid component you can stay idiomatic and use `class`:
 
 ```tsx
-/** @jsxImportSource solid-js */
-
 import { Icon } from "@effective/icon/compile"
 
 export function StatusCard() {
@@ -231,7 +216,29 @@ export function StatusCard() {
 }
 ```
 
-The workspace also includes a real Solid demo app at `pnpm dev:demo:solid`, and the test suite builds a Solid fixture in `image`, `mask`, and `svg` modes.
+The workspace also includes real React and Solid demo apps, and the test suite builds a Solid fixture in `image`, `mask`, and `svg` modes.
+
+## Testing
+
+Run the node-side suite with:
+
+```bash
+pnpm test
+```
+
+Run the visual mask smoke checks in real browser mode with:
+
+```bash
+pnpm test:browser
+```
+
+Update the screenshot baselines with:
+
+```bash
+pnpm test:browser:update
+```
+
+The browser tests use Vitest Browser Mode with the Playwright provider. On macOS they automatically use the system Google Chrome binary when present. You can override that with `PLAYWRIGHT_CHROMIUM_EXECUTABLE_PATH`.
 
 ## Vite Config
 
@@ -331,23 +338,6 @@ Use it when you want:
 This mode assumes the icon pack already ships normalized, inline-safe SVG assets.
 The builder pipeline owns that normalization and validation step; the Vite transform does not run SVGO or broad SVG repair at app-build time.
 
-### Custom Element Output
-
-```ts
-effectiveIconVitePlugin({
-  package: "@icon-pkg/streamline-core-line-free",
-  surface: "custom-element",
-})
-```
-
-This accepts direct `<effective-icon name="...">` authoring in JSX/TSX/MDX. The build rewrites `name` to an external SVG asset URL, injects `ensureIconElement()`, and the runtime renders a tintable mask-based glyph inside shadow DOM.
-
-Use it when you want:
-
-- a framework-agnostic consumer surface
-- external assets instead of raw SVG strings in JS
-- tintable output with a stable custom element API
-
 ## Rules
 
 The plugin is intentionally strict.
@@ -358,7 +348,6 @@ The plugin is intentionally strict.
 - children are rejected
 - unknown icon names fail the build
 - `<Icon ...>` is only valid for `surface: "jsx"`
-- `<effective-icon ...>` is only valid for `surface: "custom-element"`
 - marker imports are only required for the JSX surface
 
 That strictness is not accidental. It is what allows `@effective/icon` to behave like a real compile-time pipeline instead of a best-effort runtime helper.
@@ -380,13 +369,11 @@ The current V1 direction is deliberately narrow:
 
 - one selected icon package per project
 - `<Icon ...>` authoring for the `jsx` surface
-- direct `<effective-icon ...>` authoring for the `custom-element` surface
 - static validation against the selected package manifest
 - build-time rewrites for:
   - JSX image output
   - JSX mask output
   - JSX SVG output
-  - generic custom-element output
 
 The repo also contains the Streamline pack builder workspace that produces pack packages with:
 
@@ -401,24 +388,26 @@ pnpm build:demo
 pnpm dev:demo
 ```
 
-The demo is structured as four real pnpm workspace apps that share most of their content and UI:
+The public demo is structured as six real pnpm workspace apps grouped by integration path:
 
 - `pnpm dev:demo` starts all demo dev servers together
-- `pnpm dev:demo:image` for `jsx/image`
-- `pnpm dev:demo:mask` for `jsx/mask`
-- `pnpm dev:demo:svg` for `jsx/svg`
-- `pnpm dev:demo:custom-element` for `custom-element`
-- `pnpm dev:demo:solid` for the SolidJS consumer demo
+- `pnpm dev:demo:react:image`
+- `pnpm dev:demo:react:mask`
+- `pnpm dev:demo:react:svg`
+- `pnpm dev:demo:solid:image`
+- `pnpm dev:demo:solid:mask`
+- `pnpm dev:demo:solid:svg`
 
 Default local ports:
 
-- `http://127.0.0.1:4174/` for `jsx/image`
-- `http://127.0.0.1:4175/` for `jsx/mask`
-- `http://127.0.0.1:4176/` for `jsx/svg`
-- `http://127.0.0.1:4177/` for `custom-element`
-- `http://127.0.0.1:4178/` for the SolidJS consumer demo
+- `http://127.0.0.1:4174/` for `react/image`
+- `http://127.0.0.1:4175/` for `react/mask`
+- `http://127.0.0.1:4176/` for `react/svg`
+- `http://127.0.0.1:4177/` for `solid/image`
+- `http://127.0.0.1:4178/` for `solid/mask`
+- `http://127.0.0.1:4179/` for `solid/svg`
 
-`pnpm build:demo` builds the four apps plus a small landing index into `demo/dist` against the sample workspace pack in `packages/packs/core-line-free`.
+`pnpm build:demo` builds the public React and Solid demo matrix into `demo/dist` against the sample workspace pack in `packages/packs/core-line-free`.
 
 ## Builder Workspace
 
