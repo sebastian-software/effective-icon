@@ -88,14 +88,12 @@
     "vite": "^8.0.0"
   },
   "dependencies": {
-    "adm-zip": "^0.5.16",
     "esrap": "^2.2.4",
     "magic-string": "^0.30.21",
     "oxc-parser": "^0.124.0"
   },
   "devDependencies": {
     "@oxc-project/types": "^0.124.0",
-    "@types/adm-zip": "^0.5.7",
     "@types/node": "^25.5.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
