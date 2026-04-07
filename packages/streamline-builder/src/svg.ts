@@ -146,7 +146,9 @@ function stripRootSvgAttributes(svg: string): string {
 }
 
 function normalizeRootSvgViewBox(svg: string): string {
-  return svg.replace(/\bviewBox\s*=\s*("([^"]+)"|'([^']+)')/i, (match, quotedValue, doubleQuoted, singleQuoted) => {
+  return svg.replace(
+    /\bviewBox\s*=\s*("([^"]+)"|'([^']+)')/i,
+    (match: string, quotedValue: string, doubleQuoted?: string, singleQuoted?: string) => {
     const rawViewBox = doubleQuoted ?? singleQuoted
     if (!rawViewBox) {
       return match
@@ -155,9 +157,9 @@ function normalizeRootSvgViewBox(svg: string): string {
     const parts = rawViewBox
       .trim()
       .split(/[\s,]+/)
-      .map((value) => Number(value))
+      .map((value: string) => Number(value))
 
-    if (parts.length !== 4 || parts.some((value) => !Number.isFinite(value))) {
+    if (parts.length !== 4 || parts.some((value: number) => !Number.isFinite(value))) {
       return match
     }
 
@@ -169,7 +171,8 @@ function normalizeRootSvgViewBox(svg: string): string {
     const normalizedViewBox = `0 0 ${width - 1} ${height - 1}`
     const quote = quotedValue[0]
     return `viewBox=${quote}${normalizedViewBox}${quote}`
-  })
+    }
+  )
 }
 
 function createSvgError(message: string, context: SvgContext): Error {
