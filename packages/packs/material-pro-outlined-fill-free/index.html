@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@icon-pkg/streamline-material-pro-outlined-fill-free icon gallery</title>
+    <meta
+      name="description"
+      content="@icon-pkg/streamline-material-pro-outlined-fill-free static icon gallery grouped by category and subcategory."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: oklch(0.98 0.006 85);
+        --paper: oklch(0.995 0.003 85);
+        --ink: oklch(0.22 0.025 255);
+        --muted: oklch(0.52 0.02 255);
+        --line: color-mix(in oklch, var(--ink) 11%, transparent);
+        --accent: oklch(0.63 0.17 255);
+        --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-sans);
+        background:
+          radial-gradient(circle at top left, color-mix(in oklch, var(--accent) 12%, transparent), transparent 24%),
+          var(--bg);
+      }
+      a { color: inherit; }
+      main {
+        width: min(1920px, calc(100vw - 2rem));
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+      }
+      .hero {
+        display: grid;
+        gap: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero__breadcrumb {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hero__title {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+      .hero__lead {
+        margin: 0;
+        max-width: 78ch;
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .meta {
+        display: grid;
+        gap: 0.9rem;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--paper);
+        box-shadow: 0 20px 60px color-mix(in oklch, var(--ink) 6%, transparent);
+      }
+      .meta__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      .meta__item {
+        display: grid;
+        gap: 0.22rem;
+      }
+      .meta__label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .meta__value,
+      .meta__value code {
+        font-size: 0.96rem;
+      }
+      .category-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin: 1.25rem 0 1.8rem;
+      }
+      .category-nav__link {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--paper) 72%, white);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+      .category + .category {
+        margin-top: 2.3rem;
+      }
+      .category__title {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .subcategory + .subcategory {
+        margin-top: 1.25rem;
+      }
+      .subcategory__title {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+        gap: 0.55rem;
+      }
+      .icon-card {
+        display: grid;
+        gap: 0.35rem;
+        padding: 0.45rem 0.4rem 0.5rem;
+        border: 1px solid var(--line);
+        border-radius: 0.65rem;
+        background: var(--paper);
+        box-shadow: none;
+        cursor: copy;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        min-width: 0;
+        justify-items: stretch;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .icon-card__preview {
+        display: grid;
+        place-items: center;
+        min-height: 4.15rem;
+        padding: 0.35rem;
+        border-radius: 0.45rem;
+        background: color-mix(in oklch, var(--paper) 92%, white);
+      }
+      .icon-card__preview img {
+        width: 1.65rem;
+        height: 1.65rem;
+        color: var(--ink);
+      }
+      .icon-card__meta {
+        width: 100%;
+        min-width: 0;
+      }
+      .icon-card__name {
+        display: block;
+        width: 100%;
+        padding: 0 0.15rem;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.35;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+      .icon-card[data-copied="true"] {
+        border-color: color-mix(in oklch, var(--accent) 34%, transparent);
+        background: color-mix(in oklch, var(--accent) 3%, white);
+      }
+      .copy-toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--ink) 92%, white);
+        color: white;
+        font-size: 0.72rem;
+        line-height: 1;
+        opacity: 0;
+        transform: translateY(0.4rem);
+        transition: opacity 120ms ease, transform 120ms ease;
+        pointer-events: none;
+      }
+      .copy-toast[data-visible="true"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (hover:hover) and (pointer:fine) {
+        .icon-card:hover {
+          border-color: color-mix(in oklch, var(--ink) 18%, transparent);
+          background: color-mix(in oklch, var(--paper) 96%, white);
+        }
+      }
+      @media (max-width: 1160px) {
+        .meta__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+        }
+      }
+      @media (max-width: 760px) {
+        main {
+          width: min(100vw - 1rem, 100%);
+          padding-top: 1.3rem;
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+        }
+      }
+      @media (max-width: 480px) {
+        .meta__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="hero__breadcrumb"><a href="https://sebastian-software.github.io/effective-icon/">@effective/icon packs</a></p>
+        <h1 class="hero__title">@icon-pkg/streamline-material-pro-outlined-fill-free</h1>
+        <p class="hero__lead">
+          [Free] This is the improved version of Google’s Material Outlined Fill Icons. It bothered us that Material icons doesn't even follow their own geometry rules — off-balance strokes, vague shapes and so on. So, we redesigned icons for more consistency. We also added thousands of new icons so your set feels complete.
+        </p>
+      </section>
+      <section class="meta">
+        <div class="meta__grid">
+          <div class="meta__item">
+            <span class="meta__label">Family</span>
+            <span class="meta__value">Streamline Material</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Style</span>
+            <span class="meta__value">Outlined Fill</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Icons</span>
+            <span class="meta__value">50</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Grid</span>
+            <span class="meta__value">24 px grid</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Install</span>
+            <span class="meta__value"><code>npm install @icon-pkg/streamline-material-pro-outlined-fill-free</code></span>
+          </div>
+        </div>
+        <div class="meta__item">
+          <span class="meta__label">Source</span>
+          <span class="meta__value"><a href="https://www.streamlinehq.com/icons/material-pro-outlined-fill-free">https://www.streamlinehq.com/icons/material-pro-outlined-fill-free</a></span>
+        </div>
+      </section>
+      <nav class="category-nav" aria-label="Pack categories">
+        <a class="category-nav__link" href="#android">Android</a>
+<a class="category-nav__link" href="#ai">AI</a>
+<a class="category-nav__link" href="#activities">Activities</a>
+      </nav>
+      <section class="category" id="android">
+  <header class="category__header">
+    <h2 class="category__title">Android</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="android">Android</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="3g Mobiledata Badge Fill"
+  title="3g Mobiledata Badge Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/3g-mobiledata-badge-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">3g Mobiledata Badge Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="5g Fill"
+  title="5g Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/5g-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">5g Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Adb Fill"
+  title="Adb Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/adb-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Adb Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Airplanemode Inactive Fill"
+  title="Airplanemode Inactive Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/airplanemode-inactive-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Airplanemode Inactive Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Backlight Low Fill"
+  title="Backlight Low Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/backlight-low-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Backlight Low Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery 4 Bar Fill"
+  title="Battery 4 Bar Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-4-bar-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery 4 Bar Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Charging 30 Fill"
+  title="Battery Charging 30 Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-charging-30-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Charging 30 Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Charging 90 Fill"
+  title="Battery Charging 90 Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-charging-90-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Charging 90 Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Full Alt Fill"
+  title="Battery Full Alt Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-full-alt-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Full Alt Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Saver Fill"
+  title="Battery Saver Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-saver-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Saver Fill</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="ai">
+  <header class="category__header">
+    <h2 class="category__title">AI</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="ai">AI</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Computer Fill"
+  title="Ai Robot Computer Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-computer-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Computer Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Microchip Fill"
+  title="Ai Robot Microchip Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-microchip-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Microchip Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Redo Fill"
+  title="Ai Robot Redo Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-redo-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Redo Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Smart Assistant Circle Fill"
+  title="Ai Smart Assistant Circle Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-smart-assistant-circle-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Smart Assistant Circle Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Chatbot Alt Fill"
+  title="Ai Spark Chatbot Alt Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-chatbot-alt-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Chatbot Alt Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Database Fill"
+  title="Ai Spark Database Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-database-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Database Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Edit Fill"
+  title="Ai Spark Edit Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-edit-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Edit Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Generate Music Fill"
+  title="Ai Spark Generate Music Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-generate-music-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Generate Music Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Generate Text Fill"
+  title="Ai Spark Generate Text Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-generate-text-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Generate Text Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Internet Fill"
+  title="Ai Spark Internet Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-internet-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Internet Fill</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="activities">
+  <header class="category__header">
+    <h2 class="category__title">Activities</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="activities">Activities</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Air Fill"
+  title="Air Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/air-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Air Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Architecture Fill"
+  title="Architecture Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/architecture-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Architecture Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Cool Down Fill"
+  title="Arrow Cool Down Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-cool-down-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Cool Down Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Avg Time Fill"
+  title="Avg Time Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/avg-time-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Avg Time Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Axe Fill"
+  title="Axe Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/axe-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Axe Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bath Private Fill"
+  title="Bath Private Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bath-private-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bath Private Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cake Alt Fill"
+  title="Cake Alt Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cake-alt-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cake Alt Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Card Face Spades Fill"
+  title="Card Face Spades Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/card-face-spades-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Card Face Spades Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cloud Gaming Fill"
+  title="Cloud Gaming Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cloud-gaming-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cloud Gaming Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Construction Fill"
+  title="Construction Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/construction-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Construction Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dice 2 Fill"
+  title="Dice 2 Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dice-2-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dice 2 Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Elevation Fill"
+  title="Elevation Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/elevation-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Elevation Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Featured Seasonal And Gifts Fill"
+  title="Featured Seasonal And Gifts Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/featured-seasonal-and-gifts-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Featured Seasonal And Gifts Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flask Full Fill"
+  title="Flask Full Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flask-full-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flask Full Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ghost Fill"
+  title="Ghost Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ghost-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ghost Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hr Resting Fill"
+  title="Hr Resting Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hr-resting-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hr Resting Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Newsstand Fill"
+  title="Newsstand Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/newsstand-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Newsstand Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pace Fill"
+  title="Pace Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pace-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pace Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Person Celebrate Fill"
+  title="Person Celebrate Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/person-celebrate-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Person Celebrate Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Piano Fill"
+  title="Piano Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/piano-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Piano Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Podiatry Fill"
+  title="Podiatry Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/podiatry-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Podiatry Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="School Fill"
+  title="School Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/school-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">School Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Self Improvement Fill"
+  title="Self Improvement Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/self-improvement-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Self Improvement Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sports Baseball Alt Fill"
+  title="Sports Baseball Alt Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sports-baseball-alt-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sports Baseball Alt Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sports Rugby Fill"
+  title="Sports Rugby Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sports-rugby-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sports Rugby Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Storm Fill"
+  title="Storm Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/storm-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Storm Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Switch Account Fill"
+  title="Switch Account Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/switch-account-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Switch Account Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Trophy Fill"
+  title="Trophy Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/trophy-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Trophy Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Volunteer Activism Fill"
+  title="Volunteer Activism Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/volunteer-activism-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Volunteer Activism Fill</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Water Medium Fill"
+  title="Water Medium Fill"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/water-medium-fill.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Water Medium Fill</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+    </main>
+    <div class="copy-toast" id="copy-toast" aria-live="polite" aria-atomic="true">Copied icon name</div>
+    <script>
+      const toast = document.getElementById("copy-toast");
+      let toastTimer = null;
+      let copiedCard = null;
+
+      async function copyText(value) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(value);
+          return;
+        }
+
+        const input = document.createElement("textarea");
+        input.value = value;
+        input.setAttribute("readonly", "");
+        input.style.position = "absolute";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      function showToast(message, card) {
+        if (copiedCard) {
+          copiedCard.dataset.copied = "false";
+        }
+
+        copiedCard = card;
+        copiedCard.dataset.copied = "true";
+        toast.textContent = message;
+        toast.dataset.visible = "true";
+
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+
+        toastTimer = window.setTimeout(() => {
+          toast.dataset.visible = "false";
+          if (copiedCard) {
+            copiedCard.dataset.copied = "false";
+            copiedCard = null;
+          }
+        }, 1200);
+      }
+
+      document.addEventListener("click", async (event) => {
+        const card = event.target instanceof Element ? event.target.closest("[data-copy-name]") : null;
+        if (!(card instanceof HTMLElement)) {
+          return;
+        }
+
+        const value = card.dataset.copyName;
+        if (!value) {
+          return;
+        }
+
+        try {
+          await copyText(value);
+          showToast("Copied " + value, card);
+        } catch {
+          showToast("Copy failed", card);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -19,6 +19,7 @@ export interface PackRenderData {
   style: string
   familyDescription?: string
   gridSize?: number
+  gridLabel?: string
   version: string
   icons: PackManifest["icons"]
 }
@@ -69,7 +70,7 @@ export function renderPackReadme(pack: PackRenderData): string {
 Redistributed Streamline icon pack for ${getPackDisplayName(pack)}.
 
 - Family: ${pack.family}
-- Style: ${pack.style}
+- Style: ${formatStyleLabel(pack.style)}
 - Icons: ${pack.iconCount}
 - Source: ${pack.sourceUrl}
 - Browse icons: ${getPackGalleryUrl(pack.slug)}
@@ -385,7 +386,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         <p class="hero__lead">
           ${escapeHtml(
             pack.familyDescription ??
-              `Static overview of the ${pack.family} ${pack.style} Streamline pack, grouped by category for quick browsing.`
+              `Static overview of the ${pack.family} ${formatStyleLabel(pack.style)} Streamline pack, grouped by category for quick browsing.`
           )}
         </p>
       </section>
@@ -397,7 +398,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
           </div>
           <div class="meta__item">
             <span class="meta__label">Style</span>
-            <span class="meta__value">${escapeHtml(pack.style)}</span>
+            <span class="meta__value">${escapeHtml(formatStyleLabel(pack.style))}</span>
           </div>
           <div class="meta__item">
             <span class="meta__label">Icons</span>
@@ -405,7 +406,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
           </div>
           <div class="meta__item">
             <span class="meta__label">Grid</span>
-            <span class="meta__value">${pack.gridSize ? `${pack.gridSize} px grid` : "Unknown"}</span>
+            <span class="meta__value">${pack.gridLabel ?? (pack.gridSize ? `${pack.gridSize} px grid` : "Unknown")}</span>
           </div>
           <div class="meta__item">
             <span class="meta__label">Install</span>
@@ -526,8 +527,16 @@ function capitalize(value: string): string {
   return value.length === 0 ? value : value[0].toUpperCase() + value.slice(1)
 }
 
+function formatStyleLabel(value: string): string {
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => capitalize(segment))
+    .join(" ")
+}
+
 function getPackDisplayName(pack: Pick<PackRenderData, "family" | "style" | "slug">): string {
-  return `${pack.family} ${capitalize(pack.style)}${pack.slug.endsWith("-free") ? " Free" : ""}`
+  return `${pack.family} ${formatStyleLabel(pack.style)}${pack.slug.endsWith("-free") ? " Free" : ""}`
 }
 
 function escapeHtml(value: string): string {

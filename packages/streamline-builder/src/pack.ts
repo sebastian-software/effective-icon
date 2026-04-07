@@ -16,6 +16,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
   const packDir = path.join(rootDir, "packages", "packs", set.slug)
   const iconsDir = path.join(packDir, "icons")
   const releaseVersion = await getSharedReleaseVersion(rootDir)
+  const gridMeta = resolvePackGridMeta(set)
 
   await rm(packDir, { recursive: true, force: true })
   await mkdir(iconsDir, { recursive: true })
@@ -29,7 +30,8 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     family: set.family,
     style: set.style,
     ...(set.familyDescription ? { familyDescription: set.familyDescription } : {}),
-    gridSize: resolvePackGridSize(set),
+    ...(gridMeta.gridSize != null ? { gridSize: gridMeta.gridSize } : {}),
+    ...(gridMeta.gridLabel ? { gridLabel: gridMeta.gridLabel } : {}),
     iconCount: set.iconCount,
     icons: set.icons.map((icon) => ({
       name: icon.name,
@@ -58,6 +60,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     style: manifest.style,
     familyDescription: manifest.familyDescription,
     gridSize: manifest.gridSize,
+    gridLabel: manifest.gridLabel,
     icons: manifest.icons,
   }
 
@@ -69,26 +72,33 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
   await writeJson(path.join(packDir, "package.json"), createPackPackageJson(packRenderData))
 }
 
-function resolvePackGridSize(set: ExtractedSetData): number | undefined {
-  let gridSize: number | undefined
+function resolvePackGridMeta(set: ExtractedSetData): { gridLabel?: string; gridSize?: number } {
+  const gridSizes = new Set<number>()
 
   for (const icon of set.icons) {
-    const iconGridSize = getSvgGridSize(icon.svg, {
+    gridSizes.add(
+      getSvgGridSize(icon.svg, {
       packSlug: set.slug,
       iconName: icon.name,
-    })
+      })
+    )
+  }
 
-    if (gridSize == null) {
-      gridSize = iconGridSize
-      continue
-    }
+  const ordered = [...gridSizes].sort((left, right) => left - right)
+  if (ordered.length === 0) {
+    return {}
+  }
 
-    if (gridSize !== iconGridSize) {
-      throw new Error(`Mixed grid sizes in "${set.slug}": expected ${gridSize}, received ${iconGridSize}`)
+  if (ordered.length === 1) {
+    return {
+      gridSize: ordered[0],
+      gridLabel: `${ordered[0]} px grid`,
     }
   }
 
-  return gridSize
+  return {
+    gridLabel: `${ordered[0]}-${ordered.at(-1)} px grid`,
+  }
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {

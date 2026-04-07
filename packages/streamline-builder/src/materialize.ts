@@ -166,7 +166,12 @@ async function getFallbackIconIfNeeded(
   }
 
   const set = await fallbackSet
-  return set.icons.find((candidate) => candidate.name === normalizedName)
+  return set.icons.find(
+    (candidate) =>
+      candidate.name === normalizedName ||
+      candidate.originalName === icon.name ||
+      normalizePackIconName(candidate.originalName) === normalizedName
+  )
 }
 
 async function fetchSvgFromCandidates(

@@ -9,6 +9,7 @@ export interface ReleasePackSummary {
   family: string
   familyDescription?: string
   gridSize?: number
+  gridLabel?: string
   href: string
   iconCount: number
   packageName: string
@@ -28,6 +29,7 @@ export async function loadReleasePackSummaries(repoRoot: string): Promise<Releas
         family: manifest.family,
         familyDescription: manifest.familyDescription,
         gridSize: manifest.gridSize,
+        gridLabel: manifest.gridLabel,
         href: `./packs/${slug}/`,
         iconCount: manifest.iconCount,
         packageName: manifest.name,
@@ -106,8 +108,8 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
     .map(
       (pack) => `<a class="card card--pack" href="${pack.href}" style="--card-accent:oklch(0.63 0.17 255)">
   <div class="card__head">
-    <span class="card__pill">${escapeHtml(pack.family)} / ${escapeHtml(capitalize(pack.style))}</span>
-    <span class="card__stats">${Intl.NumberFormat("en-US").format(pack.iconCount)} icons${pack.gridSize ? ` · ${pack.gridSize} px grid` : ""}</span>
+    <span class="card__pill">${escapeHtml(pack.family)} / ${escapeHtml(formatStyleLabel(pack.style))}</span>
+    <span class="card__stats">${Intl.NumberFormat("en-US").format(pack.iconCount)} icons${pack.gridLabel ? ` · ${escapeHtml(pack.gridLabel)}` : pack.gridSize ? ` · ${pack.gridSize} px grid` : ""}</span>
   </div>
   <h3 class="card__title">${escapeHtml(pack.packageName)}</h3>
   <p class="card__desc">${escapeHtml(pack.summary)}</p>
@@ -312,6 +314,14 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
 
 function capitalize(value: string): string {
   return value.length === 0 ? value : value[0].toUpperCase() + value.slice(1)
+}
+
+function formatStyleLabel(value: string): string {
+  return value
+    .split("-")
+    .filter(Boolean)
+    .map((segment) => capitalize(segment))
+    .join(" ")
 }
 
 function getPackStyleSummary(style: string, familyDescription?: string): string {

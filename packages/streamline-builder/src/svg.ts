@@ -111,9 +111,11 @@ export function validatePackSvg(svg: string, context: SvgContext = {}): string {
 }
 
 function normalizeSvgSource(svg: string): string {
-  return stripRootSvgAttributes(
+  return normalizeRootSvgViewBox(
+    stripRootSvgAttributes(
     stripElements(
       stripXmlArtifacts(normalizeSvgToCurrentColor(svg))
+    )
     )
   ).trim()
 }
@@ -140,6 +142,33 @@ function stripRootSvgAttributes(svg: string): string {
     nextAttributes = nextAttributes.replace(/\saria-[\w-]+\s*=\s*(".*?"|'.*?')/gi, "")
 
     return `<svg${nextAttributes}>`
+  })
+}
+
+function normalizeRootSvgViewBox(svg: string): string {
+  return svg.replace(/\bviewBox\s*=\s*("([^"]+)"|'([^']+)')/i, (match, quotedValue, doubleQuoted, singleQuoted) => {
+    const rawViewBox = doubleQuoted ?? singleQuoted
+    if (!rawViewBox) {
+      return match
+    }
+
+    const parts = rawViewBox
+      .trim()
+      .split(/[\s,]+/)
+      .map((value) => Number(value))
+
+    if (parts.length !== 4 || parts.some((value) => !Number.isFinite(value))) {
+      return match
+    }
+
+    const [minX, minY, width, height] = parts
+    if (minX !== 0 || minY !== -0.5 || width !== height || !Number.isInteger(width) || width <= 1) {
+      return match
+    }
+
+    const normalizedViewBox = `0 0 ${width - 1} ${height - 1}`
+    const quote = quotedValue[0]
+    return `viewBox=${quote}${normalizedViewBox}${quote}`
   })
 }
 

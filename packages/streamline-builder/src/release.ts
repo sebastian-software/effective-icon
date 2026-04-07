@@ -26,6 +26,18 @@ export const RELEASE_PACK_SLUGS = [
   "sharp-line-free",
   "sharp-solid-free",
   "sharp-remix-free",
+  "plump-line-free",
+  "plump-solid-free",
+  "plump-remix-free",
+  "material-pro-outlined-fill-free",
+  "material-pro-outlined-line-free",
+  "material-pro-rounded-fill-free",
+  "material-pro-rounded-line-free",
+  "material-pro-sharp-fill-free",
+  "material-pro-sharp-line-free",
+  "ultimate-light-free",
+  "ultimate-regular-free",
+  "ultimate-bold-free",
 ] as const
 
 export function getReleaseRegistryEntries() {

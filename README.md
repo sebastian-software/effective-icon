@@ -455,6 +455,18 @@ The current npm release set is intentionally scoped to the nine materialized pac
 - `@icon-pkg/streamline-sharp-line-free`
 - `@icon-pkg/streamline-sharp-solid-free`
 - `@icon-pkg/streamline-sharp-remix-free`
+- `@icon-pkg/streamline-plump-line-free`
+- `@icon-pkg/streamline-plump-solid-free`
+- `@icon-pkg/streamline-plump-remix-free`
+- `@icon-pkg/streamline-material-pro-outlined-fill-free`
+- `@icon-pkg/streamline-material-pro-outlined-line-free`
+- `@icon-pkg/streamline-material-pro-rounded-fill-free`
+- `@icon-pkg/streamline-material-pro-rounded-line-free`
+- `@icon-pkg/streamline-material-pro-sharp-fill-free`
+- `@icon-pkg/streamline-material-pro-sharp-line-free`
+- `@icon-pkg/streamline-ultimate-light-free`
+- `@icon-pkg/streamline-ultimate-regular-free`
+- `@icon-pkg/streamline-ultimate-bold-free`
 
 Use the dedicated release check before publishing:
 

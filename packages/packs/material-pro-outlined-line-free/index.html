@@ -1,0 +1,1025 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@icon-pkg/streamline-material-pro-outlined-line-free icon gallery</title>
+    <meta
+      name="description"
+      content="@icon-pkg/streamline-material-pro-outlined-line-free static icon gallery grouped by category and subcategory."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: oklch(0.98 0.006 85);
+        --paper: oklch(0.995 0.003 85);
+        --ink: oklch(0.22 0.025 255);
+        --muted: oklch(0.52 0.02 255);
+        --line: color-mix(in oklch, var(--ink) 11%, transparent);
+        --accent: oklch(0.63 0.17 255);
+        --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-sans);
+        background:
+          radial-gradient(circle at top left, color-mix(in oklch, var(--accent) 12%, transparent), transparent 24%),
+          var(--bg);
+      }
+      a { color: inherit; }
+      main {
+        width: min(1920px, calc(100vw - 2rem));
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+      }
+      .hero {
+        display: grid;
+        gap: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero__breadcrumb {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hero__title {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+      .hero__lead {
+        margin: 0;
+        max-width: 78ch;
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .meta {
+        display: grid;
+        gap: 0.9rem;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--paper);
+        box-shadow: 0 20px 60px color-mix(in oklch, var(--ink) 6%, transparent);
+      }
+      .meta__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      .meta__item {
+        display: grid;
+        gap: 0.22rem;
+      }
+      .meta__label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .meta__value,
+      .meta__value code {
+        font-size: 0.96rem;
+      }
+      .category-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin: 1.25rem 0 1.8rem;
+      }
+      .category-nav__link {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--paper) 72%, white);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+      .category + .category {
+        margin-top: 2.3rem;
+      }
+      .category__title {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .subcategory + .subcategory {
+        margin-top: 1.25rem;
+      }
+      .subcategory__title {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+        gap: 0.55rem;
+      }
+      .icon-card {
+        display: grid;
+        gap: 0.35rem;
+        padding: 0.45rem 0.4rem 0.5rem;
+        border: 1px solid var(--line);
+        border-radius: 0.65rem;
+        background: var(--paper);
+        box-shadow: none;
+        cursor: copy;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        min-width: 0;
+        justify-items: stretch;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .icon-card__preview {
+        display: grid;
+        place-items: center;
+        min-height: 4.15rem;
+        padding: 0.35rem;
+        border-radius: 0.45rem;
+        background: color-mix(in oklch, var(--paper) 92%, white);
+      }
+      .icon-card__preview img {
+        width: 1.65rem;
+        height: 1.65rem;
+        color: var(--ink);
+      }
+      .icon-card__meta {
+        width: 100%;
+        min-width: 0;
+      }
+      .icon-card__name {
+        display: block;
+        width: 100%;
+        padding: 0 0.15rem;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.35;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+      .icon-card[data-copied="true"] {
+        border-color: color-mix(in oklch, var(--accent) 34%, transparent);
+        background: color-mix(in oklch, var(--accent) 3%, white);
+      }
+      .copy-toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--ink) 92%, white);
+        color: white;
+        font-size: 0.72rem;
+        line-height: 1;
+        opacity: 0;
+        transform: translateY(0.4rem);
+        transition: opacity 120ms ease, transform 120ms ease;
+        pointer-events: none;
+      }
+      .copy-toast[data-visible="true"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (hover:hover) and (pointer:fine) {
+        .icon-card:hover {
+          border-color: color-mix(in oklch, var(--ink) 18%, transparent);
+          background: color-mix(in oklch, var(--paper) 96%, white);
+        }
+      }
+      @media (max-width: 1160px) {
+        .meta__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+        }
+      }
+      @media (max-width: 760px) {
+        main {
+          width: min(100vw - 1rem, 100%);
+          padding-top: 1.3rem;
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+        }
+      }
+      @media (max-width: 480px) {
+        .meta__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="hero__breadcrumb"><a href="https://sebastian-software.github.io/effective-icon/">@effective/icon packs</a></p>
+        <h1 class="hero__title">@icon-pkg/streamline-material-pro-outlined-line-free</h1>
+        <p class="hero__lead">
+          [Free] This is the improved version of Google’s Material Line Icons. Every icon is redrawn using the Material Design Guidelines, but fixed where they fell short. You get more coverage and better consistency. The difference is subtle, until you notice it. Then it is impossible to ignore.
+        </p>
+      </section>
+      <section class="meta">
+        <div class="meta__grid">
+          <div class="meta__item">
+            <span class="meta__label">Family</span>
+            <span class="meta__value">Streamline Material</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Style</span>
+            <span class="meta__value">Outlined Line</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Icons</span>
+            <span class="meta__value">50</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Grid</span>
+            <span class="meta__value">24 px grid</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Install</span>
+            <span class="meta__value"><code>npm install @icon-pkg/streamline-material-pro-outlined-line-free</code></span>
+          </div>
+        </div>
+        <div class="meta__item">
+          <span class="meta__label">Source</span>
+          <span class="meta__value"><a href="https://www.streamlinehq.com/icons/material-pro-outlined-line-free">https://www.streamlinehq.com/icons/material-pro-outlined-line-free</a></span>
+        </div>
+      </section>
+      <nav class="category-nav" aria-label="Pack categories">
+        <a class="category-nav__link" href="#android">Android</a>
+<a class="category-nav__link" href="#ai">AI</a>
+<a class="category-nav__link" href="#activities">Activities</a>
+      </nav>
+      <section class="category" id="android">
+  <header class="category__header">
+    <h2 class="category__title">Android</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="android">Android</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="3g Mobiledata Badge"
+  title="3g Mobiledata Badge"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/3g-mobiledata-badge.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">3g Mobiledata Badge</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="5g Mobiledata Badge"
+  title="5g Mobiledata Badge"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/5g-mobiledata-badge.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">5g Mobiledata Badge</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Adb"
+  title="Adb"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/adb.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Adb</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Airplanemode Inactive"
+  title="Airplanemode Inactive"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/airplanemode-inactive.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Airplanemode Inactive</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Backlight Low"
+  title="Backlight Low"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/backlight-low.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Backlight Low</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery 4 Bar"
+  title="Battery 4 Bar"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-4-bar.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery 4 Bar</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Charging 30"
+  title="Battery Charging 30"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-charging-30.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Charging 30</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Charging 90"
+  title="Battery Charging 90"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-charging-90.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Charging 90</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Full Alt"
+  title="Battery Full Alt"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-full-alt.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Full Alt</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Saver"
+  title="Battery Saver"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-saver.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Saver</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="ai">
+  <header class="category__header">
+    <h2 class="category__title">AI</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="ai">AI</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Computer"
+  title="Ai Robot Computer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-computer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Computer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Microchip"
+  title="Ai Robot Microchip"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-microchip.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Microchip</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Robot Redo"
+  title="Ai Robot Redo"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-robot-redo.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Robot Redo</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Smart Assistant Circle"
+  title="Ai Smart Assistant Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-smart-assistant-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Smart Assistant Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Chatbot Alt"
+  title="Ai Spark Chatbot Alt"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-chatbot-alt.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Chatbot Alt</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Database"
+  title="Ai Spark Database"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-database.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Database</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Edit"
+  title="Ai Spark Edit"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-edit.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Edit</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Generate Music"
+  title="Ai Spark Generate Music"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-generate-music.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Generate Music</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Generate Text"
+  title="Ai Spark Generate Text"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-generate-text.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Generate Text</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Spark Internet"
+  title="Ai Spark Internet"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-spark-internet.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Spark Internet</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="activities">
+  <header class="category__header">
+    <h2 class="category__title">Activities</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="activities">Activities</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Air"
+  title="Air"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/air.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Air</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Architecture"
+  title="Architecture"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/architecture.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Architecture</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Cool Down"
+  title="Arrow Cool Down"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-cool-down.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Cool Down</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Avg Time"
+  title="Avg Time"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/avg-time.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Avg Time</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Axe"
+  title="Axe"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/axe.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Axe</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bath Private"
+  title="Bath Private"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bath-private.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bath Private</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cake Alt"
+  title="Cake Alt"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cake-alt.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cake Alt</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Card Face Spades"
+  title="Card Face Spades"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/card-face-spades.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Card Face Spades</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cloud Gaming"
+  title="Cloud Gaming"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cloud-gaming.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cloud Gaming</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Construction"
+  title="Construction"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/construction.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Construction</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dice 2"
+  title="Dice 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dice-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dice 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Elevation"
+  title="Elevation"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/elevation.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Elevation</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Featured Seasonal And Gifts"
+  title="Featured Seasonal And Gifts"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/featured-seasonal-and-gifts.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Featured Seasonal And Gifts</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flask Full"
+  title="Flask Full"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flask-full.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flask Full</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ghost"
+  title="Ghost"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ghost.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ghost</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hr Resting"
+  title="Hr Resting"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hr-resting.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hr Resting</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Newsstand"
+  title="Newsstand"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/newsstand.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Newsstand</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pace"
+  title="Pace"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pace.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pace</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Person Celebrate"
+  title="Person Celebrate"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/person-celebrate.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Person Celebrate</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Piano"
+  title="Piano"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/piano.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Piano</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Podiatry"
+  title="Podiatry"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/podiatry.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Podiatry</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="School"
+  title="School"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/school.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">School</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Self Improvement"
+  title="Self Improvement"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/self-improvement.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Self Improvement</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sports Baseball Alt"
+  title="Sports Baseball Alt"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sports-baseball-alt.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sports Baseball Alt</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sports Rugby"
+  title="Sports Rugby"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sports-rugby.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sports Rugby</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Storm"
+  title="Storm"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/storm.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Storm</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Switch Account"
+  title="Switch Account"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/switch-account.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Switch Account</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Trophy"
+  title="Trophy"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/trophy.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Trophy</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Volunteer Activism"
+  title="Volunteer Activism"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/volunteer-activism.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Volunteer Activism</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Water Medium"
+  title="Water Medium"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/water-medium.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Water Medium</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+    </main>
+    <div class="copy-toast" id="copy-toast" aria-live="polite" aria-atomic="true">Copied icon name</div>
+    <script>
+      const toast = document.getElementById("copy-toast");
+      let toastTimer = null;
+      let copiedCard = null;
+
+      async function copyText(value) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(value);
+          return;
+        }
+
+        const input = document.createElement("textarea");
+        input.value = value;
+        input.setAttribute("readonly", "");
+        input.style.position = "absolute";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      function showToast(message, card) {
+        if (copiedCard) {
+          copiedCard.dataset.copied = "false";
+        }
+
+        copiedCard = card;
+        copiedCard.dataset.copied = "true";
+        toast.textContent = message;
+        toast.dataset.visible = "true";
+
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+
+        toastTimer = window.setTimeout(() => {
+          toast.dataset.visible = "false";
+          if (copiedCard) {
+            copiedCard.dataset.copied = "false";
+            copiedCard = null;
+          }
+        }, 1200);
+      }
+
+      document.addEventListener("click", async (event) => {
+        const card = event.target instanceof Element ? event.target.closest("[data-copy-name]") : null;
+        if (!(card instanceof HTMLElement)) {
+          return;
+        }
+
+        const value = card.dataset.copyName;
+        if (!value) {
+          return;
+        }
+
+        try {
+          await copyText(value);
+          showToast("Copied " + value, card);
+        } catch {
+          showToast("Copy failed", card);
+        }
+      });
+    </script>
+  </body>
+</html>

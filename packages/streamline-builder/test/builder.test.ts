@@ -89,6 +89,55 @@ describe("streamline builder", () => {
     expect(getSvgGridSize('<svg viewBox="0 0 14 14"><path /></svg>')).toBe(14)
   })
 
+  it("normalizes offset square viewBoxes to the expected grid size", () => {
+    const prepared = preparePackSvg('<svg viewBox="0 -0.5 25 25"><path d="M1 1h20" stroke="#000000" /></svg>')
+    expect(prepared).toContain('viewBox="0 0 24 24"')
+    expect(getSvgGridSize(prepared)).toBe(24)
+  })
+
+  it("writes a mixed-grid label when a pack spans multiple viewBox sizes", async () => {
+    const tempDir = await mkdtemp(path.join(tmpdir(), "streamline-builder-mixed-grid-"))
+    tempDirs.push(tempDir)
+    await writeFile(path.join(tempDir, "LICENSE"), await readFile(path.join(rootFixture, "LICENSE"), "utf8"), "utf8")
+    await writeTempRootPackageJson(tempDir)
+
+    await writePack(tempDir, {
+      ...extractSetDataFromPageProps(JSON.parse(await readFile(fixturePath, "utf8")), registryEntry),
+      icons: [
+        {
+          name: "icon-24",
+          file: "icon-24.svg",
+          originalName: "Icon 24",
+          sourcePageUrl: registryEntry.setPageUrl,
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Interface Essential",
+          subcategorySlug: "interface-essential",
+          svg: '<svg viewBox="0 0 24 24"><path d="M1 1h22" stroke="currentColor" /></svg>',
+        },
+        {
+          name: "icon-25",
+          file: "icon-25.svg",
+          originalName: "Icon 25",
+          sourcePageUrl: registryEntry.setPageUrl,
+          category: "Interface Essential",
+          categorySlug: "interface-essential",
+          subcategory: "Interface Essential",
+          subcategorySlug: "interface-essential",
+          svg: '<svg viewBox="0 0 25 25"><path d="M1 1h23" stroke="currentColor" /></svg>',
+        },
+      ],
+      iconCount: 2,
+    })
+
+    const manifest = JSON.parse(
+      await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
+    ) as { gridLabel?: string; gridSize?: number }
+
+    expect(manifest.gridSize).toBeUndefined()
+    expect(manifest.gridLabel).toBe("24-25 px grid")
+  })
+
   it("keeps multicolor svg fills unchanged when preparing pack svg", () => {
     const prepared = preparePackSvg(
       '<svg viewBox="0 0 24 24"><path d="M1 1h10v10H1z" fill="#ff0000" /><path d="M2 2h20" stroke="#000000" /></svg>'
@@ -139,7 +188,7 @@ describe("streamline builder", () => {
 
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
-    ) as { familyDescription?: string; gridSize?: number; iconCount: number; version: string; icons: Array<{ file: string }> }
+    ) as { familyDescription?: string; gridLabel?: string; gridSize?: number; iconCount: number; version: string; icons: Array<{ file: string }> }
     const packageJson = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "package.json"), "utf8")
     ) as {
@@ -163,6 +212,7 @@ describe("streamline builder", () => {
     expect(manifest.version).toBe(releaseVersion)
     expect(manifest.familyDescription).toBe("[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0")
     expect(manifest.gridSize).toBe(14)
+    expect(manifest.gridLabel).toBe("14 px grid")
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
     expect(packageJson.version).toBe(releaseVersion)
     expect(packageJson.license).toBe(PACK_PACKAGE_LICENSE)

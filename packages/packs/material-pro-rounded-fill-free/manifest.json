@@ -1,0 +1,515 @@
+{
+  "name": "@icon-pkg/streamline-material-pro-rounded-fill-free",
+  "slug": "material-pro-rounded-fill-free",
+  "version": "0.2.1",
+  "license": "CC BY 4.0",
+  "sourceUrl": "https://www.streamlinehq.com/icons/material-pro-rounded-fill-free",
+  "family": "Streamline Material",
+  "style": "rounded-fill",
+  "familyDescription": "[Free] This is the improved version of Google’s Material Rounded Fill Icons. It bothered us that Material icons doesn't even follow their own geometry rules — off-balance strokes, vague shapes and so on. So, we redesigned icons for more consistency. We also added thousands of new icons so your set feels complete.",
+  "gridSize": 24,
+  "gridLabel": "24 px grid",
+  "iconCount": 50,
+  "icons": [
+    {
+      "name": "3g-mobiledata-badge-fill",
+      "file": "icons/3g-mobiledata-badge-fill.svg",
+      "originalName": "3g Mobiledata Badge Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/3g-mobiledata-badge-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "5g-fill",
+      "file": "icons/5g-fill.svg",
+      "originalName": "5g Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/5g-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "adb-fill",
+      "file": "icons/adb-fill.svg",
+      "originalName": "Adb Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/adb-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "ai-robot-computer-fill",
+      "file": "icons/ai-robot-computer-fill.svg",
+      "originalName": "Ai Robot Computer Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-computer-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-robot-microchip-fill",
+      "file": "icons/ai-robot-microchip-fill.svg",
+      "originalName": "Ai Robot Microchip Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-microchip-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-robot-redo-fill",
+      "file": "icons/ai-robot-redo-fill.svg",
+      "originalName": "Ai Robot Redo Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-redo-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-smart-assistant-circle-fill",
+      "file": "icons/ai-smart-assistant-circle-fill.svg",
+      "originalName": "Ai Smart Assistant Circle Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-smart-assistant-circle-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-chatbot-alt-fill",
+      "file": "icons/ai-spark-chatbot-alt-fill.svg",
+      "originalName": "Ai Spark Chatbot Alt Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-chatbot-alt-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-database-fill",
+      "file": "icons/ai-spark-database-fill.svg",
+      "originalName": "Ai Spark Database Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-database-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-edit-fill",
+      "file": "icons/ai-spark-edit-fill.svg",
+      "originalName": "Ai Spark Edit Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-edit-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-generate-music-fill",
+      "file": "icons/ai-spark-generate-music-fill.svg",
+      "originalName": "Ai Spark Generate Music Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-generate-music-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-generate-text-fill",
+      "file": "icons/ai-spark-generate-text-fill.svg",
+      "originalName": "Ai Spark Generate Text Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-generate-text-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-internet-fill",
+      "file": "icons/ai-spark-internet-fill.svg",
+      "originalName": "Ai Spark Internet Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-internet-fill--32994",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "air-fill",
+      "file": "icons/air-fill.svg",
+      "originalName": "Air Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/air-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "airplanemode-inactive-fill",
+      "file": "icons/airplanemode-inactive-fill.svg",
+      "originalName": "Airplanemode Inactive Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/airplanemode-inactive-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "architecture-fill",
+      "file": "icons/architecture-fill.svg",
+      "originalName": "Architecture Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/architecture-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "arrow-cool-down-fill",
+      "file": "icons/arrow-cool-down-fill.svg",
+      "originalName": "Arrow Cool Down Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-cool-down-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "avg-time-fill",
+      "file": "icons/avg-time-fill.svg",
+      "originalName": "Avg Time Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/avg-time-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "axe-fill",
+      "file": "icons/axe-fill.svg",
+      "originalName": "Axe Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/axe-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "backlight-high-fill",
+      "file": "icons/backlight-high-fill.svg",
+      "originalName": "Backlight High Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/backlight-high-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "bath-private-fill",
+      "file": "icons/bath-private-fill.svg",
+      "originalName": "Bath Private Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bath-private-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "battery-4-bar-fill",
+      "file": "icons/battery-4-bar-fill.svg",
+      "originalName": "Battery 4 Bar Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-4-bar-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-charging-30-fill",
+      "file": "icons/battery-charging-30-fill.svg",
+      "originalName": "Battery Charging 30 Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-charging-30-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-charging-90-fill",
+      "file": "icons/battery-charging-90-fill.svg",
+      "originalName": "Battery Charging 90 Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-charging-90-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-full-alt-fill",
+      "file": "icons/battery-full-alt-fill.svg",
+      "originalName": "Battery Full Alt Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-full-alt-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-saver-fill",
+      "file": "icons/battery-saver-fill.svg",
+      "originalName": "Battery Saver Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-saver-fill--32993",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "cake-alt-fill",
+      "file": "icons/cake-alt-fill.svg",
+      "originalName": "Cake Alt Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cake-alt-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "card-face-spades-fill",
+      "file": "icons/card-face-spades-fill.svg",
+      "originalName": "Card Face Spades Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/card-face-spades-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "cloud-gaming-fill",
+      "file": "icons/cloud-gaming-fill.svg",
+      "originalName": "Cloud Gaming Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-gaming-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "construction-fill",
+      "file": "icons/construction-fill.svg",
+      "originalName": "Construction Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/construction-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "dice-2-fill",
+      "file": "icons/dice-2-fill.svg",
+      "originalName": "Dice 2 Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dice-2-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "elevation-fill",
+      "file": "icons/elevation-fill.svg",
+      "originalName": "Elevation Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/elevation-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "featured-seasonal-and-gifts-fill",
+      "file": "icons/featured-seasonal-and-gifts-fill.svg",
+      "originalName": "Featured Seasonal And Gifts Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/featured-seasonal-and-gifts-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "flask-full-fill",
+      "file": "icons/flask-full-fill.svg",
+      "originalName": "Flask Full Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flask-full-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "ghost-fill",
+      "file": "icons/ghost-fill.svg",
+      "originalName": "Ghost Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ghost-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "hr-resting-fill",
+      "file": "icons/hr-resting-fill.svg",
+      "originalName": "Hr Resting Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hr-resting-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "newsstand-fill",
+      "file": "icons/newsstand-fill.svg",
+      "originalName": "Newsstand Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/newsstand-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "pace-fill",
+      "file": "icons/pace-fill.svg",
+      "originalName": "Pace Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pace-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "person-celebrate-fill",
+      "file": "icons/person-celebrate-fill.svg",
+      "originalName": "Person Celebrate Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/person-celebrate-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "piano-fill",
+      "file": "icons/piano-fill.svg",
+      "originalName": "Piano Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/piano-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "podiatry-fill",
+      "file": "icons/podiatry-fill.svg",
+      "originalName": "Podiatry Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/podiatry-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "school-fill",
+      "file": "icons/school-fill.svg",
+      "originalName": "School Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/school-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "self-improvement-fill",
+      "file": "icons/self-improvement-fill.svg",
+      "originalName": "Self Improvement Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/self-improvement-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "sports-baseball-alt-fill",
+      "file": "icons/sports-baseball-alt-fill.svg",
+      "originalName": "Sports Baseball Alt Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sports-baseball-alt-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "sports-rugby-fill",
+      "file": "icons/sports-rugby-fill.svg",
+      "originalName": "Sports Rugby Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sports-rugby-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "storm-fill",
+      "file": "icons/storm-fill.svg",
+      "originalName": "Storm Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/storm-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "switch-account-fill",
+      "file": "icons/switch-account-fill.svg",
+      "originalName": "Switch Account Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/switch-account-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "trophy-fill",
+      "file": "icons/trophy-fill.svg",
+      "originalName": "Trophy Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/trophy-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "volunteer-activism-fill",
+      "file": "icons/volunteer-activism-fill.svg",
+      "originalName": "Volunteer Activism Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/volunteer-activism-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "water-medium-fill",
+      "file": "icons/water-medium-fill.svg",
+      "originalName": "Water Medium Fill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/water-medium-fill--32995",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    }
+  ]
+}

@@ -31,6 +31,7 @@ export interface IconPackManifest {
   style: string
   familyDescription?: string
   gridSize?: number
+  gridLabel?: string
   iconCount: number
   icons: IconPackManifestIcon[]
 }

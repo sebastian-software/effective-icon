@@ -45,7 +45,16 @@ async function downloadSet(
   browserManager: ReturnType<typeof createBrowserManager>
 ) {
   const entry = findRegistryEntry(slug)
-  const discoveredSet = await apiClient.discoverSet(entry)
+  let discoveredSet: Awaited<ReturnType<ReturnType<typeof createBuilderApiClient>["discoverSet"]>> | null = null
+
+  try {
+    discoveredSet = await apiClient.discoverSet(entry)
+  } catch {
+    const fallbackSet = await loadFallbackSet(entry, null, browserManager)
+    await writePack(rootDir, fallbackSet)
+    return fallbackSet
+  }
+
   const set = await materializeDiscoveredSet(entry, discoveredSet, {
     apiClient,
     loadFallbackSet: () => loadFallbackSet(entry, discoveredSet, browserManager),
@@ -57,13 +66,15 @@ async function downloadSet(
 
 async function loadFallbackSet(
   entry: ReturnType<typeof findRegistryEntry>,
-  discoveredSet: Awaited<ReturnType<ReturnType<typeof createBuilderApiClient>["discoverSet"]>>,
+  discoveredSet: Awaited<ReturnType<ReturnType<typeof createBuilderApiClient>["discoverSet"]>> | null,
   browserManager: ReturnType<typeof createBrowserManager>
 ) {
-  try {
-    return await fetchGroupedWebsiteSet(entry, discoveredSet)
-  } catch {
-    // Fall back to the browser path only when the public grouped endpoint is unavailable.
+  if (discoveredSet) {
+    try {
+      return await fetchGroupedWebsiteSet(entry, discoveredSet)
+    } catch {
+      // Fall back to the browser path only when the public grouped endpoint is unavailable.
+    }
   }
 
   const browser = await browserManager.get()

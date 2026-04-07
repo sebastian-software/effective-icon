@@ -1,0 +1,515 @@
+{
+  "name": "@icon-pkg/streamline-material-pro-rounded-line-free",
+  "slug": "material-pro-rounded-line-free",
+  "version": "0.2.1",
+  "license": "CC BY 4.0",
+  "sourceUrl": "https://www.streamlinehq.com/icons/material-pro-rounded-line-free",
+  "family": "Streamline Material",
+  "style": "rounded-line",
+  "familyDescription": "[Free] This is the improved version of Google’s Material Rounded Line Icons. Every icon is redrawn using the Material Design Guidelines, but fixed where they fell short. You get more coverage and better consistency. The difference is subtle, until you notice it. Then it is impossible to ignore.",
+  "gridSize": 24,
+  "gridLabel": "24 px grid",
+  "iconCount": 50,
+  "icons": [
+    {
+      "name": "3g-mobiledata-badge",
+      "file": "icons/3g-mobiledata-badge.svg",
+      "originalName": "3g Mobiledata Badge",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/3g-mobiledata-badge--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "5g-mobiledata-badge",
+      "file": "icons/5g-mobiledata-badge.svg",
+      "originalName": "5g Mobiledata Badge",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/5g-mobiledata-badge--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "adb",
+      "file": "icons/adb.svg",
+      "originalName": "Adb",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/adb--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "ai-robot-computer",
+      "file": "icons/ai-robot-computer.svg",
+      "originalName": "Ai Robot Computer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-computer--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-robot-microchip",
+      "file": "icons/ai-robot-microchip.svg",
+      "originalName": "Ai Robot Microchip",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-microchip--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-robot-redo",
+      "file": "icons/ai-robot-redo.svg",
+      "originalName": "Ai Robot Redo",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-robot-redo--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-smart-assistant-circle",
+      "file": "icons/ai-smart-assistant-circle.svg",
+      "originalName": "Ai Smart Assistant Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-smart-assistant-circle--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-chatbot-alt",
+      "file": "icons/ai-spark-chatbot-alt.svg",
+      "originalName": "Ai Spark Chatbot Alt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-chatbot-alt--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-database",
+      "file": "icons/ai-spark-database.svg",
+      "originalName": "Ai Spark Database",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-database--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-edit",
+      "file": "icons/ai-spark-edit.svg",
+      "originalName": "Ai Spark Edit",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-edit--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-generate-music",
+      "file": "icons/ai-spark-generate-music.svg",
+      "originalName": "Ai Spark Generate Music",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-generate-music--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-generate-text",
+      "file": "icons/ai-spark-generate-text.svg",
+      "originalName": "Ai Spark Generate Text",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-generate-text--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "ai-spark-internet",
+      "file": "icons/ai-spark-internet.svg",
+      "originalName": "Ai Spark Internet",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-spark-internet--32959",
+      "category": "AI",
+      "categorySlug": "ai",
+      "subcategory": "AI",
+      "subcategorySlug": "ai"
+    },
+    {
+      "name": "air",
+      "file": "icons/air.svg",
+      "originalName": "Air",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/air--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "airplanemode-inactive",
+      "file": "icons/airplanemode-inactive.svg",
+      "originalName": "Airplanemode Inactive",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/airplanemode-inactive--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "architecture",
+      "file": "icons/architecture.svg",
+      "originalName": "Architecture",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/architecture--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "arrow-cool-down",
+      "file": "icons/arrow-cool-down.svg",
+      "originalName": "Arrow Cool Down",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-cool-down--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "avg-time",
+      "file": "icons/avg-time.svg",
+      "originalName": "Avg Time",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/avg-time--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "axe",
+      "file": "icons/axe.svg",
+      "originalName": "Axe",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/axe--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "backlight-high",
+      "file": "icons/backlight-high.svg",
+      "originalName": "Backlight High",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/backlight-high--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "bath-private",
+      "file": "icons/bath-private.svg",
+      "originalName": "Bath Private",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bath-private--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "battery-4-bar",
+      "file": "icons/battery-4-bar.svg",
+      "originalName": "Battery 4 Bar",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-4-bar--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-charging-30",
+      "file": "icons/battery-charging-30.svg",
+      "originalName": "Battery Charging 30",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-charging-30--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-charging-90",
+      "file": "icons/battery-charging-90.svg",
+      "originalName": "Battery Charging 90",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-charging-90--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-full-alt",
+      "file": "icons/battery-full-alt.svg",
+      "originalName": "Battery Full Alt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-full-alt--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "battery-saver",
+      "file": "icons/battery-saver.svg",
+      "originalName": "Battery Saver",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-saver--32960",
+      "category": "Android",
+      "categorySlug": "android",
+      "subcategory": "Android",
+      "subcategorySlug": "android"
+    },
+    {
+      "name": "cake-alt",
+      "file": "icons/cake-alt.svg",
+      "originalName": "Cake Alt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cake-alt--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "card-face-spades",
+      "file": "icons/card-face-spades.svg",
+      "originalName": "Card Face Spades",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/card-face-spades--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "cloud-gaming",
+      "file": "icons/cloud-gaming.svg",
+      "originalName": "Cloud Gaming",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-gaming--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "construction",
+      "file": "icons/construction.svg",
+      "originalName": "Construction",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/construction--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "dice-2",
+      "file": "icons/dice-2.svg",
+      "originalName": "Dice 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dice-2--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "elevation",
+      "file": "icons/elevation.svg",
+      "originalName": "Elevation",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/elevation--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "featured-seasonal-and-gifts",
+      "file": "icons/featured-seasonal-and-gifts.svg",
+      "originalName": "Featured Seasonal And Gifts",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/featured-seasonal-and-gifts--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "flask-full",
+      "file": "icons/flask-full.svg",
+      "originalName": "Flask Full",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flask-full--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "ghost",
+      "file": "icons/ghost.svg",
+      "originalName": "Ghost",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ghost--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "hr-resting",
+      "file": "icons/hr-resting.svg",
+      "originalName": "Hr Resting",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hr-resting--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "newsstand",
+      "file": "icons/newsstand.svg",
+      "originalName": "Newsstand",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/newsstand--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "pace",
+      "file": "icons/pace.svg",
+      "originalName": "Pace",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pace--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "person-celebrate",
+      "file": "icons/person-celebrate.svg",
+      "originalName": "Person Celebrate",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/person-celebrate--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "piano",
+      "file": "icons/piano.svg",
+      "originalName": "Piano",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/piano--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "podiatry",
+      "file": "icons/podiatry.svg",
+      "originalName": "Podiatry",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/podiatry--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "school",
+      "file": "icons/school.svg",
+      "originalName": "School",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/school--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "self-improvement",
+      "file": "icons/self-improvement.svg",
+      "originalName": "Self Improvement",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/self-improvement--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "sports-baseball-alt",
+      "file": "icons/sports-baseball-alt.svg",
+      "originalName": "Sports Baseball Alt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sports-baseball-alt--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "sports-rugby",
+      "file": "icons/sports-rugby.svg",
+      "originalName": "Sports Rugby",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sports-rugby--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "storm",
+      "file": "icons/storm.svg",
+      "originalName": "Storm",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/storm--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "switch-account",
+      "file": "icons/switch-account.svg",
+      "originalName": "Switch Account",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/switch-account--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "trophy",
+      "file": "icons/trophy.svg",
+      "originalName": "Trophy",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/trophy--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "volunteer-activism",
+      "file": "icons/volunteer-activism.svg",
+      "originalName": "Volunteer Activism",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/volunteer-activism--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    },
+    {
+      "name": "water-medium",
+      "file": "icons/water-medium.svg",
+      "originalName": "Water Medium",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/water-medium--32958",
+      "category": "Activities",
+      "categorySlug": "activities",
+      "subcategory": "Activities",
+      "subcategorySlug": "activities"
+    }
+  ]
+}

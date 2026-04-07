@@ -98,3 +98,51 @@ jobs:
       - name: Publish @icon-pkg/streamline-sharp-remix-free
         working-directory: packages/packs/sharp-remix-free
         run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-plump-line-free
+        working-directory: packages/packs/plump-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-plump-solid-free
+        working-directory: packages/packs/plump-solid-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-plump-remix-free
+        working-directory: packages/packs/plump-remix-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-outlined-fill-free
+        working-directory: packages/packs/material-pro-outlined-fill-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-outlined-line-free
+        working-directory: packages/packs/material-pro-outlined-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-rounded-fill-free
+        working-directory: packages/packs/material-pro-rounded-fill-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-rounded-line-free
+        working-directory: packages/packs/material-pro-rounded-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-sharp-fill-free
+        working-directory: packages/packs/material-pro-sharp-fill-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-material-pro-sharp-line-free
+        working-directory: packages/packs/material-pro-sharp-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-ultimate-light-free
+        working-directory: packages/packs/ultimate-light-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-ultimate-regular-free
+        working-directory: packages/packs/ultimate-regular-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-ultimate-bold-free
+        working-directory: packages/packs/ultimate-bold-free
+        run: npm publish --access public
