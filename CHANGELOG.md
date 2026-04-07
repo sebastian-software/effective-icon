@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.3.0](https://github.com/sebastian-software/effective-icon/compare/icon-v0.2.1...icon-v0.3.0) (2026-04-07)
+
+
+### Features
+
+* **demo:** rebuild demos around React and Solid integrations ([404687c](https://github.com/sebastian-software/effective-icon/commit/404687c930f664a939e95257921bdbb886ac578b))
+* **packs:** add family descriptions to gallery pages ([c355f02](https://github.com/sebastian-software/effective-icon/commit/c355f026399e7646b43d9e41a31a3b567a129486))
+* **packs:** add flex and sharp free release sets ([046bd06](https://github.com/sebastian-software/effective-icon/commit/046bd06aa4e778be50bd1d1577b97bbf09c2dae5))
+* **packs:** add lucide free set ([9587b9f](https://github.com/sebastian-software/effective-icon/commit/9587b9f8f70bfedd50ef93ee2fc4bd5b812edd4e))
+* **packs:** add plump, material, and ultimate free sets ([a8870b9](https://github.com/sebastian-software/effective-icon/commit/a8870b9672a546b88b3d7104b8b56283ece0f700))
+* **packs:** add static pack galleries and pages index ([21e4f5a](https://github.com/sebastian-software/effective-icon/commit/21e4f5af2f903b825429a2826d01527ca08528d0))
+* **packs:** refine gallery layout and copy behavior ([1d7c2e3](https://github.com/sebastian-software/effective-icon/commit/1d7c2e352a32e55afbd6b4d5fbc7454f55c454b7))
+* **packs:** surface grid size in pack metadata and pages ([0adc84d](https://github.com/sebastian-software/effective-icon/commit/0adc84d1b6e0a245e497b49f12202cb61d84307b))
+
+
+### Bug Fixes
+
+* **builder:** satisfy svg typecheck ([74d39be](https://github.com/sebastian-software/effective-icon/commit/74d39bee28a0ae3de661b731d6b13f23abb291dd))
+
 ## [0.2.1](https://github.com/sebastian-software/effective-icon/compare/icon-v0.2.0...icon-v0.2.1) (2026-04-02)
 
 
