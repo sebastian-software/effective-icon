@@ -179,8 +179,12 @@ describe("streamline builder", () => {
     expect(readmeText).toContain("`index.html` for a static icon gallery grouped by category")
     expect(galleryText).toContain("<title>@icon-pkg/streamline-core-line-free icon gallery</title>")
     expect(galleryText).toContain("Interface Essential")
+    expect(galleryText).toContain('class="subcategory__title"')
     expect(galleryText).toContain("icon-card__name")
+    expect(galleryText).toContain("text-overflow: ellipsis")
     expect(galleryText).toContain('src="./icons/add-1.svg"')
+    expect(galleryText).toContain('data-copy-name="Add 1"')
+    expect(galleryText).toContain("Copied icon name")
   })
 
   it(

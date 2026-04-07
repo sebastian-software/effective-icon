@@ -102,32 +102,28 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
 
   const sections = grouped
     .map((group) => {
-      const showSubcategoryHeadings =
-        group.subcategories.length > 1 ||
-        group.subcategories[0]?.subcategorySlug !== group.categorySlug ||
-        group.subcategories[0]?.subcategory !== group.category
-
       const subcategoryMarkup = group.subcategories
         .map((subcategory) => {
           const cards = subcategory.icons
             .map(
-              (icon) => `<article class="icon-card">
-  <div class="icon-card__preview">
+              (icon) => `<button
+  class="icon-card"
+  type="button"
+  data-copy-name="${escapeAttribute(icon.originalName)}"
+  title="${escapeAttribute(icon.originalName)}"
+>
+  <div class="icon-card__preview" aria-hidden="true">
     <img src="./${escapeAttribute(icon.file)}" alt="" loading="lazy" />
   </div>
   <div class="icon-card__meta">
     <span class="icon-card__name">${escapeHtml(icon.originalName)}</span>
   </div>
-</article>`
+</button>`
             )
             .join("\n")
 
-          const heading = showSubcategoryHeadings
-            ? `<h3 class="subcategory__title" id="${escapeAttribute(subcategory.subcategorySlug)}">${escapeHtml(subcategory.subcategory)}</h3>`
-            : ""
-
           return `<section class="subcategory">
-  ${heading}
+  <h3 class="subcategory__title" id="${escapeAttribute(subcategory.subcategorySlug)}">${escapeHtml(subcategory.subcategory)}</h3>
   <div class="icon-grid">
     ${cards}
   </div>
@@ -253,19 +249,21 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         font-weight: 700;
       }
       .category + .category {
-        margin-top: 2rem;
+        margin-top: 2.3rem;
       }
       .category__title {
-        margin: 0 0 0.9rem;
-        font-size: 1.35rem;
-        letter-spacing: -0.03em;
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
       .subcategory + .subcategory {
-        margin-top: 1.5rem;
+        margin-top: 1.25rem;
       }
       .subcategory__title {
-        margin: 0 0 0.8rem;
-        font-size: 0.85rem;
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
@@ -273,53 +271,83 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
       }
       .icon-grid {
         display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 0.9rem;
+        grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+        gap: 0.55rem;
       }
       .icon-card {
         display: grid;
-        gap: 0.75rem;
-        padding: 0.85rem;
+        gap: 0.35rem;
+        padding: 0.45rem 0.4rem 0.5rem;
         border: 1px solid var(--line);
-        border-radius: 1rem;
+        border-radius: 0.65rem;
         background: var(--paper);
-        box-shadow: 0 16px 48px color-mix(in oklch, var(--ink) 5%, transparent);
+        box-shadow: none;
+        cursor: copy;
+        text-align: left;
+        font: inherit;
+        color: inherit;
       }
       .icon-card__preview {
         display: grid;
         place-items: center;
-        min-height: 5rem;
-        padding: 0.75rem;
-        border-radius: 0.8rem;
-        background: color-mix(in oklch, var(--accent) 6%, white);
+        min-height: 4.15rem;
+        padding: 0.35rem;
+        border-radius: 0.45rem;
+        background: color-mix(in oklch, var(--paper) 92%, white);
       }
       .icon-card__preview img {
-        width: 1.5rem;
-        height: 1.5rem;
+        width: 1.65rem;
+        height: 1.65rem;
         color: var(--ink);
       }
       .icon-card__name {
-        display: inline-flex;
+        display: block;
         max-width: 100%;
-        padding: 0.38rem 0.6rem;
-        border-radius: 999px;
-        background: color-mix(in oklch, var(--accent) 8%, white);
-        font-size: 0.78rem;
-        font-weight: 700;
-        line-height: 1.3;
-        overflow-wrap: anywhere;
+        padding: 0 0.15rem;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.35;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
-      @media (max-width: 1160px) {
-        .icon-grid {
-          grid-template-columns: repeat(5, minmax(0, 1fr));
+      .icon-card[data-copied="true"] {
+        border-color: color-mix(in oklch, var(--accent) 34%, transparent);
+        background: color-mix(in oklch, var(--accent) 3%, white);
+      }
+      .copy-toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--ink) 92%, white);
+        color: white;
+        font-size: 0.72rem;
+        line-height: 1;
+        opacity: 0;
+        transform: translateY(0.4rem);
+        transition: opacity 120ms ease, transform 120ms ease;
+        pointer-events: none;
+      }
+      .copy-toast[data-visible="true"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (hover:hover) and (pointer:fine) {
+        .icon-card:hover {
+          border-color: color-mix(in oklch, var(--ink) 18%, transparent);
+          background: color-mix(in oklch, var(--paper) 96%, white);
         }
       }
-      @media (max-width: 980px) {
+      @media (max-width: 1160px) {
         .meta__grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
         }
         .icon-grid {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
         }
       }
       @media (max-width: 760px) {
@@ -328,7 +356,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
           padding-top: 1.3rem;
         }
         .icon-grid {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
+          grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
         }
       }
       @media (max-width: 480px) {
@@ -377,6 +405,71 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
       </nav>
       ${sections}
     </main>
+    <div class="copy-toast" id="copy-toast" aria-live="polite" aria-atomic="true">Copied icon name</div>
+    <script>
+      const toast = document.getElementById("copy-toast");
+      let toastTimer = null;
+      let copiedCard = null;
+
+      async function copyText(value) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(value);
+          return;
+        }
+
+        const input = document.createElement("textarea");
+        input.value = value;
+        input.setAttribute("readonly", "");
+        input.style.position = "absolute";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      function showToast(message, card) {
+        if (copiedCard) {
+          copiedCard.dataset.copied = "false";
+        }
+
+        copiedCard = card;
+        copiedCard.dataset.copied = "true";
+        toast.textContent = message;
+        toast.dataset.visible = "true";
+
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+
+        toastTimer = window.setTimeout(() => {
+          toast.dataset.visible = "false";
+          if (copiedCard) {
+            copiedCard.dataset.copied = "false";
+            copiedCard = null;
+          }
+        }, 1200);
+      }
+
+      document.addEventListener("click", async (event) => {
+        const card = event.target instanceof Element ? event.target.closest("[data-copy-name]") : null;
+        if (!(card instanceof HTMLElement)) {
+          return;
+        }
+
+        const value = card.dataset.copyName;
+        if (!value) {
+          return;
+        }
+
+        try {
+          await copyText(value);
+          showToast("Copied " + value, card);
+        } catch {
+          showToast("Copy failed", card);
+        }
+      });
+    </script>
   </body>
 </html>
 `
