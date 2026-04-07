@@ -45,6 +45,7 @@
     "dev:demo:solid:svg": "pnpm --filter @streamline-demo/solid-svg dev",
     "download:free": "pnpm --filter @icon-pkg/streamline-builder download-all",
     "download:set": "pnpm --filter @icon-pkg/streamline-builder download-set",
+    "publish:new-packs": "./scripts/publish-new-packs.sh",
     "release:packs:check": "pnpm --filter @icon-pkg/streamline-builder release-check",
     "release:packs:publish": "pnpm --filter @icon-pkg/streamline-builder publish-release",
     "typecheck": "tsc --noEmit",
