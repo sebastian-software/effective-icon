@@ -1,19 +1,25 @@
-import ts from "typescript"
+import { print } from "esrap"
+import tsx from "esrap/languages/tsx"
 
-export function findNameAttribute(attributes: readonly ts.JsxAttributeLike[]): ts.JsxAttribute | undefined {
+import type * as ESTree from "@oxc-project/types"
+
+const JSX_PRINTER = tsx()
+
+export function findNameAttribute(
+  attributes: readonly ESTree.JSXAttributeItem[]
+): ESTree.JSXAttribute | undefined {
   return attributes.find(
-    (attribute): attribute is ts.JsxAttribute =>
-      ts.isJsxAttribute(attribute) && getJsxAttributeIdentifier(attribute.name) === "name"
+    (attribute): attribute is ESTree.JSXAttribute =>
+      attribute.type === "JSXAttribute" && getJsxAttributeIdentifier(attribute.name) === "name"
   )
 }
 
-export function getJsxTagName(node: ts.JsxSelfClosingElement | ts.JsxElement): string {
-  const tagName = ts.isJsxElement(node) ? node.openingElement.tagName : node.tagName
-  return ts.isIdentifier(tagName) ? tagName.text : tagName.getText()
+export function getJsxTagName(node: ESTree.JSXElement): string {
+  return getJsxElementName(node.openingElement.name)
 }
 
-export function getJsxAttributeName(attribute: ts.JsxAttributeLike): string | null {
-  if (!ts.isJsxAttribute(attribute)) {
+export function getJsxAttributeName(attribute: ESTree.JSXAttributeItem): string | null {
+  if (attribute.type !== "JSXAttribute") {
     return null
   }
 
@@ -21,34 +27,47 @@ export function getJsxAttributeName(attribute: ts.JsxAttributeLike): string | nu
 }
 
 export function getJsxAttributeExpression(
-  attributes: readonly ts.JsxAttributeLike[],
+  attributes: readonly ESTree.JSXAttributeItem[],
   name: string
-): ts.Expression | undefined {
+): ESTree.Expression | undefined {
   const attribute = attributes.find(
-    (candidate): candidate is ts.JsxAttribute =>
-      ts.isJsxAttribute(candidate) && getJsxAttributeIdentifier(candidate.name) === name
+    (candidate): candidate is ESTree.JSXAttribute =>
+      candidate.type === "JSXAttribute" && getJsxAttributeIdentifier(candidate.name) === name
   )
 
-  if (!attribute?.initializer) {
+  if (!attribute?.value) {
     return undefined
   }
 
-  if (ts.isStringLiteral(attribute.initializer)) {
-    return ts.factory.createStringLiteral(attribute.initializer.text)
+  if (attribute.value.type === "Literal") {
+    return attribute.value
   }
 
-  if (ts.isJsxExpression(attribute.initializer) && attribute.initializer.expression) {
-    return attribute.initializer.expression
+  if (attribute.value.type === "JSXExpressionContainer" && attribute.value.expression.type !== "JSXEmptyExpression") {
+    return attribute.value.expression
   }
 
   return undefined
 }
 
+export function getJsxAttributeExpressionSource(
+  attributes: readonly ESTree.JSXAttributeItem[],
+  name: string,
+  source: string
+): string | undefined {
+  const expression = getJsxAttributeExpression(attributes, name)
+  if (!expression) {
+    return undefined
+  }
+
+  return getNodeSource(expression, source) ?? printNode(expression)
+}
+
 export function mergeJsxAttributes(
-  existing: readonly ts.JsxAttributeLike[],
-  forwarded: readonly ts.JsxAttributeLike[]
-): ts.JsxAttributeLike[] {
-  const merged: ts.JsxAttributeLike[] = []
+  existing: readonly ESTree.JSXAttributeItem[],
+  forwarded: readonly ESTree.JSXAttributeItem[]
+): ESTree.JSXAttributeItem[] {
+  const merged: ESTree.JSXAttributeItem[] = []
   const indexByName = new Map<string, number>()
 
   for (const attribute of [...existing, ...forwarded]) {
@@ -72,49 +91,52 @@ export function mergeJsxAttributes(
   return merged
 }
 
-export function createJsxElement(tagName: string, attributes: ts.JsxAttributeLike[]): ts.JsxSelfClosingElement {
-  return ts.factory.createJsxSelfClosingElement(
-    ts.factory.createIdentifier(tagName),
-    undefined,
-    ts.factory.createJsxAttributes(attributes)
-  )
-}
-
-export function createStringAttribute(name: string, value: string): ts.JsxAttribute {
-  return ts.factory.createJsxAttribute(ts.factory.createIdentifier(name), ts.factory.createStringLiteral(value))
-}
-
-export function createExpressionAttribute(name: string, expression: ts.Expression): ts.JsxAttribute {
-  return ts.factory.createJsxAttribute(
-    ts.factory.createIdentifier(name),
-    ts.factory.createJsxExpression(undefined, expression)
-  )
-}
-
-export function appendClassName(attribute: ts.JsxAttribute, className: string): ts.JsxAttribute {
-  if (!attribute.initializer) {
-    return createStringAttribute(getJsxAttributeIdentifier(attribute.name), className)
+export function renderJsxAttribute(attribute: ESTree.JSXAttributeItem, source = ""): string {
+  const exact = getNodeSource(attribute, source)
+  if (exact) {
+    return exact
   }
 
-  if (ts.isStringLiteral(attribute.initializer)) {
-    return createStringAttribute(getJsxAttributeIdentifier(attribute.name), `${attribute.initializer.text} ${className}`)
+  if (attribute.type === "JSXSpreadAttribute") {
+    return `{...${printNode(attribute.argument)}}`
   }
 
-  if (ts.isJsxExpression(attribute.initializer) && attribute.initializer.expression) {
-    return createExpressionAttribute(
-      getJsxAttributeIdentifier(attribute.name),
-      createJoinedClassNameExpression(attribute.initializer.expression, className)
-    )
+  const name = renderJsxAttributeName(attribute.name, source)
+  if (!attribute.value) {
+    return name
   }
 
-  return attribute
+  return `${name}=${renderJsxAttributeValue(attribute.value, source)}`
+}
+
+export function renderJsxAttributes(attributes: readonly ESTree.JSXAttributeItem[], source = ""): string[] {
+  return attributes.map((attribute) => renderJsxAttribute(attribute, source))
+}
+
+export function appendClassName(attribute: ESTree.JSXAttribute, source: string, className: string): string {
+  const attributeName = getJsxAttributeIdentifier(attribute.name)
+
+  if (!attribute.value) {
+    return `${attributeName}=${JSON.stringify(className)}`
+  }
+
+  if (attribute.value.type === "Literal" && typeof attribute.value.value === "string") {
+    return `${attributeName}=${JSON.stringify(`${attribute.value.value} ${className}`)}`
+  }
+
+  if (attribute.value.type === "JSXExpressionContainer" && attribute.value.expression.type !== "JSXEmptyExpression") {
+    const expressionSource = getNodeSource(attribute.value.expression, source) ?? printNode(attribute.value.expression)
+    return `${attributeName}={[${expressionSource}, ${JSON.stringify(className)}].filter(Boolean).join(" ")}`
+  }
+
+  return renderJsxAttribute(attribute, source)
 }
 
 export function styleTargetToClassPropName(styleTarget: "object" | "string"): "class" | "className" {
   return styleTarget === "string" ? "class" : "className"
 }
 
-export function createA11yFallback(attributes: readonly ts.JsxAttributeLike[]): ts.JsxAttribute[] {
+export function createA11yFallback(attributes: readonly ESTree.JSXAttributeItem[]): ESTree.JSXAttribute[] {
   const names = new Set(attributes.map((attribute) => getJsxAttributeName(attribute)).filter(Boolean))
   if (names.has("aria-hidden") || names.has("aria-label") || names.has("aria-labelledby") || names.has("role")) {
     return []
@@ -123,9 +145,9 @@ export function createA11yFallback(attributes: readonly ts.JsxAttributeLike[]): 
   return [createStringAttribute("aria-hidden", "true")]
 }
 
-export function createImageFallback(attributes: readonly ts.JsxAttributeLike[]): ts.JsxAttribute[] {
+export function createImageFallback(attributes: readonly ESTree.JSXAttributeItem[]): ESTree.JSXAttribute[] {
   const names = new Set(attributes.map((attribute) => getJsxAttributeName(attribute)).filter(Boolean))
-  const fallback: ts.JsxAttribute[] = []
+  const fallback: ESTree.JSXAttribute[] = []
 
   if (!names.has("alt")) {
     fallback.push(createStringAttribute("alt", ""))
@@ -134,62 +156,84 @@ export function createImageFallback(attributes: readonly ts.JsxAttributeLike[]):
   return [...fallback, ...createA11yFallback(attributes)]
 }
 
-export function createDefaultImport(specifier: string, localName: string): ts.ImportDeclaration {
-  return ts.factory.createImportDeclaration(
-    undefined,
-    ts.factory.createImportClause(false, ts.factory.createIdentifier(localName), undefined),
-    ts.factory.createStringLiteral(specifier),
-    undefined
-  )
+export function createStringAttribute(name: string, value: string): ESTree.JSXAttribute {
+  return {
+    type: "JSXAttribute",
+    name: createJsxIdentifier(name),
+    value: createStringLiteral(value),
+    start: 0,
+    end: 0,
+    range: [0, 0],
+  }
 }
 
-export function createNamedImport(moduleId: string, bindings: Array<[string, string]>): ts.ImportDeclaration {
-  return ts.factory.createImportDeclaration(
-    undefined,
-    ts.factory.createImportClause(
-      false,
-      undefined,
-      ts.factory.createNamedImports(
-        bindings.map(([importedName, localName]) =>
-          ts.factory.createImportSpecifier(
-            false,
-            importedName === localName ? undefined : ts.factory.createIdentifier(importedName),
-            ts.factory.createIdentifier(localName)
-          )
-        )
-      )
-    ),
-    ts.factory.createStringLiteral(moduleId),
-    undefined
-  )
-}
-
-export function createSideEffectImport(specifier: string): ts.ImportDeclaration {
-  return ts.factory.createImportDeclaration(undefined, undefined, ts.factory.createStringLiteral(specifier), undefined)
-}
-
-export function getJsxAttributeIdentifier(name: ts.JsxAttributeName): string {
-  if (ts.isIdentifier(name)) {
-    return name.text
+export function getJsxAttributeIdentifier(name: ESTree.JSXAttributeName): string {
+  if (name.type === "JSXIdentifier") {
+    return name.name
   }
 
-  return `${name.namespace.text}:${name.name.text}`
+  return `${name.namespace.name}:${name.name.name}`
 }
 
-function createJoinedClassNameExpression(expression: ts.Expression, className: string): ts.Expression {
-  return ts.factory.createCallExpression(
-    ts.factory.createPropertyAccessExpression(
-      ts.factory.createCallExpression(
-        ts.factory.createPropertyAccessExpression(
-          ts.factory.createArrayLiteralExpression([expression, ts.factory.createStringLiteral(className)]),
-          "filter"
-        ),
-        undefined,
-        [ts.factory.createIdentifier("Boolean")]
-      ),
-      "join"
-    ),
-    undefined,
-    [ts.factory.createStringLiteral(" ")]
-  )
+export function getNodeSource(node: Pick<ESTree.Span, "start" | "end">, source: string): string | null {
+  if (!source || node.end <= node.start) {
+    return null
+  }
+
+  return source.slice(node.start, node.end)
+}
+
+export function printNode(node: object): string {
+  return print(node as never, JSX_PRINTER).code
+}
+
+function getJsxElementName(name: ESTree.JSXElementName): string {
+  if (name.type === "JSXIdentifier") {
+    return name.name
+  }
+
+  if (name.type === "JSXNamespacedName") {
+    return `${name.namespace.name}:${name.name.name}`
+  }
+
+  return `${getJsxElementName(name.object)}.${name.property.name}`
+}
+
+function renderJsxAttributeName(name: ESTree.JSXAttributeName, source: string): string {
+  const exact = getNodeSource(name, source)
+  if (exact) {
+    return exact
+  }
+
+  return getJsxAttributeIdentifier(name)
+}
+
+function renderJsxAttributeValue(value: ESTree.JSXAttributeValue, source: string): string {
+  const exact = getNodeSource(value, source)
+  if (exact) {
+    return exact
+  }
+
+  return printNode(value)
+}
+
+function createJsxIdentifier(name: string): ESTree.JSXIdentifier {
+  return {
+    type: "JSXIdentifier",
+    name,
+    start: 0,
+    end: 0,
+    range: [0, 0],
+  }
+}
+
+function createStringLiteral(value: string): ESTree.StringLiteral {
+  return {
+    type: "Literal",
+    value,
+    raw: JSON.stringify(value),
+    start: 0,
+    end: 0,
+    range: [0, 0],
+  } as ESTree.StringLiteral
 }
