@@ -74,3 +74,27 @@ jobs:
       - name: Publish @icon-pkg/streamline-core-remix-free
         working-directory: packages/packs/core-remix-free
         run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-flex-line-free
+        working-directory: packages/packs/flex-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-flex-solid-free
+        working-directory: packages/packs/flex-solid-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-flex-remix-free
+        working-directory: packages/packs/flex-remix-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-sharp-line-free
+        working-directory: packages/packs/sharp-line-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-sharp-solid-free
+        working-directory: packages/packs/sharp-solid-free
+        run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-sharp-remix-free
+        working-directory: packages/packs/sharp-remix-free
+        run: npm publish --access public

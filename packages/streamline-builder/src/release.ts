@@ -16,7 +16,17 @@ export const PACK_OSS_HOMEPAGE_URL = "https://oss.sebastian-software.com"
 export const PACK_REDISTRIBUTOR = "Sebastian Software GmbH, Mainz, Germany"
 export const PACK_REDISTRIBUTOR_COPYRIGHT = "Copyright (c) 2026 Sebastian Software GmbH, Mainz, Germany"
 
-export const RELEASE_PACK_SLUGS = ["core-line-free", "core-solid-free", "core-remix-free"] as const
+export const RELEASE_PACK_SLUGS = [
+  "core-line-free",
+  "core-solid-free",
+  "core-remix-free",
+  "flex-line-free",
+  "flex-solid-free",
+  "flex-remix-free",
+  "sharp-line-free",
+  "sharp-solid-free",
+  "sharp-remix-free",
+] as const
 
 export function getReleaseRegistryEntries() {
   return RELEASE_PACK_SLUGS.map((slug) => findRegistryEntry(slug))

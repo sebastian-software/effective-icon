@@ -1,0 +1,37 @@
+{
+  "name": "@icon-pkg/streamline-sharp-solid-free",
+  "version": "0.2.1",
+  "description": "Redistributed Streamline Sharp Solid Free icon pack",
+  "license": "CC-BY-4.0",
+  "type": "module",
+  "files": [
+    "manifest.json",
+    "icons",
+    "index.html",
+    "README.md",
+    "ATTRIBUTION.md",
+    "LICENSE"
+  ],
+  "exports": {
+    "./manifest.json": "./manifest.json",
+    "./icons/*": "./icons/*"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sebastian-software/effective-icon.git",
+    "directory": "packages/packs/sharp-solid-free"
+  },
+  "homepage": "https://sebastian-software.github.io/effective-icon/packs/sharp-solid-free/",
+  "bugs": {
+    "url": "https://github.com/sebastian-software/effective-icon/issues"
+  },
+  "keywords": [
+    "streamline",
+    "icons",
+    "svg",
+    "cc-by-4.0"
+  ]
+}

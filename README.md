@@ -442,13 +442,19 @@ pnpm release:packs:publish
 
 The live downloader is still under active development for full Streamline pagination, but the emitted package contract is already aligned with the compile-time plugin.
 
-## Publishing the Initial Pack Set
+## Publishing the Current Pack Set
 
-The first npm release is intentionally scoped to the three materialized pack workspaces already tracked in this repository:
+The current npm release set is intentionally scoped to the nine materialized pack workspaces tracked in this repository:
 
 - `@icon-pkg/streamline-core-line-free`
 - `@icon-pkg/streamline-core-solid-free`
 - `@icon-pkg/streamline-core-remix-free`
+- `@icon-pkg/streamline-flex-line-free`
+- `@icon-pkg/streamline-flex-solid-free`
+- `@icon-pkg/streamline-flex-remix-free`
+- `@icon-pkg/streamline-sharp-line-free`
+- `@icon-pkg/streamline-sharp-solid-free`
+- `@icon-pkg/streamline-sharp-remix-free`
 
 Use the dedicated release check before publishing:
 

@@ -1,0 +1,5002 @@
+{
+  "name": "@icon-pkg/streamline-flex-solid-free",
+  "slug": "flex-solid-free",
+  "version": "0.2.1",
+  "license": "CC BY 4.0",
+  "sourceUrl": "https://www.streamlinehq.com/icons/flex-solid-free",
+  "family": "Flex",
+  "style": "solid",
+  "iconCount": 499,
+  "icons": [
+    {
+      "name": "3d-coordinate-axis",
+      "file": "icons/3d-coordinate-axis.svg",
+      "originalName": "3d Coordinate Axis",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/3d-coordinate-axis--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "3d-rotate-1",
+      "file": "icons/3d-rotate-1.svg",
+      "originalName": "3d Rotate 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/3d-rotate-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "3d-rotate-y-axis",
+      "file": "icons/3d-rotate-y-axis.svg",
+      "originalName": "3d Rotate Y Axis",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/3d-rotate-y-axis--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "add-to-playlist",
+      "file": "icons/add-to-playlist.svg",
+      "originalName": "Add To Playlist",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/add-to-playlist--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "ai-chip-robot",
+      "file": "icons/ai-chip-robot.svg",
+      "originalName": "Ai Chip Robot",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-chip-robot--26802",
+      "category": "Artificial Intelligence",
+      "categorySlug": "artificial-intelligence",
+      "subcategory": "Artificial Intelligence",
+      "subcategorySlug": "artificial-intelligence"
+    },
+    {
+      "name": "ai-generate-portrait-image-spark",
+      "file": "icons/ai-generate-portrait-image-spark.svg",
+      "originalName": "Ai Generate Portrait Image Spark",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-generate-portrait-image-spark--26802",
+      "category": "Artificial Intelligence",
+      "categorySlug": "artificial-intelligence",
+      "subcategory": "Artificial Intelligence",
+      "subcategorySlug": "artificial-intelligence"
+    },
+    {
+      "name": "ai-scanner-robot",
+      "file": "icons/ai-scanner-robot.svg",
+      "originalName": "Ai Scanner Robot",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ai-scanner-robot--26802",
+      "category": "Artificial Intelligence",
+      "categorySlug": "artificial-intelligence",
+      "subcategory": "Artificial Intelligence",
+      "subcategorySlug": "artificial-intelligence"
+    },
+    {
+      "name": "airplane-disabled",
+      "file": "icons/airplane-disabled.svg",
+      "originalName": "Airplane Disabled",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/airplane-disabled--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "airport-plane",
+      "file": "icons/airport-plane.svg",
+      "originalName": "Airport Plane",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/airport-plane--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "airship",
+      "file": "icons/airship.svg",
+      "originalName": "Airship",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/airship--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "alien",
+      "file": "icons/alien.svg",
+      "originalName": "Alien",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/alien--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "align-back-1",
+      "file": "icons/align-back-1.svg",
+      "originalName": "Align Back 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/align-back-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "align-selection",
+      "file": "icons/align-selection.svg",
+      "originalName": "Align Selection",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/align-selection--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "align-text-top",
+      "file": "icons/align-text-top.svg",
+      "originalName": "Align Text Top",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/align-text-top--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "align-top-1",
+      "file": "icons/align-top-1.svg",
+      "originalName": "Align Top 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/align-top-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "allergens-fish",
+      "file": "icons/allergens-fish.svg",
+      "originalName": "Allergens Fish",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/allergens-fish--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "anchor",
+      "file": "icons/anchor.svg",
+      "originalName": "Anchor",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/anchor--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "apple",
+      "file": "icons/apple.svg",
+      "originalName": "Apple",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/apple--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "application-add",
+      "file": "icons/application-add.svg",
+      "originalName": "Application Add",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/application-add--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "archive-box",
+      "file": "icons/archive-box.svg",
+      "originalName": "Archive Box",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/archive-box--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-cursor-2",
+      "file": "icons/arrow-cursor-2.svg",
+      "originalName": "Arrow Cursor 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-cursor-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-cursor-click-2",
+      "file": "icons/arrow-cursor-click-2.svg",
+      "originalName": "Arrow Cursor Click 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-cursor-click-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-cursor-move",
+      "file": "icons/arrow-cursor-move.svg",
+      "originalName": "Arrow Cursor Move",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-cursor-move--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-expand",
+      "file": "icons/arrow-expand.svg",
+      "originalName": "Arrow Expand",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-expand--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-move",
+      "file": "icons/arrow-move.svg",
+      "originalName": "Arrow Move",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-move--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "arrow-roadmap",
+      "file": "icons/arrow-roadmap.svg",
+      "originalName": "Arrow Roadmap",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/arrow-roadmap--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "artificial-intelligence-brain-chip",
+      "file": "icons/artificial-intelligence-brain-chip.svg",
+      "originalName": "Artificial Intelligence Brain Chip",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/artificial-intelligence-brain-chip--26802",
+      "category": "Artificial Intelligence",
+      "categorySlug": "artificial-intelligence",
+      "subcategory": "Artificial Intelligence",
+      "subcategorySlug": "artificial-intelligence"
+    },
+    {
+      "name": "artist-song",
+      "file": "icons/artist-song.svg",
+      "originalName": "Artist Song",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/artist-song--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "auto-correction-check",
+      "file": "icons/auto-correction-check.svg",
+      "originalName": "Auto Correction Check",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/auto-correction-check--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "bag",
+      "file": "icons/bag.svg",
+      "originalName": "Bag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bag--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "bag-suitcase-4",
+      "file": "icons/bag-suitcase-4.svg",
+      "originalName": "Bag Suitcase 4",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bag-suitcase-4--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "baggage",
+      "file": "icons/baggage.svg",
+      "originalName": "Baggage",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/baggage--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "ball",
+      "file": "icons/ball.svg",
+      "originalName": "Ball",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ball--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "balloon",
+      "file": "icons/balloon.svg",
+      "originalName": "Balloon",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/balloon--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "battery-charging",
+      "file": "icons/battery-charging.svg",
+      "originalName": "Battery Charging",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-charging--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "battery-medium-1",
+      "file": "icons/battery-medium-1.svg",
+      "originalName": "Battery Medium 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/battery-medium-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "bell",
+      "file": "icons/bell.svg",
+      "originalName": "Bell",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bell--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "bell-notification",
+      "file": "icons/bell-notification.svg",
+      "originalName": "Bell Notification",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bell-notification--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "bicycle-bike",
+      "file": "icons/bicycle-bike.svg",
+      "originalName": "Bicycle Bike",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bicycle-bike--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "bill-4",
+      "file": "icons/bill-4.svg",
+      "originalName": "Bill 4",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bill-4--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "binoculars",
+      "file": "icons/binoculars.svg",
+      "originalName": "Binoculars",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/binoculars--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "blank-calendar",
+      "file": "icons/blank-calendar.svg",
+      "originalName": "Blank Calendar",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/blank-calendar--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "block-2",
+      "file": "icons/block-2.svg",
+      "originalName": "Block 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/block-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "blood-donate-drop",
+      "file": "icons/blood-donate-drop.svg",
+      "originalName": "Blood Donate Drop",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/blood-donate-drop--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "bluetooth-disabled",
+      "file": "icons/bluetooth-disabled.svg",
+      "originalName": "Bluetooth Disabled",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bluetooth-disabled--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "bluetooth-searching",
+      "file": "icons/bluetooth-searching.svg",
+      "originalName": "Bluetooth Searching",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bluetooth-searching--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "book-reading",
+      "file": "icons/book-reading.svg",
+      "originalName": "Book Reading",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/book-reading--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "bookmark",
+      "file": "icons/bookmark.svg",
+      "originalName": "Bookmark",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bookmark--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "bow-tie",
+      "file": "icons/bow-tie.svg",
+      "originalName": "Bow Tie",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bow-tie--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "brightness-1",
+      "file": "icons/brightness-1.svg",
+      "originalName": "Brightness 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/brightness-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "brightness-4",
+      "file": "icons/brightness-4.svg",
+      "originalName": "Brightness 4",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/brightness-4--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "broken-link-1",
+      "file": "icons/broken-link-1.svg",
+      "originalName": "Broken Link 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/broken-link-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "browser-bookmark",
+      "file": "icons/browser-bookmark.svg",
+      "originalName": "Browser Bookmark",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/browser-bookmark--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "browser-dashboard",
+      "file": "icons/browser-dashboard.svg",
+      "originalName": "Browser Dashboard",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/browser-dashboard--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "browser-multiple-window",
+      "file": "icons/browser-multiple-window.svg",
+      "originalName": "Browser Multiple Window",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/browser-multiple-window--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "bug-antivirus-shield",
+      "file": "icons/bug-antivirus-shield.svg",
+      "originalName": "Bug Antivirus Shield",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/bug-antivirus-shield--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "building-1",
+      "file": "icons/building-1.svg",
+      "originalName": "Building 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/building-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "button-move-circle",
+      "file": "icons/button-move-circle.svg",
+      "originalName": "Button Move Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/button-move-circle--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "button-pause-circle",
+      "file": "icons/button-pause-circle.svg",
+      "originalName": "Button Pause Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/button-pause-circle--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "button-power-1",
+      "file": "icons/button-power-1.svg",
+      "originalName": "Button Power 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/button-power-1--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "button-record-1",
+      "file": "icons/button-record-1.svg",
+      "originalName": "Button Record 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/button-record-1--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "cake-slice",
+      "file": "icons/cake-slice.svg",
+      "originalName": "Cake Slice",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cake-slice--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "calculator-1",
+      "file": "icons/calculator-1.svg",
+      "originalName": "Calculator 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/calculator-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "calendar-mark",
+      "file": "icons/calendar-mark.svg",
+      "originalName": "Calendar Mark",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/calendar-mark--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "call-center-support-service",
+      "file": "icons/call-center-support-service.svg",
+      "originalName": "Call Center Support Service",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/call-center-support-service--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "camera-1",
+      "file": "icons/camera-1.svg",
+      "originalName": "Camera 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/camera-1--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "camera-setting-gear",
+      "file": "icons/camera-setting-gear.svg",
+      "originalName": "Camera Setting Gear",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/camera-setting-gear--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "camera-tripod",
+      "file": "icons/camera-tripod.svg",
+      "originalName": "Camera Tripod",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/camera-tripod--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "camera-video",
+      "file": "icons/camera-video.svg",
+      "originalName": "Camera Video",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/camera-video--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "campfire",
+      "file": "icons/campfire.svg",
+      "originalName": "Campfire",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/campfire--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "camping-tent",
+      "file": "icons/camping-tent.svg",
+      "originalName": "Camping Tent",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/camping-tent--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "car-taxi-1",
+      "file": "icons/car-taxi-1.svg",
+      "originalName": "Car Taxi 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/car-taxi-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "carrot",
+      "file": "icons/carrot.svg",
+      "originalName": "Carrot",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/carrot--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "cashing-check",
+      "file": "icons/cashing-check.svg",
+      "originalName": "Cashing Check",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cashing-check--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "cat-2",
+      "file": "icons/cat-2.svg",
+      "originalName": "Cat 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cat-2--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "cellular-network-lte",
+      "file": "icons/cellular-network-lte.svg",
+      "originalName": "Cellular Network Lte",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cellular-network-lte--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "champagne-party-alcohol",
+      "file": "icons/champagne-party-alcohol.svg",
+      "originalName": "Champagne Party Alcohol",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/champagne-party-alcohol--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "charging",
+      "file": "icons/charging.svg",
+      "originalName": "Charging",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/charging--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "chat-bubble-square-phone",
+      "file": "icons/chat-bubble-square-phone.svg",
+      "originalName": "Chat Bubble Square Phone",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/chat-bubble-square-phone--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "chat-bubble-text-square",
+      "file": "icons/chat-bubble-text-square.svg",
+      "originalName": "Chat Bubble Text Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/chat-bubble-text-square--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "chat-bubble-typing-oval",
+      "file": "icons/chat-bubble-typing-oval.svg",
+      "originalName": "Chat Bubble Typing Oval",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/chat-bubble-typing-oval--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "check-square",
+      "file": "icons/check-square.svg",
+      "originalName": "Check Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/check-square--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "checkup-medical-report-clipboard",
+      "file": "icons/checkup-medical-report-clipboard.svg",
+      "originalName": "Checkup Medical Report Clipboard",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/checkup-medical-report-clipboard--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "chef-toque-hat",
+      "file": "icons/chef-toque-hat.svg",
+      "originalName": "Chef Toque Hat",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/chef-toque-hat--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "chess-king",
+      "file": "icons/chess-king.svg",
+      "originalName": "Chess King",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/chess-king--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "city-hall",
+      "file": "icons/city-hall.svg",
+      "originalName": "City Hall",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/city-hall--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "clean-broom-wipe",
+      "file": "icons/clean-broom-wipe.svg",
+      "originalName": "Clean Broom Wipe",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/clean-broom-wipe--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "cloud",
+      "file": "icons/cloud.svg",
+      "originalName": "Cloud",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "cloud-data-transfer",
+      "file": "icons/cloud-data-transfer.svg",
+      "originalName": "Cloud Data Transfer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-data-transfer--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "cloud-download",
+      "file": "icons/cloud-download.svg",
+      "originalName": "Cloud Download",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-download--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "cloud-off",
+      "file": "icons/cloud-off.svg",
+      "originalName": "Cloud Off",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-off--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "cloud-warning",
+      "file": "icons/cloud-warning.svg",
+      "originalName": "Cloud Warning",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cloud-warning--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "cocktail",
+      "file": "icons/cocktail.svg",
+      "originalName": "Cocktail",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cocktail--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "code-analysis",
+      "file": "icons/code-analysis.svg",
+      "originalName": "Code Analysis",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/code-analysis--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "code-monitor-1",
+      "file": "icons/code-monitor-1.svg",
+      "originalName": "Code Monitor 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/code-monitor-1--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "cog",
+      "file": "icons/cog.svg",
+      "originalName": "Cog",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cog--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "coin-share",
+      "file": "icons/coin-share.svg",
+      "originalName": "Coin Share",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/coin-share--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "color-picker",
+      "file": "icons/color-picker.svg",
+      "originalName": "Color Picker",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/color-picker--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "color-swatches",
+      "file": "icons/color-swatches.svg",
+      "originalName": "Color Swatches",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/color-swatches--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "compsition-horizontal",
+      "file": "icons/compsition-horizontal.svg",
+      "originalName": "Compsition Horizontal",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/compsition-horizontal--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "computer-chip-1",
+      "file": "icons/computer-chip-1.svg",
+      "originalName": "Computer Chip 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/computer-chip-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "contact-book",
+      "file": "icons/contact-book.svg",
+      "originalName": "Contact Book",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/contact-book--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "contact-phonebook-2",
+      "file": "icons/contact-phonebook-2.svg",
+      "originalName": "Contact Phonebook 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/contact-phonebook-2--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "controller-stick",
+      "file": "icons/controller-stick.svg",
+      "originalName": "Controller Stick",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/controller-stick--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "controller-wireless",
+      "file": "icons/controller-wireless.svg",
+      "originalName": "Controller Wireless",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/controller-wireless--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "copy-2",
+      "file": "icons/copy-2.svg",
+      "originalName": "Copy 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/copy-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "countdown-timer",
+      "file": "icons/countdown-timer.svg",
+      "originalName": "Countdown Timer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/countdown-timer--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "credit-card-4",
+      "file": "icons/credit-card-4.svg",
+      "originalName": "Credit Card 4",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/credit-card-4--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "credit-card-approved",
+      "file": "icons/credit-card-approved.svg",
+      "originalName": "Credit Card Approved",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/credit-card-approved--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "credit-card-disable",
+      "file": "icons/credit-card-disable.svg",
+      "originalName": "Credit Card Disable",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/credit-card-disable--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "critical-thinking-2",
+      "file": "icons/critical-thinking-2.svg",
+      "originalName": "Critical Thinking 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/critical-thinking-2--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "crown",
+      "file": "icons/crown.svg",
+      "originalName": "Crown",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/crown--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "cube",
+      "file": "icons/cube.svg",
+      "originalName": "Cube",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cube--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "cursor-click",
+      "file": "icons/cursor-click.svg",
+      "originalName": "Cursor Click",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cursor-click--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "curves-levels-graph",
+      "file": "icons/curves-levels-graph.svg",
+      "originalName": "Curves Levels Graph",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/curves-levels-graph--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "customer-support-5",
+      "file": "icons/customer-support-5.svg",
+      "originalName": "Customer Support 5",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/customer-support-5--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "customer-support-7",
+      "file": "icons/customer-support-7.svg",
+      "originalName": "Customer Support 7",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/customer-support-7--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "cyborg-2",
+      "file": "icons/cyborg-2.svg",
+      "originalName": "Cyborg 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/cyborg-2--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "dark-dislay-mode",
+      "file": "icons/dark-dislay-mode.svg",
+      "originalName": "Dark Dislay Mode",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dark-dislay-mode--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "dashboard-3",
+      "file": "icons/dashboard-3.svg",
+      "originalName": "Dashboard 3",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dashboard-3--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "dashboard-gauge-1",
+      "file": "icons/dashboard-gauge-1.svg",
+      "originalName": "Dashboard Gauge 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dashboard-gauge-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "database",
+      "file": "icons/database.svg",
+      "originalName": "Database",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/database--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "decent-work-and-economic-growth",
+      "file": "icons/decent-work-and-economic-growth.svg",
+      "originalName": "Decent Work And Economic Growth",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/decent-work-and-economic-growth--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "deepfake-technology-1",
+      "file": "icons/deepfake-technology-1.svg",
+      "originalName": "Deepfake Technology 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/deepfake-technology-1--26802",
+      "category": "Artificial Intelligence",
+      "categorySlug": "artificial-intelligence",
+      "subcategory": "Artificial Intelligence",
+      "subcategorySlug": "artificial-intelligence"
+    },
+    {
+      "name": "definition-search-book",
+      "file": "icons/definition-search-book.svg",
+      "originalName": "Definition Search Book",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/definition-search-book--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "delete-tag",
+      "file": "icons/delete-tag.svg",
+      "originalName": "Delete Tag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/delete-tag--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "departure-time",
+      "file": "icons/departure-time.svg",
+      "originalName": "Departure Time",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/departure-time--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "desktop-lock",
+      "file": "icons/desktop-lock.svg",
+      "originalName": "Desktop Lock",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/desktop-lock--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "desktop-screensaver-sleep",
+      "file": "icons/desktop-screensaver-sleep.svg",
+      "originalName": "Desktop Screensaver Sleep",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/desktop-screensaver-sleep--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "dial-pad-finger-2",
+      "file": "icons/dial-pad-finger-2.svg",
+      "originalName": "Dial Pad Finger 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dial-pad-finger-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "diamond-1",
+      "file": "icons/diamond-1.svg",
+      "originalName": "Diamond 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/diamond-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "dice-5",
+      "file": "icons/dice-5.svg",
+      "originalName": "Dice 5",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dice-5--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "dictionary-language-book",
+      "file": "icons/dictionary-language-book.svg",
+      "originalName": "Dictionary Language Book",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dictionary-language-book--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "disable-bell-notification",
+      "file": "icons/disable-bell-notification.svg",
+      "originalName": "Disable Bell Notification",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/disable-bell-notification--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "discount-percent-coupon",
+      "file": "icons/discount-percent-coupon.svg",
+      "originalName": "Discount Percent Coupon",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/discount-percent-coupon--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "discussion-converstion-reply",
+      "file": "icons/discussion-converstion-reply.svg",
+      "originalName": "Discussion Converstion Reply",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/discussion-converstion-reply--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "dislike-circle",
+      "file": "icons/dislike-circle.svg",
+      "originalName": "Dislike Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dislike-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "dna",
+      "file": "icons/dna.svg",
+      "originalName": "Dna",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dna--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "dog-1",
+      "file": "icons/dog-1.svg",
+      "originalName": "Dog 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dog-1--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "dollar-increase",
+      "file": "icons/dollar-increase.svg",
+      "originalName": "Dollar Increase",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dollar-increase--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "download-arrow",
+      "file": "icons/download-arrow.svg",
+      "originalName": "Download Arrow",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/download-arrow--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "download-box-1",
+      "file": "icons/download-box-1.svg",
+      "originalName": "Download Box 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/download-box-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "download-tray",
+      "file": "icons/download-tray.svg",
+      "originalName": "Download Tray",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/download-tray--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "dribble",
+      "file": "icons/dribble.svg",
+      "originalName": "Dribble",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/dribble--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "drone",
+      "file": "icons/drone.svg",
+      "originalName": "Drone",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/drone--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "ear-speciality",
+      "file": "icons/ear-speciality.svg",
+      "originalName": "Ear Speciality",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ear-speciality--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "earpods",
+      "file": "icons/earpods.svg",
+      "originalName": "Earpods",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/earpods--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "earth-1",
+      "file": "icons/earth-1.svg",
+      "originalName": "Earth 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/earth-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "eject-square",
+      "file": "icons/eject-square.svg",
+      "originalName": "Eject Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/eject-square--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "electric-cord-1",
+      "file": "icons/electric-cord-1.svg",
+      "originalName": "Electric Cord 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/electric-cord-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "elevator",
+      "file": "icons/elevator.svg",
+      "originalName": "Elevator",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/elevator--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "empty-clipboard",
+      "file": "icons/empty-clipboard.svg",
+      "originalName": "Empty Clipboard",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/empty-clipboard--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "end-point-diamond",
+      "file": "icons/end-point-diamond.svg",
+      "originalName": "End Point Diamond",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/end-point-diamond--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "erlenmeyer-flask",
+      "file": "icons/erlenmeyer-flask.svg",
+      "originalName": "Erlenmeyer Flask",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/erlenmeyer-flask--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "esports",
+      "file": "icons/esports.svg",
+      "originalName": "Esports",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/esports--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "expand-crop-resize",
+      "file": "icons/expand-crop-resize.svg",
+      "originalName": "Expand Crop Resize",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/expand-crop-resize--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "expand-window-1",
+      "file": "icons/expand-window-1.svg",
+      "originalName": "Expand Window 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/expand-window-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "face-scan-1",
+      "file": "icons/face-scan-1.svg",
+      "originalName": "Face Scan 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/face-scan-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "facebook-1",
+      "file": "icons/facebook-1.svg",
+      "originalName": "Facebook 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/facebook-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "fahrenheit",
+      "file": "icons/fahrenheit.svg",
+      "originalName": "Fahrenheit",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fahrenheit--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "feather-pen",
+      "file": "icons/feather-pen.svg",
+      "originalName": "Feather Pen",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/feather-pen--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "file-bookmark",
+      "file": "icons/file-bookmark.svg",
+      "originalName": "File Bookmark",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/file-bookmark--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "file-code-1",
+      "file": "icons/file-code-1.svg",
+      "originalName": "File Code 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/file-code-1--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "film",
+      "file": "icons/film.svg",
+      "originalName": "Film",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/film--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "film-slate",
+      "file": "icons/film-slate.svg",
+      "originalName": "Film Slate",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/film-slate--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "filter-2",
+      "file": "icons/filter-2.svg",
+      "originalName": "Filter 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/filter-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "finger-snapping",
+      "file": "icons/finger-snapping.svg",
+      "originalName": "Finger Snapping",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/finger-snapping--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "fingerprint-1",
+      "file": "icons/fingerprint-1.svg",
+      "originalName": "Fingerprint 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fingerprint-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "fire-alarm-2",
+      "file": "icons/fire-alarm-2.svg",
+      "originalName": "Fire Alarm 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fire-alarm-2--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "flash-3",
+      "file": "icons/flash-3.svg",
+      "originalName": "Flash 3",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flash-3--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "flash-off",
+      "file": "icons/flash-off.svg",
+      "originalName": "Flash Off",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flash-off--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "flash-warning",
+      "file": "icons/flash-warning.svg",
+      "originalName": "Flash Warning",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flash-warning--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "flip-horizontal-arrow-1",
+      "file": "icons/flip-horizontal-arrow-1.svg",
+      "originalName": "Flip Horizontal Arrow 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flip-horizontal-arrow-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "flip-horizontal-circle-2",
+      "file": "icons/flip-horizontal-circle-2.svg",
+      "originalName": "Flip Horizontal Circle 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flip-horizontal-circle-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "floppy-disk",
+      "file": "icons/floppy-disk.svg",
+      "originalName": "Floppy Disk",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/floppy-disk--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "flower",
+      "file": "icons/flower.svg",
+      "originalName": "Flower",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/flower--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "focus-frame",
+      "file": "icons/focus-frame.svg",
+      "originalName": "Focus Frame",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/focus-frame--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "fork-knife",
+      "file": "icons/fork-knife.svg",
+      "originalName": "Fork Knife",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fork-knife--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "fragile",
+      "file": "icons/fragile.svg",
+      "originalName": "Fragile",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fragile--26807",
+      "category": "Shipping",
+      "categorySlug": "shipping",
+      "subcategory": "Shipping",
+      "subcategorySlug": "shipping"
+    },
+    {
+      "name": "fried-egg-breakfast",
+      "file": "icons/fried-egg-breakfast.svg",
+      "originalName": "Fried Egg Breakfast",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/fried-egg-breakfast--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "full-screen-osx",
+      "file": "icons/full-screen-osx.svg",
+      "originalName": "Full Screen Osx",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/full-screen-osx--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "galaxy-2",
+      "file": "icons/galaxy-2.svg",
+      "originalName": "Galaxy 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/galaxy-2--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "gallery",
+      "file": "icons/gallery.svg",
+      "originalName": "Gallery",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/gallery--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "gambling",
+      "file": "icons/gambling.svg",
+      "originalName": "Gambling",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/gambling--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "gas-station-fuel-petroleum",
+      "file": "icons/gas-station-fuel-petroleum.svg",
+      "originalName": "Gas Station Fuel Petroleum",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/gas-station-fuel-petroleum--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "gift-2",
+      "file": "icons/gift-2.svg",
+      "originalName": "Gift 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/gift-2--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "give-star",
+      "file": "icons/give-star.svg",
+      "originalName": "Give Star",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/give-star--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "graduation-cap",
+      "file": "icons/graduation-cap.svg",
+      "originalName": "Graduation Cap",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/graduation-cap--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "graph-bar-increase-square",
+      "file": "icons/graph-bar-increase-square.svg",
+      "originalName": "Graph Bar Increase Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/graph-bar-increase-square--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "graph-dot",
+      "file": "icons/graph-dot.svg",
+      "originalName": "Graph Dot",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/graph-dot--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "group-meeting-approval",
+      "file": "icons/group-meeting-approval.svg",
+      "originalName": "Group Meeting Approval",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/group-meeting-approval--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "hand-held-tablet-writing",
+      "file": "icons/hand-held-tablet-writing.svg",
+      "originalName": "Hand Held Tablet Writing",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hand-held-tablet-writing--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "happy-face",
+      "file": "icons/happy-face.svg",
+      "originalName": "Happy Face",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/happy-face--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "hard-drive-1",
+      "file": "icons/hard-drive-1.svg",
+      "originalName": "Hard Drive 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hard-drive-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "health-care-2",
+      "file": "icons/health-care-2.svg",
+      "originalName": "Health Care 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/health-care-2--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "heart",
+      "file": "icons/heart.svg",
+      "originalName": "Heart",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/heart--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "heart-cross",
+      "file": "icons/heart-cross.svg",
+      "originalName": "Heart Cross",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/heart-cross--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "heart-rate",
+      "file": "icons/heart-rate.svg",
+      "originalName": "Heart Rate",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/heart-rate--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "help-chat-1",
+      "file": "icons/help-chat-1.svg",
+      "originalName": "Help Chat 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/help-chat-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hierarchy-1",
+      "file": "icons/hierarchy-1.svg",
+      "originalName": "Hierarchy 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hierarchy-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hierarchy-13",
+      "file": "icons/hierarchy-13.svg",
+      "originalName": "Hierarchy 13",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hierarchy-13--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hierarchy-16",
+      "file": "icons/hierarchy-16.svg",
+      "originalName": "Hierarchy 16",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hierarchy-16--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hierarchy-2",
+      "file": "icons/hierarchy-2.svg",
+      "originalName": "Hierarchy 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hierarchy-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hierarchy-line-3",
+      "file": "icons/hierarchy-line-3.svg",
+      "originalName": "Hierarchy Line 3",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hierarchy-line-3--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "high-speed-train-front",
+      "file": "icons/high-speed-train-front.svg",
+      "originalName": "High Speed Train Front",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/high-speed-train-front--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "home-2",
+      "file": "icons/home-2.svg",
+      "originalName": "Home 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/home-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "horizontal-slider-2",
+      "file": "icons/horizontal-slider-2.svg",
+      "originalName": "Horizontal Slider 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/horizontal-slider-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "horizontal-toggle-button",
+      "file": "icons/horizontal-toggle-button.svg",
+      "originalName": "Horizontal Toggle Button",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/horizontal-toggle-button--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "hospital-sign",
+      "file": "icons/hospital-sign.svg",
+      "originalName": "Hospital Sign",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hospital-sign--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "hourglass",
+      "file": "icons/hourglass.svg",
+      "originalName": "Hourglass",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/hourglass--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "humidity-none",
+      "file": "icons/humidity-none.svg",
+      "originalName": "Humidity None",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/humidity-none--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "ice-cream-2",
+      "file": "icons/ice-cream-2.svg",
+      "originalName": "Ice Cream 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ice-cream-2--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "image-location",
+      "file": "icons/image-location.svg",
+      "originalName": "Image Location",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/image-location--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "inbox",
+      "file": "icons/inbox.svg",
+      "originalName": "Inbox",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/inbox--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "inbox-favorite",
+      "file": "icons/inbox-favorite.svg",
+      "originalName": "Inbox Favorite",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/inbox-favorite--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "inbox-open",
+      "file": "icons/inbox-open.svg",
+      "originalName": "Inbox Open",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/inbox-open--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "inbox-tray-1",
+      "file": "icons/inbox-tray-1.svg",
+      "originalName": "Inbox Tray 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/inbox-tray-1--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "incognito-mode",
+      "file": "icons/incognito-mode.svg",
+      "originalName": "Incognito Mode",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/incognito-mode--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "incoming-call",
+      "file": "icons/incoming-call.svg",
+      "originalName": "Incoming Call",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/incoming-call--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "incorrect-password",
+      "file": "icons/incorrect-password.svg",
+      "originalName": "Incorrect Password",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/incorrect-password--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "increase-indent",
+      "file": "icons/increase-indent.svg",
+      "originalName": "Increase Indent",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/increase-indent--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "information-circle",
+      "file": "icons/information-circle.svg",
+      "originalName": "Information Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/information-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "input-box",
+      "file": "icons/input-box.svg",
+      "originalName": "Input Box",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/input-box--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "insert-center-left-1",
+      "file": "icons/insert-center-left-1.svg",
+      "originalName": "Insert Center Left 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/insert-center-left-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "insurance-hand-1",
+      "file": "icons/insurance-hand-1.svg",
+      "originalName": "Insurance Hand 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/insurance-hand-1--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "intersex-symbol",
+      "file": "icons/intersex-symbol.svg",
+      "originalName": "Intersex Symbol",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/intersex-symbol--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "investing-and-banking",
+      "file": "icons/investing-and-banking.svg",
+      "originalName": "Investing And Banking",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/investing-and-banking--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "invisible-1",
+      "file": "icons/invisible-1.svg",
+      "originalName": "Invisible 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/invisible-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "ios-ipados",
+      "file": "icons/ios-ipados.svg",
+      "originalName": "Ios Ipados",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/ios-ipados--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "iphone",
+      "file": "icons/iphone.svg",
+      "originalName": "Iphone",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/iphone--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "iris-scan",
+      "file": "icons/iris-scan.svg",
+      "originalName": "Iris Scan",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/iris-scan--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "iron",
+      "file": "icons/iron.svg",
+      "originalName": "Iron",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/iron--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "japanese-alphabet",
+      "file": "icons/japanese-alphabet.svg",
+      "originalName": "Japanese Alphabet",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/japanese-alphabet--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "justice-scale-1",
+      "file": "icons/justice-scale-1.svg",
+      "originalName": "Justice Scale 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/justice-scale-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "key-frame",
+      "file": "icons/key-frame.svg",
+      "originalName": "Key Frame",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/key-frame--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "keyboard",
+      "file": "icons/keyboard.svg",
+      "originalName": "Keyboard",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/keyboard--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "keyboard-option-setting-gear",
+      "file": "icons/keyboard-option-setting-gear.svg",
+      "originalName": "Keyboard Option Setting Gear",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/keyboard-option-setting-gear--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "label-folder-tag",
+      "file": "icons/label-folder-tag.svg",
+      "originalName": "Label Folder Tag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/label-folder-tag--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "landscape-2",
+      "file": "icons/landscape-2.svg",
+      "originalName": "Landscape 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/landscape-2--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "landscape-lock",
+      "file": "icons/landscape-lock.svg",
+      "originalName": "Landscape Lock",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/landscape-lock--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "laptop",
+      "file": "icons/laptop.svg",
+      "originalName": "Laptop",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/laptop--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "layers-1",
+      "file": "icons/layers-1.svg",
+      "originalName": "Layers 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/layers-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "layout-right-sidebar",
+      "file": "icons/layout-right-sidebar.svg",
+      "originalName": "Layout Right Sidebar",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/layout-right-sidebar--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "layout-window-1",
+      "file": "icons/layout-window-1.svg",
+      "originalName": "Layout Window 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/layout-window-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "left-click",
+      "file": "icons/left-click.svg",
+      "originalName": "Left Click",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/left-click--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "less-than-sign-circle",
+      "file": "icons/less-than-sign-circle.svg",
+      "originalName": "Less Than Sign Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/less-than-sign-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "lightbulb",
+      "file": "icons/lightbulb.svg",
+      "originalName": "Lightbulb",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/lightbulb--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "like-1",
+      "file": "icons/like-1.svg",
+      "originalName": "Like 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/like-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "link-chain",
+      "file": "icons/link-chain.svg",
+      "originalName": "Link Chain",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/link-chain--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "location-compass-1",
+      "file": "icons/location-compass-1.svg",
+      "originalName": "Location Compass 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-compass-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "location-compass-2",
+      "file": "icons/location-compass-2.svg",
+      "originalName": "Location Compass 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-compass-2--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "location-heart-pin",
+      "file": "icons/location-heart-pin.svg",
+      "originalName": "Location Heart Pin",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-heart-pin--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "location-pin-3",
+      "file": "icons/location-pin-3.svg",
+      "originalName": "Location Pin 3",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-pin-3--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "location-pin-medical-hospital-2",
+      "file": "icons/location-pin-medical-hospital-2.svg",
+      "originalName": "Location Pin Medical Hospital 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-pin-medical-hospital-2--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "location-target-2",
+      "file": "icons/location-target-2.svg",
+      "originalName": "Location Target 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/location-target-2--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "lock-rotation",
+      "file": "icons/lock-rotation.svg",
+      "originalName": "Lock Rotation",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/lock-rotation--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "login-1",
+      "file": "icons/login-1.svg",
+      "originalName": "Login 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/login-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "logout-1",
+      "file": "icons/logout-1.svg",
+      "originalName": "Logout 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/logout-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "magic-wand-1",
+      "file": "icons/magic-wand-1.svg",
+      "originalName": "Magic Wand 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/magic-wand-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "magic-wand-2",
+      "file": "icons/magic-wand-2.svg",
+      "originalName": "Magic Wand 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/magic-wand-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "magnifying-glass",
+      "file": "icons/magnifying-glass.svg",
+      "originalName": "Magnifying Glass",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/magnifying-glass--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "mail-reply-all",
+      "file": "icons/mail-reply-all.svg",
+      "originalName": "Mail Reply All",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/mail-reply-all--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "mail-send-email-message-circle",
+      "file": "icons/mail-send-email-message-circle.svg",
+      "originalName": "Mail Send Email Message Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/mail-send-email-message-circle--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "mail-send-envelope",
+      "file": "icons/mail-send-envelope.svg",
+      "originalName": "Mail Send Envelope",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/mail-send-envelope--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "map-location",
+      "file": "icons/map-location.svg",
+      "originalName": "Map Location",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/map-location--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "maximize-2",
+      "file": "icons/maximize-2.svg",
+      "originalName": "Maximize 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/maximize-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "megaphone-1",
+      "file": "icons/megaphone-1.svg",
+      "originalName": "Megaphone 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/megaphone-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "merge-pdf",
+      "file": "icons/merge-pdf.svg",
+      "originalName": "Merge PDF",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/merge-pdf--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "merge-vertical",
+      "file": "icons/merge-vertical.svg",
+      "originalName": "Merge Vertical",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/merge-vertical--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "microscope-observation-sciene",
+      "file": "icons/microscope-observation-sciene.svg",
+      "originalName": "Microscope Observation Sciene",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/microscope-observation-sciene--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "missed-call",
+      "file": "icons/missed-call.svg",
+      "originalName": "Missed Call",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/missed-call--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "module-puzzle-2",
+      "file": "icons/module-puzzle-2.svg",
+      "originalName": "Module Puzzle 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/module-puzzle-2--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "monitor-error",
+      "file": "icons/monitor-error.svg",
+      "originalName": "Monitor Error",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/monitor-error--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "moustache",
+      "file": "icons/moustache.svg",
+      "originalName": "Moustache",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/moustache--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "multiple-stars",
+      "file": "icons/multiple-stars.svg",
+      "originalName": "Multiple Stars",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/multiple-stars--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "music-equalizer",
+      "file": "icons/music-equalizer.svg",
+      "originalName": "Music Equalizer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/music-equalizer--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "music-note-circle",
+      "file": "icons/music-note-circle.svg",
+      "originalName": "Music Note Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/music-note-circle--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "navigation-arrow-north",
+      "file": "icons/navigation-arrow-north.svg",
+      "originalName": "Navigation Arrow North",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/navigation-arrow-north--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "network",
+      "file": "icons/network.svg",
+      "originalName": "Network",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/network--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "new-badge-highlight",
+      "file": "icons/new-badge-highlight.svg",
+      "originalName": "New Badge Highlight",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/new-badge-highlight--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "new-file",
+      "file": "icons/new-file.svg",
+      "originalName": "New File",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/new-file--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "new-folder",
+      "file": "icons/new-folder.svg",
+      "originalName": "New Folder",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/new-folder--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "new-sticky-note",
+      "file": "icons/new-sticky-note.svg",
+      "originalName": "New Sticky Note",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/new-sticky-note--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "news-paper",
+      "file": "icons/news-paper.svg",
+      "originalName": "News Paper",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/news-paper--26805",
+      "category": "Culture",
+      "categorySlug": "culture",
+      "subcategory": "Culture",
+      "subcategorySlug": "culture"
+    },
+    {
+      "name": "non-commercial-dollars",
+      "file": "icons/non-commercial-dollars.svg",
+      "originalName": "Non Commercial Dollars",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/non-commercial-dollars--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "notepad-text",
+      "file": "icons/notepad-text.svg",
+      "originalName": "Notepad Text",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/notepad-text--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "notification-alarm-snooze",
+      "file": "icons/notification-alarm-snooze.svg",
+      "originalName": "Notification Alarm Snooze",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/notification-alarm-snooze--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "notification-application-1",
+      "file": "icons/notification-application-1.svg",
+      "originalName": "Notification Application 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/notification-application-1--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "number-sign",
+      "file": "icons/number-sign.svg",
+      "originalName": "Number Sign",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/number-sign--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "nurse-assistant-emergency",
+      "file": "icons/nurse-assistant-emergency.svg",
+      "originalName": "Nurse Assistant Emergency",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/nurse-assistant-emergency--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "office-building-1",
+      "file": "icons/office-building-1.svg",
+      "originalName": "Office Building 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/office-building-1--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "one-finger-tap",
+      "file": "icons/one-finger-tap.svg",
+      "originalName": "One Finger Tap",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/one-finger-tap--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "online-medical-service-monitor",
+      "file": "icons/online-medical-service-monitor.svg",
+      "originalName": "Online Medical Service Monitor",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/online-medical-service-monitor--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "open-umbrella",
+      "file": "icons/open-umbrella.svg",
+      "originalName": "Open Umbrella",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/open-umbrella--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "package-dimension",
+      "file": "icons/package-dimension.svg",
+      "originalName": "Package Dimension",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/package-dimension--26807",
+      "category": "Shipping",
+      "categorySlug": "shipping",
+      "subcategory": "Shipping",
+      "subcategorySlug": "shipping"
+    },
+    {
+      "name": "padlock-square-1",
+      "file": "icons/padlock-square-1.svg",
+      "originalName": "Padlock Square 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/padlock-square-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "padlock-square-2",
+      "file": "icons/padlock-square-2.svg",
+      "originalName": "Padlock Square 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/padlock-square-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "page-setting",
+      "file": "icons/page-setting.svg",
+      "originalName": "Page Setting",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/page-setting--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "paintbrush-2",
+      "file": "icons/paintbrush-2.svg",
+      "originalName": "Paintbrush 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/paintbrush-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "panoramic-screen",
+      "file": "icons/panoramic-screen.svg",
+      "originalName": "Panoramic Screen",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/panoramic-screen--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "paperclip-1",
+      "file": "icons/paperclip-1.svg",
+      "originalName": "Paperclip 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/paperclip-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "party-popper",
+      "file": "icons/party-popper.svg",
+      "originalName": "Party Popper",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/party-popper--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "passport-globe",
+      "file": "icons/passport-globe.svg",
+      "originalName": "Passport Globe",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/passport-globe--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "pathfinder-minus-front-2",
+      "file": "icons/pathfinder-minus-front-2.svg",
+      "originalName": "Pathfinder Minus Front 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pathfinder-minus-front-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pen-1",
+      "file": "icons/pen-1.svg",
+      "originalName": "Pen 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pen-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pen-tool",
+      "file": "icons/pen-tool.svg",
+      "originalName": "Pen Tool",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pen-tool--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pencil-square",
+      "file": "icons/pencil-square.svg",
+      "originalName": "Pencil Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pencil-square--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pet-paw",
+      "file": "icons/pet-paw.svg",
+      "originalName": "Pet Paw",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pet-paw--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "phone",
+      "file": "icons/phone.svg",
+      "originalName": "Phone",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "phone-notification",
+      "file": "icons/phone-notification.svg",
+      "originalName": "Phone Notification",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone-notification--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "phone-qr",
+      "file": "icons/phone-qr.svg",
+      "originalName": "Phone Qr",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone-qr--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "phone-ringing-1",
+      "file": "icons/phone-ringing-1.svg",
+      "originalName": "Phone Ringing 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone-ringing-1--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "phone-rotate-mobile",
+      "file": "icons/phone-rotate-mobile.svg",
+      "originalName": "Phone Rotate Mobile",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone-rotate-mobile--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "phone-shield",
+      "file": "icons/phone-shield.svg",
+      "originalName": "Phone Shield",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/phone-shield--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "photo-camera",
+      "file": "icons/photo-camera.svg",
+      "originalName": "Photo Camera",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/photo-camera--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "pictures-folder-memories",
+      "file": "icons/pictures-folder-memories.svg",
+      "originalName": "Pictures Folder Memories",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pictures-folder-memories--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pie-chart",
+      "file": "icons/pie-chart.svg",
+      "originalName": "Pie Chart",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pie-chart--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "piggy-bank",
+      "file": "icons/piggy-bank.svg",
+      "originalName": "Piggy Bank",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/piggy-bank--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "pin-1",
+      "file": "icons/pin-1.svg",
+      "originalName": "Pin 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pin-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "pine-tree",
+      "file": "icons/pine-tree.svg",
+      "originalName": "Pine Tree",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/pine-tree--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "play-list-4",
+      "file": "icons/play-list-4.svg",
+      "originalName": "Play List 4",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/play-list-4--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "play-list-6",
+      "file": "icons/play-list-6.svg",
+      "originalName": "Play List 6",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/play-list-6--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "polaroid-four",
+      "file": "icons/polaroid-four.svg",
+      "originalName": "Polaroid Four",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/polaroid-four--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "politics-speech",
+      "file": "icons/politics-speech.svg",
+      "originalName": "Politics Speech",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/politics-speech--26805",
+      "category": "Culture",
+      "categorySlug": "culture",
+      "subcategory": "Culture",
+      "subcategorySlug": "culture"
+    },
+    {
+      "name": "politics-vote-2",
+      "file": "icons/politics-vote-2.svg",
+      "originalName": "Politics Vote 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/politics-vote-2--26805",
+      "category": "Culture",
+      "categorySlug": "culture",
+      "subcategory": "Culture",
+      "subcategorySlug": "culture"
+    },
+    {
+      "name": "polygonal-lasso-tool",
+      "file": "icons/polygonal-lasso-tool.svg",
+      "originalName": "Polygonal Lasso Tool",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/polygonal-lasso-tool--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "portrait-lock",
+      "file": "icons/portrait-lock.svg",
+      "originalName": "Portrait Lock",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/portrait-lock--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "prescription-pills-drugs-healthcare",
+      "file": "icons/prescription-pills-drugs-healthcare.svg",
+      "originalName": "Prescription Pills Drugs Healthcare",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/prescription-pills-drugs-healthcare--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "presentation",
+      "file": "icons/presentation.svg",
+      "originalName": "Presentation",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/presentation--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "printer",
+      "file": "icons/printer.svg",
+      "originalName": "Printer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/printer--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "printer-wireless",
+      "file": "icons/printer-wireless.svg",
+      "originalName": "Printer Wireless",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/printer--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "production-belt-time",
+      "file": "icons/production-belt-time.svg",
+      "originalName": "Production Belt Time",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/production-belt-time--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "projector",
+      "file": "icons/projector.svg",
+      "originalName": "Projector",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/projector--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "projector-board",
+      "file": "icons/projector-board.svg",
+      "originalName": "Projector Board",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/projector-board--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "qr-code",
+      "file": "icons/qr-code.svg",
+      "originalName": "Qr Code",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/qr-code--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "receipt",
+      "file": "icons/receipt.svg",
+      "originalName": "Receipt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/receipt--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "record-player",
+      "file": "icons/record-player.svg",
+      "originalName": "Record Player",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/record-player--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "recording-tape-bubble-circle",
+      "file": "icons/recording-tape-bubble-circle.svg",
+      "originalName": "Recording Tape Bubble Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/recording-tape-bubble-circle--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "rectangle-split-thirds",
+      "file": "icons/rectangle-split-thirds.svg",
+      "originalName": "Rectangle Split Thirds",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/rectangle-split-thirds--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "recycle-1",
+      "file": "icons/recycle-1.svg",
+      "originalName": "Recycle 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/recycle-1--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "recycle-bin",
+      "file": "icons/recycle-bin.svg",
+      "originalName": "Recycle Bin",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/recycle-bin--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "recycle-bin-3",
+      "file": "icons/recycle-bin-3.svg",
+      "originalName": "Recycle Bin 3",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/recycle-bin-3--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "recycle-bin-throw-2",
+      "file": "icons/recycle-bin-throw-2.svg",
+      "originalName": "Recycle Bin Throw 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/recycle-bin-throw-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "reduced-inequalities",
+      "file": "icons/reduced-inequalities.svg",
+      "originalName": "Reduced Inequalities",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/reduced-inequalities--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "repeat-single",
+      "file": "icons/repeat-single.svg",
+      "originalName": "Repeat Single",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/repeat-single--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "return-square-2",
+      "file": "icons/return-square-2.svg",
+      "originalName": "Return Square 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/return-square-2--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "rocket",
+      "file": "icons/rocket.svg",
+      "originalName": "Rocket",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/rocket--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "rotate-left",
+      "file": "icons/rotate-left.svg",
+      "originalName": "Rotate Left",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/rotate-left--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "rotate-right-circle",
+      "file": "icons/rotate-right-circle.svg",
+      "originalName": "Rotate Right Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/rotate-right-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "round-anchor-point",
+      "file": "icons/round-anchor-point.svg",
+      "originalName": "Round Anchor Point",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/round-anchor-point--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "router-wifi-network",
+      "file": "icons/router-wifi-network.svg",
+      "originalName": "Router Wifi Network",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/router-wifi-network--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "safe-vault",
+      "file": "icons/safe-vault.svg",
+      "originalName": "Safe Vault",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/safe-vault--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "salad-vegetable-diet",
+      "file": "icons/salad-vegetable-diet.svg",
+      "originalName": "Salad Vegetable Diet",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/salad-vegetable-diet--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "satellite-dish",
+      "file": "icons/satellite-dish.svg",
+      "originalName": "Satellite Dish",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/satellite-dish--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "scanner",
+      "file": "icons/scanner.svg",
+      "originalName": "Scanner",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/scanner--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "scanner-bar-code",
+      "file": "icons/scanner-bar-code.svg",
+      "originalName": "Scanner Bar Code",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/scanner-bar-code--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "school",
+      "file": "icons/school.svg",
+      "originalName": "School",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/school--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "school-bus-side",
+      "file": "icons/school-bus-side.svg",
+      "originalName": "School Bus Side",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/school-bus-side--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "scissors",
+      "file": "icons/scissors.svg",
+      "originalName": "Scissors",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/scissors--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "screen-broadcast",
+      "file": "icons/screen-broadcast.svg",
+      "originalName": "Screen Broadcast",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/screen-broadcast--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "screen-curve",
+      "file": "icons/screen-curve.svg",
+      "originalName": "Screen Curve",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/screen-curve--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "screenshot",
+      "file": "icons/screenshot.svg",
+      "originalName": "Screenshot",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/screenshot--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "screwdriver-wrench",
+      "file": "icons/screwdriver-wrench.svg",
+      "originalName": "Screwdriver Wrench",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/screwdriver-wrench--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "script-2",
+      "file": "icons/script-2.svg",
+      "originalName": "Script 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/script-2--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "search-arrow-increase",
+      "file": "icons/search-arrow-increase.svg",
+      "originalName": "Search Arrow Increase",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/search-arrow-increase--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "search-category",
+      "file": "icons/search-category.svg",
+      "originalName": "Search Category",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/search-category--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "search-history-browser",
+      "file": "icons/search-history-browser.svg",
+      "originalName": "Search History Browser",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/search-history-browser--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "security-umbrella",
+      "file": "icons/security-umbrella.svg",
+      "originalName": "Security Umbrella",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/security-umbrella--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "serving-dome-hand",
+      "file": "icons/serving-dome-hand.svg",
+      "originalName": "Serving Dome Hand",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/serving-dome-hand--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "share-link",
+      "file": "icons/share-link.svg",
+      "originalName": "Share Link",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/share-link--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "shield-1",
+      "file": "icons/shield-1.svg",
+      "originalName": "Shield 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shield-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "shield-2",
+      "file": "icons/shield-2.svg",
+      "originalName": "Shield 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shield-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "shield-cross",
+      "file": "icons/shield-cross.svg",
+      "originalName": "Shield Cross",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shield-cross--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "shipping-box-2",
+      "file": "icons/shipping-box-2.svg",
+      "originalName": "Shipping Box 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shipping-box-2--26807",
+      "category": "Shipping",
+      "categorySlug": "shipping",
+      "subcategory": "Shipping",
+      "subcategorySlug": "shipping"
+    },
+    {
+      "name": "shirt",
+      "file": "icons/shirt.svg",
+      "originalName": "Shirt",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shirt--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "shopping-bag-hand-bag-2",
+      "file": "icons/shopping-bag-hand-bag-2.svg",
+      "originalName": "Shopping Bag Hand Bag 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shopping-bag-hand-bag-2--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "shopping-basket-2",
+      "file": "icons/shopping-basket-2.svg",
+      "originalName": "Shopping Basket 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shopping-basket-2--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "shopping-basket-add",
+      "file": "icons/shopping-basket-add.svg",
+      "originalName": "Shopping Basket Add",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shopping-basket-add--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "shopping-cart-2",
+      "file": "icons/shopping-cart-2.svg",
+      "originalName": "Shopping Cart 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shopping-cart-2--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "show-layer",
+      "file": "icons/show-layer.svg",
+      "originalName": "Show Layer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/show-layer--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "shuffle",
+      "file": "icons/shuffle.svg",
+      "originalName": "Shuffle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/shuffle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "sigma",
+      "file": "icons/sigma.svg",
+      "originalName": "Sigma",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sigma--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "sign-at",
+      "file": "icons/sign-at.svg",
+      "originalName": "Sign At",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sign-at--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "signage-1",
+      "file": "icons/signage-1.svg",
+      "originalName": "Signage 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/signage-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "signage-pedestrian-no-crossing",
+      "file": "icons/signage-pedestrian-no-crossing.svg",
+      "originalName": "Signage Pedestrian No Crossing",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/signage-pedestrian-no-crossing--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "signal-full",
+      "file": "icons/signal-full.svg",
+      "originalName": "Signal Full",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/signal-full--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "skull-2",
+      "file": "icons/skull-2.svg",
+      "originalName": "Skull 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/skull-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "small-caps",
+      "file": "icons/small-caps.svg",
+      "originalName": "Small Caps",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/small-caps--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "smiley-blessed",
+      "file": "icons/smiley-blessed.svg",
+      "originalName": "Smiley Blessed",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/smiley-blessed--26814",
+      "category": "Mail",
+      "categorySlug": "mail",
+      "subcategory": "Mail",
+      "subcategorySlug": "mail"
+    },
+    {
+      "name": "smoking-area",
+      "file": "icons/smoking-area.svg",
+      "originalName": "Smoking Area",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/smoking-area--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "snooze",
+      "file": "icons/snooze.svg",
+      "originalName": "Snooze",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/snooze--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "sofa",
+      "file": "icons/sofa.svg",
+      "originalName": "Sofa",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sofa--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "soft-drink-can",
+      "file": "icons/soft-drink-can.svg",
+      "originalName": "Soft Drink Can",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/soft-drink-can--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "sos-help-emergency-sign",
+      "file": "icons/sos-help-emergency-sign.svg",
+      "originalName": "Sos Help Emergency Sign",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sos-help-emergency-sign--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "sound-recognition-search",
+      "file": "icons/sound-recognition-search.svg",
+      "originalName": "Sound Recognition Search",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sound-recognition-search--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "speaker-1",
+      "file": "icons/speaker-1.svg",
+      "originalName": "Speaker 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/speaker-1--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "spiral-shape",
+      "file": "icons/spiral-shape.svg",
+      "originalName": "Spiral Shape",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/spiral-shape--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "stairs-1",
+      "file": "icons/stairs-1.svg",
+      "originalName": "Stairs 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/stairs-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "star-badge",
+      "file": "icons/star-badge.svg",
+      "originalName": "Star Badge",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/star-badge--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "star-circle",
+      "file": "icons/star-circle.svg",
+      "originalName": "Star Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/star-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "steps-2",
+      "file": "icons/steps-2.svg",
+      "originalName": "Steps 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/steps-2--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "stopwatch",
+      "file": "icons/stopwatch.svg",
+      "originalName": "Stopwatch",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/stopwatch--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "stopwatch-three-quarter",
+      "file": "icons/stopwatch-three-quarter.svg",
+      "originalName": "Stopwatch Three Quarter",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/stopwatch-three-quarter--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "store-1",
+      "file": "icons/store-1.svg",
+      "originalName": "Store 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/store-1--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "story-post",
+      "file": "icons/story-post.svg",
+      "originalName": "Story Post",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/story-post--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "street-road",
+      "file": "icons/street-road.svg",
+      "originalName": "Street Road",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/street-road--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "street-sign",
+      "file": "icons/street-sign.svg",
+      "originalName": "Street Sign",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/street-sign--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "subscription-cashflow",
+      "file": "icons/subscription-cashflow.svg",
+      "originalName": "Subscription Cashflow",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/subscription-cashflow--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "suitcase-rolling",
+      "file": "icons/suitcase-rolling.svg",
+      "originalName": "Suitcase Rolling",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/suitcase-rolling--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "sun",
+      "file": "icons/sun.svg",
+      "originalName": "Sun",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/sun--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "surveillance-camera",
+      "file": "icons/surveillance-camera.svg",
+      "originalName": "Surveillance Camera",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/surveillance-camera--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "table",
+      "file": "icons/table.svg",
+      "originalName": "Table",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/table--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "table-lamp-2",
+      "file": "icons/table-lamp-2.svg",
+      "originalName": "Table Lamp 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/table-lamp-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "tablet-capsule",
+      "file": "icons/tablet-capsule.svg",
+      "originalName": "Tablet Capsule",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tablet-capsule--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "tag-interface-essential",
+      "file": "icons/tag-interface-essential.svg",
+      "originalName": "Tag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tag--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "tag-money-shopping",
+      "file": "icons/tag-money-shopping.svg",
+      "originalName": "Tag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tag--26818",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "tall-hat",
+      "file": "icons/tall-hat.svg",
+      "originalName": "Tall Hat",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tall-hat--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "tape-cassette-record",
+      "file": "icons/tape-cassette-record.svg",
+      "originalName": "Tape Cassette Record",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tape-cassette-record--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "target",
+      "file": "icons/target.svg",
+      "originalName": "Target",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/target--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "target-dollar",
+      "file": "icons/target-dollar.svg",
+      "originalName": "Target Dollar",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/target-dollar--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "tea-cup",
+      "file": "icons/tea-cup.svg",
+      "originalName": "Tea Cup",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tea-cup--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "text-file",
+      "file": "icons/text-file.svg",
+      "originalName": "Text File",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/text-file--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "text-square",
+      "file": "icons/text-square.svg",
+      "originalName": "Text Square",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/text-square--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "text-style",
+      "file": "icons/text-style.svg",
+      "originalName": "Text Style",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/text-style--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "texture",
+      "file": "icons/texture.svg",
+      "originalName": "Texture",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/texture--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "theater-mask",
+      "file": "icons/theater-mask.svg",
+      "originalName": "Theater Mask",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/theater-mask--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "thermometer",
+      "file": "icons/thermometer.svg",
+      "originalName": "Thermometer",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/thermometer--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "thread-post-tweet",
+      "file": "icons/thread-post-tweet.svg",
+      "originalName": "Thread Post Tweet",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/thread-post-tweet--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "threat-monitor",
+      "file": "icons/threat-monitor.svg",
+      "originalName": "Threat Monitor",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/threat-monitor--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "threat-phone",
+      "file": "icons/threat-phone.svg",
+      "originalName": "Threat Phone",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/threat-phone--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "threat-usb",
+      "file": "icons/threat-usb.svg",
+      "originalName": "Threat Usb",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/threat-usb--26813",
+      "category": "Programming",
+      "categorySlug": "programming",
+      "subcategory": "Programming",
+      "subcategorySlug": "programming"
+    },
+    {
+      "name": "tickets",
+      "file": "icons/tickets.svg",
+      "originalName": "Tickets",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tickets--26805",
+      "category": "Culture",
+      "categorySlug": "culture",
+      "subcategory": "Culture",
+      "subcategorySlug": "culture"
+    },
+    {
+      "name": "tidal-wave",
+      "file": "icons/tidal-wave.svg",
+      "originalName": "Tidal Wave",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tidal-wave--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "tiktok",
+      "file": "icons/tiktok.svg",
+      "originalName": "Tiktok",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tiktok--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "time-lapse",
+      "file": "icons/time-lapse.svg",
+      "originalName": "Time Lapse",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/time-lapse--26811",
+      "category": "Images Photography",
+      "categorySlug": "images-photography",
+      "subcategory": "Images Photography",
+      "subcategorySlug": "images-photography"
+    },
+    {
+      "name": "timer-zero",
+      "file": "icons/timer-zero.svg",
+      "originalName": "Timer Zero",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/timer-zero--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "tinder",
+      "file": "icons/tinder.svg",
+      "originalName": "Tinder",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tinder--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "toaster",
+      "file": "icons/toaster.svg",
+      "originalName": "Toaster",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/toaster--26816",
+      "category": "Food Drink",
+      "categorySlug": "food-drink",
+      "subcategory": "Food Drink",
+      "subcategorySlug": "food-drink"
+    },
+    {
+      "name": "toilet-man",
+      "file": "icons/toilet-man.svg",
+      "originalName": "Toilet Man",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/toilet-man--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "toilet-man-woman-1",
+      "file": "icons/toilet-man-woman-1.svg",
+      "originalName": "Toilet Man Woman 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/toilet-man-woman-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "toilet-sign-man",
+      "file": "icons/toilet-sign-man.svg",
+      "originalName": "Toilet Sign Man",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/toilet-sign-man--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "tooth",
+      "file": "icons/tooth.svg",
+      "originalName": "Tooth",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tooth--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "track-select-right-tool",
+      "file": "icons/track-select-right-tool.svg",
+      "originalName": "Track Select Right Tool",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/track-select-right-tool--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "transfer-forwarding-call",
+      "file": "icons/transfer-forwarding-call.svg",
+      "originalName": "Transfer Forwarding Call",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/transfer-forwarding-call--26808",
+      "category": "Phone",
+      "categorySlug": "phone",
+      "subcategory": "Phone",
+      "subcategorySlug": "phone"
+    },
+    {
+      "name": "transfer-truck-time",
+      "file": "icons/transfer-truck-time.svg",
+      "originalName": "Transfer Truck Time",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/transfer-truck-time--26807",
+      "category": "Shipping",
+      "categorySlug": "shipping",
+      "subcategory": "Shipping",
+      "subcategorySlug": "shipping"
+    },
+    {
+      "name": "treasure-chest",
+      "file": "icons/treasure-chest.svg",
+      "originalName": "Treasure Chest",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/treasure-chest--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "trending-content",
+      "file": "icons/trending-content.svg",
+      "originalName": "Trending Content",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/trending-content--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "triangle-flag",
+      "file": "icons/triangle-flag.svg",
+      "originalName": "Triangle Flag",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/triangle-flag--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "trophy",
+      "file": "icons/trophy.svg",
+      "originalName": "Trophy",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/trophy--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "tune-adjust-volume",
+      "file": "icons/tune-adjust-volume.svg",
+      "originalName": "Tune Adjust Volume",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/tune-adjust-volume--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "typewriter",
+      "file": "icons/typewriter.svg",
+      "originalName": "Typewriter",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/typewriter--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "upload-box-1",
+      "file": "icons/upload-box-1.svg",
+      "originalName": "Upload Box 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/upload-box-1--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "usb-port",
+      "file": "icons/usb-port.svg",
+      "originalName": "Usb Port",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/usb-port--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "user-circle-single",
+      "file": "icons/user-circle-single.svg",
+      "originalName": "User Circle Single",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-circle-single--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-collaborate-group",
+      "file": "icons/user-collaborate-group.svg",
+      "originalName": "User Collaborate Group",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-collaborate-group--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-feedback-heart",
+      "file": "icons/user-feedback-heart.svg",
+      "originalName": "User Feedback Heart",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-feedback-heart--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-full-body",
+      "file": "icons/user-full-body.svg",
+      "originalName": "User Full Body",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-full-body--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-identifier-card",
+      "file": "icons/user-identifier-card.svg",
+      "originalName": "User Identifier Card",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-identifier-card--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-king-crown",
+      "file": "icons/user-king-crown.svg",
+      "originalName": "User King Crown",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-king-crown--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-queen-crown",
+      "file": "icons/user-queen-crown.svg",
+      "originalName": "User Queen Crown",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-queen-crown--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "user-sync-online-in-person",
+      "file": "icons/user-sync-online-in-person.svg",
+      "originalName": "User Sync Online In Person",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/user-sync-online-in-person--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "video-close-captioning",
+      "file": "icons/video-close-captioning.svg",
+      "originalName": "Video Close Captioning",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/video-close-captioning--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "virus-antivirus",
+      "file": "icons/virus-antivirus.svg",
+      "originalName": "Virus Antivirus",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/virus-antivirus--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "visual-blind-1",
+      "file": "icons/visual-blind-1.svg",
+      "originalName": "Visual Blind 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/visual-blind-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "voice-activation-check-validate",
+      "file": "icons/voice-activation-check-validate.svg",
+      "originalName": "Voice Activation Check Validate",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/voice-activation-check-validate--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "voice-mail",
+      "file": "icons/voice-mail.svg",
+      "originalName": "Voice Mail",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/voice-mail--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "voice-scan-2",
+      "file": "icons/voice-scan-2.svg",
+      "originalName": "Voice Scan 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/voice-scan-2--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "volume-level-high",
+      "file": "icons/volume-level-high.svg",
+      "originalName": "Volume Level High",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/volume-level-high--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "volume-mute",
+      "file": "icons/volume-mute.svg",
+      "originalName": "Volume Mute",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/volume-mute--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "vpn-connection",
+      "file": "icons/vpn-connection.svg",
+      "originalName": "VPN Connection",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/vpn-connection--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "walker",
+      "file": "icons/walker.svg",
+      "originalName": "Walker",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/walker--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "wallet",
+      "file": "icons/wallet.svg",
+      "originalName": "Wallet",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wallet--26810",
+      "category": "Money Shopping",
+      "categorySlug": "money-shopping",
+      "subcategory": "Money Shopping",
+      "subcategorySlug": "money-shopping"
+    },
+    {
+      "name": "warehouse-1",
+      "file": "icons/warehouse-1.svg",
+      "originalName": "Warehouse 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/warehouse-1--26807",
+      "category": "Shipping",
+      "categorySlug": "shipping",
+      "subcategory": "Shipping",
+      "subcategorySlug": "shipping"
+    },
+    {
+      "name": "warning-diamond",
+      "file": "icons/warning-diamond.svg",
+      "originalName": "Warning Diamond",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/warning-diamond--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "warranty-badge-highlight",
+      "file": "icons/warranty-badge-highlight.svg",
+      "originalName": "Warranty Badge Highlight",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/warranty-badge-highlight--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "watch-2",
+      "file": "icons/watch-2.svg",
+      "originalName": "Watch 2",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/watch-2--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "watch-circle-charging",
+      "file": "icons/watch-circle-charging.svg",
+      "originalName": "Watch Circle Charging",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/watch-circle-charging--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "watch-circle-heartbeat-monitor-1",
+      "file": "icons/watch-circle-heartbeat-monitor-1.svg",
+      "originalName": "Watch Circle Heartbeat Monitor 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/watch-circle-heartbeat-monitor-1--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "watch-square-menu",
+      "file": "icons/watch-square-menu.svg",
+      "originalName": "Watch Square Menu",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/watch-square-menu--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "watchtower-castle",
+      "file": "icons/watchtower-castle.svg",
+      "originalName": "Watchtower Castle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/watchtower-castle--26809",
+      "category": "Entertainment",
+      "categorySlug": "entertainment",
+      "subcategory": "Entertainment",
+      "subcategorySlug": "entertainment"
+    },
+    {
+      "name": "wave-signal-circle",
+      "file": "icons/wave-signal-circle.svg",
+      "originalName": "Wave Signal Circle",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wave-signal-circle--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "webcam",
+      "file": "icons/webcam.svg",
+      "originalName": "Webcam",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/webcam--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "webcam-video-off",
+      "file": "icons/webcam-video-off.svg",
+      "originalName": "Webcam Video Off",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/webcam-video-off--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "wheelchair",
+      "file": "icons/wheelchair.svg",
+      "originalName": "Wheelchair",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wheelchair--26806",
+      "category": "Health",
+      "categorySlug": "health",
+      "subcategory": "Health",
+      "subcategorySlug": "health"
+    },
+    {
+      "name": "wheelchair-1",
+      "file": "icons/wheelchair-1.svg",
+      "originalName": "Wheelchair 1",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wheelchair-1--26817",
+      "category": "Map Travel",
+      "categorySlug": "map-travel",
+      "subcategory": "Map Travel",
+      "subcategorySlug": "map-travel"
+    },
+    {
+      "name": "white-board",
+      "file": "icons/white-board.svg",
+      "originalName": "White Board",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/white-board--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "wifi-antenna",
+      "file": "icons/wifi-antenna.svg",
+      "originalName": "Wifi Antenna",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wifi-antenna--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "wifi-secure-connection",
+      "file": "icons/wifi-secure-connection.svg",
+      "originalName": "Wifi Secure Connection",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wifi-secure-connection--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "windmill",
+      "file": "icons/windmill.svg",
+      "originalName": "Windmill",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/windmill--26815",
+      "category": "Nature Ecology",
+      "categorySlug": "nature-ecology",
+      "subcategory": "Nature Ecology",
+      "subcategorySlug": "nature-ecology"
+    },
+    {
+      "name": "wireless-fast-charging",
+      "file": "icons/wireless-fast-charging.svg",
+      "originalName": "Wireless Fast Charging",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wireless-fast-charging--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "word-wrap-around-bounding-box",
+      "file": "icons/word-wrap-around-bounding-box.svg",
+      "originalName": "Word Wrap Around Bounding Box",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/word-wrap-around-bounding-box--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "workspace-desk",
+      "file": "icons/workspace-desk.svg",
+      "originalName": "Workspace Desk",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/workspace-desk--26804",
+      "category": "Work Education",
+      "categorySlug": "work-education",
+      "subcategory": "Work Education",
+      "subcategorySlug": "work-education"
+    },
+    {
+      "name": "wrap-arc-upper",
+      "file": "icons/wrap-arc-upper.svg",
+      "originalName": "Wrap Arc Upper",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wrap-arc-upper--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "wrench-hand",
+      "file": "icons/wrench-hand.svg",
+      "originalName": "Wrench Hand",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/wrench-hand--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "youtube",
+      "file": "icons/youtube.svg",
+      "originalName": "Youtube",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/youtube--26812",
+      "category": "Computer Devices",
+      "categorySlug": "computer-devices",
+      "subcategory": "Computer Devices",
+      "subcategorySlug": "computer-devices"
+    },
+    {
+      "name": "zip-folder",
+      "file": "icons/zip-folder.svg",
+      "originalName": "Zip Folder",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/zip-folder--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "zoom-in",
+      "file": "icons/zoom-in.svg",
+      "originalName": "Zoom In",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/zoom-in--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "zoom-out",
+      "file": "icons/zoom-out.svg",
+      "originalName": "Zoom Out",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/zoom-out--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    },
+    {
+      "name": "zoom-out-gesture",
+      "file": "icons/zoom-out-gesture.svg",
+      "originalName": "Zoom Out Gesture",
+      "sourcePageUrl": "https://www.streamlinehq.com/icons/download/zoom-out--26818",
+      "category": "Interface Essential",
+      "categorySlug": "interface-essential",
+      "subcategory": "Interface Essential",
+      "subcategorySlug": "interface-essential"
+    }
+  ]
+}

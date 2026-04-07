@@ -1,0 +1,7014 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@icon-pkg/streamline-sharp-line-free icon gallery</title>
+    <meta
+      name="description"
+      content="@icon-pkg/streamline-sharp-line-free static icon gallery grouped by category and subcategory."
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: oklch(0.98 0.006 85);
+        --paper: oklch(0.995 0.003 85);
+        --ink: oklch(0.22 0.025 255);
+        --muted: oklch(0.52 0.02 255);
+        --line: color-mix(in oklch, var(--ink) 11%, transparent);
+        --accent: oklch(0.63 0.17 255);
+        --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+      * { box-sizing: border-box; }
+      html, body { min-height: 100%; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--font-sans);
+        background:
+          radial-gradient(circle at top left, color-mix(in oklch, var(--accent) 12%, transparent), transparent 24%),
+          var(--bg);
+      }
+      a { color: inherit; }
+      main {
+        width: min(1920px, calc(100vw - 2rem));
+        margin: 0 auto;
+        padding: 2rem 0 3rem;
+      }
+      .hero {
+        display: grid;
+        gap: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero__breadcrumb {
+        margin: 0;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hero__title {
+        margin: 0;
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+      }
+      .hero__lead {
+        margin: 0;
+        max-width: 78ch;
+        font-size: 1rem;
+        line-height: 1.65;
+        color: var(--muted);
+      }
+      .meta {
+        display: grid;
+        gap: 0.9rem;
+        padding: 1rem;
+        border: 1px solid var(--line);
+        border-radius: 1rem;
+        background: var(--paper);
+        box-shadow: 0 20px 60px color-mix(in oklch, var(--ink) 6%, transparent);
+      }
+      .meta__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      .meta__item {
+        display: grid;
+        gap: 0.22rem;
+      }
+      .meta__label {
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .meta__value,
+      .meta__value code {
+        font-size: 0.96rem;
+      }
+      .category-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin: 1.25rem 0 1.8rem;
+      }
+      .category-nav__link {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--paper) 72%, white);
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.82rem;
+        font-weight: 700;
+      }
+      .category + .category {
+        margin-top: 2.3rem;
+      }
+      .category__title {
+        margin: 0 0 0.8rem;
+        font-size: 0.95rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .subcategory + .subcategory {
+        margin-top: 1.25rem;
+      }
+      .subcategory__title {
+        margin: 0 0 0.65rem;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+        gap: 0.55rem;
+      }
+      .icon-card {
+        display: grid;
+        gap: 0.35rem;
+        padding: 0.45rem 0.4rem 0.5rem;
+        border: 1px solid var(--line);
+        border-radius: 0.65rem;
+        background: var(--paper);
+        box-shadow: none;
+        cursor: copy;
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        min-width: 0;
+        justify-items: stretch;
+        appearance: none;
+        -webkit-appearance: none;
+      }
+      .icon-card__preview {
+        display: grid;
+        place-items: center;
+        min-height: 4.15rem;
+        padding: 0.35rem;
+        border-radius: 0.45rem;
+        background: color-mix(in oklch, var(--paper) 92%, white);
+      }
+      .icon-card__preview img {
+        width: 1.65rem;
+        height: 1.65rem;
+        color: var(--ink);
+      }
+      .icon-card__meta {
+        width: 100%;
+        min-width: 0;
+      }
+      .icon-card__name {
+        display: block;
+        width: 100%;
+        padding: 0 0.15rem;
+        font-size: 10px;
+        font-weight: 500;
+        line-height: 1.35;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+      }
+      .icon-card[data-copied="true"] {
+        border-color: color-mix(in oklch, var(--accent) 34%, transparent);
+        background: color-mix(in oklch, var(--accent) 3%, white);
+      }
+      .copy-toast {
+        position: fixed;
+        right: 1rem;
+        bottom: 1rem;
+        padding: 0.55rem 0.7rem;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: color-mix(in oklch, var(--ink) 92%, white);
+        color: white;
+        font-size: 0.72rem;
+        line-height: 1;
+        opacity: 0;
+        transform: translateY(0.4rem);
+        transition: opacity 120ms ease, transform 120ms ease;
+        pointer-events: none;
+      }
+      .copy-toast[data-visible="true"] {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (hover:hover) and (pointer:fine) {
+        .icon-card:hover {
+          border-color: color-mix(in oklch, var(--ink) 18%, transparent);
+          background: color-mix(in oklch, var(--paper) 96%, white);
+        }
+      }
+      @media (max-width: 1160px) {
+        .meta__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+        }
+      }
+      @media (max-width: 760px) {
+        main {
+          width: min(100vw - 1rem, 100%);
+          padding-top: 1.3rem;
+        }
+        .icon-grid {
+          grid-template-columns: repeat(auto-fill, minmax(86px, 1fr));
+        }
+      }
+      @media (max-width: 480px) {
+        .meta__grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="hero">
+        <p class="hero__breadcrumb"><a href="https://sebastian-software.github.io/effective-icon/">@effective/icon packs</a></p>
+        <h1 class="hero__title">@icon-pkg/streamline-sharp-line-free</h1>
+        <p class="hero__lead">
+          Static overview of the Sharp line Streamline pack, grouped by category for quick browsing.
+        </p>
+      </section>
+      <section class="meta">
+        <div class="meta__grid">
+          <div class="meta__item">
+            <span class="meta__label">Family</span>
+            <span class="meta__value">Sharp</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Style</span>
+            <span class="meta__value">line</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Icons</span>
+            <span class="meta__value">500</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Install</span>
+            <span class="meta__value"><code>npm install @icon-pkg/streamline-sharp-line-free</code></span>
+          </div>
+        </div>
+        <div class="meta__item">
+          <span class="meta__label">Source</span>
+          <span class="meta__value"><a href="https://www.streamlinehq.com/icons/sharp-line-free">https://www.streamlinehq.com/icons/sharp-line-free</a></span>
+        </div>
+      </section>
+      <nav class="category-nav" aria-label="Pack categories">
+        <a class="category-nav__link" href="#interface-essential">Interface Essential</a>
+<a class="category-nav__link" href="#artificial-intelligence">Artificial Intelligence</a>
+<a class="category-nav__link" href="#phone">Phone</a>
+<a class="category-nav__link" href="#nature-ecology">Nature Ecology</a>
+<a class="category-nav__link" href="#food-drink">Food Drink</a>
+<a class="category-nav__link" href="#programming">Programming</a>
+<a class="category-nav__link" href="#computer-devices">Computer Devices</a>
+<a class="category-nav__link" href="#money-shopping">Money Shopping</a>
+<a class="category-nav__link" href="#map-travel">Map Travel</a>
+<a class="category-nav__link" href="#health">Health</a>
+<a class="category-nav__link" href="#shipping">Shipping</a>
+<a class="category-nav__link" href="#entertainment">Entertainment</a>
+<a class="category-nav__link" href="#images-photography">Images Photography</a>
+<a class="category-nav__link" href="#mail">Mail</a>
+<a class="category-nav__link" href="#work-education">Work Education</a>
+<a class="category-nav__link" href="#culture">Culture</a>
+      </nav>
+      <section class="category" id="interface-essential">
+  <header class="category__header">
+    <h2 class="category__title">Interface Essential</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="interface-essential">Interface Essential</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="3d Move"
+  title="3d Move"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/3d-move.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">3d Move</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="3d Rotate Y Axis"
+  title="3d Rotate Y Axis"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/3d-rotate-y-axis.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">3d Rotate Y Axis</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="3d Scale"
+  title="3d Scale"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/3d-scale.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">3d Scale</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Add PDF"
+  title="Add PDF"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/add-pdf.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Add PDF</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Align Back 2"
+  title="Align Back 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/align-back-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Align Back 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Align Left 1"
+  title="Align Left 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/align-left-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Align Left 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Align Object Bottom"
+  title="Align Object Bottom"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/align-object-bottom.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Align Object Bottom</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Align Text Center"
+  title="Align Text Center"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/align-text-center.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Align Text Center</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Archive Box"
+  title="Archive Box"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/archive-box.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Archive Box</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Cursor 1"
+  title="Arrow Cursor 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-cursor-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Cursor 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Cursor Move"
+  title="Arrow Cursor Move"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-cursor-move.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Cursor Move</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Diagonal 2"
+  title="Arrow Diagonal 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-diagonal-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Diagonal 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Expand"
+  title="Arrow Expand"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-expand.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Expand</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Reload Horizontal 2"
+  title="Arrow Reload Horizontal 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-reload-horizontal-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Reload Horizontal 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Transfer Horizontal Large 1"
+  title="Arrow Transfer Horizontal Large 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-transfer-horizontal-large-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Transfer Horizontal Large 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Triangle Loop"
+  title="Arrow Triangle Loop"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-triangle-loop.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Triangle Loop</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Turn Down Large"
+  title="Arrow Turn Down Large"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-turn-down-large.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Turn Down Large</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Up Dashed Square"
+  title="Arrow Up Dashed Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-up-dashed-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Up Dashed Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Arrow Up Large 2"
+  title="Arrow Up Large 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/arrow-up-large-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Arrow Up Large 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Attribution"
+  title="Attribution"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/attribution.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Attribution</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bell Notification"
+  title="Bell Notification"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bell-notification.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bell Notification</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bell Set Timer"
+  title="Bell Set Timer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bell-set-timer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bell Set Timer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Board"
+  title="Board"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/board.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Board</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Border Bottom"
+  title="Border Bottom"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/border-bottom.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Border Bottom</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Brightness 1"
+  title="Brightness 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/brightness-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Brightness 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bullet List"
+  title="Bullet List"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bullet-list.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bullet List</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Calendar Add"
+  title="Calendar Add"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/calendar-add.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Calendar Add</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Calendar Mark"
+  title="Calendar Mark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/calendar-mark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Calendar Mark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Calendar Warning"
+  title="Calendar Warning"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/calendar-warning.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Calendar Warning</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Candle"
+  title="Candle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/candle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Candle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Check"
+  title="Check"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/check.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Check</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Clean Broom Wipe"
+  title="Clean Broom Wipe"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/clean-broom-wipe.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Clean Broom Wipe</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Closed Umbrella"
+  title="Closed Umbrella"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/closed-umbrella.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Closed Umbrella</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cog"
+  title="Cog"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cog.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cog</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Color Swatches"
+  title="Color Swatches"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/color-swatches.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Color Swatches</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Contact Book"
+  title="Contact Book"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/contact-book.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Contact Book</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Copy Link"
+  title="Copy Link"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/copy-link.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Copy Link</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Curves Levels Graph"
+  title="Curves Levels Graph"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/curves-levels-graph.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Curves Levels Graph</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Custom Feeds Like Favorite"
+  title="Custom Feeds Like Favorite"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/custom-feeds-like-favorite.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Custom Feeds Like Favorite</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Customer Support 1"
+  title="Customer Support 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/customer-support-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Customer Support 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Customer Support Setting"
+  title="Customer Support Setting"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/customer-support-setting.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Customer Support Setting</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cut"
+  title="Cut"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cut.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cut</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cutter"
+  title="Cutter"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cutter.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cutter</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dark Display Mode"
+  title="Dark Display Mode"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dark-display-mode.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dark Display Mode</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dashboard 1"
+  title="Dashboard 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dashboard-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dashboard 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dashboard Circle"
+  title="Dashboard Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dashboard-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dashboard Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dashboard Gauge 2"
+  title="Dashboard Gauge 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dashboard-gauge-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dashboard Gauge 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Delete 2"
+  title="Delete 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/delete-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Delete 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Delete Bookmark"
+  title="Delete Bookmark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/delete-bookmark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Delete Bookmark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Delete PDF"
+  title="Delete PDF"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/delete-pdf.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Delete PDF</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Delete Tag"
+  title="Delete Tag"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/delete-tag.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Delete Tag</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Diagonal Scroll 1"
+  title="Diagonal Scroll 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/diagonal-scroll-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Diagonal Scroll 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dial Pad Finger 2"
+  title="Dial Pad Finger 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dial-pad-finger-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dial Pad Finger 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Division Circle"
+  title="Division Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/division-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Division Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Double Bookmark"
+  title="Double Bookmark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/double-bookmark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Double Bookmark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Double Heart"
+  title="Double Heart"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/double-heart.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Double Heart</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Download Box 1"
+  title="Download Box 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/download-box-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Download Box 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Download Square"
+  title="Download Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/download-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Download Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Download Stack"
+  title="Download Stack"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/download-stack.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Download Stack</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Drawing Compass"
+  title="Drawing Compass"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/drawing-compass.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Drawing Compass</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Edit PDF"
+  title="Edit PDF"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/edit-pdf.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Edit PDF</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Elipse Frame"
+  title="Elipse Frame"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/elipse-frame.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Elipse Frame</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Empty Clipboard"
+  title="Empty Clipboard"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/empty-clipboard.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Empty Clipboard</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Empty Recycle Bin 1"
+  title="Empty Recycle Bin 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/empty-recycle-bin-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Empty Recycle Bin 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="End Point Arrow"
+  title="End Point Arrow"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/end-point-arrow.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">End Point Arrow</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Feather Pen"
+  title="Feather Pen"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/feather-pen.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Feather Pen</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="File Bookmark"
+  title="File Bookmark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/file-bookmark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">File Bookmark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Filter 2"
+  title="Filter 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/filter-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Filter 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fingerprint 2"
+  title="Fingerprint 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fingerprint-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fingerprint 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fire Wall"
+  title="Fire Wall"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fire-wall.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fire Wall</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flashlight"
+  title="Flashlight"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flashlight.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flashlight</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flip Vertical Arrow 2"
+  title="Flip Vertical Arrow 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flip-vertical-arrow-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flip Vertical Arrow 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flip Vertical Square 1"
+  title="Flip Vertical Square 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flip-vertical-square-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flip Vertical Square 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Folder Block"
+  title="Folder Block"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/folder-block.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Folder Block</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Following"
+  title="Following"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/following.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Following</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Give Gift"
+  title="Give Gift"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/give-gift.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Give Gift</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Glasses"
+  title="Glasses"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/glasses.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Glasses</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Graphic Template Website Ui"
+  title="Graphic Template Website Ui"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/graphic-template-website-ui.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Graphic Template Website Ui</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Help Chat 2"
+  title="Help Chat 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/help-chat-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Help Chat 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hide Layer"
+  title="Hide Layer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hide-layer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hide Layer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hierarchy 16"
+  title="Hierarchy 16"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hierarchy-16.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hierarchy 16</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hierarchy 2"
+  title="Hierarchy 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hierarchy-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hierarchy 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hierarchy 8"
+  title="Hierarchy 8"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hierarchy-8.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hierarchy 8</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hierarchy Line 1"
+  title="Hierarchy Line 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hierarchy-line-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hierarchy Line 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Home 1"
+  title="Home 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/home-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Home 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Horizontal Menu Square"
+  title="Horizontal Menu Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/horizontal-menu-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Horizontal Menu Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Horizontal Slider 2"
+  title="Horizontal Slider 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/horizontal-slider-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Horizontal Slider 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Horizontal Toggle Button"
+  title="Horizontal Toggle Button"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/horizontal-toggle-button.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Horizontal Toggle Button</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hourglass"
+  title="Hourglass"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hourglass.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hourglass</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Image Highlights"
+  title="Image Highlights"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/image-highlights.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Image Highlights</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Information Circle"
+  title="Information Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/information-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Information Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Input Box"
+  title="Input Box"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/input-box.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Input Box</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Insert Row"
+  title="Insert Row"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/insert-row.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Insert Row</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Insert Top Left"
+  title="Insert Top Left"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/insert-top-left.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Insert Top Left</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Invisible 2"
+  title="Invisible 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/invisible-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Invisible 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Iris Scan"
+  title="Iris Scan"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/iris-scan.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Iris Scan</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Label Folder Tag"
+  title="Label Folder Tag"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/label-folder-tag.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Label Folder Tag</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Lasso Tool"
+  title="Lasso Tool"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/lasso-tool.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Lasso Tool</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Layers 1"
+  title="Layers 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/layers-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Layers 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Layout Right Sidebar"
+  title="Layout Right Sidebar"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/layout-right-sidebar.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Layout Right Sidebar</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Layout Window 2"
+  title="Layout Window 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/layout-window-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Layout Window 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Layout Window 25"
+  title="Layout Window 25"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/layout-window-25.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Layout Window 25</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Like 1"
+  title="Like 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/like-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Like 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Link Chain"
+  title="Link Chain"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/link-chain.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Link Chain</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Link Share 2"
+  title="Link Share 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/link-share-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Link Share 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Login 2"
+  title="Login 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/login-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Login 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Logout 2"
+  title="Logout 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/logout-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Logout 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Loop 1"
+  title="Loop 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/loop-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Loop 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Magic Wand 2"
+  title="Magic Wand 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/magic-wand-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Magic Wand 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Magnifying Glass"
+  title="Magnifying Glass"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/magnifying-glass.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Magnifying Glass</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Megaphone 2"
+  title="Megaphone 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/megaphone-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Megaphone 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Memes Comment Reply"
+  title="Memes Comment Reply"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/memes-comment-reply.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Memes Comment Reply</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Moon Cloud"
+  title="Moon Cloud"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/moon-cloud.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Moon Cloud</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Move File"
+  title="Move File"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/move-file.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Move File</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="New File"
+  title="New File"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/new-file.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">New File</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="New Folder"
+  title="New Folder"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/new-folder.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">New Folder</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="New Sticky Note"
+  title="New Sticky Note"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/new-sticky-note.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">New Sticky Note</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="No Word Wrap"
+  title="No Word Wrap"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/no-word-wrap.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">No Word Wrap</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Non Commercial Dollars"
+  title="Non Commercial Dollars"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/non-commercial-dollars.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Non Commercial Dollars</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Notebook"
+  title="Notebook"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/notebook.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Notebook</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Octagram Shape"
+  title="Octagram Shape"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/octagram-shape.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Octagram Shape</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="One Finger Short Tap"
+  title="One Finger Short Tap"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/one-finger-short-tap.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">One Finger Short Tap</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Padlock Shield"
+  title="Padlock Shield"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/padlock-shield.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Padlock Shield</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Padlock Square 1"
+  title="Padlock Square 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/padlock-square-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Padlock Square 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Padlock Square 2"
+  title="Padlock Square 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/padlock-square-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Padlock Square 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Page Break"
+  title="Page Break"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/page-break.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Page Break</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Page Setting"
+  title="Page Setting"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/page-setting.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Page Setting</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Panoramic Screen"
+  title="Panoramic Screen"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/panoramic-screen.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Panoramic Screen</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Paperclip 2"
+  title="Paperclip 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/paperclip-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Paperclip 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Paragraph Article"
+  title="Paragraph Article"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/paragraph-article.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Paragraph Article</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Paragraph Right To Left"
+  title="Paragraph Right To Left"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/paragraph-right-to-left.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Paragraph Right To Left</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Password Block"
+  title="Password Block"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/password-block.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Password Block</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pathfinder Outline"
+  title="Pathfinder Outline"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pathfinder-outline.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pathfinder Outline</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pen 1"
+  title="Pen 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pen-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pen 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pen Draw"
+  title="Pen Draw"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pen-draw.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pen Draw</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pen Tool"
+  title="Pen Tool"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pen-tool.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pen Tool</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pen Types"
+  title="Pen Types"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pen-types.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pen Types</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pentagon"
+  title="Pentagon"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pentagon.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pentagon</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pictures Folder Memories"
+  title="Pictures Folder Memories"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pictures-folder-memories.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pictures Folder Memories</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pin 1"
+  title="Pin 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pin-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pin 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pinwheel"
+  title="Pinwheel"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pinwheel.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pinwheel</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Presentation"
+  title="Presentation"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/presentation.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Presentation</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Projector Screen"
+  title="Projector Screen"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/projector-screen.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Projector Screen</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pyramid Shape"
+  title="Pyramid Shape"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pyramid-shape.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pyramid Shape</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Radioactive 1"
+  title="Radioactive 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/radioactive-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Radioactive 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Rate Stretch Tool"
+  title="Rate Stretch Tool"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/rate-stretch-tool.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Rate Stretch Tool</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Recycle Bin 2"
+  title="Recycle Bin 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/recycle-bin-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Recycle Bin 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Remove Alert Clock"
+  title="Remove Alert Clock"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/remove-alert-clock.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Remove Alert Clock</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Remove Favorite Highlight"
+  title="Remove Favorite Highlight"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/remove-favorite-highlight.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Remove Favorite Highlight</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Reset Clock"
+  title="Reset Clock"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/reset-clock.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Reset Clock</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ribbon"
+  title="Ribbon"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ribbon.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ribbon</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Rock And Roll Hand"
+  title="Rock And Roll Hand"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/rock-and-roll-hand.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Rock And Roll Hand</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Roller Paintbrush"
+  title="Roller Paintbrush"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/roller-paintbrush.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Roller Paintbrush</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Rotate Right"
+  title="Rotate Right"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/rotate-right.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Rotate Right</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Round Anchor Point"
+  title="Round Anchor Point"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/round-anchor-point.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Round Anchor Point</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ruler"
+  title="Ruler"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ruler.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ruler</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Satellite Dish"
+  title="Satellite Dish"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/satellite-dish.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Satellite Dish</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Scanner"
+  title="Scanner"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/scanner.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Scanner</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Screwdriver Wrench"
+  title="Screwdriver Wrench"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/screwdriver-wrench.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Screwdriver Wrench</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Search Bar"
+  title="Search Bar"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/search-bar.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Search Bar</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Search History Browser"
+  title="Search History Browser"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/search-history-browser.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Search History Browser</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Select All"
+  title="Select All"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/select-all.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Select All</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Select Circle Area 2"
+  title="Select Circle Area 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/select-circle-area-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Select Circle Area 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Share Link"
+  title="Share Link"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/share-link.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Share Link</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Share Time"
+  title="Share Time"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/share-time.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Share Time</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shield 2"
+  title="Shield 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shield-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shield 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shrink Window Osx"
+  title="Shrink Window Osx"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shrink-window-osx.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shrink Window Osx</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Signature"
+  title="Signature"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/signature.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Signature</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sizing"
+  title="Sizing"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sizing.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sizing</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Skull 2"
+  title="Skull 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/skull-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Skull 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Slide Show Play"
+  title="Slide Show Play"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/slide-show-play.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Slide Show Play</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Smart Key"
+  title="Smart Key"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/smart-key.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Smart Key</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Snooze"
+  title="Snooze"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/snooze.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Snooze</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Snooze Clock"
+  title="Snooze Clock"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/snooze-clock.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Snooze Clock</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Snow Flake"
+  title="Snow Flake"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/snow-flake.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Snow Flake</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sound Recognition Search"
+  title="Sound Recognition Search"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sound-recognition-search.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sound Recognition Search</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sphere Shape"
+  title="Sphere Shape"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sphere-shape.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sphere Shape</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Spiral Shape"
+  title="Spiral Shape"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/spiral-shape.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Spiral Shape</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Stamp"
+  title="Stamp"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/stamp.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Stamp</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Star 2"
+  title="Star 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/star-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Star 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Star Badge"
+  title="Star Badge"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/star-badge.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Star Badge</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Star Circle"
+  title="Star Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/star-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Star Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Stopwatch"
+  title="Stopwatch"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/stopwatch.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Stopwatch</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Story Post"
+  title="Story Post"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/story-post.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Story Post</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sun"
+  title="Sun"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sun.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sun</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Symmetry Mirror 1"
+  title="Symmetry Mirror 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/symmetry-mirror-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Symmetry Mirror 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Synchronize Disable"
+  title="Synchronize Disable"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/synchronize-disable.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Synchronize Disable</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Table Lamp 2"
+  title="Table Lamp 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/table-lamp-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Table Lamp 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Text Bar"
+  title="Text Bar"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/text-bar.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Text Bar</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Text Flow Rows"
+  title="Text Flow Rows"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/text-flow-rows.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Text Flow Rows</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Text Style"
+  title="Text Style"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/text-style.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Text Style</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Text Tracking"
+  title="Text Tracking"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/text-tracking.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Text Tracking</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Thermometer Positive"
+  title="Thermometer Positive"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/thermometer-positive.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Thermometer Positive</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Timer Zero"
+  title="Timer Zero"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/timer-zero.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Timer Zero</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tool Box"
+  title="Tool Box"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tool-box.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tool Box</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Translate Text"
+  title="Translate Text"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/translate-text.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Translate Text</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Transparent"
+  title="Transparent"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/transparent.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Transparent</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Trophy"
+  title="Trophy"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/trophy.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Trophy</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Two Finger Tap"
+  title="Two Finger Tap"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/two-finger-tap.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Two Finger Tap</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Type Area"
+  title="Type Area"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/type-area.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Type Area</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Typewriter"
+  title="Typewriter"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/typewriter.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Typewriter</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Upload Computer"
+  title="Upload Computer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/upload-computer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Upload Computer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Upload Square"
+  title="Upload Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/upload-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Upload Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Add Plus"
+  title="User Add Plus"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-add-plus.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Add Plus</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Arrows Account Switch"
+  title="User Arrows Account Switch"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-arrows-account-switch.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Arrows Account Switch</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Collaborate Group"
+  title="User Collaborate Group"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-collaborate-group.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Collaborate Group</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Feedback Heart"
+  title="User Feedback Heart"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-feedback-heart.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Feedback Heart</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Head Focus"
+  title="User Head Focus"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-head-focus.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Head Focus</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Identifier Card"
+  title="User Identifier Card"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-identifier-card.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Identifier Card</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Multiple Circle"
+  title="User Multiple Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-multiple-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Multiple Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Protection 1"
+  title="User Protection 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-protection-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Protection 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Single Neutral Female"
+  title="User Single Neutral Female"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-single-neutral-female.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Single Neutral Female</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Single Neutral Male"
+  title="User Single Neutral Male"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-single-neutral-male.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Single Neutral Male</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Sticker Square"
+  title="User Sticker Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-sticker-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Sticker Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="User Work Laptop Wifi"
+  title="User Work Laptop Wifi"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/user-work-laptop-wifi.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">User Work Laptop Wifi</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Vertical Slider 2"
+  title="Vertical Slider 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/vertical-slider-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Vertical Slider 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Video Subtitles"
+  title="Video Subtitles"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/video-subtitles.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Video Subtitles</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="View Document Files"
+  title="View Document Files"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/view-document-files.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">View Document Files</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Visible"
+  title="Visible"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/visible.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Visible</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Voice Scan 1"
+  title="Voice Scan 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/voice-scan-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Voice Scan 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Voice Typing Word Convert"
+  title="Voice Typing Word Convert"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/voice-typing-word-convert.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Voice Typing Word Convert</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Warning Shield"
+  title="Warning Shield"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/warning-shield.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Warning Shield</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Warp Fish"
+  title="Warp Fish"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/warp-fish.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Warp Fish</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Water Drop"
+  title="Water Drop"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/water-drop.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Water Drop</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Wave Signal"
+  title="Wave Signal"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/wave-signal.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Wave Signal</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Waving Hand"
+  title="Waving Hand"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/waving-hand.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Waving Hand</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Wrap Arch"
+  title="Wrap Arch"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/wrap-arch.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Wrap Arch</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Wrench"
+  title="Wrench"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/wrench.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Wrench</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Zip File"
+  title="Zip File"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/zip-file.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Zip File</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Zoom Document"
+  title="Zoom Document"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/zoom-document.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Zoom Document</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="artificial-intelligence">
+  <header class="category__header">
+    <h2 class="category__title">Artificial Intelligence</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="artificial-intelligence">Artificial Intelligence</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Edit Robot"
+  title="Ai Edit Robot"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-edit-robot.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Edit Robot</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Folder Robot"
+  title="Ai Folder Robot"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-folder-robot.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Folder Robot</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Gaming Robot"
+  title="Ai Gaming Robot"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-gaming-robot.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Gaming Robot</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Generate Voice Spark 2"
+  title="Ai Generate Voice Spark 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-generate-voice-spark-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Generate Voice Spark 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Science Spark"
+  title="Ai Science Spark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-science-spark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Science Spark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Upscale Spark"
+  title="Ai Upscale Spark"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-upscale-spark.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Upscale Spark</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ai Vehicle Robot 1"
+  title="Ai Vehicle Robot 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ai-vehicle-robot-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ai Vehicle Robot 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Artificial Intelligence Brain Chip"
+  title="Artificial Intelligence Brain Chip"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/artificial-intelligence-brain-chip.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Artificial Intelligence Brain Chip</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Deepfake Technology 2"
+  title="Deepfake Technology 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/deepfake-technology-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Deepfake Technology 2</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="phone">
+  <header class="category__header">
+    <h2 class="category__title">Phone</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="phone">Phone</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Airplane Disabled"
+  title="Airplane Disabled"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/airplane-disabled.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Airplane Disabled</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cellular Network 5g"
+  title="Cellular Network 5g"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cellular-network-5g.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cellular Network 5g</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Missed Call"
+  title="Missed Call"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/missed-call.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Missed Call</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Notification Alarm 2"
+  title="Notification Alarm 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/notification-alarm-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Notification Alarm 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Notification Alarm Snooze"
+  title="Notification Alarm Snooze"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/notification-alarm-snooze.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Notification Alarm Snooze</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Circle Off"
+  title="Phone Circle Off"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-circle-off.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Circle Off</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Message"
+  title="Phone Message"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-message.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Message</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Pen 2"
+  title="Phone Pen 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-pen-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Pen 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Personal Hotspot"
+  title="Phone Personal Hotspot"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-personal-hotspot.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Personal Hotspot</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Ringing 1"
+  title="Phone Ringing 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-ringing-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Ringing 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Setting"
+  title="Phone Setting"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-setting.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Setting</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Phone Vibrate"
+  title="Phone Vibrate"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/phone-vibrate.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Phone Vibrate</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sharing Data"
+  title="Sharing Data"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sharing-data.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sharing Data</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Signal Full"
+  title="Signal Full"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/signal-full.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Signal Full</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="nature-ecology">
+  <header class="category__header">
+    <h2 class="category__title">Nature Ecology</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="nature-ecology">Nature Ecology</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Alien"
+  title="Alien"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/alien.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Alien</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Consellation"
+  title="Consellation"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/consellation.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Consellation</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Decent Work And Economic Growth"
+  title="Decent Work And Economic Growth"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/decent-work-and-economic-growth.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Decent Work And Economic Growth</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dna"
+  title="Dna"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dna.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dna</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Eco House"
+  title="Eco House"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/eco-house.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Eco House</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Leaf"
+  title="Leaf"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/leaf.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Leaf</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Rabbit"
+  title="Rabbit"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/rabbit.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Rabbit</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Recycle 1"
+  title="Recycle 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/recycle-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Recycle 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shovel Rake"
+  title="Shovel Rake"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shovel-rake.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shovel Rake</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Test Tube"
+  title="Test Tube"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/test-tube.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Test Tube</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tree 3"
+  title="Tree 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tree-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tree 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Water Drop 1"
+  title="Water Drop 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/water-drop-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Water Drop 1</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="food-drink">
+  <header class="category__header">
+    <h2 class="category__title">Food Drink</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="food-drink">Food Drink</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Allergens Fish"
+  title="Allergens Fish"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/allergens-fish.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Allergens Fish</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Allergens Peanut"
+  title="Allergens Peanut"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/allergens-peanut.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Allergens Peanut</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Apple"
+  title="Apple"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/apple.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Apple</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cake"
+  title="Cake"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cake.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cake</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chef Toque Hat"
+  title="Chef Toque Hat"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chef-toque-hat.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chef Toque Hat</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chicken Grilled Stream"
+  title="Chicken Grilled Stream"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chicken-grilled-stream.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chicken Grilled Stream</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cupcake"
+  title="Cupcake"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cupcake.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cupcake</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Drum Stick"
+  title="Drum Stick"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/drum-stick.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Drum Stick</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fork Plate"
+  title="Fork Plate"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fork-plate.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fork Plate</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ice Cream 1"
+  title="Ice Cream 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ice-cream-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ice Cream 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Milk"
+  title="Milk"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/milk.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Milk</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Refrigerator"
+  title="Refrigerator"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/refrigerator.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Refrigerator</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Roller"
+  title="Roller"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/roller.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Roller</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tea Cup"
+  title="Tea Cup"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tea-cup.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tea Cup</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Wine"
+  title="Wine"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/wine.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Wine</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="programming">
+  <header class="category__header">
+    <h2 class="category__title">Programming</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="programming">Programming</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Application Add"
+  title="Application Add"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/application-add.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Application Add</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Browser Build"
+  title="Browser Build"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/browser-build.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Browser Build</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Browser Code 2"
+  title="Browser Code 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/browser-code-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Browser Code 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Browser Error 404"
+  title="Browser Error 404"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/browser-error-404.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Browser Error 404</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Browser Key"
+  title="Browser Key"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/browser-key.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Browser Key</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bug"
+  title="Bug"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bug.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bug</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bug Virus Browser"
+  title="Bug Virus Browser"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bug-virus-browser.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bug Virus Browser</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cloud Data Transfer"
+  title="Cloud Data Transfer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cloud-data-transfer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cloud Data Transfer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cloud Off"
+  title="Cloud Off"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cloud-off.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cloud Off</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cloud Wifi"
+  title="Cloud Wifi"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cloud-wifi.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cloud Wifi</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Drop Down Menu"
+  title="Drop Down Menu"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/drop-down-menu.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Drop Down Menu</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Incognito Mode"
+  title="Incognito Mode"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/incognito-mode.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Incognito Mode</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Insert Cloud Link"
+  title="Insert Cloud Link"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/insert-cloud-link.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Insert Cloud Link</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Module"
+  title="Module"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/module.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Module</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Module Puzzle 2"
+  title="Module Puzzle 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/module-puzzle-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Module Puzzle 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Rss Symbol"
+  title="Rss Symbol"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/rss-symbol.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Rss Symbol</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Script 1"
+  title="Script 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/script-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Script 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Share Code"
+  title="Share Code"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/share-code.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Share Code</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Steps Number"
+  title="Steps Number"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/steps-number.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Steps Number</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Threat Usb"
+  title="Threat Usb"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/threat-usb.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Threat Usb</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="computer-devices">
+  <header class="category__header">
+    <h2 class="category__title">Computer Devices</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="computer-devices">Computer Devices</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Asterisk Square"
+  title="Asterisk Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/asterisk-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Asterisk Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Empty 2"
+  title="Battery Empty 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-empty-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Empty 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Battery Medium 3"
+  title="Battery Medium 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/battery-medium-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Battery Medium 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bluetooth"
+  title="Bluetooth"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bluetooth.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bluetooth</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Browser Error"
+  title="Browser Error"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/browser-error.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Browser Error</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Computer Chip 1"
+  title="Computer Chip 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/computer-chip-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Computer Chip 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Controller Wireless"
+  title="Controller Wireless"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/controller-wireless.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Controller Wireless</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cursor Click"
+  title="Cursor Click"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cursor-click.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cursor Click</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cyborg"
+  title="Cyborg"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cyborg.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cyborg</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Database"
+  title="Database"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/database.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Database</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Database Server 2"
+  title="Database Server 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/database-server-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Database Server 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Desktop Chat"
+  title="Desktop Chat"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/desktop-chat.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Desktop Chat</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Desktop Screensaver Sleep"
+  title="Desktop Screensaver Sleep"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/desktop-screensaver-sleep.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Desktop Screensaver Sleep</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Device Database Encryption 1"
+  title="Device Database Encryption 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/device-database-encryption-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Device Database Encryption 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Drone"
+  title="Drone"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/drone.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Drone</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Eject Square"
+  title="Eject Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/eject-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Eject Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Electric Cord 3"
+  title="Electric Cord 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/electric-cord-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Electric Cord 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Facebook 1"
+  title="Facebook 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/facebook-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Facebook 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Floppy Disk"
+  title="Floppy Disk"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/floppy-disk.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Floppy Disk</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Google Drive"
+  title="Google Drive"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/google-drive.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Google Drive</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hand Held Tablet Drawing"
+  title="Hand Held Tablet Drawing"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hand-held-tablet-drawing.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hand Held Tablet Drawing</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Keyboard"
+  title="Keyboard"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/keyboard.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Keyboard</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Laptop Project Screen"
+  title="Laptop Project Screen"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/laptop-project-screen.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Laptop Project Screen</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Middle Click"
+  title="Middle Click"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/middle-click.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Middle Click</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="One Handed Holding Tablet Handheld"
+  title="One Handed Holding Tablet Handheld"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/one-handed-holding-tablet-handheld.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">One Handed Holding Tablet Handheld</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Router Wifi Network"
+  title="Router Wifi Network"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/router-wifi-network.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Router Wifi Network</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Safari"
+  title="Safari"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/safari.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Safari</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Screen Tv"
+  title="Screen Tv"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/screen-tv.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Screen Tv</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shredder"
+  title="Shredder"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shredder.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shredder</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Skype"
+  title="Skype"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/skype.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Skype</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Virtual Reality"
+  title="Virtual Reality"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/virtual-reality.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Virtual Reality</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Voice Mail"
+  title="Voice Mail"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/voice-mail.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Voice Mail</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Watch Circle Bluetooth"
+  title="Watch Circle Bluetooth"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/watch-circle-bluetooth.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Watch Circle Bluetooth</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Watch Circle Disable"
+  title="Watch Circle Disable"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/watch-circle-disable.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Watch Circle Disable</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Watch Square Disable"
+  title="Watch Square Disable"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/watch-square-disable.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Watch Square Disable</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Watch Square Time"
+  title="Watch Square Time"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/watch-square-time.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Watch Square Time</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Webcam Video"
+  title="Webcam Video"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/webcam-video.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Webcam Video</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="money-shopping">
+  <header class="category__header">
+    <h2 class="category__title">Money Shopping</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="money-shopping">Money Shopping</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bag Dollar"
+  title="Bag Dollar"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bag-dollar.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bag Dollar</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bag Suitcase Add Plus"
+  title="Bag Suitcase Add Plus"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bag-suitcase-add-plus.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bag Suitcase Add Plus</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ball"
+  title="Ball"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ball.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ball</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bill 4"
+  title="Bill 4"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bill-4.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bill 4</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Bill Dollar 1"
+  title="Bill Dollar 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/bill-dollar-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Bill Dollar 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Business Idea Money"
+  title="Business Idea Money"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/business-idea-money.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Business Idea Money</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cashier Machine 2"
+  title="Cashier Machine 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cashier-machine-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cashier Machine 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chair 2"
+  title="Chair 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chair-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chair 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Credit Card 2"
+  title="Credit Card 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/credit-card-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Credit Card 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Credit Card Disable"
+  title="Credit Card Disable"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/credit-card-disable.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Credit Card Disable</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Critical Thinking 2"
+  title="Critical Thinking 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/critical-thinking-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Critical Thinking 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Discount Percent Fire"
+  title="Discount Percent Fire"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/discount-percent-fire.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Discount Percent Fire</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Dollar Increase"
+  title="Dollar Increase"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/dollar-increase.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Dollar Increase</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Gift 2"
+  title="Gift 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/gift-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Gift 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Gold"
+  title="Gold"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/gold.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Gold</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Graph Arrow User Increase"
+  title="Graph Arrow User Increase"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/graph-arrow-user-increase.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Graph Arrow User Increase</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Graph Dot"
+  title="Graph Dot"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/graph-dot.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Graph Dot</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Investing And Banking"
+  title="Investing And Banking"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/investing-and-banking.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Investing And Banking</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Justice Scale 2"
+  title="Justice Scale 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/justice-scale-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Justice Scale 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Moustache"
+  title="Moustache"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/moustache.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Moustache</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Necktie"
+  title="Necktie"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/necktie.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Necktie</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pie Chart"
+  title="Pie Chart"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pie-chart.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pie Chart</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Qr Code"
+  title="Qr Code"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/qr-code.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Qr Code</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Receipt Add"
+  title="Receipt Add"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/receipt-add.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Receipt Add</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ring"
+  title="Ring"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ring.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ring</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Safe Vault"
+  title="Safe Vault"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/safe-vault.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Safe Vault</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shirt"
+  title="Shirt"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shirt.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shirt</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shopping Bag Hand Bag Price Tag"
+  title="Shopping Bag Hand Bag Price Tag"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shopping-bag-hand-bag-price-tag.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shopping Bag Hand Bag Price Tag</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shopping Basket 2"
+  title="Shopping Basket 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shopping-basket-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shopping Basket 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shopping Basket Remove"
+  title="Shopping Basket Remove"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shopping-basket-remove.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shopping Basket Remove</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shopping Cart Add"
+  title="Shopping Cart Add"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shopping-cart-add.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shopping Cart Add</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Signage 3"
+  title="Signage 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/signage-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Signage 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Startup"
+  title="Startup"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/startup.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Startup</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Stock"
+  title="Stock"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/stock.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Stock</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Store 2"
+  title="Store 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/store-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Store 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Store Factory"
+  title="Store Factory"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/store-factory.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Store Factory</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Summit"
+  title="Summit"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/summit.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Summit</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tag Free Circle"
+  title="Tag Free Circle"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tag-free-circle.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tag Free Circle</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Target 3"
+  title="Target 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/target-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Target 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Wallet Purse"
+  title="Wallet Purse"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/wallet-purse.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Wallet Purse</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="map-travel">
+  <header class="category__header">
+    <h2 class="category__title">Map Travel</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="map-travel">Map Travel</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Baggage"
+  title="Baggage"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/baggage.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Baggage</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Car 2"
+  title="Car 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/car-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Car 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Cleaning Room Woman"
+  title="Cleaning Room Woman"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/cleaning-room-woman.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Cleaning Room Woman</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Crutch"
+  title="Crutch"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/crutch.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Crutch</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Earth 2"
+  title="Earth 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/earth-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Earth 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fire Alarm 1"
+  title="Fire Alarm 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fire-alarm-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fire Alarm 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Gas Station Fuel Petroleum"
+  title="Gas Station Fuel Petroleum"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/gas-station-fuel-petroleum.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Gas Station Fuel Petroleum</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Gender Lesbian 2"
+  title="Gender Lesbian 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/gender-lesbian-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Gender Lesbian 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hand Washing"
+  title="Hand Washing"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hand-washing.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hand Washing</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hanger"
+  title="Hanger"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hanger.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hanger</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hearing Deaf 1"
+  title="Hearing Deaf 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hearing-deaf-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hearing Deaf 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hot Air Balloon"
+  title="Hot Air Balloon"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hot-air-balloon.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hot Air Balloon</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hot Spring"
+  title="Hot Spring"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hot-spring.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hot Spring</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hotel Bed 2"
+  title="Hotel Bed 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hotel-bed-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hotel Bed 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Hotel Three Star"
+  title="Hotel Three Star"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/hotel-three-star.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Hotel Three Star</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Landing"
+  title="Landing"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/landing.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Landing</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Lift"
+  title="Lift"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/lift.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Lift</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Location Compass 2"
+  title="Location Compass 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/location-compass-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Location Compass 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Location Office"
+  title="Location Office"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/location-office.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Location Office</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Location Pin 3"
+  title="Location Pin 3"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/location-pin-3.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Location Pin 3</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Location Pin Store"
+  title="Location Pin Store"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/location-pin-store.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Location Pin Store</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Map Search"
+  title="Map Search"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/map-search.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Map Search</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Mine Cart 2"
+  title="Mine Cart 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/mine-cart-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Mine Cart 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="No Photo Taking Zone"
+  title="No Photo Taking Zone"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/no-photo-taking-zone.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">No Photo Taking Zone</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Passport Globe"
+  title="Passport Globe"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/passport-globe.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Passport Globe</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pet Friendly Hotel"
+  title="Pet Friendly Hotel"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pet-friendly-hotel.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pet Friendly Hotel</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Pets Allowed"
+  title="Pets Allowed"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/pets-allowed.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Pets Allowed</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Plane Flight Board"
+  title="Plane Flight Board"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/plane-flight-board.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Plane Flight Board</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="School Bus Side"
+  title="School Bus Side"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/school-bus-side.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">School Bus Side</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ship"
+  title="Ship"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ship.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ship</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Spa"
+  title="Spa"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/spa.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Spa</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Street Sign"
+  title="Street Sign"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/street-sign.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Street Sign</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Surveillance Camera"
+  title="Surveillance Camera"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/surveillance-camera.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Surveillance Camera</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Theater Mask"
+  title="Theater Mask"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/theater-mask.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Theater Mask</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Toilet Paper"
+  title="Toilet Paper"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/toilet-paper.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Toilet Paper</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Traffic Light"
+  title="Traffic Light"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/traffic-light.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Traffic Light</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Triangle Flag"
+  title="Triangle Flag"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/triangle-flag.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Triangle Flag</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="health">
+  <header class="category__header">
+    <h2 class="category__title">Health</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="health">Health</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Blood Bag Donation"
+  title="Blood Bag Donation"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/blood-bag-donation.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Blood Bag Donation</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Emergency Call"
+  title="Emergency Call"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/emergency-call.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Emergency Call</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flu Mask"
+  title="Flu Mask"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flu-mask.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flu Mask</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Health Care 2"
+  title="Health Care 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/health-care-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Health Care 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Heart Rate Clipboard"
+  title="Heart Rate Clipboard"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/heart-rate-clipboard.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Heart Rate Clipboard</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Insurance Hands"
+  title="Insurance Hands"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/insurance-hands.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Insurance Hands</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Medical Folder"
+  title="Medical Folder"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/medical-folder.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Medical Folder</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Medical Ribbon 1"
+  title="Medical Ribbon 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/medical-ribbon-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Medical Ribbon 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Medical Search Diagnosis"
+  title="Medical Search Diagnosis"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/medical-search-diagnosis.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Medical Search Diagnosis</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Microscope Observation Sciene"
+  title="Microscope Observation Sciene"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/microscope-observation-sciene.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Microscope Observation Sciene</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Nose Smell"
+  title="Nose Smell"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/nose-smell.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Nose Smell</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Petri Dish Lab Equipment"
+  title="Petri Dish Lab Equipment"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/petri-dish-lab-equipment.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Petri Dish Lab Equipment</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Prescription Pills Drugs Healthcare"
+  title="Prescription Pills Drugs Healthcare"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/prescription-pills-drugs-healthcare.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Prescription Pills Drugs Healthcare</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Syringe"
+  title="Syringe"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/syringe.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Syringe</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tooth"
+  title="Tooth"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tooth.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tooth</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Virus Antivirus"
+  title="Virus Antivirus"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/virus-antivirus.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Virus Antivirus</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="shipping">
+  <header class="category__header">
+    <h2 class="category__title">Shipping</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="shipping">Shipping</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Box Waterproof"
+  title="Box Waterproof"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/box-waterproof.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Box Waterproof</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fragile"
+  title="Fragile"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fragile.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fragile</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shipment Check"
+  title="Shipment Check"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shipment-check.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shipment Check</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shipping Box 1"
+  title="Shipping Box 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shipping-box-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shipping Box 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Transfer Cart"
+  title="Transfer Cart"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/transfer-cart.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Transfer Cart</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Transfer Truck Time"
+  title="Transfer Truck Time"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/transfer-truck-time.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Transfer Truck Time</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Warehouse 1"
+  title="Warehouse 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/warehouse-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Warehouse 1</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="entertainment">
+  <header class="category__header">
+    <h2 class="category__title">Entertainment</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="entertainment">Entertainment</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Button Fast Forward 2"
+  title="Button Fast Forward 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/button-fast-forward-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Button Fast Forward 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Button Power Circle 1"
+  title="Button Power Circle 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/button-power-circle-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Button Power Circle 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Buttons All"
+  title="Buttons All"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/buttons-all.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Buttons All</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Camera Video"
+  title="Camera Video"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/camera-video.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Camera Video</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Card Game Diamond"
+  title="Card Game Diamond"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/card-game-diamond.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Card Game Diamond</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chess Knight"
+  title="Chess Knight"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chess-knight.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chess Knight</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Circus Tent"
+  title="Circus Tent"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/circus-tent.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Circus Tent</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Gameboy"
+  title="Gameboy"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/gameboy.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Gameboy</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Music Note 1"
+  title="Music Note 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/music-note-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Music Note 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Music Note Trebble Clef"
+  title="Music Note Trebble Clef"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/music-note-trebble-clef.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Music Note Trebble Clef</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Party Popper"
+  title="Party Popper"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/party-popper.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Party Popper</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Play List 1"
+  title="Play List 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/play-list-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Play List 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Play List 8"
+  title="Play List 8"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/play-list-8.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Play List 8</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Radio"
+  title="Radio"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/radio.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Radio</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Record Player"
+  title="Record Player"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/record-player.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Record Player</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Recording Tape 2"
+  title="Recording Tape 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/recording-tape-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Recording Tape 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Repeat Single"
+  title="Repeat Single"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/repeat-single.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Repeat Single</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Song Recommendation"
+  title="Song Recommendation"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/song-recommendation.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Song Recommendation</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Speaker 1"
+  title="Speaker 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/speaker-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Speaker 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sword Attack"
+  title="Sword Attack"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sword-attack.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sword Attack</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Ticket Star"
+  title="Ticket Star"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/ticket-star.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Ticket Star</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Tune Adjust Volume"
+  title="Tune Adjust Volume"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/tune-adjust-volume.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Tune Adjust Volume</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Volume Level High"
+  title="Volume Level High"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/volume-level-high.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Volume Level High</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Volume Sleep"
+  title="Volume Sleep"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/volume-sleep.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Volume Sleep</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="images-photography">
+  <header class="category__header">
+    <h2 class="category__title">Images Photography</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="images-photography">Images Photography</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Camera Flip 1"
+  title="Camera Flip 1"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/camera-flip-1.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Camera Flip 1</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Camera Setting Pin"
+  title="Camera Setting Pin"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/camera-setting-pin.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Camera Setting Pin</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Flash Timer"
+  title="Flash Timer"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/flash-timer.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Flash Timer</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Landscape 2"
+  title="Landscape 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/landscape-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Landscape 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Laptop Camera"
+  title="Laptop Camera"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/laptop-camera.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Laptop Camera</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Lens"
+  title="Lens"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/lens.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Lens</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Light Dark Mode"
+  title="Light Dark Mode"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/light-dark-mode.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Light Dark Mode</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Mirror Horizontally"
+  title="Mirror Horizontally"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/mirror-horizontally.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Mirror Horizontally</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Polaroid"
+  title="Polaroid"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/polaroid.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Polaroid</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Time Lapse"
+  title="Time Lapse"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/time-lapse.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Time Lapse</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="mail">
+  <header class="category__header">
+    <h2 class="category__title">Mail</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="mail">Mail</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Bubble Crack Square"
+  title="Chat Bubble Crack Square"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-bubble-crack-square.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Bubble Crack Square</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Bubble Disable Oval"
+  title="Chat Bubble Disable Oval"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-bubble-disable-oval.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Bubble Disable Oval</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Bubble Square Block"
+  title="Chat Bubble Square Block"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-bubble-square-block.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Bubble Square Block</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Bubble Square Write"
+  title="Chat Bubble Square Write"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-bubble-square-write.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Bubble Square Write</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Bubble Typing Oval"
+  title="Chat Bubble Typing Oval"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-bubble-typing-oval.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Bubble Typing Oval</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Chat Two Bubbles Oval"
+  title="Chat Two Bubbles Oval"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/chat-two-bubbles-oval.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Chat Two Bubbles Oval</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Email Attachment Image"
+  title="Email Attachment Image"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/email-attachment-image.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Email Attachment Image</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Forward Email"
+  title="Forward Email"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/forward-email.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Forward Email</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Happy Face"
+  title="Happy Face"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/happy-face.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Happy Face</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Inbox"
+  title="Inbox"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/inbox.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Inbox</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Inbox Favorite"
+  title="Inbox Favorite"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/inbox-favorite.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Inbox Favorite</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Inbox Post"
+  title="Inbox Post"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/inbox-post.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Inbox Post</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Mail Loading"
+  title="Mail Loading"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/mail-loading.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Mail Loading</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Mail Send Email Message"
+  title="Mail Send Email Message"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/mail-send-email-message.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Mail Send Email Message</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Mail Send Envelope"
+  title="Mail Send Envelope"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/mail-send-envelope.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Mail Send Envelope</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Sign Hashtag"
+  title="Sign Hashtag"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/sign-hashtag.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Sign Hashtag</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Smiley Shocked"
+  title="Smiley Shocked"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/smiley-shocked.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Smiley Shocked</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="work-education">
+  <header class="category__header">
+    <h2 class="category__title">Work Education</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="work-education">Work Education</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Definition Search Book"
+  title="Definition Search Book"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/definition-search-book.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Definition Search Book</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Global Learning"
+  title="Global Learning"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/global-learning.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Global Learning</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Graduation Cap"
+  title="Graduation Cap"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/graduation-cap.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Graduation Cap</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Office Building 2"
+  title="Office Building 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/office-building-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Office Building 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Office Worker"
+  title="Office Worker"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/office-worker.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Office Worker</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Strategy Tasks"
+  title="Strategy Tasks"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/strategy-tasks.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Strategy Tasks</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Workspace Desk"
+  title="Workspace Desk"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/workspace-desk.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Workspace Desk</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+<section class="category" id="culture">
+  <header class="category__header">
+    <h2 class="category__title">Culture</h2>
+  </header>
+  <section class="subcategory">
+  <h3 class="subcategory__title" id="culture">Culture</h3>
+  <div class="icon-grid">
+    <button
+  class="icon-card"
+  type="button"
+  data-copy-name="Fortune Telling Sphere"
+  title="Fortune Telling Sphere"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/fortune-telling-sphere.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Fortune Telling Sphere</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="News Paper"
+  title="News Paper"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/news-paper.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">News Paper</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Peace Symbol"
+  title="Peace Symbol"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/peace-symbol.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Peace Symbol</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Politics Vote 2"
+  title="Politics Vote 2"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/politics-vote-2.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Politics Vote 2</span>
+  </div>
+</button>
+<button
+  class="icon-card"
+  type="button"
+  data-copy-name="Shinto"
+  title="Shinto"
+>
+  <div class="icon-card__preview" aria-hidden="true">
+    <img src="./icons/shinto.svg" alt="" loading="lazy" />
+  </div>
+  <div class="icon-card__meta">
+    <span class="icon-card__name">Shinto</span>
+  </div>
+</button>
+  </div>
+</section>
+</section>
+    </main>
+    <div class="copy-toast" id="copy-toast" aria-live="polite" aria-atomic="true">Copied icon name</div>
+    <script>
+      const toast = document.getElementById("copy-toast");
+      let toastTimer = null;
+      let copiedCard = null;
+
+      async function copyText(value) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(value);
+          return;
+        }
+
+        const input = document.createElement("textarea");
+        input.value = value;
+        input.setAttribute("readonly", "");
+        input.style.position = "absolute";
+        input.style.left = "-9999px";
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand("copy");
+        document.body.removeChild(input);
+      }
+
+      function showToast(message, card) {
+        if (copiedCard) {
+          copiedCard.dataset.copied = "false";
+        }
+
+        copiedCard = card;
+        copiedCard.dataset.copied = "true";
+        toast.textContent = message;
+        toast.dataset.visible = "true";
+
+        if (toastTimer) {
+          window.clearTimeout(toastTimer);
+        }
+
+        toastTimer = window.setTimeout(() => {
+          toast.dataset.visible = "false";
+          if (copiedCard) {
+            copiedCard.dataset.copied = "false";
+            copiedCard = null;
+          }
+        }, 1200);
+      }
+
+      document.addEventListener("click", async (event) => {
+        const card = event.target instanceof Element ? event.target.closest("[data-copy-name]") : null;
+        if (!(card instanceof HTMLElement)) {
+          return;
+        }
+
+        const value = card.dataset.copyName;
+        if (!value) {
+          return;
+        }
+
+        try {
+          await copyText(value);
+          showToast("Copied " + value, card);
+        } catch {
+          showToast("Copy failed", card);
+        }
+      });
+    </script>
+  </body>
+</html>
