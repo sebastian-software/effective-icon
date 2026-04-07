@@ -29,6 +29,7 @@ export interface IconPackManifest {
   sourceUrl: string
   family: string
   style: string
+  familyDescription?: string
   iconCount: number
   icons: IconPackManifestIcon[]
 }

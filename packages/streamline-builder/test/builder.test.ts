@@ -135,7 +135,7 @@ describe("streamline builder", () => {
 
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
-    ) as { iconCount: number; version: string; icons: Array<{ file: string }> }
+    ) as { familyDescription?: string; iconCount: number; version: string; icons: Array<{ file: string }> }
     const packageJson = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "package.json"), "utf8")
     ) as {
@@ -157,6 +157,7 @@ describe("streamline builder", () => {
 
     expect(manifest.iconCount).toBe(2)
     expect(manifest.version).toBe(releaseVersion)
+    expect(manifest.familyDescription).toBe("[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0")
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
     expect(packageJson.version).toBe(releaseVersion)
     expect(packageJson.license).toBe(PACK_PACKAGE_LICENSE)
@@ -182,9 +183,11 @@ describe("streamline builder", () => {
     expect(galleryText).toContain('class="subcategory__title"')
     expect(galleryText).toContain("icon-card__name")
     expect(galleryText).toContain("text-overflow: ellipsis")
+    expect(galleryText).toContain("text-align: center")
     expect(galleryText).toContain('src="./icons/add-1.svg"')
     expect(galleryText).toContain('data-copy-name="Add 1"')
     expect(galleryText).toContain("Copied icon name")
+    expect(galleryText).toContain("[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0")
   })
 
   it(

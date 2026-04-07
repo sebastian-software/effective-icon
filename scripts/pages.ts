@@ -7,6 +7,7 @@ import type { PackManifest } from "../packages/streamline-builder/src/types"
 
 export interface ReleasePackSummary {
   family: string
+  familyDescription?: string
   href: string
   iconCount: number
   packageName: string
@@ -24,12 +25,15 @@ export async function loadReleasePackSummaries(repoRoot: string): Promise<Releas
 
       return {
         family: manifest.family,
+        familyDescription: manifest.familyDescription,
         href: `./packs/${slug}/`,
         iconCount: manifest.iconCount,
         packageName: manifest.name,
         slug,
         style: manifest.style,
-        summary: `${manifest.family} ${manifest.style} pack with ${Intl.NumberFormat("en-US").format(manifest.iconCount)} icons.`,
+        summary:
+          manifest.familyDescription ??
+          `${manifest.family} ${manifest.style} pack with ${Intl.NumberFormat("en-US").format(manifest.iconCount)} icons.`,
       }
     })
   )

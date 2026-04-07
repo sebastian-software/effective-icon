@@ -27,6 +27,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     sourceUrl: set.sourceUrl,
     family: set.family,
     style: set.style,
+    ...(set.familyDescription ? { familyDescription: set.familyDescription } : {}),
     iconCount: set.iconCount,
     icons: set.icons.map((icon) => ({
       name: icon.name,
@@ -53,6 +54,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     sourceUrl: manifest.sourceUrl,
     family: manifest.family,
     style: manifest.style,
+    familyDescription: manifest.familyDescription,
     icons: manifest.icons,
   }
 

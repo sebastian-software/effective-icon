@@ -31,7 +31,7 @@
       }
       a { color: inherit; }
       main {
-        width: min(1240px, calc(100vw - 2rem));
+        width: min(1920px, calc(100vw - 2rem));
         margin: 0 auto;
         padding: 2rem 0 3rem;
       }
@@ -56,7 +56,7 @@
       }
       .hero__lead {
         margin: 0;
-        max-width: 56ch;
+        max-width: 78ch;
         font-size: 1rem;
         line-height: 1.65;
         color: var(--muted);
@@ -144,6 +144,10 @@
         text-align: left;
         font: inherit;
         color: inherit;
+        min-width: 0;
+        justify-items: stretch;
+        appearance: none;
+        -webkit-appearance: none;
       }
       .icon-card__preview {
         display: grid;
@@ -158,9 +162,13 @@
         height: 1.65rem;
         color: var(--ink);
       }
+      .icon-card__meta {
+        width: 100%;
+        min-width: 0;
+      }
       .icon-card__name {
         display: block;
-        max-width: 100%;
+        width: 100%;
         padding: 0 0.15rem;
         font-size: 10px;
         font-weight: 500;
@@ -169,6 +177,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: center;
       }
       .icon-card[data-copied="true"] {
         border-color: color-mix(in oklch, var(--accent) 34%, transparent);
@@ -230,8 +239,7 @@
         <p class="hero__breadcrumb"><a href="https://sebastian-software.github.io/effective-icon/">@effective/icon packs</a></p>
         <h1 class="hero__title">@icon-pkg/streamline-core-line-free</h1>
         <p class="hero__lead">
-          Static overview of the Core line Streamline pack, grouped by
-          category for quick browsing.
+          [Free + Open-source] Core is the Helvetica of icons. The Free Line variant offers clean, minimal icons with consistent line weights. Licensed under the Creative Commons - CC BY 4.0
         </p>
       </section>
       <section class="meta">

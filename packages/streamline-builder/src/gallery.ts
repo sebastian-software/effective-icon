@@ -17,6 +17,7 @@ export interface PackRenderData {
   sourceUrl: string
   family: string
   style: string
+  familyDescription?: string
   version: string
   icons: PackManifest["icons"]
 }
@@ -173,7 +174,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
       }
       a { color: inherit; }
       main {
-        width: min(1240px, calc(100vw - 2rem));
+        width: min(1920px, calc(100vw - 2rem));
         margin: 0 auto;
         padding: 2rem 0 3rem;
       }
@@ -198,7 +199,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
       }
       .hero__lead {
         margin: 0;
-        max-width: 56ch;
+        max-width: 78ch;
         font-size: 1rem;
         line-height: 1.65;
         color: var(--muted);
@@ -286,6 +287,10 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         text-align: left;
         font: inherit;
         color: inherit;
+        min-width: 0;
+        justify-items: stretch;
+        appearance: none;
+        -webkit-appearance: none;
       }
       .icon-card__preview {
         display: grid;
@@ -300,9 +305,13 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         height: 1.65rem;
         color: var(--ink);
       }
+      .icon-card__meta {
+        width: 100%;
+        min-width: 0;
+      }
       .icon-card__name {
         display: block;
-        max-width: 100%;
+        width: 100%;
         padding: 0 0.15rem;
         font-size: 10px;
         font-weight: 500;
@@ -311,6 +320,7 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        text-align: center;
       }
       .icon-card[data-copied="true"] {
         border-color: color-mix(in oklch, var(--accent) 34%, transparent);
@@ -372,8 +382,10 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
         <p class="hero__breadcrumb"><a href="${escapeAttribute(PACK_HOMEPAGE_URL)}">@effective/icon packs</a></p>
         <h1 class="hero__title">${escapeHtml(pack.name)}</h1>
         <p class="hero__lead">
-          Static overview of the ${escapeHtml(pack.family)} ${escapeHtml(pack.style)} Streamline pack, grouped by
-          category for quick browsing.
+          ${escapeHtml(
+            pack.familyDescription ??
+              `Static overview of the ${pack.family} ${pack.style} Streamline pack, grouped by category for quick browsing.`
+          )}
         </p>
       </section>
       <section class="meta">
