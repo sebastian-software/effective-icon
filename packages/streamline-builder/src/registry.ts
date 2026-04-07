@@ -50,7 +50,7 @@ export const registry: RegistryEntry[] = [
   createEntry("ultimate-light-free", "Ultimate", "light"),
   createEntry("ultimate-regular-free", "Ultimate", "regular"),
   createEntry("ultimate-bold-free", "Ultimate", "bold"),
-  createEntry("ultimate-colos-free", "Ultimate", "colors"),
+  createEntry("lucide-line", "Lucide", "line"),
 ]
 
 export function getEnabledRegistry(): RegistryEntry[] {

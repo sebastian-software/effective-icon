@@ -38,6 +38,7 @@ export const RELEASE_PACK_SLUGS = [
   "ultimate-light-free",
   "ultimate-regular-free",
   "ultimate-bold-free",
+  "lucide-line",
 ] as const
 
 export function getReleaseRegistryEntries() {

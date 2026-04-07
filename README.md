@@ -467,6 +467,7 @@ The current npm release set is intentionally scoped to the nine materialized pac
 - `@icon-pkg/streamline-ultimate-light-free`
 - `@icon-pkg/streamline-ultimate-regular-free`
 - `@icon-pkg/streamline-ultimate-bold-free`
+- `@icon-pkg/streamline-lucide-line`
 
 Use the dedicated release check before publishing:
 

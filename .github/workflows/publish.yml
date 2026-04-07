@@ -146,3 +146,7 @@ jobs:
       - name: Publish @icon-pkg/streamline-ultimate-bold-free
         working-directory: packages/packs/ultimate-bold-free
         run: npm publish --access public
+
+      - name: Publish @icon-pkg/streamline-lucide-line
+        working-directory: packages/packs/lucide-line
+        run: npm publish --access public

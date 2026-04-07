@@ -203,6 +203,11 @@
         },
         {
           "type": "json",
+          "path": "packages/packs/lucide-line/package.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
           "path": "packages/packs/ultimate-light-free/manifest.json",
           "jsonpath": "$.version"
         },
@@ -214,6 +219,11 @@
         {
           "type": "json",
           "path": "packages/packs/ultimate-bold-free/manifest.json",
+          "jsonpath": "$.version"
+        },
+        {
+          "type": "json",
+          "path": "packages/packs/lucide-line/manifest.json",
           "jsonpath": "$.version"
         }
       ]
