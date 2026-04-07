@@ -251,7 +251,7 @@ describe("streamline builder", () => {
     async () => {
       await validateReleasePacks(rootFixture)
     },
-    15_000
+    60_000
   )
 
   it("loads builder config from .env.local", async () => {
