@@ -2,85 +2,72 @@ import { mkdtempSync, writeFileSync } from "node:fs"
 import os from "node:os"
 import path from "node:path"
 
-import ts from "typescript"
+import { print } from "esrap"
+import tsx from "esrap/languages/tsx"
+import { parseSync } from "oxc-parser"
 import { describe, expect, it } from "vitest"
+
+import type * as ESTree from "@oxc-project/types"
 
 import {
   appendClassName,
   createA11yFallback,
   createImageFallback,
-  getJsxAttributeName,
   getJsxAttributeExpression,
+  getJsxAttributeName,
   mergeJsxAttributes,
+  renderJsxAttributes,
 } from "../src/transform-jsx"
 import { createInlineMaskStyle, toCssPropertyName, withMaskClass } from "../src/transform-mask"
 import { cloneStaticJsxNode, createInlineSvgElement, parseInlineSvg } from "../src/transform-svg"
 
-function createSourceFile(source: string) {
-  return ts.createSourceFile("test.tsx", source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX)
-}
+const JSX_PRINTER = tsx()
 
-function parseSelfClosingElement(source: string): ts.JsxSelfClosingElement {
-  const file = createSourceFile(`const view = ${source};`)
-  const statement = file.statements[0]
-  if (!statement || !ts.isVariableStatement(statement)) {
-    throw new Error("Expected a variable statement")
-  }
+function parseJsxElement(source: string): ESTree.JSXElement {
+  const { program } = parseSync("test.tsx", source, {
+    lang: "tsx",
+    sourceType: "module",
+    astType: "ts",
+    range: true,
+  })
+  const statement = program.body[0]
 
-  const initializer = statement.declarationList.declarations[0]?.initializer
-  if (!initializer || !ts.isJsxSelfClosingElement(initializer)) {
-    throw new Error("Expected a JSX self-closing element")
-  }
-
-  return initializer
-}
-
-function parseElement(source: string): ts.JsxElement {
-  const file = createSourceFile(`const view = ${source};`)
-  const statement = file.statements[0]
-  if (!statement || !ts.isVariableStatement(statement)) {
-    throw new Error("Expected a variable statement")
-  }
-
-  const initializer = statement.declarationList.declarations[0]?.initializer
-  if (!initializer || !ts.isJsxElement(initializer)) {
+  if (!statement || statement.type !== "ExpressionStatement" || statement.expression.type !== "JSXElement") {
     throw new Error("Expected a JSX element")
   }
 
-  return initializer
+  return statement.expression
 }
 
-function printNode(node: ts.Node): string {
-  const file = createSourceFile("")
-  return ts.createPrinter({ removeComments: true }).printNode(ts.EmitHint.Unspecified, node, file)
+function parseAttributeHost(source: string): { code: string; attributes: ESTree.JSXAttributeItem[] } {
+  const code = `<div ${source} />`
+  return {
+    code,
+    attributes: parseJsxElement(code).openingElement.attributes,
+  }
 }
 
-function printAttributes(attributes: readonly ts.JsxAttributeLike[]): string {
-  const element = ts.factory.createJsxSelfClosingElement(
-    ts.factory.createIdentifier("div"),
-    undefined,
-    ts.factory.createJsxAttributes([...attributes])
-  )
-
-  return printNode(element)
+function printNode(node: object): string {
+  return print(node as never, JSX_PRINTER).code
 }
 
 describe("transform JSX helpers", () => {
   it("merges named attributes while preserving spreads", () => {
-    const existing = parseSelfClosingElement('<div foo="first" {...spread} />').attributes.properties
-    const forwarded = parseSelfClosingElement('<div foo="second" bar={value} />').attributes.properties
+    const existing = parseAttributeHost('foo="first" {...spread}').attributes
+    const forwarded = parseAttributeHost('foo="second" bar={value}').attributes
 
     const merged = mergeJsxAttributes(existing, forwarded)
-    const fooAttribute = merged.find((attribute) => getJsxAttributeName(attribute) === "foo") as ts.JsxAttribute
+    const fooAttribute = merged.find((attribute) => getJsxAttributeName(attribute) === "foo") as ESTree.JSXAttribute
 
-    expect(printAttributes(merged)).toContain('{...spread}')
-    expect(fooAttribute.initializer && ts.isStringLiteral(fooAttribute.initializer)).toBe(true)
-    expect((fooAttribute.initializer as ts.StringLiteral).text).toBe("second")
-    expect(printAttributes(merged)).toContain("bar={value}")
+    expect(renderJsxAttributes(merged, `<div foo="first" {...spread} foo="second" bar={value} />`).join(" ")).toContain(
+      "{...spread}"
+    )
+    expect(fooAttribute.value?.type).toBe("Literal")
+    expect((fooAttribute.value as ESTree.StringLiteral).value).toBe("second")
   })
 
   it("reads string and expression attribute values", () => {
-    const attributes = parseSelfClosingElement('<div title="hello" count={value} />').attributes.properties
+    const { attributes } = parseAttributeHost('title="hello" count={value}')
 
     expect(printNode(getJsxAttributeExpression(attributes, "title")!)).toBe('"hello"')
     expect(printNode(getJsxAttributeExpression(attributes, "count")!)).toBe("value")
@@ -88,101 +75,60 @@ describe("transform JSX helpers", () => {
   })
 
   it("appends class names to empty and dynamic class props", () => {
-    const emptyClass = parseSelfClosingElement("<div className />").attributes.properties[0]
-    const dynamicClass = parseSelfClosingElement("<div className={iconClass} />").attributes.properties[0]
+    const emptyHost = parseAttributeHost("className")
+    const dynamicHost = parseAttributeHost("className={iconClass}")
 
-    expect(printNode(appendClassName(emptyClass as ts.JsxAttribute, "effective-icon-mask"))).toContain(
+    expect(appendClassName(emptyHost.attributes[0] as ESTree.JSXAttribute, emptyHost.code, "effective-icon-mask")).toContain(
       'className="effective-icon-mask"'
     )
-    expect(printNode(appendClassName(dynamicClass as ts.JsxAttribute, "effective-icon-mask"))).toContain(
-      '[iconClass, "effective-icon-mask"].filter(Boolean).join(" ")'
-    )
-  })
-
-  it("leaves unsupported class initializers untouched", () => {
-    const attribute = ts.factory.createJsxAttribute(
-      ts.factory.createIdentifier("className"),
-      ts.factory.createJsxElement(
-        ts.factory.createJsxOpeningElement(
-          ts.factory.createIdentifier("span"),
-          undefined,
-          ts.factory.createJsxAttributes([])
-        ),
-        [],
-        ts.factory.createJsxClosingElement(ts.factory.createIdentifier("span"))
-      )
-    )
-
-    expect(appendClassName(attribute, "effective-icon-mask")).toBe(attribute)
+    expect(
+      appendClassName(dynamicHost.attributes[0] as ESTree.JSXAttribute, dynamicHost.code, "effective-icon-mask")
+    ).toContain('[iconClass, "effective-icon-mask"].filter(Boolean).join(" ")')
   })
 
   it("adds image and a11y fallbacks only when missing", () => {
-    const bareAttributes = parseSelfClosingElement("<img />").attributes.properties
-    const labelledAttributes = parseSelfClosingElement('<img alt="Plane" role="img" />').attributes.properties
+    const bareAttributes = parseAttributeHost("").attributes
+    const labelledAttributes = parseAttributeHost('alt="Plane" role="img"').attributes
 
-    expect(printAttributes(createImageFallback(bareAttributes))).toContain('alt=""')
-    expect(printAttributes(createImageFallback(bareAttributes))).toContain('aria-hidden="true"')
+    expect(renderJsxAttributes(createImageFallback(bareAttributes)).join(" ")).toContain('alt=""')
+    expect(renderJsxAttributes(createImageFallback(bareAttributes)).join(" ")).toContain('aria-hidden="true"')
     expect(createA11yFallback(labelledAttributes)).toHaveLength(0)
   })
 })
 
 describe("transform mask helpers", () => {
   it("creates inline mask style objects and css text", () => {
-    const styleObject = createInlineMaskStyle(undefined, "__icon0", "object")
-    const styleText = createInlineMaskStyle(
-      ts.factory.createObjectLiteralExpression(
-        [
-          ts.factory.createPropertyAssignment("color", ts.factory.createStringLiteral("tomato")),
-          ts.factory.createPropertyAssignment(ts.factory.createNumericLiteral("1"), ts.factory.createStringLiteral("one")),
-          ts.factory.createPropertyAssignment("WebkitMaskSize", ts.factory.createStringLiteral("cover")),
-        ],
-        true
-      ),
-      "__icon0",
-      "string"
-    )
+    const styleHost = parseAttributeHost('style={{ color: "tomato", 1: "one", WebkitMaskSize: "cover" }}')
+    const styleExpression = getJsxAttributeExpression(styleHost.attributes, "style")
 
-    expect(printNode(styleObject!)).toContain('"--effective-icon-mask-image": `url("${__icon0}")`')
-    expect(printNode(styleText!)).toContain('--effective-icon-mask-image:')
-    expect(printNode(styleText!)).toContain("color:")
-    expect(printNode(styleText!)).toContain("-webkit-mask-size:")
-    expect(printNode(styleText!)).toContain("1:")
+    const styleObject = createInlineMaskStyle(undefined, "__icon0", "object", styleHost.code)
+    const styleText = createInlineMaskStyle(styleExpression, "__icon0", "string", styleHost.code)
+
+    expect(styleObject).toContain('"--effective-icon-mask-image": `url("${__icon0}")`')
+    expect(styleText).toContain("--effective-icon-mask-image")
+    expect(styleText).toContain("color:")
+    expect(styleText).toContain("-webkit-mask-size:")
+    expect(styleText).toContain("1:")
   })
 
   it("returns undefined for dynamic or unsupported mask style objects", () => {
-    expect(createInlineMaskStyle(ts.factory.createIdentifier("styleVar"), "__icon0", "object")).toBeUndefined()
-    expect(
-      createInlineMaskStyle(
-        ts.factory.createObjectLiteralExpression([ts.factory.createSpreadAssignment(ts.factory.createIdentifier("rest"))], true),
-        "__icon0",
-        "object"
-      )
-    ).toBeUndefined()
-    expect(
-      createInlineMaskStyle(
-        ts.factory.createObjectLiteralExpression(
-          [
-            ts.factory.createPropertyAssignment(
-              ts.factory.createComputedPropertyName(ts.factory.createIdentifier("prop")),
-              ts.factory.createStringLiteral("value")
-            ),
-          ],
-          true
-        ),
-        "__icon0",
-        "object"
-      )
-    ).toBeUndefined()
+    const dynamic = parseAttributeHost("style={styleVar}")
+    const spread = parseAttributeHost("style={{ ...rest }}")
+    const computed = parseAttributeHost("style={{ [prop]: value }}")
+
+    expect(createInlineMaskStyle(getJsxAttributeExpression(dynamic.attributes, "style"), "__icon0", "object", dynamic.code)).toBeUndefined()
+    expect(createInlineMaskStyle(getJsxAttributeExpression(spread.attributes, "style"), "__icon0", "object", spread.code)).toBeUndefined()
+    expect(createInlineMaskStyle(getJsxAttributeExpression(computed.attributes, "style"), "__icon0", "object", computed.code)).toBeUndefined()
   })
 
   it("normalizes css property names and appends the mask class", () => {
-    const attributes = parseSelfClosingElement('<div class={classes} />').attributes.properties
-    const merged = withMaskClass(attributes, "class")
+    const host = parseAttributeHost("class={classes}")
+    const merged = withMaskClass(host.attributes, "class", host.code)
 
     expect(toCssPropertyName("--custom-token")).toBe("--custom-token")
     expect(toCssPropertyName("WebkitMaskPosition")).toBe("-webkit-mask-position")
     expect(toCssPropertyName("backgroundColor")).toBe("background-color")
-    expect(printAttributes(merged)).toContain('[classes, "effective-icon-mask"].filter(Boolean).join(" ")')
+    expect(merged.join(" ")).toContain('[classes, "effective-icon-mask"].filter(Boolean).join(" ")')
   })
 })
 
@@ -192,55 +138,36 @@ describe("transform SVG helpers", () => {
   })
 
   it("clones inline svg nodes deeply and merges forwarded attributes", () => {
-    const svg = parseElement(
+    const svg = parseJsxElement(
       '<svg xmlns:xlink="http://www.w3.org/1999/xlink"><g>{"hi"}<path /><this.Icon /><><title>{"label"}</title></></g></svg>'
     )
     const cloned = cloneStaticJsxNode(svg)
-    const merged = createInlineSvgElement(cloned, "airplane", parseSelfClosingElement('<svg aria-hidden="true" />').attributes.properties)
-    const mergedAttributes = ts.isJsxElement(merged) ? merged.openingElement.attributes.properties : merged.attributes.properties
-    const ariaHidden = mergedAttributes.find((attribute) => getJsxAttributeName(attribute) === "aria-hidden") as
-      | ts.JsxAttribute
-      | undefined
-    const group = ts.isJsxElement(merged) ? (merged.children[0] as ts.JsxElement) : undefined
-    const fragment = group ? (group.children[3] as ts.JsxFragment) : undefined
-    const title = fragment ? (fragment.children[0] as ts.JsxElement) : undefined
-    const titleExpression = title ? (title.children[0] as ts.JsxExpression).expression : undefined
+    const forwarded = parseAttributeHost('aria-hidden="true"').attributes
+    const merged = createInlineSvgElement(cloned, "airplane", forwarded)
+    const reparsed = parseJsxElement(merged)
+    const ariaHidden = reparsed.openingElement.attributes.find((attribute) => getJsxAttributeName(attribute) === "aria-hidden")
+    const group = reparsed.children[0] as ESTree.JSXElement
+    const fragment = group.children[3] as ESTree.JSXFragment
+    const title = fragment.children[0] as ESTree.JSXElement
+    const titleExpression = (title.children[0] as ESTree.JSXExpressionContainer).expression
 
     expect(cloned).not.toBe(svg)
-    expect(printNode(merged)).toContain('xmlns:xlink="http://www.w3.org/1999/xlink"')
+    expect(merged).toContain('xmlns:xlink="http://www.w3.org/1999/xlink"')
     expect(ariaHidden).toBeDefined()
-    expect(printNode(merged)).toContain("<this.Icon />")
-    expect(title && ts.isIdentifier(title.openingElement.tagName) ? title.openingElement.tagName.text : undefined).toBe("title")
-    expect(titleExpression && ts.isStringLiteral(titleExpression)).toBe(true)
-    expect((titleExpression as ts.StringLiteral).text).toBe("label")
+    expect(merged).toContain("<this.Icon />")
+    expect(title.openingElement.name.type === "JSXIdentifier" ? title.openingElement.name.name : undefined).toBe("title")
+    expect(titleExpression.type).toBe("Literal")
+    expect((titleExpression as ESTree.StringLiteral).value).toBe("label")
   })
 
-  it("clones spread children and exotic tag names", () => {
-    const namespaced = ts.factory.createJsxSelfClosingElement(
-      ts.factory.createJsxNamespacedName(ts.factory.createIdentifier("svg"), ts.factory.createIdentifier("path")),
-      undefined,
-      ts.factory.createJsxAttributes([])
-    )
-    const propertyAccess = ts.factory.createJsxSelfClosingElement(
-      ts.factory.createPropertyAccessExpression(ts.factory.createThis(), ts.factory.createIdentifier("Icon")) as ts.JsxTagNamePropertyAccess,
-      undefined,
-      ts.factory.createJsxAttributes([])
-    )
-    const withThisTag = ts.factory.createJsxElement(
-      ts.factory.createJsxOpeningElement(ts.factory.createIdentifier("svg"), undefined, ts.factory.createJsxAttributes([])),
-      [
-        ts.factory.createJsxSelfClosingElement(
-          ts.factory.createThis() as unknown as ts.JsxTagNameExpression,
-          undefined,
-          ts.factory.createJsxAttributes([])
-        ),
-      ],
-      ts.factory.createJsxClosingElement(ts.factory.createIdentifier("svg"))
-    )
+  it("prints spread children and exotic tag names", () => {
+    const namespaced = parseJsxElement("<svg:path />")
+    const propertyAccess = parseJsxElement("<this.Icon />")
+    const withSpreadChild = parseJsxElement("<svg>{...items}</svg>")
 
     expect(printNode(cloneStaticJsxNode(namespaced))).toContain("<svg:path />")
     expect(printNode(cloneStaticJsxNode(propertyAccess))).toContain("<this.Icon />")
-    expect(printNode(cloneStaticJsxNode(withThisTag))).toContain("<this />")
+    expect(printNode(cloneStaticJsxNode(withSpreadChild))).toContain("{...items}")
   })
 
   it("parses inline svg files and rejects invalid roots", () => {
@@ -257,7 +184,7 @@ describe("transform SVG helpers", () => {
 
     expect(printNode(parseInlineSvg(validPath, "/virtual/input.tsx"))).toContain("<svg")
     expect(() => parseInlineSvg(groupPath, "/virtual/input.tsx")).toThrow(/Expected root <svg> element/)
-    expect(() => parseInlineSvg(textPath, "/virtual/input.tsx")).toThrow(/Expected root <svg> element/)
-    expect(() => parseInlineSvg(emptyPath, "/virtual/input.tsx")).toThrow(/Expected root <svg> element/)
+    expect(() => parseInlineSvg(textPath, "/virtual/input.tsx")).toThrow(/Could not parse inline SVG/)
+    expect(() => parseInlineSvg(emptyPath, "/virtual/input.tsx")).toThrow(/Could not parse inline SVG/)
   })
 })

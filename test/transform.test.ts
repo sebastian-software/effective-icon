@@ -486,6 +486,34 @@ describe("compile-time transform", () => {
     expect(transformed).toContain("sharedStyle")
   })
 
+  it("preserves unrelated comments and imports outside replaced spans", async () => {
+    const resolvedPackage = await loadResolvedPackage()
+    const source = `// keep-me
+import { helper } from "./helper"
+import { Icon } from "${COMPILE_MODULE_ID}"
+
+/* keep-me-too */
+const view = <Icon name="airplane" />
+
+export { helper }
+`
+
+    const transformed = transformCompileTimeIcons(source, "/virtual/input.tsx", {
+      options: {
+        package: packageName,
+        surface: "jsx",
+        renderMode: "image",
+      },
+      resolvedPackage,
+    })
+
+    expect(transformed).toContain("// keep-me")
+    expect(transformed).toContain('import { helper } from "./helper"')
+    expect(transformed).toContain("/* keep-me-too */")
+    expect(transformed).toContain("export { helper }")
+    expect(transformed).not.toContain(COMPILE_MODULE_ID)
+  })
+
   it("rejects reserved props that would clash with generated output", async () => {
     const resolvedPackage = await loadResolvedPackage()
 
