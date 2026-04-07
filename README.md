@@ -367,6 +367,7 @@ Compatible icon packages are expected to ship:
 
 - `manifest.json`
 - `icons/*.svg`
+- `index.html`
 - `exports["./manifest.json"]`
 - `exports["./icons/*"]`
 
@@ -416,11 +417,11 @@ Default local ports:
 - `http://127.0.0.1:4178/` for `solid/mask`
 - `http://127.0.0.1:4179/` for `solid/svg`
 
-`pnpm build:demo` builds the public React and Solid demo matrix into `demo/dist` against the sample workspace pack in `packages/packs/core-line-free`.
+`pnpm build:demo` builds the public Pages artifact into `demo/dist`: the React and Solid demo matrix plus static pack galleries for the currently released Streamline packs.
 
 ## Builder Workspace
 
-The builder workspace lives under `packages/streamline-builder` and produces downstream icon pack packages.
+The builder workspace lives under `packages/streamline-builder` and produces downstream icon pack packages with a static `index.html` gallery, README links to GitHub Pages, and the manifest + SVG payload used by the compile-time plugin.
 
 For builder commands, define your API key in the workspace root via `.env.local`, `.env`, or normal shell environment variables:
 

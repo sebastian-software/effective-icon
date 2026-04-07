@@ -9,7 +9,8 @@ export const PACK_PACKAGE_LICENSE = "CC-BY-4.0"
 export const PACK_MANIFEST_LICENSE = "CC BY 4.0"
 export const PACK_REPOSITORY_URL = "https://github.com/sebastian-software/effective-icon"
 export const PACK_REPOSITORY_GIT_URL = "git+https://github.com/sebastian-software/effective-icon.git"
-export const PACK_HOMEPAGE_URL = `${PACK_REPOSITORY_URL}#readme`
+export const PACK_PAGES_URL = "https://sebastian-software.github.io/effective-icon"
+export const PACK_HOMEPAGE_URL = `${PACK_PAGES_URL}/`
 export const PACK_BUGS_URL = `${PACK_REPOSITORY_URL}/issues`
 export const PACK_OSS_HOMEPAGE_URL = "https://oss.sebastian-software.com"
 export const PACK_REDISTRIBUTOR = "Sebastian Software GmbH, Mainz, Germany"
@@ -23,6 +24,10 @@ export function getReleaseRegistryEntries() {
 
 export function getPackDir(rootDir: string, slug: string): string {
   return path.join(rootDir, "packages", "packs", slug)
+}
+
+export function getPackGalleryUrl(slug: string): string {
+  return `${PACK_PAGES_URL}/packs/${slug}/`
 }
 
 export async function getSharedReleaseVersion(rootDir: string): Promise<string> {

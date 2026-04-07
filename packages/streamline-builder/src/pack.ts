@@ -2,16 +2,13 @@ import { mkdir, rm, writeFile } from "node:fs/promises"
 import path from "node:path"
 
 import {
-  PACK_BUGS_URL,
-  PACK_HOMEPAGE_URL,
   PACK_MANIFEST_LICENSE,
   PACK_OSS_HOMEPAGE_URL,
-  PACK_PACKAGE_LICENSE,
   PACK_REDISTRIBUTOR,
   PACK_REDISTRIBUTOR_COPYRIGHT,
-  PACK_REPOSITORY_GIT_URL,
   getSharedReleaseVersion,
 } from "./release"
+import { createPackPackageJson, renderPackIndexHtml, renderPackReadme, type PackRenderData } from "./gallery"
 import type { ExtractedSetData, PackManifest } from "./types"
 
 export async function writePack(rootDir: string, set: ExtractedSetData): Promise<void> {
@@ -48,67 +45,27 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     await writeFile(path.join(iconsDir, icon.file), `${icon.svg}\n`, "utf8")
   }
 
+  const packRenderData: PackRenderData = {
+    iconCount: manifest.iconCount,
+    name: manifest.name,
+    slug: manifest.slug,
+    version: manifest.version,
+    sourceUrl: manifest.sourceUrl,
+    family: manifest.family,
+    style: manifest.style,
+    icons: manifest.icons,
+  }
+
   await writeJson(path.join(packDir, "manifest.json"), manifest)
-  await writeFile(path.join(packDir, "README.md"), renderPackReadme(set), "utf8")
+  await writeFile(path.join(packDir, "README.md"), renderPackReadme(packRenderData), "utf8")
+  await writeFile(path.join(packDir, "index.html"), renderPackIndexHtml(packRenderData), "utf8")
   await writeFile(path.join(packDir, "ATTRIBUTION.md"), renderAttribution(set), "utf8")
   await writeFile(path.join(packDir, "LICENSE"), renderLicense(set), "utf8")
-  await writeJson(path.join(packDir, "package.json"), {
-    name: set.packageName,
-    version: releaseVersion,
-    description: `Redistributed Streamline ${set.familyName} icon pack`,
-    license: PACK_PACKAGE_LICENSE,
-    type: "module",
-    files: ["manifest.json", "icons", "README.md", "ATTRIBUTION.md", "LICENSE"],
-    exports: {
-      "./manifest.json": "./manifest.json",
-      "./icons/*": "./icons/*",
-    },
-    publishConfig: {
-      access: "public",
-    },
-    repository: {
-      type: "git",
-      url: PACK_REPOSITORY_GIT_URL,
-      directory: `packages/packs/${set.slug}`,
-    },
-    homepage: PACK_HOMEPAGE_URL,
-    bugs: {
-      url: PACK_BUGS_URL,
-    },
-    keywords: ["streamline", "icons", "svg", "cc-by-4.0"],
-  })
+  await writeJson(path.join(packDir, "package.json"), createPackPackageJson(packRenderData))
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8")
-}
-
-function renderPackReadme(set: ExtractedSetData): string {
-  return `# ${set.packageName}
-
-Redistributed Streamline icon pack for ${set.familyName}.
-
-- Family: ${set.family}
-- Style: ${set.style}
-- Icons: ${set.iconCount}
-- Source: ${set.sourceUrl}
-- License: ${PACK_MANIFEST_LICENSE}
-- Redistributor: ${PACK_REDISTRIBUTOR}
-- OSS Home: ${PACK_OSS_HOMEPAGE_URL}
-
-## Install
-
-\`\`\`bash
-npm install ${set.packageName}
-\`\`\`
-
-## Contents
-
-- \`manifest.json\` for pack metadata and icon lookup
-- flat \`icons/*.svg\` files for downstream tooling and asset access
-
-This package redistributes the publicly available Streamline free icon set and is intended to be consumed by build tools such as \`@effective/icon\`.
-`
 }
 
 function renderAttribution(set: ExtractedSetData): string {

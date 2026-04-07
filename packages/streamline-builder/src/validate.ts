@@ -4,9 +4,9 @@ import path from "node:path"
 import { getEnabledRegistry } from "./registry"
 import {
   getPackDir,
+  getPackGalleryUrl,
   getReleaseRegistryEntries,
   PACK_BUGS_URL,
-  PACK_HOMEPAGE_URL,
   PACK_MANIFEST_LICENSE,
   PACK_PACKAGE_LICENSE,
   PACK_REPOSITORY_GIT_URL,
@@ -64,6 +64,7 @@ async function loadPackState(rootDir: string, entry: RegistryEntry): Promise<Pac
   const attributionPath = path.join(packDir, "ATTRIBUTION.md")
   const readmePath = path.join(packDir, "README.md")
   const licensePath = path.join(packDir, "LICENSE")
+  const galleryPath = path.join(packDir, "index.html")
 
   await Promise.all([
     assertExists(manifestPath),
@@ -71,6 +72,7 @@ async function loadPackState(rootDir: string, entry: RegistryEntry): Promise<Pac
     assertExists(attributionPath),
     assertExists(readmePath),
     assertExists(licensePath),
+    assertExists(galleryPath),
   ])
 
   const manifest = JSON.parse(await readFile(manifestPath, "utf8")) as PackState["manifest"]
@@ -157,14 +159,14 @@ function assertReleaseMetadata(pack: PackState, releaseVersion: string): void {
   if (packageJson.repository?.directory !== `packages/packs/${entry.slug}`) {
     throw new Error(`Pack "${entry.slug}" has unexpected repository directory "${packageJson.repository?.directory}"`)
   }
-  if (packageJson.homepage !== PACK_HOMEPAGE_URL) {
+  if (packageJson.homepage !== getPackGalleryUrl(entry.slug)) {
     throw new Error(`Pack "${entry.slug}" has unexpected homepage "${packageJson.homepage}"`)
   }
   if (packageJson.bugs?.url !== PACK_BUGS_URL) {
     throw new Error(`Pack "${entry.slug}" has unexpected bugs url "${packageJson.bugs?.url}"`)
   }
 
-  const expectedFiles = ["manifest.json", "icons", "README.md", "ATTRIBUTION.md", "LICENSE"]
+  const expectedFiles = ["manifest.json", "icons", "index.html", "README.md", "ATTRIBUTION.md", "LICENSE"]
   for (const file of expectedFiles) {
     if (!packageJson.files?.includes(file)) {
       throw new Error(`Pack "${entry.slug}" is missing "${file}" from package files`)
