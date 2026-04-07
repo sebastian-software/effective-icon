@@ -11,7 +11,7 @@ import { getPackGalleryUrl } from "../src/release"
 import { materializeDiscoveredSet } from "../src/materialize"
 import { normalizePackIconName, normalizeSvgToCurrentColor } from "../src/normalize"
 import { writePack } from "../src/pack"
-import { preparePackSvg, validatePackSvg } from "../src/svg"
+import { getSvgGridSize, preparePackSvg, validatePackSvg } from "../src/svg"
 import {
   PACK_BUGS_URL,
   PACK_OSS_HOMEPAGE_URL,
@@ -85,6 +85,10 @@ describe("streamline builder", () => {
     expect(prepared).not.toContain('role="img"')
   })
 
+  it("reads the square grid size from the root viewBox", () => {
+    expect(getSvgGridSize('<svg viewBox="0 0 14 14"><path /></svg>')).toBe(14)
+  })
+
   it("keeps multicolor svg fills unchanged when preparing pack svg", () => {
     const prepared = preparePackSvg(
       '<svg viewBox="0 0 24 24"><path d="M1 1h10v10H1z" fill="#ff0000" /><path d="M2 2h20" stroke="#000000" /></svg>'
@@ -135,7 +139,7 @@ describe("streamline builder", () => {
 
     const manifest = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "manifest.json"), "utf8")
-    ) as { familyDescription?: string; iconCount: number; version: string; icons: Array<{ file: string }> }
+    ) as { familyDescription?: string; gridSize?: number; iconCount: number; version: string; icons: Array<{ file: string }> }
     const packageJson = JSON.parse(
       await readFile(path.join(tempDir, "packages", "packs", "core-line-free", "package.json"), "utf8")
     ) as {
@@ -158,6 +162,7 @@ describe("streamline builder", () => {
     expect(manifest.iconCount).toBe(2)
     expect(manifest.version).toBe(releaseVersion)
     expect(manifest.familyDescription).toBe("[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0")
+    expect(manifest.gridSize).toBe(14)
     expect(manifest.icons[0]?.file).toBe("icons/add-1.svg")
     expect(packageJson.version).toBe(releaseVersion)
     expect(packageJson.license).toBe(PACK_PACKAGE_LICENSE)
@@ -188,6 +193,7 @@ describe("streamline builder", () => {
     expect(galleryText).toContain('data-copy-name="Add 1"')
     expect(galleryText).toContain("Copied icon name")
     expect(galleryText).toContain("[Free + Open-source] Core is the Helvetica of icons. Licensed under the Creative Commons - CC BY 4.0")
+    expect(galleryText).toContain("14 px grid")
   })
 
   it(

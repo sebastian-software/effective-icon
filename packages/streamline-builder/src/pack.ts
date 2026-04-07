@@ -9,6 +9,7 @@ import {
   getSharedReleaseVersion,
 } from "./release"
 import { createPackPackageJson, renderPackIndexHtml, renderPackReadme, type PackRenderData } from "./gallery"
+import { getSvgGridSize } from "./svg"
 import type { ExtractedSetData, PackManifest } from "./types"
 
 export async function writePack(rootDir: string, set: ExtractedSetData): Promise<void> {
@@ -28,6 +29,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     family: set.family,
     style: set.style,
     ...(set.familyDescription ? { familyDescription: set.familyDescription } : {}),
+    gridSize: resolvePackGridSize(set),
     iconCount: set.iconCount,
     icons: set.icons.map((icon) => ({
       name: icon.name,
@@ -55,6 +57,7 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
     family: manifest.family,
     style: manifest.style,
     familyDescription: manifest.familyDescription,
+    gridSize: manifest.gridSize,
     icons: manifest.icons,
   }
 
@@ -64,6 +67,28 @@ export async function writePack(rootDir: string, set: ExtractedSetData): Promise
   await writeFile(path.join(packDir, "ATTRIBUTION.md"), renderAttribution(set), "utf8")
   await writeFile(path.join(packDir, "LICENSE"), renderLicense(set), "utf8")
   await writeJson(path.join(packDir, "package.json"), createPackPackageJson(packRenderData))
+}
+
+function resolvePackGridSize(set: ExtractedSetData): number | undefined {
+  let gridSize: number | undefined
+
+  for (const icon of set.icons) {
+    const iconGridSize = getSvgGridSize(icon.svg, {
+      packSlug: set.slug,
+      iconName: icon.name,
+    })
+
+    if (gridSize == null) {
+      gridSize = iconGridSize
+      continue
+    }
+
+    if (gridSize !== iconGridSize) {
+      throw new Error(`Mixed grid sizes in "${set.slug}": expected ${gridSize}, received ${iconGridSize}`)
+    }
+  }
+
+  return gridSize
 }
 
 async function writeJson(filePath: string, value: unknown): Promise<void> {

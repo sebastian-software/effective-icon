@@ -30,6 +30,7 @@ export interface IconPackManifest {
   family: string
   style: string
   familyDescription?: string
+  gridSize?: number
   iconCount: number
   icons: IconPackManifestIcon[]
 }

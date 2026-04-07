@@ -18,6 +18,7 @@ export interface PackRenderData {
   family: string
   style: string
   familyDescription?: string
+  gridSize?: number
   version: string
   icons: PackManifest["icons"]
 }
@@ -401,6 +402,10 @@ export function renderPackIndexHtml(pack: PackRenderData): string {
           <div class="meta__item">
             <span class="meta__label">Icons</span>
             <span class="meta__value">${Intl.NumberFormat("en-US").format(pack.iconCount)}</span>
+          </div>
+          <div class="meta__item">
+            <span class="meta__label">Grid</span>
+            <span class="meta__value">${pack.gridSize ? `${pack.gridSize} px grid` : "Unknown"}</span>
           </div>
           <div class="meta__item">
             <span class="meta__label">Install</span>

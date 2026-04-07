@@ -68,6 +68,7 @@ export interface PackManifest {
   family: string
   style: string
   familyDescription?: string
+  gridSize?: number
   iconCount: number
   icons: Array<{
     name: string

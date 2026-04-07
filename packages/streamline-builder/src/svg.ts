@@ -25,6 +25,33 @@ interface SvgContext {
   packSlug?: string
 }
 
+export function getSvgGridSize(svg: string, context: SvgContext = {}): number {
+  const rootTag = svg.trim().match(/^<svg\b[^>]*\bviewBox\s*=\s*("([^"]+)"|'([^']+)')[^>]*>/i)
+  const rawViewBox = rootTag?.[2] ?? rootTag?.[3]
+
+  if (!rawViewBox) {
+    throw createSvgError('Missing root <svg> viewBox attribute', context)
+  }
+
+  const parts = rawViewBox
+    .trim()
+    .split(/[\s,]+/)
+    .map((value) => Number(value))
+
+  if (parts.length !== 4 || parts.some((value) => !Number.isFinite(value))) {
+    throw createSvgError(`Invalid viewBox "${rawViewBox}"`, context)
+  }
+
+  const width = parts[2]
+  const height = parts[3]
+
+  if (width !== height) {
+    throw createSvgError(`Expected square viewBox but received "${rawViewBox}"`, context)
+  }
+
+  return width
+}
+
 export function preparePackSvg(svg: string, context: SvgContext = {}): string {
   const normalized = normalizeSvgSource(svg)
   validatePackSvg(normalized, context)

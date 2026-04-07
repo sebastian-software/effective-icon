@@ -5008,5 +5008,6 @@
       "subcategory": "Interface Essential",
       "subcategorySlug": "interface-essential"
     }
-  ]
+  ],
+  "gridSize": 24
 }

@@ -8,6 +8,7 @@ import type { PackManifest } from "../packages/streamline-builder/src/types"
 export interface ReleasePackSummary {
   family: string
   familyDescription?: string
+  gridSize?: number
   href: string
   iconCount: number
   packageName: string
@@ -26,14 +27,13 @@ export async function loadReleasePackSummaries(repoRoot: string): Promise<Releas
       return {
         family: manifest.family,
         familyDescription: manifest.familyDescription,
+        gridSize: manifest.gridSize,
         href: `./packs/${slug}/`,
         iconCount: manifest.iconCount,
         packageName: manifest.name,
         slug,
         style: manifest.style,
-        summary:
-          manifest.familyDescription ??
-          `${manifest.family} ${manifest.style} pack with ${Intl.NumberFormat("en-US").format(manifest.iconCount)} icons.`,
+        summary: getPackStyleSummary(manifest.style, manifest.familyDescription),
       }
     })
   )
@@ -105,7 +105,10 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
   const packCards = packSummaries
     .map(
       (pack) => `<a class="card card--pack" href="${pack.href}" style="--card-accent:oklch(0.63 0.17 255)">
-  <span class="card__pill">${escapeHtml(pack.family)} / ${escapeHtml(capitalize(pack.style))}</span>
+  <div class="card__head">
+    <span class="card__pill">${escapeHtml(pack.family)} / ${escapeHtml(capitalize(pack.style))}</span>
+    <span class="card__stats">${Intl.NumberFormat("en-US").format(pack.iconCount)} icons${pack.gridSize ? ` · ${pack.gridSize} px grid` : ""}</span>
+  </div>
   <h3 class="card__title">${escapeHtml(pack.packageName)}</h3>
   <p class="card__desc">${escapeHtml(pack.summary)}</p>
 </a>`
@@ -212,6 +215,12 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
         text-decoration: none;
         box-shadow: 0 20px 60px color-mix(in oklch, var(--ink) 6%, transparent);
       }
+      .card__head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+      }
       .card__pill {
         display: inline-flex;
         align-items: center;
@@ -226,6 +235,14 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
         font-size: 0.72rem;
         font-weight: 700;
       }
+      .card__stats {
+        flex: 0 0 auto;
+        font-size: 0.74rem;
+        font-weight: 700;
+        color: var(--muted);
+        text-align: right;
+        white-space: nowrap;
+      }
       .card__title {
         margin: 0;
         font-size: 1rem;
@@ -234,7 +251,7 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
       .card__desc {
         margin: 0;
         font-size: 0.85rem;
-        line-height: 1.55;
+        line-height: 1.5;
         color: var(--muted);
       }
       .section__intro {
@@ -295,6 +312,30 @@ export function renderPagesIndexHtml(packSummaries: ReleasePackSummary[]): strin
 
 function capitalize(value: string): string {
   return value.length === 0 ? value : value[0].toUpperCase() + value.slice(1)
+}
+
+function getPackStyleSummary(style: string, familyDescription?: string): string {
+  const normalized = style.toLowerCase()
+
+  if (normalized === "line") {
+    return "Clean line icons with consistent stroke weight."
+  }
+
+  if (normalized === "solid") {
+    return "Filled icons tuned for faster visual recognition."
+  }
+
+  if (normalized === "remix") {
+    return "Hybrid line-and-solid styling with extra energy."
+  }
+
+  return familyDescription ? shortenSentence(familyDescription) : `${capitalize(style)} icons for general interface work.`
+}
+
+function shortenSentence(input: string): string {
+  const trimmed = input.trim()
+  const sentence = trimmed.match(/^[^.?!]+[.?!]?/)
+  return sentence?.[0]?.trim() || trimmed
 }
 
 function escapeHtml(value: string): string {

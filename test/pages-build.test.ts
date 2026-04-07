@@ -27,6 +27,9 @@ describe("pages site build", () => {
     expect(html).toContain("@icon-pkg/streamline-core-line-free")
     expect(html).toContain("./packs/core-line-free/")
     expect(html).toContain("./react-image/")
+    expect(html).toContain("998 icons")
+    expect(html).toContain("14 px grid")
+    expect(html).toContain("Clean line icons with consistent stroke weight.")
   })
 
   it("copies published pack artifacts into the pages output", async () => {
