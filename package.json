@@ -91,14 +91,14 @@
   "dependencies": {
     "esrap": "^2.2.4",
     "magic-string": "^0.30.21",
-    "oxc-parser": "^0.124.0"
+    "oxc-parser": "^0.128.0"
   },
   "devDependencies": {
-    "@oxc-project/types": "^0.124.0",
+    "@oxc-project/types": "^0.128.0",
     "@types/node": "^25.5.0",
     "@types/react": "^19.1.13",
     "@types/react-dom": "^19.1.9",
-    "@vitejs/plugin-react": "^5.0.4",
+    "@vitejs/plugin-react": "^6.0.1",
     "@vitest/browser-playwright": "^4.1.2",
     "@vitest/coverage-v8": "^4.1.2",
     "playwright": "^1.55.0",
