@@ -4,6 +4,6 @@
   "version": "0.1.0",
   "type": "module",
   "devDependencies": {
-    "sugar-high": "^1.0.0"
+    "sugar-high": "^2.0.0"
   }
 }
